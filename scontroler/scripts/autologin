@@ -1,0 +1,8 @@
+#!/usr/bin/expect
+
+spawn ssh job3@localhost touch /tmp/hola
+
+expect "password:"
+send "matrixxx\r"
+
+interact
