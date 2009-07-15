@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+
+spawn ssh job3@localhost 
+
+expect "(yes/no)?"
+send "yes\r"
+
+expect eof
+
+

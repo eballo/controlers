@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+
+spawn ssh root@172.20.1.22 
+
+expect "(yes/no)?"
+send "yes"
+
+expect eof
+
+

@@ -1,0 +1,10 @@
+#!/usr/bin/expect -f
+
+spawn ssh sadiel@localhost beep
+
+expect "password:"
+send "barcelona\r"
+
+expect eof
+
+

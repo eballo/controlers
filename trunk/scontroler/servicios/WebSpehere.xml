@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			<scontroler>
+			    <host ip='172.20.1.15'>
+			        <usuario value='adminint'/>
+			        <password value='adminint10'/>
+			    </host>
+			    <servicio nombre='WebSpehere' nombreproceso='websphere'  puerto='8080'>
+			        <datosexternos>
+			            <pidfile value='--'/>
+			        </datosexternos>
+			        <commandos>
+			        	<principales>
+				            <inicio cmd='/usr/local/bea/bin/startServer.sh server1'/>
+				            <parada cmd='/usr/local/bea/bin/restartServer.sh server1'/>
+				            <reinicio cmd='/usr/local/bea/bin/stopServer.sh server1'/>
+			            </principales>
+			            <otros>
+			            	
+			            </otros>
+			        </commandos>
+			        <descripcion>
+			        Servidor de aplicaciones WebSphere de integracion.
+			        </descripcion>
+			    </servicio>
+			</scontroler>
+		
