@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			<scontroler>
+			    <host ip='localhost'>
+			        <usuario value='job3'/>
+			        <password value='matrixxx'/>
+			    </host>
+			    <servicio nombre='ApacheTest' nombreproceso='apacheStrees2'  puerto='92'>
+			        <datosexternos>
+			            <pidfile value='--'/>
+			        </datosexternos>
+			        <commandos>
+			        	<principales>
+				            <inicio cmd='/etc/init.d/apache2 start'/>
+				            <parada cmd='/etc/init.d/apache2 stop'/>
+				            <reinicio cmd='/etc/init.d/apache2 restart'/>
+			            </principales>
+			            <otros>
+			            	
+			            </otros>
+			        </commandos>
+			        <descripcion>
+			        Apache de prubas de strees
+			        </descripcion>
+			    </servicio>
+			</scontroler>
+		

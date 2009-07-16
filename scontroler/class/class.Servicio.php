@@ -272,6 +272,9 @@ class Servicio {
 	public function getPuerto() {
 		return $this->puerto ;
 	}
+	public function getComandos(){
+		return $this->comandos;
+	}
 }
 
 ?>
