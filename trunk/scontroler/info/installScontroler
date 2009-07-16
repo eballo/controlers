@@ -1,0 +1,58 @@
+Instlacion del entrorno 
+
+EL servidor donde esta el apache debera tener:
+
+nmap <- comando para testar pruertos
+expect <- necesario para lo comunicacion con los servers
+
+
+//SOPORTE
+sudo aptitude install php5-dev php5-cli php-pear build-essential \
+openssl-dev zlib1g-dev
+
+
+//SSH
+cd /usr/src
+wget http://surfnet.dl.sourceforge.net/sourceforge/libssh2/libssh2-0.14.tar.gz
+tar -zxvf libssh2-0.14.tar.gz
+cd libssh2-0.14/
+./configure
+make all install
+
+pecl install -f ssh2
+
+
+EN /etc/php5/cli/php.ini, for Apache utilities /etc/php5/apache2/php.in meter
+extension=ssh2.so
+
+[ http://kevin.vanzonneveld.net/techblog/article/make_ssh_connections_with_php/ ]
+
+
+
+
+//////////////////////////////
+
+
+1. Descargar e instalar OpenSSL. Si la instalación es atraves del el paquete de tu distribución, asegurate que las librerías de desarrollo esten, normalmente deberia existir un paquete llamado openssl-dev, openssl_devel.
+
+2. Descargar (http://sourceforge.net/projects/libssh2/) e instalar libssh2. Descomprimir el paquete y en el directorio raíz, ejecute el siguiente comando ./configure && make all install.
+
+NOTA: si obtiene un error relacionado con -lgssapi_krb5, cambie la ruta del LDFLAGS con el siguiente comando export
+
+export LDFLAGS="-L/usr/kerberos/lib -lkrb5 -lgssapi_krb5 -lpam"
+
+Luego trate de nuevo de carrer el comando configure y make
+
+3. Ejecute el instalador de PEAR para PECL/ssh2. pear install ssh2.
+descargue el archivo TAR de PECL  (http://pecl.php.net/package/ssh2), descomprima y en la raíz del paquete ejecute el siguiente comando: run: phpize && ./configure --with-ssh2 && make. Con el make generamos el ssh2.so necesario en el siguiente paso.
+
+4. Copiar el ssh2.so generado en el paso anterior al el directorio de extensiones que indica tu php.ini
+
+5. Agregar la extensión ssh2 en tu php.ini (extension=ssh2.so).
+
+6. Reinicie su servidor web para aplicar los cambios en el php.ini
+
+Tip: utilize tar –zxvf filename.tgz , para descomprimir archivos tgz
+
+
+http://209.85.229.132/search?q=cache:03m-dE42iqEJ:www.haroldflores.com/blog_instalacion-de-ssh2-en-php.php+instalar+php+ssh2&cd=1&hl=es&ct=clnk&gl=es&client=firefox-a
