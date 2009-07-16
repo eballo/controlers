@@ -61,36 +61,28 @@ if ( $lnsr->esValido()){
 		</table>
 		<div class='desplegableComandos' id='desp".$serv->getNombre()."'>
 			<div class='contenedorComandos' id='contenedorComandos".$serv->getNombre()."'>
-				<div class='comando'>
-					<table>
-						<tr>
-							<td>Limpiar logs</td>
-							<td>rm -rf /var/logs</td>
-							<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td>
-						</tr>
-					</table>
-				</div>
-				<div class='comandoi'>
-					<table>
-						<tr>
-							<td>Limpiar logs</td>
-							<td>rm -rf /var/logs</td>
-							<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td>
-						</tr>
-					</table>
-				</div>
-				<div class='comando'>
-					<table>
-						<tr>
-							<td>Limpiar logs</td>
-							<td>rm -rf /var/logs</td>
-							<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td>
-						</tr>
-					</table>
-				</div>
-		
-		
-		
+				";
+		$comandos = $serv->getComandos();
+		$d=0;
+		if (count($comandos) > 0){
+			foreach ($comandos as $cmd){
+				$d++;
+				if ( $d % 2 == 0 ){
+					$tipo="comando";
+				}else{
+					$tipo="comandoi";
+				}
+				$ret.="<div class='$tipo'><table>
+							<tr>
+								<td><b>".$cmd->getNombre()."</b></td>
+								<td>[".$cmd->getCmd()."]</td>
+								<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td>
+							</tr>
+						</table>
+					</div>";
+			}
+		}
+		$ret.="
 			</div>
 			<div  class='pieContenedorComandos'><img style='cursor:pointer' src='img/mas.png' onclick=addCmd('".$serv->getNombre()."') /> Add
 			<input type='text' id='inputCmdNombre".$serv->getNombre()."' onclick=vaciari('inputCmdNombre".$serv->getNombre()."') value='< nombre >'/>

@@ -1,3 +1,40 @@
+//SOPORTE
+sudo aptitude install php5-dev php5-cli php-pear build-essential \
+openssl-dev zlib1g-dev
+
+
+
+//SSH
+cd /usr/src
+wget http://surfnet.dl.sourceforge.net/sourceforge/libssh2/libssh2-0.14.tar.gz
+tar -zxvf libssh2-0.14.tar.gz
+cd libssh2-0.14/
+./configure
+make all install
+
+
+
+pecl install -f ssh2
+
+
+EN /etc/php5/cli/php.ini, for Apache utilities /etc/php5/apache2/php.in meter
+extension=ssh2.so
+
+
+
+
+Ejecute el instalador de PEAR para PECL/ssh2. pear install ssh2.
+descargue el archivo TAR de PECL  (http://pecl.php.net/package/ssh2), descomprima y en la raíz del paquete ejecute el siguiente comando: run: phpize && ./configure --with-ssh2 && make. Con el make generamos el ssh2.so necesario en el siguiente paso.
+
+
+
+
+
+
+
+
+##############################33
+
 Instlacion del entrorno 
 
 EL servidor donde esta el apache debera tener:

@@ -82,12 +82,12 @@ function addCmd(id) {
 		var codigo = "<div class='"
 				+ tipo
 				+ "'><table><tr>"
-				+ "<td> "
+				+ "<td><b> "
 				+ nombrecmd
-				+ "</td>"
-				+ "<td>"
+				+ "</b></td>"
+				+ "<td>["
 				+ comando
-				+ "</td>"
+				+ "]</td>"
 				+ "<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td></tr></table></div>";
 
 		$("#contenedorComandos" + id).append(codigo);

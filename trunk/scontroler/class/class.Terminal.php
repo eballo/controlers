@@ -25,7 +25,7 @@ class Terminal{
 
 	}
 	/**
-	 * Conecta con el servidor 
+	 * Conecta con el servidor
 	 * @return unknown_type
 	 */
 	public function conectar(){
@@ -40,6 +40,7 @@ class Terminal{
 			}
 		}
 	}
+
 	/**
 	 * Lanza un comando contra el servidor.
 	 * @param $cmd
@@ -68,7 +69,14 @@ class Terminal{
 
 		return $data;
 	}
-
+	public function getHost() { return $this->host; }
+	public function getUsuario() { return $this->usuario; }
+	public function getPassword() { return $this->password; }
+	public function getIdcon() { return $this->idcon; }
+	public function setHost($x) { $this->host = $x; }
+	public function setUsuario($x) { $this->usuario = $x; }
+	public function setPassword($x) { $this->password = $x; }
+	public function setIdcon($x) { $this->idcon = $x; }
 }
 
 ?>
