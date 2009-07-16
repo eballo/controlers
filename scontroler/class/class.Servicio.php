@@ -157,9 +157,13 @@ class Servicio {
 		$res= substr($ress,0,4);
 		
 		if ( $res == "open"){
-			return "Servicio activo";
+			return 0;
 		}else{
-			return "Servicio inactivo";
+			if ( $res == "clos"){
+				return 1;
+			}else{
+				return 2;
+			}
 		}
 	}
 	/**
