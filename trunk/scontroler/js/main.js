@@ -2,6 +2,8 @@ var indexInfor = 11;
 var indexDesple = 10;
 
 function cargarApp() {
+setInterval("validarEstadoServicios()",10000);
+
 	$.ajax( {
 		type :"POST",
 		url :"conectors/lsnr.cargarServicios.php",
@@ -9,7 +11,7 @@ function cargarApp() {
 		success : function(serviciosHtml) {
 			$("#zonaDeCarga").empty();
 			$("#zonaDeCarga").append(serviciosHtml);
-
+			validarEstadoServicios();
 		}
 	});
 }
@@ -61,24 +63,78 @@ function ocultarPaneles() {
 
 }
 
+function addCmd(id) {
 
-function addCmd( id ){
+	var nombrecmd = $("#inputCmdNombre" + id).val();
+	var comando = $("#inputCmd" + id).val();
 
-	
-	var nombrecmd = $("#inputCmdNombre" + id ).val();
-	var comando = $("#inputCmd" + id ).val();
-	
-	if ( nombrecmd != "" && comando != "" ){
-		var codigo = "<div class='comando'><table><tr>"+
-		"<td> "+ nombrecmd +"</td>" +
-		"<td>" + comando + "</td>" +
-		"<td>Ejecutar</td></tr></table></div>";
-		
-		$("#contenedorComandos"+id).append( codigo );
+	var utlimotipo = $("#contenedorComandos" + id).find("div:last").attr(
+			"class");
+	var tipo;
+
+	if (utlimotipo == "comando") {
+		tipo = "comandoi";
+	} else {
+		tipo = "comando";
+	}
+
+	if (nombrecmd != "" && comando != "") {
+		var codigo = "<div class='"
+				+ tipo
+				+ "'><table><tr>"
+				+ "<td> "
+				+ nombrecmd
+				+ "</td>"
+				+ "<td>"
+				+ comando
+				+ "</td>"
+				+ "<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td></tr></table></div>";
+
+		$("#contenedorComandos" + id).append(codigo);
 	}
 
 }
 
-function vaciari( id ){
+function vaciari(id) {
 	$("#" + id).val("");
+}
+
+function validarEstadoServicios() {
+	$(".servicioMain").each(
+			function() {
+				var servicio = $(this).find("#nombreServicio").text();
+
+				$.ajax( {
+					type :"POST",
+					url :"conectors/lsnr.estadoServicio.php",
+					data :"servicio=" + servicio,
+					success : function(estado) {
+						var codigoestado = $(estado).find("servicestatus:first").attr("code");
+
+						switch (parseInt(codigoestado)) {
+						case 0:
+							$("#estadoImg" + servicio).attr("src",
+									"img/start.png");
+							$("#opcionesServicio" + servicio).empty();									
+							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton'>Parar</div></td></tr>"+
+									"<tr><td><div class='boton'>Reiniciar</div></td></tr>");
+							$("#despcButon" + servicio ).css("visibility","visible");
+							break;
+						case 1:
+							$("#estadoImg" + servicio).attr("src",
+									"img/stop.png");
+							$("#opcionesServicio" + servicio).empty();									
+							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton'>Arrancar</div></td></tr>");
+							$("#despcButon" + servicio ).css("visibility","hidden");
+							break
+						case 2:
+							$("#estadoImg" + servicio).attr("src",
+									"img/alert.png");
+							$("#opcionesServicio" + servicio).empty();
+							$("#despcButon" + servicio ).css("visibility","hidden");
+							break
+						}
+					}
+				});
+			});
 }

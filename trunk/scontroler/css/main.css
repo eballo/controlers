@@ -9,7 +9,7 @@ table {
 
 }
 div{
-		    color: #4c4c4c;
+	color: #4c4c4c;
 	font-family: Verdana;
     font-size: x-small;
 	}
@@ -37,7 +37,7 @@ div.servicioMain {
     background-color: #c3e2fb;
     margin: 5px;
     padding: 0px;
-
+	height:	95px;
 }
 
 div.servicioInfo {
@@ -70,7 +70,7 @@ div.desplegableComandos{
     border: 0px;
     background-color:#adc0d1; 
     width: 290px;
-    top:70px;
+    top:80px;
     height:1px;
     left:13px;
     overflow: hidden;
@@ -147,6 +147,7 @@ div.minBoton{
 
 
 td{
+
 	    color: #4c4c4c;
 	font-family: Verdana;
     font-size: x-small;
@@ -164,7 +165,7 @@ input{
     border-style:solid;
     border-color:#89c9ff;
     background-color:#FFFFFF;
-    height:16px;
+    height:20px;
 	-moz-border-radius: 8px;
     -khtml-border-radius: 8px;
     -webkit-border-radius: 8px;
