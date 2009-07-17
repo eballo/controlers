@@ -4,6 +4,6 @@
 
 $APPHOME = "/var/www/scontroler/";
 $APPNOMBRE = "Hosts Sadiel";
-$APPUSERFILE = "/var/www/scontrol/etc/passwd"
+$APPUSERFILE = "/var/www/scontroler/etc/passwd"
 
 ?>

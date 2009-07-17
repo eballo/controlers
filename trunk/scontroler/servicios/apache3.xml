@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 			<scontroler>
-			    <host ip='127.0.0.1'>
+			    <host ip='localhost'>
 			        <usuario value='root'/>
 			        <password value='matrixxx'/>
 			    </host>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 			<scontroler>
 			    <host ip='127.0.0.1'>
-			        <usuario value='root'/>
-			        <password value='matrixxx'/>
+			        <usuario value='job3'/>
+			        <password value='matrixxx'></password>
 			    </host>
 			    <servicio nombre='apache' nombreproceso='apache2'  puerto='80'>
 			        <datosexternos>

@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='172.20.1.15'>
 			        <usuario value='adminint'/>
-			        <password value='adminint10'/>
+			        <password value='adminint10'></password>
 			    </host>
 			    <servicio nombre='WebSpehere' nombreproceso='websphere'  puerto='8080'>
 			        <datosexternos>

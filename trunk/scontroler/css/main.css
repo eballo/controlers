@@ -1,172 +1,195 @@
 @CHARSET "UTF-8";
 
-
 table {
-
-    padding: 0px;
-    margin: 0px;
-    border: 0px;
-
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
 }
-div{
+
+div {
 	color: #4c4c4c;
 	font-family: Verdana;
-    font-size: x-small;
-	}
+	font-size: x-small;
+}
+
 div.mainFrame {
-    position: relative;
-    margin: auto;
-    width: 800px;
-    padding: 10px;
-    border: 1px;
-    border-style: solid;
-    border-color: #7b7474;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #a6d5fc;
+	position: relative;
+	margin: auto;
+	width: 800px;
+	padding: 10px;
+	border: 1px;
+	border-style: solid;
+	border-color: #7b7474;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #a6d5fc;
 }
 
 div.servicioMain {
-    position: relative;
-    margin: auto;
-    border: 0px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #c3e2fb;
-    margin: 5px;
-    padding: 0px;
-	height:	95px;
+	position: relative;
+	margin: auto;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #c3e2fb;
+	margin: 5px;
+	padding: 0px;
+	height: 95px;
 }
 
 div.servicioInfo {
-    position: relative;
-    z-index:3;
-    padding: 10px;
-    border: 0px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #ecf6ff;
-    width: 300px;
+	position: relative;
+	z-index: 3;
+	padding: 10px;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #ecf6ff;
+	width: 300px;
 }
 
 div.servicioDatos {
-    position: relative;
-    top: 0;
-    padding: 10px;
-    border: 0px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    width: 450px;
-    margin: 0 auto;
+	position: relative;
+	top: 0;
+	padding: 10px;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	width: 450px;
+	margin: 0 auto;
 }
 
-div.desplegableComandos{
+div.desplegableComandos {
 	position: absolute;
-    padding: 4px;
-    border: 0px;
-    background-color:#adc0d1; 
-    width: 290px;
-    top:75px;
-    height:1px;
-    left:13px;
-    overflow: hidden;
-
+	padding: 4px;
+	border: 0px;
+	background-color: #adc0d1;
+	width: 290px;
+	top: 75px;
+	height: 1px;
+	left: 13px;
+	overflow: hidden;
 }
-div.comando{
-	margin:auto;
-	border:0px;
+
+div.comando {
+	margin: auto;
+	border: 0px;
 	background-color: #e4eaf0;
 }
-div.comandoi{
-	margin:auto;
-	border:0px;
+
+div.comandoi {
+	margin: auto;
+	border: 0px;
 	background-color: #fff;
 }
-div.contenedorComandos{
+
+div.contenedorComandos {
 	position: relative;
-
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:9px;
-    margin-bottom:9px;
-    
-    border: 1px;
-    border-style:solid;
-    border-color:#89c9ff;
-
-    background-color:#FFFFFF;
-    
-    width: 280px;
-
-    height:108px;
-    
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    
-    overflow: auto;
-
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 9px;
+	margin-bottom: 9px;
+	border: 1px;
+	border-style: solid;
+	border-color: #89c9ff;
+	background-color: #FFFFFF;
+	width: 280px;
+	height: 108px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	overflow: auto;
 }
-div.pieContenedorComandos{
+
+div.pieContenedorComandos {
 	position: relative;
 	top: -3px;
 	left: 3px;
 }
-div.boton{
+
+div.boton {
 	position: relative;
-    padding: 3px;
-    border: 0px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #5f809d;
-	margin:auto;
-	color:#FFFFFF;
-	cursor:pointer;
-	width:100%;
-		text-align:center;
+	padding: 3px;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #5f809d;
+	margin: auto;
+	color: #FFFFFF;
+	cursor: pointer;
+	width: 100%;
+	text-align: center;
 }
-div.minBoton{
+
+div.minBoton {
 	position: relative;
-    padding: 3px;
-    border: 0px;
-    -moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    background-color: #5f809d;
-	margin:auto;
-	color:#FFFFFF;
-	cursor:pointer;
-	width:17px;
-	text-align:center;
+	padding: 3px;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #5f809d;
+	margin: auto;
+	color: #FFFFFF;
+	cursor: pointer;
+	width: 17px;
+	text-align: center;
 }
 
-
-td{
-
-	    color: #4c4c4c;
-	font-family: Verdana;
-    font-size: x-small;
-}
-table.expand{
-		width:100%;
-}
-
-input{
+td {
 	color: #4c4c4c;
 	font-family: Verdana;
-    font-size: x-small;
+	font-size: x-small;
+}
+
+table.expand {
+	width: 100%;
+}
+
+input {
+	color: #4c4c4c;
+	font-family: Verdana;
+	font-size: x-small;
 	width: 100px;
-    border: 1px;
-    border-style:solid;
-    border-color:#89c9ff;
-    background-color:#FFFFFF;
-    height:20px;
+	border: 1px;
+	border-style: solid;
+	border-color: #89c9ff;
+	background-color: #FFFFFF;
+	height: 20px;
 	-moz-border-radius: 8px;
-    -khtml-border-radius: 8px;
-    -webkit-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+}
+
+div.zonaInfor {
+	position: absolute;
+	z-index:99;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 0px;
+	background-color: #fff0be;
+	background-repeat: repeat-x;
+	border: 0px;
+	border-top: 1px;
+	border-style: solid;
+	border-color: #cabf43;
+	text-align: center;
+	overflow: hidden;
+}
+
+div.cerrarZonaInfor {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	cursor:pointer;
+}
+
+div>div.zonaInfor {
+	position: fixed;
 }

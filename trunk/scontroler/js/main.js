@@ -138,3 +138,34 @@ function validarEstadoServicios() {
 				});
 			});
 }
+
+function mostrarInforHost(){
+	cursorEspera();
+	mostrarZonaInfor( "Test" , 100 );
+	cursorNormal();
+}
+
+function mostrarZonaInfor( contenido , tamano ){
+	$("#zonaInfor").animate({
+		height: tamano
+	},"slow",function(){
+		$(this).find("#contenedorZonaInfor").fadeOut("slow",function(){
+			$(this).empty();
+			$(this).append(contenido);
+			$(this).fadeIn("slow");
+		});
+	});
+}
+function ocultarZonaInfor(){
+	$("#zonaInfor").animate({
+		height: 0
+	},"slow");
+}
+
+function cursorEspera(){
+	$("document").css("cursor","wait");
+}
+
+function cursorNormal(){
+	$("document").css("cursor","default");
+}
