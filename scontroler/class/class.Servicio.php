@@ -55,14 +55,14 @@ class Servicio {
 			            </principales>
 			            <otros>
 			            	";
-							if( count($this->comandos) > 0 ){
-								foreach ($this->comandos as $comando){
-									if ( $comando->getNombre() != "" && $comando->getCmd() != "" ){
-										$data.="<comando nombre='".$comando->getNombre()."' cmd='".$comando->getCmd()."' />";
-									}
-								}
-							}
-						$data.="
+		if( count($this->comandos) > 0 ){
+			foreach ($this->comandos as $comando){
+				if ( $comando->getNombre() != "" && $comando->getCmd() != "" ){
+					$data.="<comando nombre='".$comando->getNombre()."' cmd='".$comando->getCmd()."' />";
+				}
+			}
+		}
+		$data.="
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -100,7 +100,7 @@ class Servicio {
 	 */
 	public function parar( $modo ){
 		$term = new Terminal($this->host,$this->user,$this->password);
-		if($modo == "S"){	
+		if($modo == "S"){
 			$term->comando($this->cmdParada);
 		}else{
 			$term->comando("kill -9 `cat ".$this->ficheroPid."`");
@@ -123,10 +123,10 @@ class Servicio {
 	/**
 	 * Carga todos los datos de un servicio
 	 */
-	public function cargarServicio(){
+	private function cargarServicio(){
 		if (file_exists("servicios/".$this->nombre.".xml")) {
 			$xml = simplexml_load_file("servicios/".$this->nombre.".xml");
-			
+
 			$this->nombreProceso = $xml->servicio['nombreproceso'];
 			$this->puerto = $xml->servicio['puerto'];
 			$this->host = $xml->host['ip'];
@@ -137,13 +137,13 @@ class Servicio {
 			$this->cmdArranque =$xml->servicio->commandos->inicio['cmd'];
 			$this->cmdParada =$xml->servicio->commandos->parada['cmd'];
 			$this->cmdReinicio =$xml->servicio->commandos->reinicio['cmd'];
-	
+
 			if (count($xml->servicio->commandos->otros->comando) > 0){
 				foreach ($xml->servicio->commandos->otros->comando as $comando ){
 					$this->comandos[count($this->comandos)] = new Comando($comando['nombre'] , $comando['cmd']);
 				}
 			}
-			
+
 		} else {
 			exit('Failed to open test.xml.');
 		}
@@ -155,7 +155,7 @@ class Servicio {
 	public function estado(){
 		$ress = `nmap $this->host -p $this->puerto | grep $this->puerto | tr -s " " | cut -f2 -d" " `;
 		$res= substr($ress,0,4);
-		
+
 		if ( $res == "open"){
 			return 0;
 		}else{
@@ -172,9 +172,9 @@ class Servicio {
 	 * @param $cmd Comando
 	 */
 	public function addCmd($nombre , $cmd ){
-		
+
 		$existe = false;
-		
+
 		if (count($this->comandos) > 0){
 			foreach ($this->comandos as $comando){
 				if ($comando->getNombre() == $nombre ){//Primero miramos si existe
@@ -185,11 +185,11 @@ class Servicio {
 			}
 		}
 		if (! $existe ){ // Si no existia lo creamos nuevo
-			$this->comandos[count($this->comandos)] = new Comando($nombre,$cmd); 
+			$this->comandos[count($this->comandos)] = new Comando($nombre,$cmd);
 		}
 
 	}
-	
+
 	/**
 	 * Elimina el comando pasado como parametro
 	 * @param $nombre Nombre del comando
@@ -205,7 +205,21 @@ class Servicio {
 			}
 		}
 	}
-	
+	/**
+	 * Retorna un array con la ram ocupada , ram disponible , cpu , disco
+	 * @return array
+	 */
+	public function infoHost(){
+		$term = new Terminal($this->host,$this->user,$this->password);
+		$term->conectar();
+		$infoHost['memo']=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
+		$infoHost['memd']=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f4 -d\" \"");
+		$infoHost['disct']=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f2 -d\" \"");
+		$infoHost['diso']=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
+
+		return $infoHost;
+	}
+
 	public function getNombre() {
 		return $this->nombre;
 	}

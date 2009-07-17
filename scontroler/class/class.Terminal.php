@@ -48,6 +48,7 @@ class Terminal{
 	 */
 	public function comando($cmd){
 
+
 		if(!($stream = ssh2_exec($this->idcon, $cmd."; echo \"__COMMAND_FINALIZADO__\"" )) ){
 			echo "fail: unable to execute command\n";
 		} else{
@@ -60,14 +61,15 @@ class Terminal{
 				if(strpos($data,"__COMMAND_FINALIZADO__") !== false){
 					break;
 				}
-				if( (time()-$time_start) > 10 ){
+				if( (time()-$time_start) > 5 ){
 					break;
 				}
 			}
 			fclose($stream);
 		}
 
-		return $data;
+
+		return str_replace("__COMMAND_FINALIZADO__","",$data);
 	}
 	public function getHost() { return $this->host; }
 	public function getUsuario() { return $this->usuario; }
