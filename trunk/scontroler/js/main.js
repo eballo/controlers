@@ -1,10 +1,13 @@
 var indexInfor = 11;
 var indexDesple = 10;
+var actualizador ;
+
 
 function cargarApp() {
-setInterval("validarEstadoServicios()",10000);
+	actualizador = setInterval("validarEstadoServicios()",20000);
 
 	$.ajax( {
+
 		type :"POST",
 		url :"conectors/lsnr.cargarServicios.php",
 		data :"",
@@ -139,10 +142,76 @@ function validarEstadoServicios() {
 			});
 }
 
-function mostrarInforHost(){
+function mostrarInforHost( servicio ){
+	clearInterval(actualizador);
 	cursorEspera();
-	mostrarZonaInfor( "Test" , 100 );
+	mostrarZonaInforHost( "<table><tr><td><div id='zonaDeCargaRamLibre'><img src='img/loading.gif' /></div></td>" +
+			"<td><div id='zonaDeCargaRamOcupada'><img src='img/loading.gif' /></div></td>" +
+			"<td><div id='zonaDeCargaDiscoTotal'><img src='img/loading.gif' /></div></td>" +
+			"<td><div id='zonaDeCargaDiscoOcupado'><img src='img/loading.gif' /></div></td></tr></table>", 100 , servicio);
+
+}
+
+function mostrarRamLibre( servicio ){
+	$.ajax( {
+		type :"POST",
+		url :"conectors/lsnr.estadoRamLibre.php",
+		data :"servicio="+ servicio +"",
+		success : function(infoHtml) {
+			$("#zonaDeCargaRamLibre").fadeOut("slow",function(){
+				$(this).empty();
+				$(this).append($(infoHtml).find("body:first").text());
+				$(this).fadeIn("slow");
+			});
+		}
+	});
+}
+function mostrarRamOcupada( servicio ){
+	$.ajax( {
+
+		type :"POST",
+		url :"conectors/lsnr.estadoRamOcupada.php",
+		data :"servicio="+ servicio +"",
+		success : function(infoHtml) {
+			$("#zonaDeCargaRamOcupada").fadeOut("slow",function(){
+				$(this).empty();
+				$(this).append($(infoHtml).find("body:first").text());
+				$(this).fadeIn("slow");
+			});
+		}
+	});
+}
+function mostrartDiscoTotal(servicio ){
+	$.ajax( {
+
+		type :"POST",
+		url :"conectors/lsnr.tamanoDisco.php",
+		data :"servicio="+ servicio +"",
+		success : function(infoHtml) {
+			$("#zonaDeCargaDiscoTotal").fadeOut("slow",function(){
+				$(this).empty();
+				$(this).append($(infoHtml).find("body:first").text());
+				$(this).fadeIn("slow");
+			});
+		}
+	});
+}
+function mostrarDiscoOcupado(servicio ){
+	$.ajax( {
+
+		type :"POST",
+		url :"conectors/lsnr.estadoDiscoOcupado.php",
+		data :"servicio="+ servicio +"",
+		success : function(infoHtml) {
+			$("#zonaDeCargaDiscoOcupado").fadeOut("slow",function(){
+				$(this).empty();
+				$(this).append($(infoHtml).find("body:first").text());
+				$(this).fadeIn("slow");
+			});
+		}
+	});
 	cursorNormal();
+	actualizador = setInterval("validarEstadoServicios()",20000);
 }
 
 function mostrarZonaInfor( contenido , tamano ){
@@ -153,6 +222,23 @@ function mostrarZonaInfor( contenido , tamano ){
 			$(this).empty();
 			$(this).append(contenido);
 			$(this).fadeIn("slow");
+		});
+	});
+}
+
+function mostrarZonaInforHost( contenido , tamano , servicio){
+	$("#zonaInfor").animate({
+		height: tamano
+	},"slow",function(){
+		$(this).find("#contenedorZonaInfor").fadeOut("slow",function(){
+			$(this).empty();
+			$(this).append(contenido);
+			$(this).fadeIn("slow");
+			
+			mostrarRamOcupada(servicio);
+			mostrarRamLibre(servicio);
+			mostrartDiscoTotal(servicio);
+			mostrarDiscoOcupado(servicio);
 		});
 	});
 }

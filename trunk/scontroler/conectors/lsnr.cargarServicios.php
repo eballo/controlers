@@ -34,7 +34,7 @@ if ( $lnsr->esValido()){
 					<div class='servicioDatos'>
 					<table class='expand'>
 							<tr>
-								<td rowspan='2'><img src='img/serv.png'  style='cursor:pointer' onclick='mostrarInforHost()' /></td>
+								<td rowspan='2'><img src='img/serv.png'  /></td>
 								<td><b>Host:</b> ".$serv->getHost()."</td>
 								<td><b>Puerto:</b> ".$serv->getPuerto()."</td>
 								<td rowspan='2'>

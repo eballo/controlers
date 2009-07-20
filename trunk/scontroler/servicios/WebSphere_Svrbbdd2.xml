@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='172.20.1.132'>
 			        <usuario value='root'/>
-			        <password value=''/>
+			        <password value='sadiel'></password>
 			    </host>
 			    <servicio nombre='WebSphere_Svrbbdd2' nombreproceso='websphere'  puerto='9090'>
 			        <datosexternos>
