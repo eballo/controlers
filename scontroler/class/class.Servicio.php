@@ -206,19 +206,48 @@ class Servicio {
 		}
 	}
 	/**
-	 * Retorna un array con la ram ocupada , ram disponible , cpu , disco
-	 * @return array
+	 * Retorna el espacio libre de ram del host
+	 * @return ram
 	 */
-	public function infoHost(){
+	public function ramLibreHost(){
 		$term = new Terminal($this->host,$this->user,$this->password);
 		$term->conectar();
-		$infoHost['memo']=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
-		$infoHost['memd']=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f4 -d\" \"");
-		$infoHost['disct']=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f2 -d\" \"");
-		$infoHost['diso']=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
-
+		$infoHost=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f4 -d\" \"");
 		return $infoHost;
 	}
+	/**
+	 * Retorna el espacio total ocupado de ram en el host
+	 * @return ram_total
+	 */
+	public function ramOcupadaHost(){
+		$term = new Terminal($this->host,$this->user,$this->password);
+		$term->conectar();
+		$infoHost=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
+		return $infoHost;
+		
+	}
+	/**
+	 * Retorna el tamaño total del disco
+	 * @return tam_disco
+	 */
+	public function tamanoDiscoHost(){
+		$term = new Terminal($this->host,$this->user,$this->password);
+		$term->conectar();
+		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f2 -d\" \"");
+		return $infoHost;
+	}
+	/**
+	 * Retorna el tamaño ocupado en disco
+	 * @return ocu_disco
+	 */
+	public function estadoDiscoOcupado(){
+		
+		$term = new Terminal($this->host,$this->user,$this->password);
+		$term->conectar();
+		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
+		return $infoHost;
+	}
+	
 
 	public function getNombre() {
 		return $this->nombre;
