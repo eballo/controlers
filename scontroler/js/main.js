@@ -1,7 +1,7 @@
 var indexInfor = 11;
 var indexDesple = 10;
 var actualizador ;
-
+var numllave = 0;
 
 function cargarApp() {
 	actualizador = setInterval("validarEstadoServicios()",20000);
@@ -21,40 +21,42 @@ function cargarApp() {
 
 function desplegarPanel(id) {
 
-	if ($("#desp" + id).css("height") == "1px") {
-
-		ocultarPaneles();
-		indexDesple = indexDesple + 5;
-		indexInfor = indexInfor + 5;
-
-		$("#desp" + id).css("z-index", indexDesple);
-		$("#info" + id).css("z-index", indexInfor);
-
-		$("#desp" + id).animate( {
-			height :145
-		}, "slow");
-
-		$("#desp" + id).attr("estado", "desplegado");
-
-		$("#despcButon" + id).empty();
-		$("#despcButon" + id).append("-");
-
-	} else {
-
-		$("#desp" + id).animate( {
-			height :1
-		}, "slow");
-
-		$("#desp" + id).attr("estado", "plegado");
-
-		$("#despcButon" + id).empty();
-		$("#despcButon" + id).append("+");
-
+	if  ( hostAutenticado( id )){
+		if ($("#desp" + id).css("height") == "1px") {
+	
+			ocultarPaneles();
+			indexDesple = indexDesple + 5;
+			indexInfor = indexInfor + 5;
+	
+			$("#desp" + id).css("z-index", indexDesple);
+			$("#info" + id).css("z-index", indexInfor);
+	
+			$("#desp" + id).animate( {
+				height :145
+			}, "slow");
+	
+			$("#desp" + id).attr("estado", "desplegado");
+			numllave
+			$("#despcButon" + id).empty();
+			$("#despcButon" + id).append("-");
+	
+		} else {
+	
+			$("#desp" + id).animate( {
+				height :1
+			}, "slow");
+	
+			$("#desp" + id).attr("estado", "plegado");
+	
+			$("#despcButon" + id).empty();
+			$("#despcButon" + id).append("+");
+	
+		}
 	}
 
 }
 
-function ocultarPaneles() {
+function ocultarPaneles()true {
 
 	var id = $("div[estado='desplegado']:first").attr("id");
 
@@ -254,4 +256,75 @@ function cursorEspera(){
 
 function cursorNormal(){
 	$("document").css("cursor","default");
+}
+
+
+function generarLLave(){
+	
+	$(".llave:first").animate({
+		top: 200,
+		opacity : 0
+	},"fast",function(){
+		$(this).remove();
+	});
+	
+	numllave++;
+	var password = $.md5($("#inputkeygen").val());
+	var key = "<img id='"+ numllave+"' key='"+password+"' src='img/key.png' class='llave'/>";
+	$("#zonaCargaDeLlaves").append( key );
+	$("#"+numllave).css("opacity","0");
+	$("#"+numllave).animate({
+		top: 100,
+		opacity : 1
+	},"fast",function(){
+		$(this).effect("bounce",{},100,function(){
+			$(this).draggable({
+				revert: true
+			});
+		});
+	});
+
+}
+
+function autenticarHost( password , servicio ){
+	var retorno;
+	
+	$.ajax( {
+		async: false,
+		type :"POST",
+		url :"conectors/lsnr.autenticarHost.php",
+		data :"servicio="+ servicio +"&password="+ password +"",
+		success : function(res) {
+			if ( $(res).find("authhost:first").attr("result") == "ok" ){
+				retorno = 1;
+			}else{
+				retorno = 0;
+			}
+		}
+	});
+	
+	return retorno;
+}
+
+function hostAutenticado( servicio ){
+	
+	var retorno;
+	
+	$.ajax( {
+		async: false,
+		type :"POST",
+		url :"conectors/lsnr.hostAutenticado.php",
+		data :"servicio="+ servicio +"",
+		success : function(res) {
+			if ( $(res).find("authhost:first").attr("result") == "ok" ){
+				retorno = 1;
+			}else{
+				retorno = 0;
+				$("#estadoSeguridad" + servicio ).effect("bounce", {}, 500);
+			}
+		}
+	});
+	
+	return retorno;
+	
 }

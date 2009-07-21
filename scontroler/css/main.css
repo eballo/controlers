@@ -111,7 +111,7 @@ div.pieContenedorComandos {
 	left: 3px;
 }
 
-div.boton {
+div.boton,span.boton {
 	position: relative;
 	padding: 3px;
 	border: 0px;
@@ -168,7 +168,7 @@ input {
 
 div.zonaInfor {
 	position: absolute;
-	z-index:99;
+	z-index: 99;
 	right: 0px;
 	bottom: 0px;
 	width: 100%;
@@ -187,9 +187,57 @@ div.cerrarZonaInfor {
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	cursor:pointer;
+	cursor: pointer;
 }
 
 div>div.zonaInfor {
 	position: fixed;
+}
+
+div.contenedorGeneradorLLaves {
+	position: absolute;
+	top: 0px;
+	left: 20px;
+	width: 210px;
+	height: 200px;
+}
+
+div.generadorDeLlaves {
+	position: absolute;
+	top: 10px;
+	height: 55px;
+	width: 170px;
+	border: 1px;
+	border-style: solid;
+	border-color: #7b7474;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #d5ebfd;
+	padding-top: 15px;
+	padding-left: 7px;
+}
+
+div.zonaCargaDeLlaves {
+	position: absolute;
+	top: 70px;
+	left: 6matrixxx0px;
+	height: 130px;
+	width: 80px;
+	margin: 0 auto;
+}
+
+img.llave {
+	position:relative;
+	top:0;
+	width: 60px;
+	height:60px;
+	cursor: pointer;
+	z-index:9999;
+}
+img.estadoSeguridad{
+		position:relative;
+		right:0px;
+		width: 40px;
+	height:40px;
 }
