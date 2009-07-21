@@ -67,9 +67,9 @@ public function comando($cmd){
 			if(strpos($data,"__COMMAND_FINALIZADO__") !== false){
 				break;
 			}
-			//				if( (time()-$time_start) > 5 ){
-			//					break;
-			//				}
+			if( (time()-$time_start) > 5 ){
+					break;
+			}
 		}
 		fclose($stream);
 	}

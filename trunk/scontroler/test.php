@@ -9,14 +9,14 @@ require_once 'class/class.Terminal.php';
 //$res = $term->comando("touch /tmp/amapola4");
 //$res = $term->comando("touch /tmp/amapola5");
 
-$term2 = new Terminal("localhost" , "sadiel" , "barcelona");
+$term2 = new Terminal("localhost" , "root" , "matrixxx");
 $term2->conectar();
 //$res .= $term2->comando("beep");
-$res .= $term2->comando("free | tail -2 | head -1 | tr -s ' ' | cut -f3 -d' '");
+//$res .= $term2->comando("free | tail -2 | head -1 | tr -s ' ' | cut -f3 -d' '");
 //$res .= $term2->comando("beep");
 //$res .= $term2->comando("beep");
 //$res .= $term2->comando("beep");
-
+$res .= $term2->comando("/etc/inid.d/apache2 stop");
 
 echo $res;
 ?>

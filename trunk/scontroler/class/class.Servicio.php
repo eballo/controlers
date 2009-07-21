@@ -134,9 +134,9 @@ class Servicio {
 			$this->password = $xml->host->password['value'];
 			$this->ficheroPid =$xml->servicio->datosexternos->pidfile['value'];
 			$this->descripcion = $xml->servicio->descripcion;
-			$this->cmdArranque =$xml->servicio->commandos->inicio['cmd'];
-			$this->cmdParada =$xml->servicio->commandos->parada['cmd'];
-			$this->cmdReinicio =$xml->servicio->commandos->reinicio['cmd'];
+			$this->cmdArranque =$xml->servicio->commandos->principales->inicio['cmd'];
+			$this->cmdParada =$xml->servicio->commandos->principales->parada['cmd'];
+			$this->cmdReinicio =$xml->servicio->commandos->principales->reinicio['cmd'];
 
 			if (count($xml->servicio->commandos->otros->comando) > 0){
 				foreach ($xml->servicio->commandos->otros->comando as $comando ){

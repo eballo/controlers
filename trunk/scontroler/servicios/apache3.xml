@@ -10,9 +10,9 @@
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
-				            <inicio cmd=''/>
-				            <parada cmd=''/>
-				            <reinicio cmd=''/>
+				            <inicio cmd='/etc/inid.d/apache2 start'/>
+				            <parada cmd='killall apache2'></parada>
+				            <reinicio cmd='/etc/inid.d/apache2 restart'/>
 			            </principales>
 			            <otros>
 			            	<comando nombre='Limpiar' cmd='cls -l' /><comando nombre='LimpiarLogs' cmd='rm -rf /var/logs' /><comando nombre='Logs' cmd='mv /ers asdas' />
