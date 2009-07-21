@@ -288,7 +288,7 @@ function generarLLave(){
 
 function autenticarHost( password , servicio ){
 	var retorno;
-	
+	mostrarRunningHost( id );
 	$.ajax( {
 		async: false,
 		type :"POST",
@@ -302,14 +302,14 @@ function autenticarHost( password , servicio ){
 			}
 		}
 	});
-	
+	pararRunningHost( id );
 	return retorno;
 }
 
 function hostAutenticado( servicio ){
 	
 	var retorno;
-	
+	mostrarRunningHost( id );
 	$.ajax( {
 		async: false,
 		type :"POST",
@@ -324,14 +324,14 @@ function hostAutenticado( servicio ){
 			}
 		}
 	});
-	
+	pararRunningHost( id );
 	return retorno;
 	
 }
 
 function arrancar( id ){
 	var retorno;
-	
+	mostrarRunningHost( id );
 	if  ( hostAutenticado( id )){
 		$.ajax( {
 			async: false,
@@ -343,13 +343,13 @@ function arrancar( id ){
 			}
 		});
 	}
-	
+	pararRunningHost( id );
 	return retorno;
 }
 
 function parar( id ){
 	var retorno;
-	
+	mostrarRunningHost( id );
 	if  ( hostAutenticado( id )){
 		$.ajax( {
 			async: false,
@@ -361,13 +361,14 @@ function parar( id ){
 			}
 		});
 	}
-	
+	pararRunningHost( id );
+
 	return retorno;
 	
 }
 function reiniciar( id ){
 	var retorno;
-	
+	mostrarRunningHost( id );
 	if  ( hostAutenticado( id )){
 		$.ajax( {
 			async: false,
@@ -379,7 +380,52 @@ function reiniciar( id ){
 			}
 		});
 	}
+	pararRunningHost( id );
 	
 	return retorno;
 	
+}
+
+function mostrarRunningHost( servicio ){
+	$("#serverRunning"+servicio).effect("pulsate", {}, 1000);
+}
+
+function pararRunningHost( servicio ){
+	$("#serverRunning"+servicio).fadeOut("slow");
+	
+}
+
+function actualizarServicio( servicio ){
+	$.ajax( {
+		type :"POST",
+		url :"conectors/lsnr.estadoServicio.php",
+		data :"servicio=" + servicio,
+		success : function(estado) {
+			var codigoestado = $(estado).find("servicestatus:first").attr("code");
+
+			switch (parseInt(codigoestado)) {
+			case 0:
+				$("#estadoImg" + servicio).attr("src",
+						"img/start.png");
+				$("#opcionesServicio" + servicio).empty();									
+				$("#opcionesServicio" + servicio).append("<tr><td><div class='boton' onclick=parar('" + servicio + "')>Parar</div></td></tr>"+
+						"<tr><td><div class='boton' onclick=reiniciar('" + servicio + "')>Reiniciar</div></td></tr>");
+				$("#despcButon" + servicio ).css("visibility","visible");
+				break;
+			case 1:
+				$("#estadoImg" + servicio).attr("src",
+						"img/stop.png");
+				$("#opcionesServicio" + servicio).empty();									
+				$("#opcionesServicio" + servicio).append("<tr><td><div class='boton' onclick=arrancar('" + servicio + "')>Arrancar</div></td></tr>");
+				$("#despcButon" + servicio ).css("visibility","hidden");
+				break
+			case 2:
+				$("#estadoImg" + servicio).attr("src",
+						"img/alert.png");
+				$("#opcionesServicio" + servicio).empty();
+				$("#despcButon" + servicio ).css("visibility","hidden");
+				break
+			}
+		}
+	});
 }

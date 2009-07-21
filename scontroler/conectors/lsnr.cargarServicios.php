@@ -43,7 +43,7 @@ if ( $lnsr->esValido()){
 					<div class='servicioDatos'>
 					<table class='expand'>
 							<tr>
-								<td rowspan='2'><img src='img/serv.png'  /></td>
+								<td rowspan='2'><div class='contenedorEstadoServer'><img class='serverImg' src='img/serv.png'  /><img id='serverRunning".$serv->getNombre()."' class='serverRunning' src='img/running.png'  /></div></td>
 								<td><b>Host:</b> ".$serv->getHost()."</td>
 								<td><b>Puerto:</b> ".$serv->getPuerto()."</td>
 								<td rowspan='2'>
