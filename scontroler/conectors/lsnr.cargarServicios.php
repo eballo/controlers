@@ -48,8 +48,8 @@ if ( $lnsr->esValido()){
 								<td><b>Puerto:</b> ".$serv->getPuerto()."</td>
 								<td rowspan='2'>
 										<table id='opcionesServicio".$serv->getNombre()."'>
-											<tr><td><div class='boton'>Parar</div></td></tr>
-											<tr><td><div class='boton'>Reiniciar</div></td></tr>
+											<tr><td><div class='boton' onclick=parar('".$serv->getNombre()."')>Parar</div></td></tr>
+											<tr><td><div class='boton' onclick=reiniciar('".$serv->getNombre()."')>Reiniciar</div></td></tr>
 										</table>
 								</td>
 								<td rowspan='2'>

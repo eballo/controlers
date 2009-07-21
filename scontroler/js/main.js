@@ -121,15 +121,15 @@ function validarEstadoServicios() {
 							$("#estadoImg" + servicio).attr("src",
 									"img/start.png");
 							$("#opcionesServicio" + servicio).empty();									
-							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton'>Parar</div></td></tr>"+
-									"<tr><td><div class='boton'>Reiniciar</div></td></tr>");
+							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton' onclick=parar('" + servicio + "')>Parar</div></td></tr>"+
+									"<tr><td><div class='boton' onclick=reiniciar('" + servicio + "')>Reiniciar</div></td></tr>");
 							$("#despcButon" + servicio ).css("visibility","visible");
 							break;
 						case 1:
 							$("#estadoImg" + servicio).attr("src",
 									"img/stop.png");
 							$("#opcionesServicio" + servicio).empty();									
-							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton'>Arrancar</div></td></tr>");
+							$("#opcionesServicio" + servicio).append("<tr><td><div class='boton' onclick=arrancar('" + servicio + "')>Arrancar</div></td></tr>");
 							$("#despcButon" + servicio ).css("visibility","hidden");
 							break
 						case 2:
@@ -324,6 +324,61 @@ function hostAutenticado( servicio ){
 			}
 		}
 	});
+	
+	return retorno;
+	
+}
+
+function arrancar( id ){
+	var retorno;
+	
+	if  ( hostAutenticado( id )){
+		$.ajax( {
+			async: false,
+			type :"POST",
+			url :"conectors/lsnr.arrancarServicio.php",
+			data :"servicio="+ id +"",
+			success : function(res) {
+	
+			}
+		});
+	}
+	
+	return retorno;
+}
+
+function parar( id ){
+	var retorno;
+	
+	if  ( hostAutenticado( id )){
+		$.ajax( {
+			async: false,
+			type :"POST",
+			url :"conectors/lsnr.pararServicio.php",
+			data :"servicio="+ id +"",
+			success : function(res) {
+	
+			}
+		});
+	}
+	
+	return retorno;
+	
+}
+function reiniciar( id ){
+	var retorno;
+	
+	if  ( hostAutenticado( id )){
+		$.ajax( {
+			async: false,
+			type :"POST",
+			url :"conectors/lsnr.reiniciarServicio.php",
+			data :"servicio="+ id +"",
+			success : function(res) {
+	
+			}
+		});
+	}
 	
 	return retorno;
 	
