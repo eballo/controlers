@@ -12,14 +12,58 @@
 			        	<principales>
 				            <inicio cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/startup.sh'/>
 				            <parada cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/shutdown.sh'/>
-				            <reinicio cmd='/'></reinicio>
+				            <reinicio cmd='/'/>
 			            </principales>
 			            <otros>
-			            	
+			            	<comando nombre='Ilos tomcat' cmd='ps -ef | grep tomcat | wc -l' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        tomcat_local
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        </descripcion>
 			    </servicio>
 			</scontroler>

@@ -62,15 +62,27 @@ public function comando($cmd){
 		stream_set_blocking( $stream, true );
 		$time_start = time();
 		$data = "";
+		
 		while( true ){
 			$data .= fread($stream, 4096);
 			if(strpos($data,"__COMMAND_FINALIZADO__") !== false){
 				break;
 			}
 			if( (time()-$time_start) > 5 ){
+					die;
 					break;
 			}
 		}
+//			
+//            $data = "";
+//            while( $buf = fread($stream,4096) ){
+//                $data .= $buf;
+//	            if( (time()-$time_start) > 5 ){
+//						break;
+//				}
+//            }
+				
+		
 		fclose($stream);
 	}
 
