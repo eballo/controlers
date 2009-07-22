@@ -56,14 +56,17 @@ function desplegarPanel(id) {
 
 }
 
-function ocultarPaneles()true {
+function ocultarPaneles(){
 
 	var id = $("div[estado='desplegado']:first").attr("id");
+	var idorg =$("div[estado='desplegado']:first").attr("idorg");
 
 	$("#" + id).animate( {
 		height :1
 	}, "fast");
-
+	
+	$("#despcButon" + idorg).empty();
+	$("#despcButon" + idorg).append("+");
 	$("#" + id).attr("estado", "plegado");
 
 }
@@ -73,31 +76,40 @@ function addCmd(id) {
 	var nombrecmd = $("#inputCmdNombre" + id).val();
 	var comando = $("#inputCmd" + id).val();
 
-	var utlimotipo = $("#contenedorComandos" + id).find("div:last").attr(
-			"class");
-	var tipo;
-
-	if (utlimotipo == "comando") {
-		tipo = "comandoi";
-	} else {
-		tipo = "comando";
+	if (! existeComando( id , nombrecmd )){
+		
+		var utlimotipo = $("#contenedorComandos" + id).find("div:last").attr(
+				"class");
+		var tipo;
+	
+		if (utlimotipo == "comando") {
+			tipo = "comandoi";
+		} else {
+			tipo = "comando";
+		}
+	
+		if (nombrecmd != "" && comando != "") {
+			$.ajax( {
+				type :"POST",
+				url :"conectors/lsnr.anadirCmd.php",
+				data :"servicio="+ id +"&nombre="+nombrecmd+"&cmd="+comando+"",
+				success : function(infoHtml) {
+				var codigo = "<div class='"
+					+ tipo
+					+ "'><table><tr>"
+					+ "<td><b> "
+					+ nombrecmd
+					+ "</b></td>"
+					+ "<td>["
+					+ comando
+					+ "]</td>"
+					+ "<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td></tr></table></div>";
+	
+				$("#contenedorComandos" + id).append(codigo);
+				}
+			});
+		}
 	}
-
-	if (nombrecmd != "" && comando != "") {
-		var codigo = "<div class='"
-				+ tipo
-				+ "'><table><tr>"
-				+ "<td><b> "
-				+ nombrecmd
-				+ "</b></td>"
-				+ "<td>["
-				+ comando
-				+ "]</td>"
-				+ "<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td></tr></table></div>";
-
-		$("#contenedorComandos" + id).append(codigo);
-	}
-
 }
 
 function vaciari(id) {
@@ -288,7 +300,7 @@ function generarLLave(){
 
 function autenticarHost( password , servicio ){
 	var retorno;
-	mostrarRunningHost( id );
+	mostrarRunningHost( servicio );
 	$.ajax( {
 		async: false,
 		type :"POST",
@@ -302,16 +314,15 @@ function autenticarHost( password , servicio ){
 			}
 		}
 	});
-	pararRunningHost( id );
+	pararRunningHost(servicio );
 	return retorno;
 }
 
 function hostAutenticado( servicio ){
 	
 	var retorno;
-	mostrarRunningHost( id );
 	$.ajax( {
-		async: false,
+		async: false,								
 		type :"POST",
 		url :"conectors/lsnr.hostAutenticado.php",
 		data :"servicio="+ servicio +"",
@@ -324,64 +335,70 @@ function hostAutenticado( servicio ){
 			}
 		}
 	});
-	pararRunningHost( id );
 	return retorno;
 	
 }
 
 function arrancar( id ){
 	var retorno;
-	mostrarRunningHost( id );
+	
 	if  ( hostAutenticado( id )){
+		
+		mostrarRunningHost( id );
 		$.ajax( {
 			async: false,
 			type :"POST",
 			url :"conectors/lsnr.arrancarServicio.php",
 			data :"servicio="+ id +"",
 			success : function(res) {
-	
+				
 			}
 		});
+		pararRunningHost( id );
 	}
-	pararRunningHost( id );
+	
 	return retorno;
 }
 
 function parar( id ){
 	var retorno;
-	mostrarRunningHost( id );
+	
 	if  ( hostAutenticado( id )){
+		mostrarRunningHost( id );
 		$.ajax( {
 			async: false,
 			type :"POST",
 			url :"conectors/lsnr.pararServicio.php",
 			data :"servicio="+ id +"",
 			success : function(res) {
-	
+				
 			}
 		});
+		pararRunningHost( id );
 	}
-	pararRunningHost( id );
+
 
 	return retorno;
 	
 }
 function reiniciar( id ){
 	var retorno;
-	mostrarRunningHost( id );
+
 	if  ( hostAutenticado( id )){
+		mostrarRunningHost( id );
 		$.ajax( {
 			async: false,
 			type :"POST",
 			url :"conectors/lsnr.reiniciarServicio.php",
 			data :"servicio="+ id +"",
 			success : function(res) {
-	
+				
 			}
 		});
+		pararRunningHost( id );
+		
 	}
-	pararRunningHost( id );
-	
+
 	return retorno;
 	
 }
@@ -391,12 +408,16 @@ function mostrarRunningHost( servicio ){
 }
 
 function pararRunningHost( servicio ){
-	$("#serverRunning"+servicio).fadeOut("slow");
+	$("#serverRunning"+servicio).fadeOut("slow",function(){
+		actualizarServicio( servicio );
+	});
+
 	
 }
 
 function actualizarServicio( servicio ){
 	$.ajax( {
+		async: false,
 		type :"POST",
 		url :"conectors/lsnr.estadoServicio.php",
 		data :"servicio=" + servicio,
@@ -428,4 +449,35 @@ function actualizarServicio( servicio ){
 			}
 		}
 	});
+}
+
+function existeComando( servicio , nombre){
+	var ret;
+	$("#contenedorComandos"+ servicio).find("div").each(function(){
+		if ( nombre == $(this).find("#nombreCmd").text() ){
+			ret = true;
+		}else{
+			ret = false;
+		}
+	});
+	return ret;
+}
+
+function ejecutarCmd(servicio , cmd ){
+	var retorno;
+
+	if  ( hostAutenticado( servicio )){
+		mostrarRunningHost( servicio );
+		$.ajax( {
+			async: false,
+			type :"POST",
+			url :"conectors/lsnr.ejecutarComando.php",
+			data :"servicio="+ servicio +"&comando="+ cmd +"",
+			success : function(res) {
+				
+			}
+		});
+		pararRunningHost(servicio );
+	}
+	return retorno;
 }

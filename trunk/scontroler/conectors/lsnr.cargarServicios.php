@@ -29,7 +29,6 @@ if ( $lnsr->esValido()){
 									if (! $_SESSION['hosts'][$serv->getNombre()] ){
 										$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
 									}
-									
 									$ret.="</td>
 							</tr>
 							<tr>
@@ -68,7 +67,7 @@ if ( $lnsr->esValido()){
 				</td>
 			</tr>
 		</table>
-		<div class='desplegableComandos' id='desp".$serv->getNombre()."'>
+		<div class='desplegableComandos' id='desp".$serv->getNombre()."' idorg='".$serv->getNombre()."'>
 			<div class='contenedorComandos' id='contenedorComandos".$serv->getNombre()."'>
 				";
 		$comandos = $serv->getComandos();
@@ -83,9 +82,9 @@ if ( $lnsr->esValido()){
 				}
 				$ret.="<div class='$tipo'><table>
 							<tr>
-								<td><b>".$cmd->getNombre()."</b></td>
+								<td><b id='nombreCmd'>".$cmd->getNombre()."</b></td>
 								<td>[".$cmd->getCmd()."]</td>
-								<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png'></td>
+								<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png' onclick=ejecutarCmd(\"".$serv->getNombre()."\",\"".ValidarDatos::limpiar($cmd->getCmd())."\") /></td>
 							</tr>
 						</table>
 					</div>";
