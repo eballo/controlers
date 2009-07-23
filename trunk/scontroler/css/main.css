@@ -201,7 +201,7 @@ div.contenedorGeneradorLLaves {
 	left: 20px;
 	width: 210px;
 	height: 200px;
-		position: fixed;
+	position: fixed;
 }
 
 div.generadorDeLlaves {
@@ -230,34 +230,47 @@ div.zonaCargaDeLlaves {
 }
 
 img.llave {
-	position:relative;
-	top:0;
+	position: relative;
+	top: 0;
 	width: 60px;
-	height:60px;
+	height: 60px;
 	cursor: pointer;
-	z-index:9999;
-}
-img.estadoSeguridad{
-		position:relative;
-		right:0px;
-		width: 40px;
-	height:40px;
+	z-index: 9999;
 }
 
-img.serverImg{
-		z-index:2;
+img.estadoSeguridad {
+	position: relative;
+	right: 0px;
+	width: 40px;
+	height: 40px;
 }
 
-img.serverRunning{
-		position:absolute;
-		left: 30px;
-		top:30px;
-		width:20px;
-		height: 20px;
-		display:none;
-
+img.serverImg {
+	z-index: 2;
 }
-div.contenedorEstadoServer{
-	position:relative;
-	
+
+img.serverRunning {
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	width: 20px;
+	height: 20px;
+	display: none;
+}
+
+div.contenedorEstadoServer {
+	position: relative;
+}
+
+div.contenedorInformesComando {
+	padding: 20px;
+	margin: 30px;
+	margion: 0 auto;
+	text-align: left;
+	background-color: #FFF;
+	border: 1px;
+	border-style: solid;
+	overflow:auto;
+	border-color: #cabf43;
+	height: 210px;
 }

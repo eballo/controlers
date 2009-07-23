@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='172.20.1.132'>
 			        <usuario value='root'/>
-			        <password value='sadiel'></password>
+			        <password value='sadiel'/>
 			    </host>
 			    <servicio nombre='WebSphere_Svrbbdd2' nombreproceso='websphere'  puerto='9090'>
 			        <datosexternos>
@@ -10,16 +10,28 @@
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
-				            <inicio cmd='/usr/local/WebSphere/AppServer/bin/startServer.sh server1'></inicio>
-				            
-				            <reinicio cmd='asdasd'></reinicio>
-			            <parada cmd="/usr/local/WebSphere/AppServer/bin/stopServer.sh server1 " /></principales>
+				            <inicio cmd='/usr/local/WebSphere/AppServer/bin/startServer.sh server1'/>
+				            <parada cmd='/usr/local/WebSphere/AppServer/bin/stopServer.sh server1 '/>
+				            <reinicio cmd='asdasd'/>
+			            </principales>
 			            <otros>
-			            	
+			            	<comando nombre='Ver log' cmd='cat /usr/local/WebSphere/AppServer/logs/server1/startServer.log' /><comando nombre='test' cmd='free' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
+			        
+			        
+			        
+			        
+			        
+			        
 			        sadasd
+			        
+			        
+			        
+			        
+			        
+			        
 			        </descripcion>
 			    </servicio>
 			</scontroler>
