@@ -55,7 +55,7 @@ class Terminal{
 public function comando($cmd){
 
 
-	if(!($stream = ssh2_exec($this->idcon, $cmd."; echo \"__COMMAND_FINALIZADO__\"" )) ){
+	if(!($stream = ssh2_exec($this->idcon,$cmd."; echo \"__COMMAND_FINALIZADO__\"" )) ){
 		echo "fail: unable to execute command\n";
 	} else{
 		// collect returning data from command
@@ -69,18 +69,9 @@ public function comando($cmd){
 				break;
 			}
 			if( (time()-$time_start) > 5 ){
-					die;
 					break;
 			}
 		}
-//			
-//            $data = "";
-//            while( $buf = fread($stream,4096) ){
-//                $data .= $buf;
-//	            if( (time()-$time_start) > 5 ){
-//						break;
-//				}
-//            }
 				
 		
 		fclose($stream);

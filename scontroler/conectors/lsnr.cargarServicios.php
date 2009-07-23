@@ -73,6 +73,7 @@ if ( $lnsr->esValido()){
 		$comandos = $serv->getComandos();
 		$d=0;
 		if (count($comandos) > 0){
+			$cont=0;
 			foreach ($comandos as $cmd){
 				$d++;
 				if ( $d % 2 == 0 ){
@@ -80,14 +81,18 @@ if ( $lnsr->esValido()){
 				}else{
 					$tipo="comandoi";
 				}
-				$ret.="<div class='$tipo'><table>
+				$ret.="<div class='$tipo' numcmd='$cont' ><table>
 							<tr>
 								<td><b id='nombreCmd'>".$cmd->getNombre()."</b></td>
-								<td>[".$cmd->getCmd()."]</td>
-								<td><img style='cursor:pointer;margin-left: 10px' src='img/run.png' onclick=ejecutarCmd(\"".$serv->getNombre()."\",\"".ValidarDatos::limpiar($cmd->getCmd())."\") /></td>
-							</tr>
+								<td>[<span>".$cmd->getCmd()."</span>]</td>
+								<td>
+								<img onclick=\"ejecutarCmd('".$serv->getNombre()."', $cont );\" style='cursor:pointer;margin-left:10px' src='img/run.png'/>
+								<img src='img/papelera.png' style='cursor:pointer;' onclick=\"delCmd('".$serv->getNombre()."', $cont)\"></td>
+								<img src='img/informe.png' style='cursor:pointer;' onclick=\"mostrarInformeCmd('".$serv->getNombre().$cont."')\"><div id='".$serv->getNombre().$cont."' style='display:none' rescmd=''></div></td>
+								</tr>
 						</table>
 					</div>";
+				$cont++;
 			}
 		}
 		$ret.="

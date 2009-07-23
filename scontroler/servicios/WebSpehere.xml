@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='172.20.1.15'>
 			        <usuario value='adminint'/>
-			        <password value='adminint10'></password>
+			        <password value='adminint10'/>
 			    </host>
 			    <servicio nombre='WebSpehere' nombreproceso='websphere'  puerto='8080'>
 			        <datosexternos>
@@ -15,11 +15,13 @@
 				            <reinicio cmd='/usr/local/bea/bin/stopServer.sh server1'/>
 			            </principales>
 			            <otros>
-			            	
+			            	<comando nombre='test' cmd='free' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
+			        
 			        Servidor de aplicaciones WebSphere de integracion.
+			        
 			        </descripcion>
 			    </servicio>
 			</scontroler>

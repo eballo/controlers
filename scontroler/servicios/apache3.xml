@@ -5,17 +5,17 @@
 			        <password value='matrixxx'/>
 			    </host>
 			    <servicio nombre='apache3' nombreproceso='apache2'  puerto='80'>
-			        <datosexternos>../
+			        <datosexternos>
 			            <pidfile value='/var/log/apache2'/>
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
 				            <inicio cmd='/etc/inid.d/apache2 start'/>
-				            <parada cmd='killall apache2'></parada>
+				            <parada cmd='killall apache2'/>
 				            <reinicio cmd='/etc/inid.d/apache2 restart'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='Limpiar' cmd='cls -l' /><comando nombre='LimpiarLogs' cmd='rm -rf /var/logs' /><comando nombre='Logs' cmd='mv /ers asdas' />
+			            	<comando nombre='LimpiarLogs' cmd='rm -rf /var/logs' /><comando nombre='Logs' cmd='mv /ers asdas' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -23,7 +23,13 @@
 			        
 			        
 			        
+			        
+			        
+			        
 			        asdasd
+			        
+			        
+			        
 			        
 			        
 			        
