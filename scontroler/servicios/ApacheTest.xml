@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='localhost'>
 			        <usuario value='job3'/>
-			        <password value='matrixxx'/>
+			        <password value='3eab530dd60470976758ec1da5dfd04c'/>
 			    </host>
 			    <servicio nombre='ApacheTest' nombreproceso='apacheStrees2'  puerto='92'>
 			        <datosexternos>

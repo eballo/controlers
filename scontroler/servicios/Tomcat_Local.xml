@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='localhost'>
 			        <usuario value='root'/>
-			        <password value='matrixxx'/>
+			        <password value='3eab530dd60470976758ec1da5dfd04c'/>
 			    </host>
 			    <servicio nombre='Tomcat_Local' nombreproceso='apache_tomcat'  puerto='8080'>
 			        <datosexternos>
@@ -15,7 +15,7 @@
 				            <reinicio cmd='/'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='Test2' cmd='ps -aux' /><comando nombre='Passwd' cmd='cat /etc/passwd' />
+			            	<comando nombre='Free' cmd='free' /><comando nombre='Procesos' cmd='ps -ef' /><comando nombre='Version' cmd='cat  /proc/version' /><comando nombre='Hola' cmd='zxczxc' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -122,7 +122,57 @@
 			        
 			        
 			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        tomcat_local
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        
 			        
 			        

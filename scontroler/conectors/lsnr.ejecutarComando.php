@@ -8,7 +8,7 @@ $lnsr = new Listener("Estado_Servicio","XML","POST", $_POST, "NOAUTH", $_SESSION
 
 if ( $lnsr->esValido()){
 	$servicio = new Servicio($lnsr->doPost('servicio'));
-	$term = new Terminal($servicio->getHost(),$servicio->getUser(),$servicio->getPassword());
+	$term = new Terminal($servicio->getHost(),$servicio->getUser(),$_SESSION['hosts'][$servicio->getNombre()."password"]);
 	$term->conectar();
 	
 	

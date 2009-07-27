@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='localhost'>
 			        <usuario value='root'/>
-			        <password value='matrixxx'/>
+			        <password value='3eab530dd60470976758ec1da5dfd04c'/>
 			    </host>
 			    <servicio nombre='apache3' nombreproceso='apache2'  puerto='80'>
 			        <datosexternos>

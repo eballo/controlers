@@ -11,10 +11,10 @@ if ( $lnsr->esValido()){
 	$servicios = new Servicios();
 	$serviciosArray = $servicios->getServicios();
 
+	if (count($serviciosArray) > 0){
+		foreach ($serviciosArray as $serv ){
 
-	foreach ($serviciosArray as $serv ){
-
-		$ret.="
+			$ret.="
 		<div class='servicioMain' id='main".$serv->getNombre()."'>
 		<table>
 			<tr>
@@ -25,11 +25,11 @@ if ( $lnsr->esValido()){
 								<td rowspan='2'><img id='estadoImg".$serv->getNombre()."' src='img/start.png' /></td>
 								<td style='width:100%'><b id='nombreServicio'>".$serv->getNombre()."</b></td>
 								<td rowspan='2'>";
-						
-									if (! $_SESSION['hosts'][$serv->getNombre()] ){
-										$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
-									}
-									$ret.="</td>
+
+			if (! $_SESSION['hosts'][$serv->getNombre()] ){
+				$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
+			}
+			$ret.="</td>
 							</tr>
 							<tr>
 								<td>".$serv->getDescripcion()."</td>
@@ -70,32 +70,33 @@ if ( $lnsr->esValido()){
 		<div class='desplegableComandos' id='desp".$serv->getNombre()."' idorg='".$serv->getNombre()."'>
 			<div class='contenedorComandos' id='contenedorComandos".$serv->getNombre()."'>
 				";
-		$comandos = $serv->getComandos();
-		$d=0;
-		if (count($comandos) > 0){
-			$cont=0;
-			foreach ($comandos as $cmd){
-				$d++;
-				if ( $d % 2 == 0 ){
-					$tipo="comando";
-				}else{
-					$tipo="comandoi";
-				}
-				$ret.="<div class='$tipo' numcmd='$cont' ><table>
+			$comandos = $serv->getComandos();
+			$d=0;
+
+			if (count($comandos) > 0){
+				$cont=0;
+				foreach ($comandos as $cmd){
+					$d++;
+					if ( $d % 2 == 0 ){
+						$tipo="comando";
+					}else{
+						$tipo="comandoi";
+					}
+					$ret.="<div class='$tipo' numcmd='$cont' tipo='cmd'><table>
 							<tr>
 								<td><b id='nombreCmd'>".$cmd->getNombre()."</b></td>
 								<td>[<span>".$cmd->getCmd()."</span>]</td>
 								<td>
 								<img onclick=\"ejecutarCmd('".$serv->getNombre()."', $cont );\" style='cursor:pointer;margin-left:10px' src='img/run.png'/>
 								<img src='img/papelera.png' style='cursor:pointer;' onclick=\"delCmd('".$serv->getNombre()."', $cont)\"></td>
-								<img src='img/informe.png' style='cursor:pointer;' onclick=\"mostrarInformeCmd('".$serv->getNombre().$cont."')\"><div id='".$serv->getNombre().$cont."' style='display:none' rescmd=''></div></td>
+								<img  id='icon".$serv->getNombre().$cont."' src='img/informe.png' style='cursor:pointer;display:none' onclick=\"mostrarInformeCmd('".$serv->getNombre().$cont."')\"><div id='".$serv->getNombre().$cont."' style='display:none' rescmd=''></div></td>
 								</tr>
 						</table>
 					</div>";
-				$cont++;
+					$cont++;
+				}
 			}
-		}
-		$ret.="
+			$ret.="
 			</div>
 			<div  class='pieContenedorComandos'><img style='cursor:pointer' src='img/mas.png' onclick=addCmd('".$serv->getNombre()."') /> Add
 			<input type='text' id='inputCmdNombre".$serv->getNombre()."' onclick=vaciari('inputCmdNombre".$serv->getNombre()."') value='< nombre >'/>
@@ -103,6 +104,9 @@ if ( $lnsr->esValido()){
 			</div>
 		</div>
 		</div>";
+		}
+	}else{
+		$ret.="Nungún servicio";
 	}
 
 	//codigo para transformar lo candados en dropables
@@ -116,8 +120,10 @@ if ( $lnsr->esValido()){
 						drop: function(event, ui) {
 							$(\"#\" + ui.draggable.attr('id') ).effect(\"explode\", options, 500);
 							var password = $(\"#\" + ui.draggable.attr('id') ).attr(\"key\");
+							var lp = $(\"#\" + ui.draggable.attr('id') ).attr(\"lp\");
+							
 							$(\"#\" + ui.draggable.attr('id') ).remove();
-							var res = autenticarHost( password , $(this).attr('servicio') );
+							var res = autenticarHost( password , $(this).attr('servicio') , lp );
 	
 							if (res == 0 ){
 								$(this).animate({

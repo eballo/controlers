@@ -8,7 +8,7 @@ $lnsr = new Listener("Arrancar_Servicio","XML","POST", $_POST, "NOAUTH", $_SESSI
 
 if ( $lnsr->esValido()){
 	$servicio = new Servicio($lnsr->doPost('servicio'));
-	$term = new Terminal($servicio->getHost(),$servicio->getUser(),$servicio->getPassword());
+	$term = new Terminal($servicio->getHost(),$servicio->getUser(),$_SESSION['hosts'][$servicio->getNombre()."password"]);
 	$term->conectar();
 	$ret.="<comando res='".$term->comando($servicio->getCmdArranque())."' />";
 }

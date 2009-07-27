@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 			<scontroler>
-			    <host ip='172.20.1.17'>
-			        <usuario value='admin'/>
-			        <password value='9fef82cf13795322aeeab3a2c36d1065'/>
+			    <host ip='localhost'>
+			        <usuario value='root'/>
+			        <password value='3eab530dd60470976758ec1da5dfd04c'/>
 			    </host>
-			    <servicio nombre='Artifactory' nombreproceso='tomcat'  puerto='8080'>
+			    <servicio nombre='Tomcat_Local_Soporte' nombreproceso='tomcat'  puerto='8080'>
 			        <datosexternos>
 			            <pidfile value='--'/>
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
-				            <inicio cmd='/usr/local/tomcat/artifactory-apache-tomcat-6.0.18/bin/startup.sh'/>
-				            <parada cmd='/usr/local/tomcat/artifactory-apache-tomcat-6.0.18/bin/shutdown.sh'/>
-				            <reinicio cmd='clear'/>
+				            <inicio cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/startup.sh'/>
+				            <parada cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/shutdown.sh'/>
+				            <reinicio cmd='export JAVA_HOME=/usr/local/java/jre1.5.0_16/usr/local/tomcat/bin/shutdown.sh'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='free' cmd='free' />
+			            	<comando nombre='free' cmd='free' /><comando nombre='Version' cmd='cat /etc/passwd' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -33,9 +33,7 @@
 			        
 			        
 			        
-			        
-			        Repositorio comun
-			        
+			        Tomcat para pruebas con Scontroler
 			        
 			        
 			        

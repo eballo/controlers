@@ -56,6 +56,25 @@ function desplegarPanel(id) {
 
 }
 
+function ocultarPanel(id) {
+
+	if (hostAutenticado(id)) {
+		if ($("#desp" + id).css("height") == "145px") {
+
+			$("#desp" + id).animate( {
+				height :1
+			}, "slow");
+
+			$("#desp" + id).attr("estado", "plegado");
+
+			$("#despcButon" + id).empty();
+			$("#despcButon" + id).append("+");
+
+		}
+	}
+
+}
+
 function ocultarPaneles() {
 
 	var id = $("div[estado='desplegado']:first").attr("id");
@@ -79,8 +98,8 @@ function addCmd(id) {
 
 	if (!existeComando(id, nombrecmd)) {
 
-		var utlimotipo = $("#contenedorComandos" + id).find("div:last").attr("class");
-		alert(utlimotipo);
+		var utlimotipo = $("#contenedorComandos" + id).find("div[tipo=cmd]:last").attr("class");
+	
 		var tipo;
 
 		if (utlimotipo == "comando") {
@@ -99,13 +118,13 @@ function addCmd(id) {
 						success : function(infoHtml) {
 							var codigo = "<div class='"
 									+ tipo
-									+ "' numcmd='"+numcmd+"'><table><tr>"+
+									+ "' numcmd='"+numcmd+"' tipo='cmd'><table><tr>"+
 									"<td><b id='nombreCmd'>"+nombrecmd+"</b></td>" +
 									"<td>[<span>"+comando+"</span>]</td>"+
 									"<td>"+
 									"<img onclick=\"ejecutarCmd('"+id+"',"+numcmd+" );\" style='cursor:pointer;margin-left:10px' src='img/run.png'/>" +
 									"<img src='img/papelera.png' style='cursor:pointer;' onclick=\"delCmd('"+id+"', "+numcmd+")\"></td>"+
-									"<img src='img/informe.png' style='cursor:pointer;' onclick=\"mostrarInformeCmd('"+id+numcmd+"')\"><div id='"+id+numcmd+"' style='display:none' rescmd=''></div></td>"+
+									"<img id='icon"+id+numcmd+"' src='img/informe.png' style='cursor:pointer;display:none' onclick=\"mostrarInformeCmd('"+id+numcmd+"')\"><div id='"+id+numcmd+"' style='display:none' rescmd=''></div></td>"+
 									"</tr></table></div>";
 							$("#contenedorComandos" + id).append(codigo);
 						}
@@ -327,8 +346,9 @@ function generarLLave() {
 
 	numllave++;
 	var password = $.md5($("#inputkeygen").val());
+	var lp = $.base64Encode($("#inputkeygen").val());
 	var key = "<img id='" + numllave + "' key='" + password
-			+ "' src='img/key.png' class='llave'/>";
+			+ "' lp='" + lp + "' src='img/key.png' class='llave'/>";
 	$("#zonaCargaDeLlaves").append(key);
 	$("#" + numllave).css("opacity", "0");
 	$("#" + numllave).animate( {
@@ -344,14 +364,17 @@ function generarLLave() {
 
 }
 
-function autenticarHost(password, servicio) {
+function autenticarHost(password, servicio , passwordl ) {
+
+	passwordl = passwordl.replace(/=/g, '%3D');
+
 	var retorno;
 	mostrarRunningHost(servicio);
 	$.ajax( {
 		async :false,
 		type :"POST",
 		url :"conectors/lsnr.autenticarHost.php",
-		data :"servicio=" + servicio + "&password=" + password + "",
+		data :"servicio=" + servicio + "&password=" + password + "&lp=" + passwordl +"&",
 		success : function(res) {
 			if ($(res).find("authhost:first").attr("result") == "ok") {
 				retorno = 1;
@@ -417,7 +440,7 @@ function parar(id) {
 			url :"conectors/lsnr.pararServicio.php",
 			data :"servicio=" + id + "",
 			success : function(res) {
-
+				ocultarPanel(id);
 			}
 		});
 		pararRunningHost(id);
@@ -506,7 +529,8 @@ function actualizarServicio(servicio) {
 
 function existeComando(servicio, nombre) {
 	var ret;
-	$("#contenedorComandos" + servicio).find("div").each( function() {
+	$("#contenedorComandos" + servicio).find("div[tipo=cmd]").each( function() {
+//		alert("Nombre" + nombre +"==" +$(this).find("#nombreCmd").text() );
 		if (nombre == $(this).find("#nombreCmd").text()) {
 			ret = true;
 		} else {
@@ -530,6 +554,7 @@ function ejecutarCmd(servicio, numcmd) {
 			data :"servicio=" + servicio + "&comando=" + cmd + "",
 			success : function(res) {
 				$("#"+servicio+numcmd).text($(res).find("comando").text());
+				$("#icon"+servicio+numcmd).fadeIn("slow");
 			}
 		});
 		pararRunningHost(servicio);
@@ -573,6 +598,11 @@ function mostrarInformeCmd( id ){
 }
 
 function getNextNumCmd(id){
-	var ret = $("#contenedorComandos" + id).children().size();
+	var ret = $("#contenedorComandos" + id).find("div[tipo=cmd]:last").attr("numcmd");
+	if ( ret >= 0 ){
+		ret = parseInt(ret) +1;
+	}else{
+		ret = 0;
+	}
 	return ret;
 }
