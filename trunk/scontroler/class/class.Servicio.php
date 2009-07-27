@@ -90,7 +90,7 @@ class Servicio {
 	 * @return pid.
 	 */
 	public function arrancar(){
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		$term->comando($this->cmdArranque);
 	}
 
@@ -99,7 +99,7 @@ class Servicio {
 	 * @param modo :: Puede ser forzado [ F ] o bien estandar [ S ]
 	 */
 	public function parar( $modo ){
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		if($modo == "S"){
 			$term->comando($this->cmdParada);
 		}else{
@@ -111,7 +111,7 @@ class Servicio {
 	 * @param modo :: Puede ser forzado [ F ] o bien estandar [ S ]
 	 */
 	public function reiniciar( $modo ){
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"] );
 		if($modo == "S"){
 			$term->comando($this->cmdReinicio);
 		}else{
@@ -220,7 +220,7 @@ class Servicio {
 	 * @return ram_total
 	 */
 	public function ramOcupadaHost(){
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
 		return $infoHost;
@@ -231,7 +231,7 @@ class Servicio {
 	 * @return tam_disco
 	 */
 	public function tamanoDiscoHost(){
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f2 -d\" \"");
 		return $infoHost;
@@ -242,7 +242,7 @@ class Servicio {
 	 */
 	public function estadoDiscoOcupado(){
 		
-		$term = new Terminal($this->host,$this->user,$this->password);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
 		return $infoHost;

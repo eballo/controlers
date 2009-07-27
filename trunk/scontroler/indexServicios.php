@@ -3,6 +3,7 @@
 <script type='text/javascript' src='js/jquery.js'></script>
 <script type='text/javascript' src='js/jqueryui.js'></script>
 <script type='text/javascript' src='js/jquery-md5.js'></script>
+<script type='text/javascript' src='js/jquery-base64.js'></script>
 <script type='text/javascript' src='js/main.js'></script>
 <script type='text/javascript'>
 	$(function(){

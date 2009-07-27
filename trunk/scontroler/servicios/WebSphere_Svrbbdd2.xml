@@ -2,7 +2,7 @@
 			<scontroler>
 			    <host ip='172.20.1.132'>
 			        <usuario value='root'/>
-			        <password value='sadiel'/>
+			        <password value='4283a71a500fc5c645a1855588888367'/>
 			    </host>
 			    <servicio nombre='WebSphere_Svrbbdd2' nombreproceso='websphere'  puerto='9090'>
 			        <datosexternos>
@@ -15,7 +15,7 @@
 				            <reinicio cmd='asdasd'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='Ver log' cmd='cat /usr/local/WebSphere/AppServer/logs/server1/startServer.log' /><comando nombre='test' cmd='free' />
+			            	<comando nombre='Free' cmd='free' /><comando nombre='ps' cmd='ps -ef' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -25,7 +25,23 @@
 			        
 			        
 			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        sadasd
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
 			        
 			        
 			        

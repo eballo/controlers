@@ -15,7 +15,7 @@ if ( $lnsr->esValido()){
 	$servicio->setPuerto($lnsr->doPost('puerto'));
 	$servicio->setHost($lnsr->doPost('host'));
 	$servicio->setUser($lnsr->doPost('user'));
-	$servicio->setPassword($lnsr->doPost('password'));
+	$servicio->setPassword(md5($lnsr->doPost('password')));
 	$servicio->setCmdArranque($lnsr->doPost('cmdarranque'));
 	$servicio->setCmdParada($lnsr->doPost('cmdparada'));
 	$servicio->setCmdReinicio($lnsr->doPost('cmdreinicio'));
