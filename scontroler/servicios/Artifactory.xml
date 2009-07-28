@@ -15,7 +15,7 @@
 				            <reinicio cmd='clear'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='free' cmd='free' />
+			            	<comando nombre='free' cmd='free' /><comando nombre='Uname' cmd='uname -a' /><comando nombre='Version' cmd='cat /proc/version' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -34,7 +34,11 @@
 			        
 			        
 			        
+			        
+			        
 			        Repositorio comun
+			        
+			        
 			        
 			        
 			        
