@@ -26,10 +26,10 @@ if ( $lnsr->esValido()){
 								<td style='width:100%'><b id='nombreServicio'>".$serv->getNombre()."</b></td>
 								<td rowspan='2'>";
 
-			if (! $_SESSION['hosts'][$serv->getNombre()] ){
-				$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
-			}
-			$ret.="</td>
+							if (! $_SESSION['hosts'][$serv->getNombre()] ){
+								$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
+							}
+							$ret.="</td>
 							</tr>
 							<tr>
 								<td>".$serv->getDescripcion()."</td>
@@ -53,7 +53,7 @@ if ( $lnsr->esValido()){
 								</td>
 								<td rowspan='2'>
 										<table>
-											<tr><td><div class='minBoton'>x</div></td></tr>
+											<tr><td><div class='minBoton' onclick=eliminarServicio('".$serv->getNombre()."')>x</div></td></tr>
 											<tr><td ><div class='minBoton' id='despcButon".$serv->getNombre()."' onclick=desplegarPanel('".$serv->getNombre()."')>+</div></td></tr>
 										</table>
 								</td>
