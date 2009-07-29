@@ -197,7 +197,7 @@ div>div.zonaInfor {
 
 div.contenedorGeneradorLLaves {
 	position: absolute;
-	z-index:9999999999999;
+	z-index:9999999;
 	top: 0px;
 	left: 20px;
 	width: 210px;
@@ -236,7 +236,7 @@ img.llave {
 	width: 60px;
 	height: 60px;
 	cursor: pointer;
-	z-index: 9999;
+	z-index: 99999999999999999;
 }
 
 img.estadoSeguridad {

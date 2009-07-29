@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type='text/javascript' src='js/jquery.js'></script>
 <script type='text/javascript' src='js/jqueryui.js'></script>
 <script type='text/javascript' src='js/jquery-md5.js'></script>
@@ -8,25 +9,6 @@
 <script type='text/javascript'>
 	$(function(){
 			cargarApp();
-			$("#dialogEliminar").dialog({
-				autoOpen: false,
-				resizable: false,
-				minWidth: 300,
-				minHeight: 50,
-				buttons: {
-					si:  function(){
-							alert("yes");
-							
-							$(this).dialog('close');
-						},
-					no:  function(){
-									
-								$(this).dialog('close');
-
-							}
-						}
-
-				});
 	});
 </script>
 <link rel='stylesheet' type='text/css' href='css/main.css' />
@@ -53,7 +35,7 @@ llaves.</b><br>
 	value='< password >'></input></div>
 <div id='zonaCargaDeLlaves' class='zonaCargaDeLlaves'></div>
 </div>
-<div id="dialogEliminar" title="Esta seguro?">
+<div id="dialogEliminar" title="Esta seguro?" style='display:none'>
 <p>Esta seguro que desea eliminar este servicio?.</p>
 </div>
 </body>

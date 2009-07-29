@@ -483,8 +483,7 @@ function pararRunningHost(servicio) {
 }
 
 function actualizarServicio(servicio) {
-	$
-			.ajax( {
+	$.ajax( {
 				async :false,
 				type :"POST",
 				url :"conectors/lsnr.estadoServicio.php",
@@ -530,7 +529,7 @@ function actualizarServicio(servicio) {
 function existeComando(servicio, nombre) {
 	var ret;
 	$("#contenedorComandos" + servicio).find("div[tipo=cmd]").each( function() {
-//		alert("Nombre" + nombre +"==" +$(this).find("#nombreCmd").text() );
+// alert("Nombre" + nombre +"==" +$(this).find("#nombreCmd").text() );
 		if (nombre == $(this).find("#nombreCmd").text()) {
 			ret = true;
 		} else {
@@ -605,4 +604,27 @@ function getNextNumCmd(id){
 		ret = 0;
 	}
 	return ret;
+}
+
+function eliminarServicio(servicio ){
+	
+	if ( hostAutenticado(servicio) ){
+		$("#dialogEliminar").dialog({
+				resizable: false,
+				minWidth: 300,
+				minHeight: 50,
+				buttons: {
+					si:  function(){
+							$(this).dialog('close');
+							$(this).dialog('destroy');
+							$("#main"+ servicio).fadeOut("slow");
+						},
+					no:  function(){
+							$(this).dialog('close');
+							$(this).dialog('destroy');
+						}
+					}
+				});
+	}
+	
 }
