@@ -33,7 +33,7 @@ function desplegarPanel(id) {
 
 			$("#desp" + id).animate( {
 				height :145
-			}, "slow");
+			}, "fast");
 
 			$("#desp" + id).attr("estado", "desplegado");
 			numllave
@@ -44,7 +44,7 @@ function desplegarPanel(id) {
 
 			$("#desp" + id).animate( {
 				height :1
-			}, "slow");
+			}, "fast");
 
 			$("#desp" + id).attr("estado", "plegado");
 

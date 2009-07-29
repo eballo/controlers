@@ -10,6 +10,7 @@ div {
 	color: #4c4c4c;
 	font-family: Verdana;
 	font-size: x-small;
+
 }
 
 div.mainFrame {
@@ -124,6 +125,7 @@ div.boton,span.boton {
 	cursor: pointer;
 	width: 100%;
 	text-align: center;
+	
 }
 
 div.minBoton {
