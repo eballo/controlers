@@ -58,7 +58,24 @@ div.servicioMain {
 	-webkit-box-shadow: 1px 1px 1px #888;
 	background-image: url(../img/mainbg.png);
 }
-
+div.servicioMainDir {
+	position: relative;
+	margin: auto;
+	border: 0px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	background-color: #c3e2fb;
+	margin: 5px;
+	padding: 0px;
+	height: 60px;
+	-moz-box-shadow: 1px 1px 1px #888;
+	-o-box-shadow: 1px 1px 1px #888;
+	-icab-box-shadow: 1px 1px 1px #888;
+	-khtml-box-shadow:  1px 1px 1px #888;
+	-webkit-box-shadow: 1px 1px 1px #888;
+	background-image: url(../img/mainbg.png);
+}
 div.servicioInfo {
 	position: relative;
 	z-index: 3;
