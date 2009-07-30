@@ -1,5 +1,7 @@
 @CHARSET "UTF-8";
-
+body{
+	background-image: url(../img/bg.png);
+	}
 table {
 	padding: 0px;
 	margin: 0px;
@@ -10,7 +12,7 @@ div {
 	color: #4c4c4c;
 	font-family: Verdana;
 	font-size: x-small;
-
+	text-shadow: 0px 0px 1px #aaa;
 }
 
 div.mainFrame {
@@ -21,10 +23,21 @@ div.mainFrame {
 	border: 1px;
 	border-style: solid;
 	border-color: #7b7474;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	background-color: #a6d5fc;
+	
+	-moz-box-shadow: 5px 5px 5px #888;
+	-o-box-shadow:5px 5px 5px #888;
+	-icab-box-shadow: 5px 5px 5px #888;
+	-khtml-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	
 }
 
 div.servicioMain {
@@ -38,6 +51,12 @@ div.servicioMain {
 	margin: 5px;
 	padding: 0px;
 	height: 95px;
+	-moz-box-shadow: 1px 1px 1px #888;
+	-o-box-shadow: 1px 1px 1px #888;
+	-icab-box-shadow: 1px 1px 1px #888;
+	-khtml-box-shadow:  1px 1px 1px #888;
+	-webkit-box-shadow: 1px 1px 1px #888;
+	background-image: url(../img/mainbg.png);
 }
 
 div.servicioInfo {
@@ -45,11 +64,16 @@ div.servicioInfo {
 	z-index: 3;
 	padding: 10px;
 	border: 0px;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	background-color: #ecf6ff;
 	width: 300px;
+	background-image: url(../img/infobg.png);
 }
 
 div.servicioDatos {
@@ -57,9 +81,13 @@ div.servicioDatos {
 	top: 0;
 	padding: 10px;
 	border: 0px;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	width: 450px;
 	margin: 0 auto;
 }
@@ -74,18 +102,28 @@ div.desplegableComandos {
 	height: 1px;
 	left: 13px;
 	overflow: hidden;
+	-moz-box-shadow: 3px 4px 4px #888;
+	-o-box-shadow: 3px 4px 4px #888;
+	-icab-box-shadow: 3px 4px 4px #888;
+	-khtml-box-shadow: 3px 4px 4px #888;
+	-webkit-box-shadow: 3px 4px 4px #888;
+	background-image: url(../img/descmd.png);
 }
 
 div.comando {
 	margin: auto;
 	border: 0px;
 	background-color: #e4eaf0;
+	border:0px;
+			
 }
 
 div.comandoi {
 	margin: auto;
 	border: 0px;
 	background-color: #fff;
+	border:0px;
+
 }
 
 div.contenedorComandos {
@@ -100,10 +138,8 @@ div.contenedorComandos {
 	background-color: #FFFFFF;
 	width: 280px;
 	height: 108px;
-	-moz-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	-webkit-border-radius: 8px;
 	overflow: auto;
+	
 }
 
 div.pieContenedorComandos {
@@ -116,32 +152,43 @@ div.boton,span.boton {
 	position: relative;
 	padding: 3px;
 	border: 0px;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	background-color: #5f809d;
 	margin: auto;
 	color: #FFFFFF;
 	cursor: pointer;
 	width: 100%;
 	text-align: center;
-	
+	text-shadow: 1px 0px 1px #FFF;
+		background-image: url(../img/boton.png);
 }
 
 div.minBoton {
+	background-image: url(../img/boton.png);
 	position: relative;
 	padding: 3px;
 	border: 0px;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	background-color: #5f809d;
 	margin: auto;
 	color: #FFFFFF;
 	cursor: pointer;
 	width: 17px;
 	text-align: center;
-}
+	text-shadow: 1px 0px 1px #FFF;
+	}
 
 td {
 	color: #4c4c4c;
@@ -163,10 +210,16 @@ input {
 	border-color: #89c9ff;
 	background-color: #FFFFFF;
 	height: 20px;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
-}
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
+	background-image: url(../img/inputbg.png);
+	text-shadow: 0px 0px 1px #aaa;
+	}
 
 div.zonaInfor {
 	position: absolute;
@@ -215,12 +268,24 @@ div.generadorDeLlaves {
 	border: 1px;
 	border-style: solid;
 	border-color: #7b7474;
+	
 	-moz-border-radius: 8px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	
 	background-color: #d5ebfd;
 	padding-top: 15px;
 	padding-left: 7px;
+	
+	-moz-box-shadow: 5px 5px 5px #888;
+	-o-box-shadow:5px 5px 5px #888;
+	-icab-box-shadow: 5px 5px 5px #888;
+	-khtml-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	
+	background-image: url(../img/genbg.png);
 }
 
 div.zonaCargaDeLlaves {
@@ -276,4 +341,39 @@ div.contenedorInformesComando {
 	overflow:auto;
 	border-color: #cabf43;
 	height: 210px;
+}
+
+div.pie{
+	text-shadow: 1px 1px 1px #FFF;
+	margin : 0 auto;
+	margin-top:30px;
+	width: 400px;
+	text-align: center;
+	padding: 3px;
+	
+	-moz-box-shadow: 0px 0px 5px #888;
+	-o-box-shadow: 0px 0px 5px #888;
+	-icab-box-shadow:  0px 0px 5px #888;
+	-khtml-box-shadow: 0px 0px 5px #888;
+	-webkit-box-shadow:  0px 0px 5px #888;
+	
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+}
+
+div.tic{
+	-moz-box-shadow: 5px 5px 5px #888;
+	-o-box-shadow: 5px 5px 5px #888;
+	-icab-box-shadow:  5px 5px 5px #888;
+	-khtml-box-shadow: 5px 5px 5px #888;
+	-webkit-box-shadow: 5px 5px 5px #888;
+	border: 1px solid;
+	border-color:  #000;
+	position: absolute;
+	right: -19px;
+	bottom: 33px;
+	opacity:0.9;
 }

@@ -4,15 +4,15 @@
 			        <usuario value='root'/>
 			        <password value='b5932eef8647bbc708be9c64d91f5338'/>
 			    </host>
-			    <servicio nombre='Apache_Integraciom' nombreproceso='apache'  puerto='81'>
+			    <servicio nombre='Apache_Integraciom' nombreproceso='apache'  puerto='80'>
 			        <datosexternos>
 			            <pidfile value='--'/>
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
-				            <inicio cmd='/usr/local/apache/apache-2.0.55/bin/apachectl start'/>
-				            <parada cmd='/usr/local/apache/apache-2.0.55/bin/apachectl restart'/>
-				            <reinicio cmd='/usr/local/apache/apache-2.0.55/bin/apachectl stop'/>
+				            <inicio cmd='/usr/local/IBMHttpServer/HttpServer1328/bin/apachectl start'/>
+				            <parada cmd='/usr/local/IBMHttpServer/HttpServer1328/bin/apachectl stop'/>
+				            <reinicio cmd='/usr/local/IBMHttpServer/HttpServer1328/bin/apachectl restart'/>
 			            </principales>
 			            <otros>
 			            	<comando nombre='free' cmd='free' /><comando nombre='Procs' cmd='ps -ef' /><comando nombre='Version' cmd='cat /proc/version' />
