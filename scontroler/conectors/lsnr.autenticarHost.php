@@ -11,13 +11,13 @@ if ( $lnsr->esValido()){
 	
 	if ($servicio->getPassword() == $lnsr->doPost('password')){
 
-		$_SESSION['hosts'][$lnsr->doPost('servicio')] = true;
-		$_SESSION['hosts'][$lnsr->doPost('servicio')."password" ] = base64_decode($lnsr->doPost('lp'));
+		$_SESSION['hosts'][$lnsr->doPost('servicio').$_SESSION['directorio']] = true;
+		$_SESSION['hosts'][$lnsr->doPost('servicio').$_SESSION['directorio']."password" ] = base64_decode($lnsr->doPost('lp'));
 		$ret.="<authhost result='ok' />";
 	}else{
 		$ret.="<authhost result='ko' />";
 		
-		$_SESSION['hosts'][$lnsr->doPost('servicio')] = false;
+		$_SESSION['hosts'][$lnsr->doPost('servicio').$_SESSION['directorio']] = false;
 	}
 }
 

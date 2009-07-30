@@ -651,3 +651,9 @@ function eliminarServicio(servicio ){
 	}
 	
 }
+
+function cargarServicios( param ){
+	
+	document.location = "servicios.php?p="+param;
+	
+}

@@ -29,7 +29,7 @@ class Servicio {
 	public function Servicio( $servicio ){
 		$this->nombre = $servicio;
 
-		if (file_exists("servicios/".$this->nombre.".xml")){
+		if (file_exists("servicios/".$_SESSION['directorio']."/".$this->nombre.".xml")){
 			$this->cargarServicio();
 		}
 	}
@@ -90,8 +90,8 @@ class Servicio {
 	 * @return pid.
 	 */
 	public function arrancar(){
-		if ($_SESSION['hosts'][$this->nombre] ){
-			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+		if ($_SESSION['hosts'][$this->nombre.$_SESSION['directorio']] ){
+			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre.$_SESSION['directorio']."password"]);
 			$term->comando($this->cmdArranque);
 		}
 	}
@@ -102,7 +102,7 @@ class Servicio {
 	 */
 	public function parar( $modo ){
 		if ($_SESSION['hosts'][$this->nombre] ){
-			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre.$_SESSION['directorio']."password"]);
 			if($modo == "S"){
 				$term->comando($this->cmdParada);
 			}else{
@@ -115,7 +115,7 @@ class Servicio {
 	 * @param modo :: Puede ser forzado [ F ] o bien estandar [ S ]
 	 */
 	public function reiniciar( $modo ){
-		if ($_SESSION['hosts'][$this->nombre] ){
+		if ($_SESSION['hosts'][$this->nombre].$_SESSION['directorio'] ){
 			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"] );
 			if($modo == "S"){
 				$term->comando($this->cmdReinicio);
@@ -130,8 +130,8 @@ class Servicio {
 	 * Carga todos los datos de un servicio
 	 */
 	private function cargarServicio(){
-		if (file_exists("servicios/".$this->nombre.".xml")) {
-			$xml = simplexml_load_file("servicios/".$this->nombre.".xml");
+		if (file_exists("servicios/".$_SESSION['directorio']."/".$this->nombre.".xml")) {
+			$xml = simplexml_load_file("servicios/".$_SESSION['directorio']."/".$this->nombre.".xml");
 
 			$this->nombreProceso = $xml->servicio['nombreproceso'];
 			$this->puerto = $xml->servicio['puerto'];
@@ -229,7 +229,7 @@ class Servicio {
 	 * @return ram_total
 	 */
 	public function ramOcupadaHost(){
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre.$_SESSION['directorio']."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
 		return $infoHost;
@@ -240,7 +240,7 @@ class Servicio {
 	 * @return tam_disco
 	 */
 	public function tamanoDiscoHost(){
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre.$_SESSION['directorio']."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f2 -d\" \"");
 		return $infoHost;
@@ -251,7 +251,7 @@ class Servicio {
 	 */
 	public function estadoDiscoOcupado(){
 
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre.$_SESSION['directorio']."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
 		return $infoHost;

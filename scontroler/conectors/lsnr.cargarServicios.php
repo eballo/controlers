@@ -26,7 +26,7 @@ if ( $lnsr->esValido()){
 								<td style='width:100%'><b id='nombreServicio'>".$serv->getNombre()."</b></td>
 								<td rowspan='2'>";
 
-							if (! $_SESSION['hosts'][$serv->getNombre()] ){
+							if (! $_SESSION['hosts'][$serv->getNombre().$_SESSION['directorio']] ){
 								$ret.="<img id='estadoSeguridad".$serv->getNombre()."' servicio='".$serv->getNombre()."' src='img/canda.png' class='estadoSeguridad' />";
 							}
 							$ret.="</td>

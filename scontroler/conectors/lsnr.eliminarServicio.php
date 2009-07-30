@@ -7,7 +7,7 @@ require_once '../includes/xmlResponseLsnr.php';///
 $lnsr = new Listener("Eliminar_Servicio","XML","POST", $_POST, "NOAUTH", $_SESSION );
 
 if ( $lnsr->esValido()){
-	if ($_SESSION['hosts'][$lnsr->doPost('servicio')] ){
+	if ($_SESSION['hosts'][$lnsr->doPost('servicio').$_SESSION['directorio']] ){
 		$servicio = new Servicio($lnsr->doPost('servicio'));
 		$servicio->eliminar();
 	}
