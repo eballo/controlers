@@ -82,7 +82,7 @@ class Servicio {
 	 * Elimina del disco duro la configuracion del servicio.
 	 */
 	public function eliminar(){
-		unlink("servicios/". $this->nombre.".xml");
+		unlink("servicios/".$_SESSION['directorio']."/".$this->nombre.".xml");
 	}
 
 	/**
