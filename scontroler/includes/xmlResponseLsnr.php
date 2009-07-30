@@ -15,6 +15,8 @@ require_once 'class/class.Servicios.php';
 require_once 'class/class.Comando.php';
 require_once 'class/class.Terminal.php';
 require_once 'class/class.ValidarDatos.php';
+require_once 'class/class.Directorio.php';
+require_once 'class/class.Directorios.php';
 
 
 

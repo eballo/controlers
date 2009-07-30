@@ -19,6 +19,20 @@ function cargarApp() {
 	});
 }
 
+function cargarDir() {
+	$.ajax( {
+		type :"POST",
+		url :"conectors/lsnr.cargarDirectorios.php",
+		data :"",
+		success : function(serviciosHtml) {
+			$("#zonaDeCarga").empty();
+			$("#zonaDeCarga").append(serviciosHtml);
+			validarEstadoServicios();
+		}
+	});
+}
+
+
 function desplegarPanel(id) {
 
 	if (hostAutenticado(id)) {
@@ -617,6 +631,15 @@ function eliminarServicio(servicio ){
 					si:  function(){
 							$(this).dialog('close');
 							$(this).dialog('destroy');
+							$.ajax( {
+								async :false,
+								type :"POST",
+								url :"conectors/lsnr.eliminarServicio.php",
+								data :"servicio=" + servicio + "",
+								success : function(res) {
+
+								}
+							});
 							$("#main"+ servicio).fadeOut("slow");
 						},
 					no:  function(){

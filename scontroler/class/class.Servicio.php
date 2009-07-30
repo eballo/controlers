@@ -90,8 +90,10 @@ class Servicio {
 	 * @return pid.
 	 */
 	public function arrancar(){
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
-		$term->comando($this->cmdArranque);
+		if ($_SESSION['hosts'][$this->nombre] ){
+			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+			$term->comando($this->cmdArranque);
+		}
 	}
 
 	/**
@@ -99,11 +101,13 @@ class Servicio {
 	 * @param modo :: Puede ser forzado [ F ] o bien estandar [ S ]
 	 */
 	public function parar( $modo ){
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
-		if($modo == "S"){
-			$term->comando($this->cmdParada);
-		}else{
-			$term->comando("kill -9 `cat ".$this->ficheroPid."`");
+		if ($_SESSION['hosts'][$this->nombre] ){
+			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
+			if($modo == "S"){
+				$term->comando($this->cmdParada);
+			}else{
+				$term->comando("kill -9 `cat ".$this->ficheroPid."`");
+			}
 		}
 	}
 	/**
@@ -111,12 +115,14 @@ class Servicio {
 	 * @param modo :: Puede ser forzado [ F ] o bien estandar [ S ]
 	 */
 	public function reiniciar( $modo ){
-		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"] );
-		if($modo == "S"){
-			$term->comando($this->cmdReinicio);
-		}else{
-			$term->comando("kill -9 `cat ".$this->ficheroPid."`");
-			$term->comando($this->cmdArranque);
+		if ($_SESSION['hosts'][$this->nombre] ){
+			$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"] );
+			if($modo == "S"){
+				$term->comando($this->cmdReinicio);
+			}else{
+				$term->comando("kill -9 `cat ".$this->ficheroPid."`");
+				$term->comando($this->cmdArranque);
+			}
 		}
 	}
 
@@ -174,18 +180,19 @@ class Servicio {
 	public function addCmd($nombre , $cmd ){
 
 		$existe = false;
-
-		if (count($this->comandos) > 0){
-			foreach ($this->comandos as $comando){
-				if ($comando->getNombre() == $nombre ){//Primero miramos si existe
-					$existe = true;
-					$comando->setCmd($cmd);
-					break;
+		if ($_SESSION['hosts'][$this->nombre] ){
+			if (count($this->comandos) > 0){
+				foreach ($this->comandos as $comando){
+					if ($comando->getNombre() == $nombre ){//Primero miramos si existe
+						$existe = true;
+						$comando->setCmd($cmd);
+						break;
+					}
 				}
 			}
-		}
-		if (! $existe ){ // Si no existia lo creamos nuevo
-			$this->comandos[count($this->comandos)] = new Comando($nombre,$cmd);
+			if (! $existe ){ // Si no existia lo creamos nuevo
+				$this->comandos[count($this->comandos)] = new Comando($nombre,$cmd);
+			}
 		}
 
 	}
@@ -195,12 +202,14 @@ class Servicio {
 	 * @param $nombre Nombre del comando
 	 */
 	public function delCmd( $nombre){
-		if (count($this->comandos) > 0){
-			foreach ($this->comandos as $comando){
-				if ($comando->getNombre() == $nombre ){//Primero miramos si existe
-					$comando->setNombre("");
-					$comando->setCmd("");
-					break;
+		if ($_SESSION['hosts'][$this->nombre] ){
+			if (count($this->comandos) > 0){
+				foreach ($this->comandos as $comando){
+					if ($comando->getNombre() == $nombre ){//Primero miramos si existe
+						$comando->setNombre("");
+						$comando->setCmd("");
+						break;
+					}
 				}
 			}
 		}
@@ -224,7 +233,7 @@ class Servicio {
 		$term->conectar();
 		$infoHost=$term->comando("free | tail -2 | head -1 | tr -s \" \" | cut -f3 -d\" \"");
 		return $infoHost;
-		
+
 	}
 	/**
 	 * Retorna el tamaño total del disco
@@ -241,13 +250,13 @@ class Servicio {
 	 * @return ocu_disco
 	 */
 	public function estadoDiscoOcupado(){
-		
+
 		$term = new Terminal($this->host,$this->user,$_SESSION['hosts'][$this->nombre."password"]);
 		$term->conectar();
 		$infoHost=$term->comando("df -h | grep \" /\"$ | tr -s \" \" | cut -f5 -d\" \"");
 		return $infoHost;
 	}
-	
+
 
 	public function getNombre() {
 		return $this->nombre;
