@@ -17,7 +17,7 @@ class Directorios{
 				
 				if (file_exists("servicios/".$fdirectorio."/inf.xml")){
 					$xml = simplexml_load_file("servicios/".$fdirectorio."/inf.xml");
-					$directorios[] = new Directorio($xml->proyecto['nombre'] , $xml->proyecto['descripcion'], $xml->proyecto['icono'] );
+					$directorios[] = new Directorio($fdirectorio , $xml->proyecto['nombre'] , $xml->proyecto['descripcion'], $xml->proyecto['icono'] );
 
 				}
 			}

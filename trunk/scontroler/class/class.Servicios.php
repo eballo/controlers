@@ -12,14 +12,14 @@ class Servicios{
 	 */
 	public function getServicios(){
 
-		$dir = opendir("servicios");
+		$dir = opendir("servicios/".$_SESSION['directorio']."/");
 		while ($fservicio = readdir($dir))
 		{
 			$datosf = explode(".",$fservicio) ;
 			$servicio = $datosf[0] ;
 			$extension = $datosf[1];
 				
-			if ($extension == "xml"){
+			if ($extension == "xml" && $servicio != "inf"){
 				$servicios[count($servicios)] = new Servicio($servicio);
 			}
 
