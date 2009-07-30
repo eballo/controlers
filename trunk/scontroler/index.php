@@ -1,6 +1,16 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--[if lt IE 8]>
+<script type="text/javascript" >
+	document.location="http://www.mozilla-europe.org/es/firefox/";
+</script>
+<![endif]-->
+<!--[if eq IE 8]>
+<script type="text/javascript" >
+	document.location="http://www.mozilla-europe.org/es/firefox/";
+</script>
+<![endif]-->
 <script type='text/javascript' src='js/jquery.js'></script>
 <script type='text/javascript' src='js/jqueryui.js'></script>
 <script type='text/javascript' src='js/jquery-md5.js'></script>
@@ -10,6 +20,7 @@
 	$(function(){
 			cargarApp();
 	});
+	
 </script>
 <link rel='stylesheet' type='text/css' href='css/main.css' />
 <link href='css/jui/jquery-ui.css' type='text/css' rel='stylesheet' />
@@ -18,6 +29,7 @@
 
 
 <div class='mainFrame'>
+<div class='tic'><img src='img/tic.png' /></div>
 <div id='zonaDeCarga'></div>
 </div>
 
@@ -38,5 +50,6 @@ llaves.</b><br>
 <div id="dialogEliminar" title="Esta seguro?" style='display:none'>
 <p>Esta seguro que desea eliminar este servicio?.</p>
 </div>
+<div class='pie'>Licencia GPL - ContolerS Google Code - Autor : Job3_14 - Version 1.0</div>
 </body>
 </html>

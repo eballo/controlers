@@ -32,7 +32,7 @@ function desplegarPanel(id) {
 			$("#info" + id).css("z-index", indexInfor);
 
 			$("#desp" + id).animate( {
-				height :145
+				height :150
 			}, "fast");
 
 			$("#desp" + id).attr("estado", "desplegado");

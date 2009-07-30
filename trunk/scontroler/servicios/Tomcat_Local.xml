@@ -15,7 +15,7 @@
 				            <reinicio cmd='/'/>
 			            </principales>
 			            <otros>
-			            	<comando nombre='Free' cmd='free' /><comando nombre='Procesos' cmd='ps -ef' /><comando nombre='Version' cmd='cat  /proc/version' /><comando nombre='Uname' cmd='uname -a' />
+			            	<comando nombre='Free' cmd='free' /><comando nombre='Procesos' cmd='ps -ef' /><comando nombre='Version' cmd='cat  /proc/version' /><comando nombre='Uname' cmd='uname -a' /><comando nombre='sdf' cmd='sdf' /><comando nombre='sdfsdfsdf' cmd='sdfsdf' />
 			            </otros>
 			        </commandos>
 			        <descripcion>
@@ -155,7 +155,11 @@
 			        
 			        
 			        
+			        
+			        
 			        tomcat_local
+			        
+			        
 			        
 			        
 			        
