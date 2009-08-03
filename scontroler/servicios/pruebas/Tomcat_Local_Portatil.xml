@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+			<scontroler>
+			    <host ip='localhost'>
+			        <usuario value='root'/>
+			        <password value='3eab530dd60470976758ec1da5dfd04c'/>
+			    </host>
+			    <servicio nombre='Tomcat_Local_Casa' nombreproceso='apache_tomcat'  puerto='8080'>
+			        <datosexternos>
+			            <pidfile value='--'/>
+			        </datosexternos>
+			        <commandos>
+			        	<principales>
+				            <inicio cmd='export JAVA_HOME=/usr/local/jdk1.6.0_14;/usr/local/apache-tomcat-5.5.27/bin/startup.sh'/>
+				            <parada cmd='export JAVA_HOME=/usr/local/jdk1.6.0_14;/usr/local/apache-tomcat-5.5.27/bin/shutdown.sh'/>
+				            <reinicio cmd='/'/>
+			            </principales>
+			            <otros>
+			            	<comando nombre='Free' cmd='free' />
+			            </otros>
+			        </commandos>
+			        <descripcion>
+			        
+			        tomcat_local
+			        
+			        </descripcion>
+			    </servicio>
+			</scontroler>
+		

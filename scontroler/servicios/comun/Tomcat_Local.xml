@@ -10,8 +10,8 @@
 			        </datosexternos>
 			        <commandos>
 			        	<principales>
-				            <inicio cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/startup.sh'/>
-				            <parada cmd='export JAVA_HOME=/usr/local/jdk1.6.0_11;/usr/local/apache-tomcat-5.5.27/bin/shutdown.sh'/>
+				            <inicio cmd='export JAVA_HOME=/usr/local/jdk1.6.0_14;/usr/local/apache-tomcat-5.5.27/bin/startup.sh'/>
+				            <parada cmd='export JAVA_HOME=/usr/local/jdk1.6.0_14;/usr/local/apache-tomcat-5.5.27/bin/shutdown.sh'/>
 				            <reinicio cmd='/'/>
 			            </principales>
 			            <otros>
