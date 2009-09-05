@@ -20,5 +20,47 @@
 	<b>Lista de Productos en Oferta</b><br>					
 		Conjunto de productos en oferta , lista completa de la BBDD con marca en oferta.
 	</div>
+	<div class='contenedorOfertas'>
+	<table class='ofertas'>
+		<tr>
+			<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/neuma1.jpg' width=100px height=100xp />
+				</div>
+			</td>
+						<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/cuchilla.jpg' width=100px height=100xp />
+				</div>
+			</td>
+						<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/llanta.jpg' width=100px height=100xp />
+				</div>
+			</td>
+						<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/medes.jpg' width=100px height=100xp />
+				</div>
+			</td>
+						<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/relojes.jpg' width=100px height=100xp />
+				</div>
+			</td>
+			<td >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/img/data/reloj.jpg' width=100px height=100xp />
+				</div>
+			</td>
+		<tr>
+	</table>	
+	</div>
 			
 

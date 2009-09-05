@@ -266,6 +266,20 @@ function Mostar_Contacto(){
 	echo "<font face='Arial' size=-2 ><b><br>$res[0]</b></font>";
 	Desconectar($conex_cont);
 }
+function cargar_ofertas(){
+	$conex_cont=Conectar();
+	$datoscont = Lanzar_Consulta("select * FROM producto WHERE oferta = 1",$conex_cont);
+	
+	for ($i = 0 ; $i < count(mysql_num_rows($datoscont) ) ; $i++ ){
+		
+		$res=mysql_fetch_array($datoscont);
+		
+		echo "<div class='oferta' style=''>
+			<img src='reflejo oferta'>
+		</div>";
+	}
+	Desconectar($conex_cont);
+}
 function Comprobar_BBDD(){
 	if(mysql_connect("mysql.telesofa.com","qav939","servidor")){
 		return(0);

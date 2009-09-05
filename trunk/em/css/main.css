@@ -154,6 +154,7 @@ div.piepa {
     -o-border-radius: 8px;
     -icab-border-radius: 8px;
 }
+
 div.piep {
     text-shadow: 1px 1px 1px #FFF;
     margin: 0 auto;
@@ -181,19 +182,18 @@ div.contendorFotos {
 iframe.mainframe {
     width: 100%;
     height: 550px;
-	border: 0;
-	overflow: hidden;
+    border: 0;
+    overflow: hidden;
 }
-div.reflejo{
-	margin: 0 auto;
+
+div.reflejo {
+    margin: 0 auto;
     width: 840px;
-	height: 80px;
+    height: 80px;
 }
 
 div.contacto {
-
-	margin: 0 auto;
-
+    margin: 0 auto;
     width: 290px;
     border: 1px solid;
     border-color: #5c5c5c;
@@ -213,19 +213,50 @@ div.contacto {
     margin: 40px;
 }
 
-div.sobre{
-	position: absolute;
-	top: 50px;
-	right: 50px;
-	width: 160px;
-	height: 160px;
-	background-image: url(../img/sobre.png);
+div.sobre {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    width: 160px;
+    height: 160px;
+    background-image: url(../img/sobre.png);
 }
-div.gestp{
-	position: absolute;
-	top: 30px;
-	right: 50px;
-	width: 80px;
-	height: 90px;
-	background-image: url(../gestp/img/logom.png);
+
+div.gestp {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 80px;
+    height: 90px;
+    background-image: url(../gestp/img/logom.png);
+}
+
+div.contenedorOfertas {
+    background-color: #4c4c4c;
+    background-image: url(../img/reflejocontenedorfertas.png);
+	background-repeat: repeat-x;;
+    min-height: 130px;
+    margin: 0 auto;
+    -moz-border-radius: 0px 0px 8px 8px;
+    -khtml-border-radius: 0px 0px 8px 8px;
+    -webkit-border-radius: 0px 0px 8px 8px;
+    -o-border-radius: 0px 0px 8px 8px;
+    -icab-border-radius: 0px 0px 8px 8px;
+    border-top: 1px solid;
+    border-top-color: #292929;
+
+}
+
+div.oferta {
+    background-color: #FFF;
+    height:100px;
+    max-width: 100px;
+	 border: 1px solid;
+	 border-color: #4a4a4a;
+	
+}
+table.ofertas{
+	width: 770px;
+		margin-left: 20px;
+		margin-top: 10px;
 }
