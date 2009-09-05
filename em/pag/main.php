@@ -13,11 +13,11 @@
 	<div class='img' style='position: absolute; right: 20px; top: 150px;'><img src='img/emsa/puertaprin.png' /></div>
 	<div class='titulo'>Noticias</div>
     <div class='contenido' style='width:500px;'>
-    <b>Nueva Web Emsa 2008<b><br>					
+    <b>Nueva Web Emsa 2008</b><br>					
 		Nos complace presentarles la nueva web de Emsadonde podran consultar los productos que tenemos en
 		 stock sin moverse de casa.
 	<br><br>
-	<b>Lista de Productos en Oferta<b><br>					
+	<b>Lista de Productos en Oferta</b><br>					
 		Conjunto de productos en oferta , lista completa de la BBDD con marca en oferta.
 	</div>
 			
