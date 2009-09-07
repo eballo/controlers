@@ -1,11 +1,14 @@
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Web Especialidades Metalicas S.A. 2008</title>
 		<link rel='stylesheet' type='text/css' href='css/main.css'></link>
 		<script type="text/javascript" src='js/jq.js'></script>
 		<script type="text/javascript" src='js/main.js'></script>
 		<script type="text/javascript">
-		 $(function(){
+		var inter;
+
+		$(function(){
 			 cambiarPagina( "main.php");
 			$(".boton").mouseover(function(){
 				$(this).attr("class","botoni");
@@ -16,18 +19,27 @@
 
 			 $("#productos").click(function(){
 				 cargarAplicacion( );
+				 clearInterval(inter);
 				 });
 			 $("#contacto").click(function(){
 				 cambiarPagina( "contacto.php");
+				 clearInterval(inter);
 				 });
 			 $("#dontam").click(function(){
 				 cambiarPagina( "dontam.php");
+				 clearInterval(inter);
 				 });
 			 $("#prin").click(function(){
 				 cambiarPagina( "main.php");
+				 clearInterval(inter);
 				 });
 			 $("#galeria").click(function(){
 				 cambiarPagina( "galeria.php");
+				 clearInterval(inter);
+				 });
+			 $("#ofertas").click(function(){
+				 cambiarPagina( "ofertas.php");
+				 clearInterval(inter);
 				 });
 			});
 		</script>
@@ -42,6 +54,7 @@
  	<span class='boton' id='galeria'>Galeria</span>
  	 <span class='boton' id='contacto'>Contacto</span>
  	 <span id='dontam' class='boton'>Donde Estamos</span>
+ 	 <span id='ofertas' class='boton'>Ofertas</span>
  </div>
 <div id='contenedorPrincipal'>
 </div>

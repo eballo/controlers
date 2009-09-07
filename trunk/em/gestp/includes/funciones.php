@@ -124,7 +124,7 @@ function Mostrar_Datos_Producto($ID_Produc,$modosalida){
 							</tr>
 						</table>
 					</td>
-					<td valign='TOP' style='font-size: x-small;'><b>$res[2]</b><br>$res[3]</td>
+					<td valign='TOP' style='font-size: small;'><b>$res[2]</b><br>$res[3]</td>
 				</tr>
 				<tr>
 					<td colspan='2' ></td>
@@ -266,20 +266,88 @@ function Mostar_Contacto(){
 	echo "<font face='Arial' size=-2 ><b><br>$res[0]</b></font>";
 	Desconectar($conex_cont);
 }
-function cargar_ofertas(){
-	$conex_cont=Conectar();
-	$datoscont = Lanzar_Consulta("select * FROM producto WHERE oferta = 1",$conex_cont);
-	
-	for ($i = 0 ; $i < count(mysql_num_rows($datoscont) ) ; $i++ ){
+function Cargar_ofertas_Ini(){
+	$conex=Conectar();
+	$datostotal = Lanzar_Consulta("select * FROM producto WHERE oferta = 1 LIMIT 0,7",$conex);
+	$datos = $datostotal[0];
+
+	for ($i = 0 ; $i < $datostotal[1]  ; $i++ ){
 		
-		$res=mysql_fetch_array($datoscont);
-		
-		echo "<div class='oferta' style=''>
-			<img src='reflejo oferta'>
-		</div>";
+		$res=mysql_fetch_array($datos);
+		echo "<td class='oferta' >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/".$res[4]."' width=100px height=100xp />
+				</div>
+			</td>";
 	}
-	Desconectar($conex_cont);
+	Desconectar($conex);
 }
+
+function Cargar_ofertas( $point ){
+	$conex=Conectar();
+	$datostotal = Lanzar_Consulta("select * FROM producto WHERE oferta = 1 LIMIT $point , 7",$conex);
+	$datos = $datostotal[0];
+
+	for ($i = 0 ; $i < $datostotal[1]  ; $i++ ){
+		
+		$res=mysql_fetch_array($datos);
+		echo "<td class='oferta' >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/".$res[4]."' width=100px height=100xp />
+				</div>
+			</td>";
+	}
+	Desconectar($conex);
+}
+
+function Cargar_todas_ofertas( ){
+	$conex=Conectar();
+	$datostotal = Lanzar_Consulta("select * FROM producto WHERE oferta = 1",$conex);
+	$datos = $datostotal[0];
+
+	for ($i = 1 ; $i < $datostotal[1] +1  ; $i++ ){
+		
+		$res=mysql_fetch_array($datos);
+		echo "<td class='ofertat' >
+				<div class='oferta'>
+					<img style='position:absolute;' src='img/reflejoferta.png' />
+					<img src='gestp/".$res[4]."' width=100px height=100xp />
+				</div>
+				<div class='ofertaTexto'>$res[2]</div>
+			</td>";
+		
+		if ( $i % 7 == 0 ){
+			echo "</tr></tr>";	
+		}
+	}
+	Desconectar($conex);
+}
+
+function Producto_En_Oferta($id){
+	$conex=Conectar();
+	$datostotal = Lanzar_Consulta("select oferta FROM producto WHERE ID_Produc = $id",$conex);
+	$res = mysql_fetch_array( $datostotal[0] );
+	
+	if( $res[0] == 0 ){
+		return false;
+	} else{
+		return true;
+	}
+	Desconectar($conex);
+	
+}
+function Numero_Paginas_Oferta(){
+	$conex=Conectar();
+	$datostotal = Lanzar_Consulta("select * FROM producto WHERE oferta = 1",$conex);
+	$numeroofertas = $datostotal[1];
+	
+	Desconectar($conex);
+	$numpag = floor($numeroofertas / 7);
+	return($numpag);
+}
+
 function Comprobar_BBDD(){
 	if(mysql_connect("mysql.telesofa.com","qav939","servidor")){
 		return(0);

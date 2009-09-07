@@ -99,7 +99,7 @@ div.titulo {
 }
 
 div.contenido {
-    font-size: x-small;
+    font-size: small;
     margin: 10px;
 }
 
@@ -256,7 +256,49 @@ div.oferta {
 	
 }
 table.ofertas{
-	width: 770px;
+	
 		margin-left: 20px;
 		margin-top: 10px;
+		cursor: pointer;
+}
+table.ofertast{
+		margin: 10px;
+}
+td.oferta{
+		width: 104px;
+}
+td.ofertat{
+		width: 108px;
+}
+div.ofertaTexto{
+	font-size: x-small;
+	background-color: #dedede;
+    border: 1px solid;
+    border-top:0px;
+    border-color: #5c5c5c;
+    text-shadow: 1px 1px 1px #FFF;
+    max-width: 100px;
+    max-height:20px;
+    overflow:hidden;
+	white-space:nowrap;
+	}
+input[type='text']{
+	border: 1px solid;
+	border-color:#b8b8b8;
+	    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -icab-border-radius: 4px;
+    -moz-border-radius: 4px;
+}
+input[type='submit']{
+	margin-top: 10px;
+		border: 1px solid;
+	border-color:#b8b8b8;
+	    -khtml-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -icab-border-radius: 4px;
+    -moz-border-radius: 4px;
+    background-color: #b8b8b8;
 }
