@@ -50,7 +50,9 @@ $date=date('l, d. F Y');
 
 		break;
 		case 'dataproduct':
-			
+					if ( Producto_En_Oferta($idproduct)){
+						echo "<div class='alertaOferta'></div>";
+					}	
 					echo "<div class='fabricantes'>Catergoria de Productos:<br>";
 						Datos_Tipo($idtipo,0);
 						echo "<br><br>Fabricantes:<br>";
