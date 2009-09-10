@@ -1,5 +1,6 @@
 <?php 
-session_start();
+require_once '../seguridad/seguridad.php';
+
 // Script Que copia el archivo temporal subido al servidor en un directorio.
 echo '<p>Nombre Temporal: '.$_FILES['fileUpload']['tmp_name'].'</p>';
 echo '<p>Nombre en el Server: '.$_FILES['fileUpload']['name'].'</p>';

@@ -1,4 +1,5 @@
 <?php
+require_once '../seguridad/seguridad.php';
 require_once '../class/class.Dbs.php';
 
 
@@ -31,7 +32,7 @@ if (isset($_POST['modo'])){
 			<td><div class='header'>Nombre</div><div class='data'>".$nombre."</div></td>
 			<td><div class='header'>Direccion</div><div class='data'>".$direccion."</div></td>
 			<td><div class='header'>Otros Datos</div><div class='data'>".$otrosdatos."</div></td>
-			<td width='50px' height='50px'><img onclick=eliminar('$id[0]') style='opacity:0.8;cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
+			<td width='50px' height='50px'><img onclick=eliminar('$id[0]') style='cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
 			</tr>";
 			
 			break;
@@ -178,7 +179,7 @@ for ($i = 0 ; $i < $db->numFilas(); $i++){
 			<td><div class='header'>Nombre</div><div class='data'>".$res[1]."</div></td>
 			<td><div class='header'>Direccion</div><div class='data'>".$res[2]."</div></td>
 			<td><div class='header'>Otros Datos</div><div class='data'>".$res[3]."</div></td>
-			<td width='50px' height='50px'><img onclick=eliminar('".$res[0]."') style='opacity:0.8;cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
+			<td width='50px' height='50px'><img onclick=eliminar('".$res[0]."') style='cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
 			</tr>
 		";
 
