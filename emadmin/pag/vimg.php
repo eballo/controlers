@@ -1,5 +1,5 @@
 <?php 
-session_start();
+require_once '../seguridad/seguridad.php';
 
 if (is_file($_SESSION['ftemp'])){
 	echo "../../em/gestp/img/data/".$_SESSION['fname'];
