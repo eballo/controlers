@@ -16,23 +16,42 @@ if (isset($_POST['modo'])){
 		case 2: //Agregar
 
 			$nombre = $_POST['nombre'];
-			$direccion = $_POST['direccion'];
-			$otrosdatos = $_POST['otrosdatos'];
+			$descripcion = $_POST['descripcion'];
+			$tipoproducto = $_POST['tipoproducto'];
+			$fabricante = $_POST['fabricante'];
 			$img = $_POST['img'];
 
 			$db = new Dbs();
-			$db->query("INSERT into fabricante values ('','$nombre','$direccion','$otrosdatos','$img')");
-			$db->query("SELECT * FROM fabricante ORDER BY ID_Fab DESC LIMIT 0 , 1  ");
+			$db->query("INSERT into producto values ($fabricante,'','$nombre','$descripcion','$img',$tipoproducto,0)");
+			
+			$db->query("SELECT ID_Produc FROM producto ORDER BY ID_Produc DESC LIMIT 0 , 1  ");
 			$id=$db->getFila();
+			$db->query("SELECT nombre FROM fabricante WHERE ID_Fab = $fabricante  ");
+			$fabricante=$db->getFila();
+			$db->query("SELECT nombre FROM tipo_producto WHERE ID_Tipo = $tipoproducto  ");
+			$tipoproducto=$db->getFila();
+			
 			$db->desconectar();
 
-			echo "<tr id='".$id[0]."'>
-			<td width='80px' height='40px'><div class='imagenfab'><img class='imagenfab' style='opacity:0.8;cursor:pointer;' src='../em/gestp/".$img."' width=80px height=40px'/></div></td>
+	echo "
+	
+		<tr id='".$id[0]."'>
+			<td width='80px' height='80px'>
+				<div class='imagenpro'>
+					<img class='imagenpro' style='cursor:pointer;' src='../em/gestp/".$img."' width=70px height=70px'/>
+				</div>
+			</td>
 			<td><div class='header'>Nombre</div><div class='data'>".$nombre."</div></td>
-			<td><div class='header'>Direccion</div><div class='data'>".$direccion."</div></td>
-			<td><div class='header'>Otros Datos</div><div class='data'>".$otrosdatos."</div></td>
-			<td width='50px' height='50px'><img onclick=eliminar('$id[0]') style='opacity:0.8;cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
-			</tr>";
+			<td><div class='header'>Descripción</div><div class='data'>".$descripcion."</div></td>
+			<td><div class='header'>Fabricante</div><div class='data'>".$fabricante[0]."</div></td>
+			<td><div class='header'>Tipo de producto</div><div class='data'>".$tipoproducto[0]."</div></td>
+			<td><div class='header'>Oferta</div><input id='oferta".$id[0]."' type='checkbox' onclick=cambiarOferta('".$id[0]."') /></td>
+			<td width='50px' height='50px'><img onclick=eliminar('".$id[0]."') style='cursor:pointer;' src='img/eliminar.png' width='50px' height='50px'></img></td>
+			</tr>
+			<script type='text/javascript'>
+				$('input:checkbox:not([safari])').checkbox();
+			</script>
+		";
 
 			break;
 		case 3:
@@ -89,13 +108,15 @@ if (isset($_POST['modo'])){
 			function calta(){
 
 				var nombre = $("#fnombre").val();
-				var direccion = $("#fdireccion").val();
-				var otrosdatos = $("#fotrosdatos").val();
+				var descripcion = $("#fdescripcion").val();
+				var tipoproducto = $("#ftipopro").val();
+				var fabricante = $("#ffabricante").val();
+
 				
 				$.ajax( {
 					type :"POST",
-					url :"pag/prductos.php",
-					data :"modo=2&nombre="+nombre+"&direccion="+direccion+"&otrosdatos="+otrosdatos+"&img="+imagenAlta,
+					url :"pag/productos.php",
+					data :"modo=2&nombre="+nombre+"&descripcion="+descripcion+"&fabricante="+fabricante+"&tipoproducto="+ tipoproducto+"&img="+imagenAlta,
 					success : function(codigo) {
 						$("#mainTable").append(codigo);
 						$("#formularioAlta").fadeOut("slow");
@@ -175,27 +196,52 @@ if (isset($_POST['modo'])){
 <input type='button' value='Si' onclick='celiminar()' /> <input
 	type='button' value='No' onclick='cancelarEliminar()' /></div>
 <div class='formularioAlta' id='formularioAlta'>
-<div class='textFormAlta'>Formulario de alta producto<br>
-<br>
-<div class='textFormAlta'>Nombre<input type='text' id='fnombre' /></div>
-<div class='textFormAlta'>Dirección<input type='text' id='fdireccion' /></div>
-<div class='textFormAlta'>Otros Datos<input type='text' id='fotrosdatos' /></div>
-<div id='zonaImgForm'><img id='imgAltaForm' style='display: none'
-	width='80px' height='40px' /></div>
-<form action='pag/uploadimg.php' target='imagen' id='formAlta'
-	method='POST' enctype="multipart/form-data">
-<div class='textFormAlta'>Imagen<input type='file' name='fileUpload'
-	id='imagenAlta' /></div>
-<br>
-<br>
-</form>
-
-<div style='text-align: center;'><input type='button' value='Guardar'
-	onclick='calta()'><input type='button' value='Cancelar'
-	onclick='cancelarAlta()'></div>
-
-<iframe id='ifimg' name='imagen' style='display: none'></iframe></div>
-</div>
+	<div class='textFormAlta'>Formulario de alta producto<br><br>
+	<div class='textFormAlta'>Nombre  <input type='text' id='fnombre'/></div>
+	<div class='textFormAlta'>Descripción  <input type='text' id='fdescripcion'/></div>
+	<div class='textFormAlta'>Fabricante 
+		<select id='ffabricante'>
+			<?php 
+				$db = new Dbs();
+				$db->query("SELECT ID_Fab , Nombre from fabricante ");
+				
+				for ($i = 0 ; $i < $db->numFilas(); $i++){
+				
+					$res = $db->getFila();
+				
+					if ($num[0] == 0 ){
+						echo "<option value='$res[0]'>$res[1]</option>";
+					}
+				}
+			?>
+		</select>
+	</div>
+	<div class='textFormAlta'>Tipo de producto
+		<select id='ftipopro'>
+			<?php 
+				$db = new Dbs();
+				$db->query("SELECT ID_Tipo , Nombre from tipo_producto WHERE ID_Tipo NOT IN (SELECT ID_TipoP_S FROM `tipo_producto` group by ID_TipoP_S )");
+				
+				for ($i = 0 ; $i < $db->numFilas(); $i++){
+				
+					$res = $db->getFila();
+				
+					if ($num[0] == 0 ){
+						echo "<option value='$res[0]'>$res[1]</option>";
+					}
+				}
+			?>
+		</select>
+	</div>
+	<div id='zonaImgForm'><img id='imgAltaForm'  style='display:none' width='100px' height='100px' /></div>
+	<form action='pag/uploadimg.php' target='imagen' id='formAlta' method='POST' enctype="multipart/form-data">
+		<div class='textFormAlta'>Imagen<input type='file' name='fileUpload' id='imagenAlta'/></div><br><br>
+	</form>
+	
+	<div style='text-align:center;'><input type='button' value='Guardar' onclick='calta()'><input type='button' value='Cancelar' onclick='cancelarAlta()'></div>
+	
+	<iframe id='ifimg' name='imagen' style='display: none' ></iframe>
+	</div></div>
 <table id='mainTable' class='fabricante' cellpadding="0" cellspacing="0">
 <?php
 $db = new Dbs();
@@ -240,6 +286,3 @@ $db->desconectar();
 
 ?>
 </table>
-
-
-

@@ -158,7 +158,7 @@ div.formularioAlta {
 	-icab-border-radius: 8px;
 	-moz-border-radius: 8px;
 	background-color: #868686;
-	max-height: 200px;
+	min-height: 200px;
 	max-width: 300px;
 	display: none;
 	text-align: right;
