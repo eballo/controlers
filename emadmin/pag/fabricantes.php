@@ -56,7 +56,7 @@ if (isset($_POST['modo'])){
 				$("#eliminar").fadeOut("slow");
 			}
 			function celiminar(){
-				
+				$("#eliminar").fadeOut("slow");
 
 				$.ajax( {
 					type :"POST",
@@ -65,7 +65,7 @@ if (isset($_POST['modo'])){
 					success : function(codigo) {
 						$("#"+ideliminar).fadeOut("slow",function(){
 							$(this).remove();
-							$("#eliminar").fadeOut("slow");
+							
 						});
 					}
 				});
@@ -84,14 +84,14 @@ if (isset($_POST['modo'])){
 				var nombre = $("#fnombre").val();
 				var direccion = $("#fdireccion").val();
 				var otrosdatos = $("#fotrosdatos").val();
-				
+				$("#formularioAlta").fadeOut("slow");
 				$.ajax( {
 					type :"POST",
 					url :"pag/fabricantes.php",
 					data :"modo=2&nombre="+nombre+"&direccion="+direccion+"&otrosdatos="+otrosdatos+"&img="+imagenAlta,
 					success : function(codigo) {
 						$("#mainTable").append(codigo);
-						$("#formularioAlta").fadeOut("slow");
+						
 					}
 				});
 			}

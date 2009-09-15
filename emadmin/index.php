@@ -31,6 +31,9 @@ $(function(){
 		 $("#productos").click(function(){
 			 cambiarPagina("productos.php");
 			 });
+		 $("#noticias").click(function(){
+			 cambiarPagina("noticias.php");
+			 });
 		
 		
 });
@@ -39,7 +42,8 @@ $(function(){
 <body>
 <div class='menu'><span class='boton' id='fabricantes'>Fabricantes</span><span
 	class='boton' id='categorias'> Categorias</span><span class='boton' id='productos'>
-Productos</span></div>
+Productos</span><span class='boton' id='noticias'>
+Noticias</span></div>
 <div id='contenedorApp'></div>
 </body>
 </html>
