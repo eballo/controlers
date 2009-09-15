@@ -11,6 +11,7 @@
 function Conectar(){
 	$link=mysql_connect("mysql.telesofa.com","qav939","servidor");
 	mysql_select_db("qav939",$link);
+	mysql_query("SET NAMES UTF8",$link);
 	return($link);
 }
 function Desconectar($link){
