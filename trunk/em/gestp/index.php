@@ -59,7 +59,7 @@ if(Comprobar_BBDD()==0){
 				}
 		echo "</div>
 		<div>
-			<iframe name='centro'  src ='frame.php' class='frame'></iframe>
+			<iframe name='centro'  src ='frame.php' class='frame' frameborder=0 scrolling=no ></iframe>
 		</div>
 		
 		";

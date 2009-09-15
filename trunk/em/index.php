@@ -1,6 +1,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<!--[if lt IE 8]>
+		<script type="text/javascript" >
+			document.location="http://www.mozilla-europe.org/es/firefox/";
+		</script>
+		<![endif]-->
+
 		<title>Web Especialidades Metalicas S.A. 2008</title>
 		<link rel='stylesheet' type='text/css' href='css/main.css'></link>
 		<script type="text/javascript" src='js/jq.js'></script>
