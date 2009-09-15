@@ -83,7 +83,7 @@ if (isset($_POST['modo'])){
 			}
 			function celiminar(){
 				
-
+				$("#eliminar").fadeOut("slow");
 				$.ajax( {
 					type :"POST",
 					url :"pag/productos.php",
@@ -91,7 +91,7 @@ if (isset($_POST['modo'])){
 					success : function(codigo) {
 						$("#"+ideliminar).fadeOut("slow",function(){
 							$(this).remove();
-							$("#eliminar").fadeOut("slow");
+							
 						});
 					}
 				});
@@ -112,14 +112,14 @@ if (isset($_POST['modo'])){
 				var tipoproducto = $("#ftipopro").val();
 				var fabricante = $("#ffabricante").val();
 
-				
+				$("#formularioAlta").fadeOut("slow");
 				$.ajax( {
 					type :"POST",
 					url :"pag/productos.php",
 					data :"modo=2&nombre="+nombre+"&descripcion="+descripcion+"&fabricante="+fabricante+"&tipoproducto="+ tipoproducto+"&img="+imagenAlta,
 					success : function(codigo) {
 						$("#mainTable").append(codigo);
-						$("#formularioAlta").fadeOut("slow");
+						
 					}
 				});
 			}
