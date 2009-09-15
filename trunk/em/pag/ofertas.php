@@ -1,3 +1,4 @@
+<div class='logoemsa'></div>
 <?php
 include "../gestp/includes/funciones.php";
 
