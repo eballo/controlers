@@ -19,13 +19,26 @@ utilidades para extraer la información contenida e</div>
 <div class='img' style='position: absolute; right: 20px; top: 150px;'><img
 	src='img/emsa/puertaprin.png' /></div>
 <div class='titulo'>Noticias</div>
-<div class='contenido' style='width: 500px;'><b>Nueva Web Emsa 2008</b><br>
-Nos complace presentarles la nueva web de Emsadonde podran consultar los
-productos que tenemos en stock sin moverse de casa. <br>
-<br>
-<div class='titulo'>Lista de Productos en Oferta</div>
-Conjunto de productos en oferta , lista completa de la BBDD con marca en
-oferta.</div>
+
+<?php 
+	$conex_fab=Conectar();
+	$datos=Lanzar_Consulta("SELECT titular , contenido , fecha from noticia",$conex_fab);	
+	
+	for ($i = 0 ; $i < $datos[1]; $i++){
+		$noticia = mysql_fetch_array($datos[0]);
+		
+		echo "<div class='contenido' style='width: 500px;'><b>".$noticia[0]."</b><br>
+".$noticia[1]."<br><b>".$noticia[2]."</b></div>";
+		
+	}
+	Desconectar($conex_fab);
+?>
+
+
+
+
+<div class='tituloOfertas'>Lista de Productos en Oferta</div>
+
 <div class='contenedorOfertas'><script type="text/javascript">
 
 	var numpaginas = <?php echo Numero_Paginas_Oferta(); ?>; //Numero de paginaciones.
