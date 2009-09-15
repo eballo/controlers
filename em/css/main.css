@@ -251,6 +251,16 @@ div.gestp {
 	background-image: url(../gestp/img/logom.png);
 }
 
+
+div.logoemsa {
+	position: absolute;
+	top: 30px;
+	right: 50px;
+	width: 110px;
+	height: 90px;
+	background-image: url(../img/logoemsa.png);
+}
+
 div.contenedorOfertas {
 	background-color: #4c4c4c;
 	background-image: url(../img/reflejocontenedorfertas.png);
@@ -272,6 +282,7 @@ div.oferta {
 	max-width: 100px;
 	border: 1px solid;
 	border-color: #4a4a4a;
+	cursor: pointer;
 }
 
 table.ofertas {

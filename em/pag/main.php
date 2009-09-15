@@ -1,6 +1,7 @@
 <?php
 include "../gestp/includes/funciones.php"
 ?>
+<div class='logoemsa'></div>
 <div class='titulo'>Bienvenidos a la web de Especialidades Metalicas</div>
 <div class='contenido' style='width: 500px;'>CD-Text es una extensión de
 las especificaciones del Disco Compacto de Audio recogidas en el Libro

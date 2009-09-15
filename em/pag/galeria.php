@@ -1,4 +1,4 @@
-
+<div class='logoemsa'></div>
 
 <div class="contendorFotos">
 		<a  href="img/emsa/1.jpg" target='blank'><img class='foto' border=0 src="img/emsa/1.jpg" width="120" height="90" alt="image 1" /></a>

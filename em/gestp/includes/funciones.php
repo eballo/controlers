@@ -312,7 +312,7 @@ function Cargar_todas_ofertas( ){
 		
 		$res=mysql_fetch_array($datos);
 		echo "<td class='ofertat' >
-				<div class='oferta'>
+				<div class='oferta' onclick=cargarProducto('".$res[1]."')>
 					<img style='position:absolute;' src='img/reflejoferta.png' />
 					<img src='gestp/".$res[4]."' width=100px height=100xp />
 				</div>
