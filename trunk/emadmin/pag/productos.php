@@ -9,7 +9,12 @@ if (isset($_POST['modo'])){
 	switch($m){
 		case 1: //Eliminar
 			$db = new Dbs();
+			$db->query("SELECT Img from producto where ID_Produc = $id ");
+			$imagen = $db->getFila();
+			unlink($imagen[0]);
 			$db->query("DELETE from producto where ID_Produc = $id ");
+			
+			
 			$db->desconectar();
 			break;
 
