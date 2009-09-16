@@ -117,8 +117,8 @@ $date=date('l, d. F Y');
 			echo "
 			<div class='informacion'>
 			<br><br>
-			<!--<img src='img/logom.png'><br>-->
-			GestProduct 2009 Emsa - Especialidades Metalicas<br>";
+			<span class='strong'>
+			GestProduct 2009 Emsa - Especialidades Metalicas<span><br>";
 			Datos_Empresa();
 			echo "</div>";
 		break;

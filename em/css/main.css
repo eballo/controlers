@@ -119,6 +119,33 @@ div.contenido {
 	margin: 10px;
 }
 
+div.noticia {
+	font-size: small;
+	margin: 10px;
+
+	border: 1px solid;
+	border-color: #9b9b9b;
+	background-color: #f4f4f4;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-moz-border-radius: 8px;
+	overflow: hidden;
+}
+div.textoNoticia{
+		margin: 10px;
+			color: #4c4c4c;
+}
+div.reflejoNoticia{
+	position: absolute;
+	z-index: 4;
+	min-width: 500px;
+	min-height: 100px;
+	background-image: url(../img/reflejoNoticia.png);
+	background-repeat: no-repeat;
+}
+
 div.pie {
 	font-size: x-small;
 	margin: 10px;

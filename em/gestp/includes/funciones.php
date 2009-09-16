@@ -86,7 +86,7 @@ function Mostrar_Fabricantes_Tipo($ID_Tipo){
 				";
 			}
 		}else{
-			echo "<font face='Arial' size=-2 ><b>No existe ning�n fabricante de este tipo de producto</b></font>";
+			echo "<font face='Arial' size=-2 ><b>No existe ningún fabricante de este tipo de producto</b></font>";
 		}
 	Desconectar($conex_fab);
 	//Muestra los fabricantes que tienen ese tipo de productos
@@ -125,7 +125,7 @@ function Mostrar_Datos_Producto($ID_Produc,$modosalida){
 							</tr>
 						</table>
 					</td>
-					<td valign='TOP' style='font-size: small;'><b>$res[2]</b><br>$res[3]</td>
+					<td valign='TOP' style='font-size: small;'><span class='strong'>$res[2]</span><br>$res[3]</td>
 				</tr>
 				<tr>
 					<td colspan='2' ></td>
@@ -159,13 +159,13 @@ function Mostrar_Ruta($idtipo){
 		$conex_tipo=Conectar();
 		$datostipo=Lanzar_Consulta("select Nombre,ID_TipoP_S,ID_Tipo FROM tipo_producto WHERE ID_Tipo=$idtipo",$conex_tipo);
 		$res=mysql_fetch_array($datostipo[0]);
-		echo "<a href='index.php?idtipo=$res[2]'> <- $res[0]</a>";
+		echo "<a href='index.php?idtipo=$res[2]'> <img border=0 src='img/f.png' /> $res[0]</a>";
 		while($res[1]!=0){
 			$datostipo=Lanzar_Consulta("select Nombre,ID_TipoP_S,ID_Tipo FROM tipo_producto WHERE ID_Tipo=$res[1]",$conex_tipo);
 			$res=mysql_fetch_array($datostipo[0]);
-			echo "<a href='index.php?idtipo=$res[2]'> <- $res[0]</a>";
+			echo "<a href='index.php?idtipo=$res[2]'> <img border=0 src='img/f.png' /> $res[0]</a>";
 		}
-		echo " <- <a href='index.php'>Emsa</a> /</font>";
+		echo " <img border=0 src='img/f.png' /> <a href='index.php'>Emsa</a> /</font>";
 		Desconectar($conex_tipo);
 	}else{
 		echo "<font face='Arial' size=-2>/ <a href='index.php'>Emsa</a> /</font>";
@@ -211,15 +211,15 @@ function Datos_Tipo($ID_tipo,$modosalida){
 	}else{
 		if ($modosalida==2){
 			echo "
-			<table border='0' bgcolor='#F5F5F5' >
+			<table class='infotipo' >
 				<tr>
 					<td>
 						<b><font face='Arial' size=-2 >Tipo de Producto :</b> $res[1]<br><br>
-							<b>Descripci�n :<b><br><br>";
+							<b>Descripción :<b><br><br>";
 								if ( $res[2]!="" ){
 									echo "$res[2]"; 
 								}else{
-									echo " Esta categoria de producto no tiene descripci�n"; 
+									echo " Esta categoria de producto no tiene descripción"; 
 								}
 							echo "<br><br></font>
 					</td>
@@ -227,7 +227,7 @@ function Datos_Tipo($ID_tipo,$modosalida){
 			</table>
 			";
 		}else{
-			echo "<font face='Arial' size=-2 ><b>$res[1]</b></font>";
+			echo "<span class='strong'><b>$res[1]</b></span>";
 		}
 	}
 	Desconectar($conex_dat_tip);
@@ -346,6 +346,11 @@ function Numero_Paginas_Oferta(){
 	
 	Desconectar($conex);
 	$numpag = floor($numeroofertas / 7);
+	
+	if ( $numeroofertas - ($numpag  *  7) == 0 ){
+		$numpag--;
+	}
+	
 	return($numpag);
 }
 

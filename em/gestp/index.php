@@ -103,6 +103,6 @@ if(Comprobar_BBDD()==0){
 		";
 		//Datos_Empresa();
 }else{
-	echo "<br><br><br><b>La conexi�n con la BBDD no se ha podido establecer. Error 102 </b>";
+	echo "<br><br><br><b>La conexión con la BBDD no se ha podido establecer. Error 102 </b>";
 }
 ?>

@@ -19,6 +19,7 @@ Sony. El soporte de CD-Text es común, pero no universal. Existen
 utilidades para extraer la información contenida e</div>
 <div class='img' style='position: absolute; right: 20px; top: 150px;'><img
 	src='img/emsa/puertaprin.png' /></div>
+<br>
 <div class='titulo'>Noticias</div>
 
 <?php 
@@ -28,16 +29,13 @@ utilidades para extraer la información contenida e</div>
 	for ($i = 0 ; $i < $datos[1]; $i++){
 		$noticia = mysql_fetch_array($datos[0]);
 		
-		echo "<div class='contenido' style='width: 500px;'><b>".$noticia[0]."</b><br>
-".$noticia[1]."<br><b>".$noticia[2]."</b></div>";
+		echo "<div class='noticia' style='width: 500px;'><div class='reflejoNoticia'></div><div class='textoNoticia'><b>".$noticia[0]."</b><br>
+".$noticia[1]."<br><b>".$noticia[2]."</b></div></div>";
 		
 	}
 	Desconectar($conex_fab);
 ?>
-
-
-
-
+<br><br>
 <div class='tituloOfertas'>Lista de Productos en Oferta</div>
 
 <div class='contenedorOfertas'><script type="text/javascript">
