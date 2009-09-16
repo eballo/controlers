@@ -18,7 +18,7 @@ if (isset($_POST['modo'])){
 			
 			$nombre = $_POST['nombre'];
 			$otrosdatos = $_POST['otrosdatos'];
-			$res = $_POST['depende'];
+			$depende = $_POST['depende'];
 			
 			$db = new Dbs();
 			$db->query("INSERT into tipo_producto values ('','$nombre','$otrosdatos','',$depende)");
