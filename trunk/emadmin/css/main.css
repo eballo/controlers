@@ -6,7 +6,8 @@
 	margin: 0 auto;
 	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Verdana,
 		sans-serif;
-	text-shadow: 0px 0px 1px #aaa; font-size : x-small;
+	text-shadow: 0px 0px 1px #aaa;
+	font-size: x-small;
 	color: #4c4c4c;
 	font-size: x-small;
 }
@@ -51,10 +52,16 @@ table {
 
 tr.over {
 	background-color: #e5e5e5;
+		cursor: pointer;
 }
 
 tr.out {
-	
+	background-color: transparent;
+		cursor: pointer;
+}
+tr.csinleer{
+	background-color: #d8d8d8;
+	cursor: pointer;
 }
 
 td {
@@ -78,11 +85,12 @@ div.imagenpro {
 	max-width: 70px;
 	max-height: 70px;
 }
+
 div.menu {
 	position: fixed;
 	width: 100%;
-	top:0px;
-	z-index:4;
+	top: 0px;
+	z-index: 4;
 	background-color: #d0d0d0;
 	border-bottom: 1px solid;
 	border-bottom-color: #4c4c4c;
@@ -93,13 +101,13 @@ div.menu {
 div.panelHeramientas {
 	position: fixed;
 	width: 100%;
-	z-index:3;
-	top:25px;
+	z-index: 3;
+	top: 25px;
 	background-color: #575757;
 	border-bottom: 1px solid;
 	border-bottom-color: #4c4c4c;
-	height:20px;
-	padding-top:5px;
+	height: 20px;
+	padding-top: 5px;
 	padding-left: 10px;
 }
 
@@ -112,7 +120,6 @@ div.data {
 }
 
 div.eliminar {
-
 	position: fixed;
 	z-index: 5;
 	top: 50px;
@@ -145,7 +152,6 @@ div.textEliminar {
 }
 
 div.formularioAlta {
-
 	position: fixed;
 	z-index: 3;
 	top: 50px;
@@ -169,51 +175,103 @@ div.formularioAlta {
 	-khtml-box-shadow: 0px 5px 30px #000;
 	-webkit-box-shadow: 0px 5px 30px #000;
 }
+
 div.textFormAlta {
 	text-shadow: 1px 1px 1px #FFF;
 	color: #FFF;
 	text-decoration: none;
 }
-#contenedorApp{
-	margin-top:50px;
+
+#contenedorApp {
+	margin-top: 50px;
+}
+
+div.contenedor {
+	position: absolute;
+	top: 25px;
+	width: 100%;
+	border: 0px;
+	background-image: url(../img/correobg.png);
+	background-repeat: repeat-y;
+	min-height: 100%;
+}
+
+table.contenedorCorreo {
+	border: 0px;
+	background-color: transparent;
+}
+
+td.menuCorreo {
+	border: 0px;
+	min-width: 161px;
+}
+
+div.correoMenuBoton {
+	position: absolute;
+	min-width: 176px;
+	border-bottom: 1px solid;
+	border-bottom-color: #4c4c4c;
+	cursor: pointer;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #8c8c8c;
+	text-shadow: 1px 1px 1px #FFF;
+	color: #FFF;
+}
+div.correoMenuBotoni {
+	position: absolute;
+	min-width: 176px;
+	border-bottom: 1px solid;
+	border-bottom-color: #4c4c4c;
+	cursor: pointer;
+	padding-bottom: 5px;
+	padding-top: 5px;
+	background-color: #535353;
+	text-shadow: 1px 1px 1px #FFF;
+	color: #FFF;
+}
+
+td.listaCorreo {
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
 }
 
 div.herramienta {
-	cursor:pointer;
-		text-shadow: 1px 1px 1px #FFF;
+	cursor: pointer;
+	text-shadow: 1px 1px 1px #FFF;
 	color: #FFF;
 	text-decoration: none;
-	
 }
-input[type='file']{
+
+input[type='file'] {
 	border: 1px solid;
-	border-color:#b8b8b8;
-	    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -o-border-radius: 4px;
-    -icab-border-radius: 4px;
-    -moz-border-radius: 4px;
+	border-color: #b8b8b8;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	-icab-border-radius: 4px;
+	-moz-border-radius: 4px;
 }
-input[type='text']{
+
+input[type='text'] {
 	border: 1px solid;
-	border-color:#b8b8b8;
-	    -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -o-border-radius: 4px;
-    -icab-border-radius: 4px;
-    -moz-border-radius: 4px;
+	border-color: #b8b8b8;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	-icab-border-radius: 4px;
+	-moz-border-radius: 4px;
 }
 
-
-div.login{
-	margin-top:50px;
-
+div.login {
+	margin-top: 50px;
 	-khtml-border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-o-border-radius: 8px;
 	-icab-border-radius: 8px;
 	-moz-border-radius: 8px;
-
 	max-height: 200px;
 	max-width: 300px;
 	text-align: right;
@@ -223,22 +281,19 @@ div.login{
 	-icab-box-shadow: 0px 5px 30px #000;
 	-khtml-box-shadow: 0px 5px 30px #000;
 	-webkit-box-shadow: 0px 5px 30px #000;
-	
-	
 	background-color: #d0d0d0;
 	border: 1px solid;
 	border-color: #000;
-
 }
 
-div.text{
-text-shadow: 1px 1px 1px #FFF;
+div.text {
+	text-shadow: 1px 1px 1px #FFF;
 	color: #2f2f2f;
 	text-decoration: none;
 }
-div.loading{
-	position:relative;
+
+div.loading {
+	position: relative;
 	top: 100px;
 	text-align: center;
-	
 }

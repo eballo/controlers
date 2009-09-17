@@ -176,6 +176,7 @@ if (isset($_POST['modo'])){
 					});
 			}
 			$(function(){
+				$("html").css("overflow","auto");
 				$('input:checkbox:not([safari])').checkbox();
 				$("tr").mouseover(function(){
 					$(this).attr("class","over");
