@@ -127,7 +127,7 @@ if (isset($_POST['modo'])){
 					});
 			}
 			$(function(){
-
+				$("html").css("overflow","auto");
 				$("tr").mouseover(function(){
 					$(this).attr("class","over");
 					});
