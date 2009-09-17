@@ -9,10 +9,10 @@
 //Declaracion de Funciones
 
 function Conectar(){
-//	$link=mysql_connect("mysql.telesofa.com","qav939","servidor");
-//	mysql_select_db("qav939",$link);
-	$link=mysql_connect("mysql-server","dom-emsa-es.com","3em42009");
-	mysql_select_db("000-emsa-es-com",$link);
+	$link=mysql_connect("mysql.telesofa.com","qav939","servidor");
+	mysql_select_db("qav939",$link);
+//	$link=mysql_connect("mysql-server","dom-emsa-es.com","3em42009");
+//	mysql_select_db("000-emsa-es-com",$link);
 	mysql_query("SET NAMES UTF8",$link);
 	return($link);
 }
@@ -357,7 +357,7 @@ function Numero_Paginas_Oferta(){
 }
 
 function Comprobar_BBDD(){
-	if(mysql_connect("mysql-server","dom-emsa-es.com","3em42009")){
+	if(mysql_connect("mysql.telesofa.com","qav939","servidor")){
 		return(0);
 	}else{
 		return(1);
