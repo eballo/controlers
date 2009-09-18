@@ -39,16 +39,23 @@ if (isset($_POST['modo'])){
 			
 			$db = new Dbs();
 			$db->query("SELECT * from correo where ID_Corr = $id ");
-			$db->desconectar();
 			
-			$xmlR = "
+			
+			
+			$res = $db->getFila();
+			
+			$xmlR ="
 			<?xml version='1.0?>
 			<mail>
-				<de></de>
-				<contenido></contenido>
-				<fecha></fecha>
+				<id>$res[0]</id>
+				<de>$res[1]</de>
+				<contenido>$res[2]</contenido>
+				<fecha>$res[3]</fecha>
 			</mail>
 			";
+			$db->query("UPDATE correo SET abierto=1 WHERE ID_Corr = $id");
+			$db->desconectar();
+			echo $xmlR;
 			
 			break;
 	}
@@ -84,18 +91,35 @@ if (isset($_POST['modo'])){
 				});
 			}
 
-			function abrirCorreo(){
+			function abrirCorreo(id){
 				$.ajax( {
 					type :"POST",
 					url :"pag/correo.php",
-					data :"modo=1&id="+ideliminar,
+					data :"modo=3&id="+id,
 					success : function(codigo) {
-						$("#"+ideliminar).fadeOut("slow",function(){
-							$(this).remove();
-							
+
+						var de = $(codigo).find("de:first").text();
+						var contenido = $(codigo).find("contenido:first").text();
+						var fecha = $(codigo).find("fecha:first").text();
+
+						$(".CargaMailData").html("<b>De:</b> " + de + "    <b>Fecha:</b> " + fecha);
+						$(".CargaMailContenido").text(contenido);
+						$(".zonaCargaMail").fadeIn("slow");
+						
+						$("#"+id).attr("class","out");
+						$("#"+id).mouseover(function(){
+							$(this).attr("class","over");
 						});
+						$("#"+id).mouseout(function(){
+							$(this).attr("class","out");
+						});
+
 					}
 				});
+			}
+
+			function cerrarCorreo(){
+				
 			}
 
 			$(function(){
@@ -153,10 +177,11 @@ if (isset($_POST['modo'])){
 				$cleido = "csinleer";
 			}else{
 				$leido = 1;
+				$cleido = "";
 			}
 			
 			echo "
-				<tr id='".$res[0]."' type='label$cleido' leido=".$leido." class='$cleido'>
+				<tr id='".$res[0]."' type='label$cleido' leido=".$leido." class='out$cleido' ondblclick=abrirCorreo('".$res[0]."')>
 					<td width='50px' hight='50px'><img width='50px' hight='50px' src='img/sobre.png'></td>
 					<td><div class='header'>De:</div><div class='data'>".$res[1]."</div></td>
 					<td><div class='header'>Contenido</div><div class='data'>".$res[2]."</div></td>
@@ -172,7 +197,17 @@ if (isset($_POST['modo'])){
 	</tr>
 	</table>
 </div>
+<div class='pieCorreo'> </div>
 
+<div class='zonaCargaMail'>
+	<div class='bordeCargaMail'>
+			<div class='CargaMail'>
+				<div class='CargaMailData'></div>
+				<div class='CargaMailContenido'>						
+				</div>
+			</div>
+	</div>
+</div>
 
 
 <div class='eliminar' id='eliminar'>
