@@ -52,14 +52,15 @@ table {
 
 tr.over {
 	background-color: #e5e5e5;
-		cursor: pointer;
+	cursor: pointer;
 }
 
 tr.out {
 	background-color: transparent;
-		cursor: pointer;
+	cursor: pointer;
 }
-tr.csinleer{
+
+tr.csinleer {
 	background-color: #d8d8d8;
 	cursor: pointer;
 }
@@ -217,7 +218,9 @@ div.correoMenuBoton {
 	background-color: #8c8c8c;
 	text-shadow: 1px 1px 1px #FFF;
 	color: #FFF;
+	background-color: #8c8c8c;
 }
+
 div.correoMenuBotoni {
 	position: absolute;
 	min-width: 176px;
@@ -296,4 +299,95 @@ div.loading {
 	position: relative;
 	top: 100px;
 	text-align: center;
+}
+
+div.pieCorreo {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background-color: #535353;
+}
+
+div.zonaCargaMail {
+	position: absolute;
+	right: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background-image: url(../img/bgcorreo.png);
+	display: none;
+}
+
+div.bordeCargaMail {
+	position:relative;
+	top: 150px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background-color: #535353;
+	margin-bottom: 100px;
+	max-width: 400px;
+	min-height: 300px;
+	min-width: 300px;
+	-moz-box-shadow: 0px 5px 30px #000;
+	-o-box-shadow: 0px 5px 30px #000;
+	-icab-box-shadow: 0px 5px 30px #000;
+	-khtml-box-shadow: 0px 5px 30px #000;
+	-webkit-box-shadow: 0px 5px 30px #000;
+}
+
+div.CargaMail {
+	position: relative;
+	top: 5px;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-moz-border-radius: 8px;
+	background-color: #e5e5e5;
+	margin-bottom: 100px;
+	max-width: 390px;
+	min-height: 290px;
+	min-width: 390px;
+	overflow: hidden;
+}
+
+div.CargaMailData {
+	position: relative;
+	top: 0px;
+	min-height: 30px;
+	width: 100%;
+	border-bottom: 1px solid;
+	border-bottom-color: #000;
+	padding-top: 15px;
+	text-align: left;
+	text-shadow: 1px 1px 1px #FFF;
+	color: #2f2f2f;
+	padding-left: 15px;
+	background-image: url(../img/datacorreobg.png);
+}
+
+div.CargaMailContenido {
+	position: relative;
+	max-width: 370px;
+	height: 225px;
+	min-height: 225px;
+	min-width: 370px;
+	background-color: #fff;
+
+	-khtml-border-radius: 0px 0px 8px 8px  ;
+	-webkit-border-radius: 0px 0px 8px 8px ;
+	-o-border-radius:0px 0px 8px 8px;
+	-icab-border-radius: 0px 0px 8px 8px ;
+	-moz-border-radius: 0px 0px 8px 8px ;
+	text-align: left;
+	text-shadow: 1px 1px 1px #b4b4b4;
+	color: #000;
+	padding: 10px;
+	overflow: auto;
 }
