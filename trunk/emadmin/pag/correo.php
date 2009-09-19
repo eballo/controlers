@@ -68,6 +68,8 @@ if (isset($_POST['modo'])){
 			var ideliminar = 0;
 			var validante ;
 			var imagenAlta ;
+			var mailrespuesta ;
+			
 			function eliminar( id ){
 				ideliminar = id;
 				$("#eliminar").fadeIn("slow");
@@ -99,6 +101,7 @@ if (isset($_POST['modo'])){
 					success : function(codigo) {
 
 						var de = $(codigo).find("de:first").text();
+						mailrespuesta = de;
 						var contenido = $(codigo).find("contenido:first").text();
 						var fecha = $(codigo).find("fecha:first").text();
 
@@ -119,9 +122,12 @@ if (isset($_POST['modo'])){
 			}
 
 			function cerrarCorreo(){
-				
+				$(".zonaCargaMail").fadeOut("slow");
 			}
-
+			
+			function responderCorreo(){
+				document.location = "mailto:" + mailrespuesta;
+			}
 			$(function(){
 				$("html").css("overflow","hidden");
 				$("tr[type='label']").mouseover(function(){
@@ -135,7 +141,7 @@ if (isset($_POST['modo'])){
 					$(this).attr("class","over");
 					});
 				$("tr[type='labelcsinleer']").mouseout(function(){
-					$(this).attr("class","csinleer");
+					$(this).attr("class","outcsinleer");
 					});
 
 				$("div[class='correoMenuBoton']").mouseover(function(){
@@ -204,6 +210,9 @@ if (isset($_POST['modo'])){
 			<div class='CargaMail'>
 				<div class='CargaMailData'></div>
 				<div class='CargaMailContenido'>						
+				</div>
+				<div class='CargaMailBotones'>				
+					<span class='CargaMailBoton' onclick='responderCorreo()'>Responder</span><span class='CargaMailBoton' onclick='cerrarCorreo()'>Cerrar</span>
 				</div>
 			</div>
 	</div>
