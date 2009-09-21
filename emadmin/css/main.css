@@ -236,9 +236,11 @@ div.correoMenuBotoni {
 
 td.listaCorreo {
 	width: 100%;
+	height: 100%;
 	margin: 0px;
 	padding: 0px;
 	border: 0px;
+	overflow: auto;
 }
 
 div.herramienta {
@@ -311,16 +313,20 @@ div.loading {
 }
 
 div.pieCorreo {
-	position: absolute;
+	position: fixed;
 	right: 0px;
 	bottom: 0px;
 	width: 100%;
 	height: 10px;
 	background-color: #535353;
 }
-
+div.contenedorMenuCorreo{
+	position:fixed;
+	left:0px;
+	top:25px;
+}
 div.zonaCargaMail {
-	position: absolute;
+	position: fixed;
 	right: 0px;
 	bottom: 0px;
 	width: 100%;
