@@ -47,6 +47,10 @@
 				 cambiarPagina( "ofertas.php");
 				 clearInterval(inter);
 				 });
+			 $("#historia").click(function(){
+				 cambiarPagina( "historia.php");
+				 clearInterval(inter);
+				 });
 			});
 		</script>
 	</head>
@@ -55,7 +59,7 @@
  <div class='ban'><img src='img/ban.png'></img></div>
  <div class='menu'>
  	<span id='prin' class='boton'>Principal</span>
- 	<span class='boton'>Historia</span>
+ 	<span class='boton' id='historia'>Historia</span>
  	<span class='boton' id='productos'>Productos</span>
  	<span class='boton' id='galeria'>Galeria</span>
  	 <span class='boton' id='contacto'>Contacto</span>

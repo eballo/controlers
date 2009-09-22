@@ -222,8 +222,43 @@ input[type='submit']{
     -moz-border-radius: 4px;
     background-color: #b8b8b8;
 }
+input[type='button'] {
+	margin-top: 10px;
+	border: 1px solid;
+	border-color: #b8b8b8;
+	-khtml-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	-icab-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #b8b8b8;
+}
 span.strong{
 	font: Arial, sans-serif;
 	font-size: small;
 	font-weight: bold;
+}
+div.notificacion{
+	position: absolute;
+    top: 310px;
+    left: 210px;
+    width: 290px;
+	background-color: #4c4c4c;
+	height: 20px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	text-align: left;
+	-khtml-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-o-border-radius: 8px;
+	-icab-border-radius: 8px;
+	-moz-border-radius: 8px;
+	color: #FFF;
+	text-shadow: 0px 0px 2px #FFF;
+	-moz-box-shadow: 0px 5px 30px #000;
+	-o-box-shadow: 0px 5px 30px #000;
+	-icab-box-shadow: 0px 5px 30px #000;
+	-khtml-box-shadow: 0px 5px 30px #000;
+	-webkit-box-shadow: 0px 5px 30px #000;
 }
