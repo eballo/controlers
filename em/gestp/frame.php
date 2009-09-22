@@ -1,4 +1,72 @@
+
 <link rel='stylesheet' type='text/css' href='css/main.css'></link>
+<script type="text/javascript" src='../js/jq.js'></script>
+<script type="text/javascript">
+
+	function mostrarNotEnviado(){
+		$("#notEnviado").fadeIn("slow");
+		setTimeout("ocultarNotEnviado()",5000);
+	}
+	function ocultarNotEnviado(){
+		$("#notEnviado").fadeOut("slow");
+	}
+	function enviar(){
+		var nombre = $("#nombre").val();
+		var empresa = $("#empresa").val();
+		var mail= $("#mail").val();
+		var tipoproducto= $("#tipoproducto").val();
+		var fabricante= $("#fabricante").val();
+		var producto= $("#producto").val();
+		var telefono= $("#telefono").val();
+		var comentario= $("#comentario").val();
+		var fecha= $("#fecha").val();
+
+		$("#buttonEnviar").attr("disabled", true);
+		
+		if ( validarEmail(mail) && ningundatoVacio( nombre, empresa , tipoproducto , fabricante , producto , telefono , comentario , fecha )){
+
+			contenido =nombre + " de la empresa "+ empresa + " ha solicitado mas información del producto [ "+ producto  +
+			" ] del fabricante [ " + fabricante +
+			" ] con categoria [ "+ tipoproducto +" ] a "+ fecha +" con el numero de telefono [ " + telefono +" ] y dejando un comentario: < "+ comentario +">";
+			
+			$.ajax( {
+				type :"POST",
+				url :"../pag/ecorreo.php",
+				data :"de="+ mail +"&contenido="+contenido,
+				success : function(codigo) {
+					if(parseInt(codigo) == 1){
+						mostrarNotEnviado();
+						$("#buttonEnviar").attr("disabled", false);
+					}
+				}
+			});
+		}else{
+			alert("Datos incorrectos.");
+			$("#buttonEnviar").attr("disabled", false);
+		}
+		
+	}
+
+	function  ningundatoVacio( nombre, empresa , tipoproducto , fabricante , producto , telefono , comentario , fecha ){
+
+		if ( nombre != "" && empresa != "" && tipoproducto != "" && fabricante != "" && producto != "" && telefono != "" && comentario != "" && fecha != ""){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+	function validarEmail(valor) {
+
+		var filtro=/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
+	    if (filtro.test(valor)){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+</script>
 <?php
 include "includes/funciones.php";
 
@@ -70,44 +138,47 @@ $date=date('l, d. F Y');
 							<table style='border:0'>
 								<tr >
 									<td><font face='Arial' size=-2>Nombre</font></td>
-									<td><input size='15' type='text' name='nombre'></td>
+									<td><input size='15' type='text' id='nombre'></td>
 									<td><font face='Arial' size=-2>Empresa</font></td>
-									<td><input  size='15' type='text' name='empresa'></td>
+									<td><input  size='15' type='text' id='empresa'></td>
 								</tr>
 								<tr>
 									<td><font face='Arial' size=-2>Tipo Producto</font></td>
-									<td><input size='15' type='text' name='tipoproducto' disabled value='";
+									<td><input size='15' type='text' id='tipoproducto' disabled value='";
 									Datos_Tipo($idtipo,1);
 									echo "'></td>
 									<td><font face='Arial' size=-2>Fabricante</font></td>
-									<td><input size='15' type='text' name='fabricante' disabled value='";
+									<td><input size='15' type='text' id='fabricante' disabled value='";
 									Datos_Fabricante($idfab,1);
 									echo "'></td>
 								</tr>
 								<tr >
 									<td><font face='Arial' size=-2>Producto</font></td>
-									<td><input  size='15' type='text' name='produc' disabled value='";
+									<td><input  size='15' type='text' id='producto' disabled value='";
 									Mostrar_Datos_Producto($idproduct,1);
 									echo "'></td>
 									<td><font face='Arial' size=-2>Telefono</font></td>
-									<td><input size='15' type='text' name='telefono'></td>
+									<td><input size='15' type='text' id='telefono'></td>
 								</tr>
 								<tr >
-									<td><font face='Arial' size=-2>Dirección</font></td>
-									<td><input size='15' type='text' name='direccion'></td>
+									<td><font face='Arial' size=-2>Mail</font></td>
+									<td><input size='15' type='text' id='mail'></td>
 									<td><font face='Arial' size=-2>Comentarios</font></td>
-									<td><input size='15' type='text' name='comentario'></td>
+									<td><input size='15' type='text' id='comentario'></td>
 								</tr>
 								<tr>
 									<td><font face='Arial' size=-2>Fecha</font></td>
-									<td><input size='15' type='text' name='fecha' disabled value='$date'></td>
-									<td> </td>
-									<td><input type='submit' value='Enviar'></td>
+									<td colspan='2'><input size='15' type='text' id='fecha' disabled value='$date' style='width: 170px;'></td>
+									
+									<td style='text-align:center;'><input id='buttonEnviar' type='button' value='Enviar' onclick='enviar()'></td>
 								</tr>
 							</table>
+							
 						</div>
-
-					</div>";
+						
+					</div>
+					<div id='notEnviado' class='notificacion' style='display:none'>Solicitud enviada con exito.</div>";
+					
 					
 		break;
 		case 'dataidtipo':
