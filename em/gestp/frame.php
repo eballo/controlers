@@ -92,7 +92,7 @@ if ( isset($_GET['idproduct'])){
 }else{
 	$idproduct="null";
 }
-$date=date('l, d. F Y');
+$date=date("Y-m-d H:m:s");
 ////////////////////
 
 	switch ($modo){
