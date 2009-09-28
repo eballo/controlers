@@ -179,11 +179,11 @@ if (isset($_POST['modo'])){
 <div class='herramienta' onclick='alta()'>Añadir</div>
 </div>
 <div class='eliminar' id='eliminar'>
-<div class='textEliminar'>¿¿Esta seguro que desea eliminar la categoria de productos y todas sus dependencias??.</div>
+<div class='textEliminar'>¿¿Esta seguro que desea eliminar la categoría de productos y todas sus dependencias??.</div>
 <input type='button' value='Si' onclick='celiminar()' /> <input
 	type='button' value='No' onclick='cancelarEliminar()' /></div>
 <div class='formularioAlta' id='formularioAlta'>
-	<div class='textFormAlta'>Formulario de alta categoria<br><br>
+	<div class='textFormAlta'>Formulario de alta categoría<br><br>
 	<div class='textFormAlta'>Nombre <input type='text' id='fnombre'/></div>
 	<div class='textFormAlta'>Otros Datos <input type='text' id='fotrosdatos'/></div>
 	<div class='textFormAlta'>Depende de  <select id='fdepende'><option value='0'>De nadie </option>

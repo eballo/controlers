@@ -105,7 +105,7 @@ if (isset($_POST['modo'])){
 			var validante ;
 			var imagenAlta ;
 			var mailrespuesta ;
-			var syncled ;
+
 			var nummailsbandeja =<?php  
 					$db = new Dbs();
 					$db->query("SELECT * from correo ");
@@ -275,8 +275,8 @@ if (isset($_POST['modo'])){
 		<td class='menuCorreo'>
 		<div class='contenedorMenuCorreo'>
 			<div id='correoBotonTodos' class='correoMenuBotoni' style='top: 0px; left: 0px;' onclick='mostrarTodos()'>Todos</div>
-			<div id='correoBotonLeidos' class='correoMenuBoton' style='top: 25px; left: 0px;' onclick='mostrarLeidos()'>Leidos</div>
-			<div id='correoBotonNoLeidos' class='correoMenuBoton' style='top: 50px; left: 0px;' onclick='mostrarNoLeidos()'>No leidos</div>
+			<div id='correoBotonLeidos' class='correoMenuBoton' style='top: 25px; left: 0px;' onclick='mostrarLeidos()'>Leídos</div>
+			<div id='correoBotonNoLeidos' class='correoMenuBoton' style='top: 50px; left: 0px;' onclick='mostrarNoLeidos()'>No leídos</div>
 		</div>
 		</td>
 		<td class='listaCorreo'>
