@@ -61,7 +61,7 @@
  	<span id='prin' class='boton'>Principal</span>
  	<span class='boton' id='historia'>Historia</span>
  	<span class='boton' id='productos'>Productos</span>
- 	<span class='boton' id='galeria'>Galeria</span>
+ 	<span class='boton' id='galeria'>Galería</span>
  	 <span class='boton' id='contacto'>Contacto</span>
  	 <span id='dontam' class='boton'>Donde Estamos</span>
  	 <span id='ofertas' class='boton'>Ofertas</span>
@@ -72,6 +72,6 @@
 <div class='reflejo'>
  	<img src='img/reflejo.png' />
 </div>
- <div class='piepa'>Emsa 2009 by Adrian Torres [Job3] Copyright by Job3 Studios</div>
+ <div class='piepa'>Emsa 2009 by [Job3] Copyright by EMSA 2009</div>
 </body>
 </html>
