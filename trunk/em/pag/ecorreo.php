@@ -2,7 +2,8 @@
 	require_once '../../emadmin/class/class.Correo.php';
 	require_once '../../emadmin/class/class.Dbs.php';	
 	require_once '../../emadmin/class/class.Mail.php';	
-	require_once '../../emadmin/class/class.smtp.php';		
+	require_once '../../emadmin/class/class.phpmailer.php';
+	
 	$de = $_POST['de'];
 	$contenido = $_POST['contenido'];
 	
