@@ -27,7 +27,7 @@
 
 			contenido =nombre + " de la empresa "+ empresa + " ha solicitado mas información del producto [ "+ producto  +
 			" ] del fabricante [ " + fabricante +
-			" ] con categoria [ "+ tipoproducto +" ] a "+ fecha +" con el numero de telefono [ " + telefono +" ] y dejando un comentario: < "+ comentario +">";
+			" ] con categoria [ "+ tipoproducto +" ] a "+ fecha +" con el numero de telefono [ " + telefono +" ] y dejando un comentario: [ "+ comentario +" ]";
 			
 			$.ajax( {
 				type :"POST",
