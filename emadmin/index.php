@@ -11,9 +11,14 @@ require_once 'seguridad/seguridad.php';
 <script type="text/javascript" src='js/jquery.checkbox.min.js'></script>
 <script type="text/javascript" src='js/main.js'></script>
 <script type="text/javascript">
+var syncled ;
 
+function cancelarSyncCorreo(){
+	clearInterval(syncled);
+}
 $(function(){
-
+		
+	
 		$(".boton").mouseover(function(){
 			$(this).attr("class","botoni");
 			});
@@ -23,19 +28,24 @@ $(function(){
 
 		 $("#fabricantes").click(function(){
 			 cambiarPagina("fabricantes.php");
+			 cancelarSyncCorreo();
 			 });
 		 $("#categorias").click(function(){
 			 cambiarPagina("categorias.php");
+			 cancelarSyncCorreo();
 			 });
 
 		 $("#productos").click(function(){
 			 cambiarPagina("productos.php");
+			 cancelarSyncCorreo();
 			 });
 		 $("#noticias").click(function(){
 			 cambiarPagina("noticias.php");
+			 cancelarSyncCorreo();
 			 });
 		 $("#correo").click(function(){
 			 cambiarPagina("correo.php");
+			 cancelarSyncCorreo();
 			 });		
 		
 });
@@ -43,7 +53,7 @@ $(function(){
 </head>
 <body>
 <div class='menu'><span class='boton' id='fabricantes'>Fabricantes</span><span
-	class='boton' id='categorias'> Categorias</span><span class='boton' id='productos'>
+	class='boton' id='categorias'> Categorías</span><span class='boton' id='productos'>
 Productos</span><span class='boton' id='noticias'>
 Noticias</span><span class='boton' id='correo'>
 Correo</span></div>
