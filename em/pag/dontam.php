@@ -5,4 +5,4 @@
 </a>
 </div>
 <div class='piepa'>Estamos en la calle C/ Mineria 54-56, 08038 Barcelona <br>
- Para mas información llamar al 933323716 </div>
+ Para mas información <b>Telf:</b> 933323716 <b>Fax:</b> 933310193 <b>Mail:</b> ventas@emsa-es.com</div>
