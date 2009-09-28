@@ -18,7 +18,7 @@
 		
 		if ( validarEmail(mail) && ningundatoVacio( nombre, empresa , asunto , mensaje )){
 
-			contenido =nombre + " de la empresa "+ empresa + " ha contactado con emsa desde la web, con el siguiente mensaje:<br>"+ asunto +", " + mensaje;
+			contenido =nombre + " de la empresa "+ empresa + " ha contactado con emsa desde la web, con el siguiente mensaje: "+ asunto +" | " + mensaje;
 			
 			$.ajax( {
 				type :"POST",
