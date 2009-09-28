@@ -1,4 +1,4 @@
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <link rel='stylesheet' type='text/css' href='css/main.css'></link>
 <script type="text/javascript" src='../js/jq.js'></script>
 <script type="text/javascript">
@@ -97,7 +97,7 @@ $date=date("Y-m-d H:m:s");
 
 	switch ($modo){
 		case 'fab':
-			echo "<div class='fabricantes'>Catergoria de Productos:<br>";
+			echo "<div class='fabricantes'>Catergoría de Productos:<br>";
 						Datos_Tipo($idtipo,0);
 						echo "<br><br>Fabricantes:<br>";
 						Mostrar_Fabricantes_Tipo($idtipo);
@@ -105,7 +105,7 @@ $date=date("Y-m-d H:m:s");
 		break;
 		case 'produc':
 
-			echo "<div class='fabricantes'>Catergoria de Productos:<br>";
+			echo "<div class='fabricantes'>Catergoría de Productos:<br>";
 						Datos_Tipo($idtipo,0);
 						echo "<br><br>Fabricantes:<br>";
 						Mostrar_Fabricantes_Tipo($idtipo);
@@ -121,7 +121,7 @@ $date=date("Y-m-d H:m:s");
 					if ( Producto_En_Oferta($idproduct)){
 						echo "<div class='alertaOferta'></div>";
 					}	
-					echo "<div class='fabricantes'>Catergoria de Productos:<br>";
+					echo "<div class='fabricantes'>Catergoría de Productos:<br>";
 						Datos_Tipo($idtipo,0);
 						echo "<br><br>Fabricantes:<br>";
 						Mostrar_Fabricantes_Tipo($idtipo);
@@ -189,7 +189,7 @@ $date=date("Y-m-d H:m:s");
 			<div class='informacion'>
 			<br><br>
 			<span class='strong'>
-			GestProduct 2009 Emsa - Especialidades Metalicas<span><br>";
+			GestProduct 2009 Emsa - Especialidades Metálicas<span><br>";
 			Datos_Empresa();
 			echo "</div>";
 		break;

@@ -1,3 +1,4 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <link rel='stylesheet' type='text/css' href='css/main.css'></link>
  <?php 
 //session_start();
@@ -68,11 +69,11 @@ if(Comprobar_BBDD()==0){
 		echo "<div class='ruta'>";
 				Mostrar_Ruta($idtipo);
 		echo "</div>
-		<div class='rutainfo'>[Clic en los nombres de la ruta para desplazarse]</div>
+		<div class='rutainfo'>[Click en los nombres de la ruta para desplazarse]</div>
 							
 		<div class='categoriaProductos'>";
 				if ($modo=='ini'){
-					echo "Catergoria de Productos:<br><br>";
+					echo "Catergoría de Productos:<br><br>";
 						$return=Gest_Arb_Tipo($idtipo);
 						if ($return[0]!=1) {
 								$ruta=Concat_Ruta($ruta,$return[1]);
@@ -80,7 +81,7 @@ if(Comprobar_BBDD()==0){
 								Datos_Tipo($idtipo,0);
 						}	
 				}else{
-						echo "Catergoria de Productos:<br><br>";
+						echo "Catergoría de Productos:<br><br>";
 						$return=Gest_Arb_Tipo($idtipopadre);
 						if ($return[0]!=1) {
 								$ruta=Concat_Ruta($ruta,$return[1]);

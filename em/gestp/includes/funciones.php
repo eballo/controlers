@@ -88,7 +88,7 @@ function Mostrar_Fabricantes_Tipo($ID_Tipo){
 				";
 			}
 		}else{
-			echo "<font face='Arial' size=-2 ><b>No existe ningún fabricante de este tipo de producto</b></font>";
+			echo "<font face='Arial' size=-2 ><b>No existe ningún fabricante de este tipo de producto.</b></font>";
 		}
 	Desconectar($conex_fab);
 	//Muestra los fabricantes que tienen ese tipo de productos
@@ -186,7 +186,7 @@ function Datos_Empresa(){
 	$datosempresa=Lanzar_Consulta("select * FROM datos_emsa",$conex);
 	$arraydatosmepres=$datosempresa[0];
 	$res=mysql_fetch_array($arraydatosmepres);
-	echo "<br><font face='Arial' size=-2 ><b>$res[0]</b><br>Telf: $res[1] <br> Direccion: $res[2] <br> Correo: $res[3] <br><b>$res[4]</b></font>";
+	echo "<br><font face='Arial' size=-2 ><b>$res[0]</b><br>Telf: $res[1] <br> Dirección: $res[2] <br> Correo: $res[3] <br><b>$res[4]</b></font>";
 	Desconectar($conex);
 	//Muestra por pantalla los datos de EMsa de la bbdd
 }
@@ -221,7 +221,7 @@ function Datos_Tipo($ID_tipo,$modosalida){
 								if ( $res[2]!="" ){
 									echo "$res[2]"; 
 								}else{
-									echo " Esta categoria de producto no tiene descripción"; 
+									echo " Esta categoría de producto no tiene descripción"; 
 								}
 							echo "<br><br></font>
 					</td>
