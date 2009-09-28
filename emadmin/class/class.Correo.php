@@ -18,7 +18,12 @@ class Correo{
 		$db = new Dbs();
 		$db->query("INSERT into correo VALUES ('','".$this->para."','".$this->contenido."','$fecha',0)");	
 		$db->desconectar();
-		return 1;
+		
+		$mail = new Mail("ventas@emsa-es.com", "Mensaje de ".$this->para , $this->contenido);
+		$mail->enviar();
+		echo $mail->getError();
+		
+//		return 1;
 	}
 }
 ?>
