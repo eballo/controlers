@@ -4,7 +4,7 @@ include "../gestp/includes/funciones.php"
 <div class='logoemsa'></div>
 <div class='titulo'>Bienvenidos a la web de Especialidades Metálicas</div>
 <div class='contenido' style='width: 500px;'>
-Nuestras especialidad es solucionar, servir y asesorar
+Nuestra especialidad es solucionar, servir y asesorar
  los equipos tecnológicos más actuales y competitivos de las grandes marcas europeas y japonesas, 
  con espíritu joven de progreso, adaptándonos a los nuevos tiempos, en calidad, técnica, servicio, 
  precio y atención personalizada.</div>
