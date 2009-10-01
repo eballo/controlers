@@ -3,7 +3,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 		<!--[if lt IE 8]>
 		<script type="text/javascript" >
-			document.location="http://www.mozilla-europe.org/es/firefox/";
+			document.location="compat.php";
 		</script>
 		<![endif]-->
 
