@@ -8,7 +8,6 @@
 		<![endif]-->
 
 		<title>Web Especialidades Metálicas S.A. 2009</title>
-		<title>Web Especialidades Metalicas S.A. 2009</title>
 		<link rel='stylesheet' type='text/css' href='css/main.css'></link>
 		<script type="text/javascript" src='js/jq.js'></script>
 		<script type="text/javascript" src='js/main.js'></script>
