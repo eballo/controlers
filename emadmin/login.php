@@ -1,7 +1,7 @@
 <?php 
 
 if (isset($_POST[usuario] ) && isset($_POST[password])){
-	if ( $_POST[usuario] == "emsa"  && $_POST[password] == "manim" ){ //ZASSSSCUTRADAAA XDD
+	if ( $_POST[usuario] == "emsa"  && $_POST[password] == "3ms42009" ){ //ZASSSSCUTRADAAA XDD
 		$_SESSION['login']= true;
 		include 'index.php';
 		die;
