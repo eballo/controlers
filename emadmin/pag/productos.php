@@ -186,6 +186,7 @@ if (isset($_POST['modo'])){
 					});
 
 				$("#imagenAlta").change(function(){
+						cargarImagen("img/loadbar.gif");
 						$("#formAlta").submit();
 						$("input[type='button']").attr("disabled", true);
 						validante = setInterval("validarImg()",3000);
