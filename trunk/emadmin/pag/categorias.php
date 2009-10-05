@@ -45,7 +45,7 @@ if (isset($_POST['modo'])){
 		case 3:
 			$db = new Dbs();
 			$db->query("SELECT * from tipo_producto ");
-			
+			echo "<option value='0'>De nadie </option>";
 			for ($i = 0 ; $i < $db->numFilas(); $i++){
 			
 				$res = $db->getFila();
