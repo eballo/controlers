@@ -1,5 +1,6 @@
 <?php
-	include_once 'functions.php';
+include_once 'includes/functions.php';
+	
 	$user=$_POST['user'];
 	$pass=$_POST['pass'];
 	$pass2=$_POST['passver'];
@@ -33,4 +34,5 @@
 				alert('$error');
 				document.location = 'form.php?id=$id';
 			</script>";
-?>
+	
+	?>
