@@ -27,7 +27,7 @@
 		 * Establece la conexion a la base de datos
 		 * y devuelve el 'enlace' para trabajar en esta situandose en la base de datos $db
 		 */
-		$link=mysql_connect("127.0.0.1","root","");
+		$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
 		if ( ! $link ){
 			echo "Error al intentar conectar a mysql";
 		}else{
