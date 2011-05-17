@@ -1,7 +1,6 @@
 <?php
 include_once 'includes/headers.php';
 
-
 $user=$_POST['user'];
 $pass=$_POST['pass'];
 $login=$_POST['login'];

@@ -13,7 +13,7 @@ include_once 'includes/headers.php';
 		}
 	}else{
 		echo"<script type='text/javascript'>
-						document.location = 'login.php?loginError=3';
+						document.location = 'login.php';
 					</script>";
 	}
 
