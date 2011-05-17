@@ -1,7 +1,5 @@
 <?php
-session_start();
-
-include_once 'functions.php';
+include_once 'includes/headers.php';
 
 $user=$_POST['user'];
 $pass=$_POST['pass'];
@@ -17,7 +15,7 @@ if ($login == "true"){
 			$_SESSION['id'] = $id;
 				
 			echo"<script type='text/javascript'>
-						document.location = 'administrador.php';
+						document.location = 'admin.php';
 					</script>";
 		}else{
 			//TODO Comentar
@@ -33,7 +31,7 @@ if ($login == "true"){
 		//TODO Comentar
 		$_SESSION['login'] = false;
 		$_SESSION['type'] = "";
-		$_SESSION['id'] = $id;
+		$_SESSION['id'] = "";
 
 		echo"<script type='text/javascript'>
 						document.location = 'login.php?loginError=3';
