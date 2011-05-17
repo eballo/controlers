@@ -1,6 +1,6 @@
 <?php
 	//Funciones de validacion de datos
-	
+	$test = "OK";
 	function esNumero($val){
 		/*
 		 * Comprueba que tipo de valores contiene la variable recibida $val
@@ -27,7 +27,13 @@
 		 * Establece la conexion a la base de datos
 		 * y devuelve el 'enlace' para trabajar en esta situandose en la base de datos $db
 		 */
+		include('./includes/headers.php');
+		/*echo $MYSQL_IP;
+		echo $MYSQL_USER;
+		echo $MYSQL_PASSWORD;
 		$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
+		*/
+		$link=mysql_connect("localhost","root","sadiel");
 		if ( ! $link ){
 			echo "Error al intentar conectar a mysql";
 		}else{
