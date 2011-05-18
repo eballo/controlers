@@ -28,8 +28,8 @@
 ?>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Alta de Files de Usuario</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Pagina de usuarios</title>
 </head>
 <body>
 	<h3> Alta de Files: </h3>
