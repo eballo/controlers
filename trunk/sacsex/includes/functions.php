@@ -1,6 +1,7 @@
 <?php
 	include_once 'config/sacsex.properties.php' ;
 	//Funciones de validacion de datos
+	
 	function esNumero($val){
 		/*
 		 * Comprueba que tipo de valores contiene la variable recibida $val
@@ -38,6 +39,7 @@
 		}else{
 			mysql_select_db($db);
 		}
+		
 		return $link;
 	}
 	

@@ -1,0 +1,315 @@
+Opcio --help-all
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions d'ajuda:
+  -h, --help                            Mostra les opcions d'ajuda
+  --help-all                            Mostra totes les opcions d'ajuda
+  --help-general                        Mostra les opcions generals
+  --help-calendar                       Mostra les opcions del calendari
+  --help-entry                          Mostra les opcions de l'entrada de text
+  --help-error                          Mostra les opcions d'error
+  --help-info                           Mostra les opcions d'informació
+  --help-file-selection                 Mostra les opcions del selector de fitxers
+  --help-list                           Mostra les opcions de llistes
+  --help-notification                   Mostra les opcions de la icona de notificació
+  --help-progress                       Mostra les opcions del progrés
+  --help-question                       Mostra les opcions de preguntes
+  --help-warning                        Mostra les opcions d'avisos
+  --help-scale                          Mostra les opcions de l'escala
+  --help-text-info                      Mostra les opcions de text informatiu
+  --help-misc                           Mostra les opcions miscel·lànies
+  --help-gtk                            Mostra les opcions del GTK+
+
+General options
+  --title=TÍTOL                         Estableix el títol del diàleg
+  --window-icon=CAMÍ D'ICONA            Estableix la icona de la finestra
+  --width=AMPLADA                       Estableix l'amplada
+  --height=ALÇADA                       Estableix l'alçada
+  --timeout=TEMPS D'ESPERA              Estableix el temps d'espera del diàleg (en segons)
+
+Calendar options
+  --text=TEXT                           Estableix el text del diàleg
+  --day=DIA                             Estableix el dia del calendari
+  --month=MES                           Estableix el mes del calendari
+  --year=ANY                            Estableix l'any del calendari
+  --date-format=PATRÓ                   Estableix el format de la data de tornada
+
+Text entry options
+  --text=TEXT                           Estableix el text del diàleg
+  --entry-text=TEXT                     Estableix el text de l'entrada
+  --hide-text                           Amaga el text de l'entrada
+
+Error options
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+Info options
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+File selection options
+  --filename=NOM DE FITXER              Estableix el nom del fitxer
+  --multiple                            Permet la selecció de múltiples fitxers
+  --directory                           Activa la selecció de només directoris
+  --save                                Activa el mode d'estalvi
+  --separator=SEPARADOR                 Estableix el caràcter de separació de la sortida
+  --confirm-overwrite                   Confirmeu la selecció del fitxer si el nom del fitxer ja existeix
+  --file-filter=PATRÓ 1 PATRÓ 2 ...     Estableix un filtre per al nom de fitxer
+
+List options
+  --text=TEXT                           Estableix el text del diàleg
+  --column=COLUMNA                      Estableix la capçalera de la columna
+  --checklist                           Utilitza quadres de verificació per a la primera columna
+  --radiolist                           Utilitza botons de grup per a la primera columna
+  --separator=SEPARADOR                 Estableix el caràcter de separació de la sortida
+  --multiple                            Permet la selecció de múltiples files
+  --editable                            Permet canvis al text
+  --print-column=NOMBRE                 Imprimeix una columna específica (el valor per defecte és 1. Es pot usar 'ALL' per a imprimir totes les columnes)
+  --hide-column=NOMBRE                  Amaga una columna específica
+  --hide-header                         Oculta les capçaleres de la columna
+
+Notification icon options
+  --text=TEXT                           Estableix el text de la notificació
+  --listen                              Espera ordres de l'entrada estàndard
+
+Progress options
+  --text=TEXT                           Estableix el text del diàleg
+  --percentage=PERCENTATGE              Estableix el percentatge inicial
+  --pulsate                             Barra de progrés parpellejant
+  --auto-close                          Tanca el diàleg quan s'arribi al 100%
+  --auto-kill                           Mata el procés para si es prem el botó de cancel·lar
+
+Question options
+  --text=TEXT                           Estableix el text del diàleg
+  --ok-label=TEXT                       Estableix l'etiqueta del botó D'acord
+  --cancel-label=TEXT                   Estableix l'etiqueta del botó Cancel·la
+  --no-wrap                             No habilites l'ajustament del text
+
+Warning options
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+Scale options
+  --text=TEXT                           Estableix el text del diàleg
+  --value=VALOR                         Estableix un valor inicial
+  --min-value=VALOR                     Estableix el valor mínim
+  --max-value=VALOR                     Estableix el valor màxim
+  --step=VALOR                          Estableix el valor dels augments
+  --print-partial                       Imprimeix valors parcials
+  --hide-value                          Amaga el valor
+
+Text information options
+  --filename=NOM DE FITXER              Obre un fitxer
+  --editable                            Permet canvis al text
+
+Miscellaneous options
+  --about                               Quant a zenity
+  --version                             Imprimeix la versió
+
+Opcions del GTK+
+  --class=CLASS                         Program class as used by the window manager
+  --name=NAME                           Program name as used by the window manager
+  --screen=SCREEN                       X screen to use
+  --sync                                Make X calls synchronous
+  --gtk-module=MODULES                  Load additional GTK+ modules
+  --g-fatal-warnings                    Make all warnings fatal
+
+Opcions de l'aplicació:
+  --calendar                            Mostra el diàleg de calendari
+  --entry                               Mostra el diàleg d'entrada de text
+  --error                               Mostra el diàleg d'error
+  --info                                Mostra el diàleg d'informació
+  --file-selection                      Mostra el diàleg de selecció de fitxers
+  --list                                Mostra el diàleg de llista
+  --notification                        Mostra una notificació
+  --progress                            Mostra el diàleg d'indicació de progrés
+  --question                            Mostra el diàleg de pregunta
+  --warning                             Mostra el diàleg d'avís
+  --scale                               Mostra el diàleg d'escala
+  --text-info                           Mostra el diàleg de text informatiu
+  --display=DISPLAY                     X display to use
+
+
+Opcio --help-general
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions generals
+  --title=TÍTOL                         Estableix el títol del diàleg
+  --window-icon=CAMÍ D'ICONA            Estableix la icona de la finestra
+  --width=AMPLADA                       Estableix l'amplada
+  --height=ALÇADA                       Estableix l'alçada
+  --timeout=TEMPS D'ESPERA              Estableix el temps d'espera del diàleg (en segons)
+
+
+Opcio --help-calendar
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions del calendari
+  --calendar                            Mostra el diàleg de calendari
+  --text=TEXT                           Estableix el text del diàleg
+  --day=DIA                             Estableix el dia del calendari
+  --month=MES                           Estableix el mes del calendari
+  --year=ANY                            Estableix l'any del calendari
+  --date-format=PATRÓ                   Estableix el format de la data de tornada
+
+
+Opcio --help-entry
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions de l'entrada de text
+  --entry                               Mostra el diàleg d'entrada de text
+  --text=TEXT                           Estableix el text del diàleg
+  --entry-text=TEXT                     Estableix el text de l'entrada
+  --hide-text                           Amaga el text de l'entrada
+
+
+Opcio --help-error
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions d'error
+  --error                               Mostra el diàleg d'error
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+
+Opcio --help-info
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions d'informació
+  --info                                Mostra el diàleg d'informació
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+
+Opcio --help-file-selection
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions del selector de fitxers
+  --file-selection                      Mostra el diàleg de selecció de fitxers
+  --filename=NOM DE FITXER              Estableix el nom del fitxer
+  --multiple                            Permet la selecció de múltiples fitxers
+  --directory                           Activa la selecció de només directoris
+  --save                                Activa el mode d'estalvi
+  --separator=SEPARADOR                 Estableix el caràcter de separació de la sortida
+  --confirm-overwrite                   Confirmeu la selecció del fitxer si el nom del fitxer ja existeix
+  --file-filter=PATRÓ 1 PATRÓ 2 ...     Estableix un filtre per al nom de fitxer
+
+
+Opcio --help-list
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions de llistes
+  --list                                Mostra el diàleg de llista
+  --text=TEXT                           Estableix el text del diàleg
+  --column=COLUMNA                      Estableix la capçalera de la columna
+  --checklist                           Utilitza quadres de verificació per a la primera columna
+  --radiolist                           Utilitza botons de grup per a la primera columna
+  --separator=SEPARADOR                 Estableix el caràcter de separació de la sortida
+  --multiple                            Permet la selecció de múltiples files
+  --editable                            Permet canvis al text
+  --print-column=NOMBRE                 Imprimeix una columna específica (el valor per defecte és 1. Es pot usar 'ALL' per a imprimir totes les columnes)
+  --hide-column=NOMBRE                  Amaga una columna específica
+  --hide-header                         Oculta les capçaleres de la columna
+
+
+Opcio --help-notification
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions de la icona de notificació
+  --notification                        Mostra una notificació
+  --text=TEXT                           Estableix el text de la notificació
+  --listen                              Espera ordres de l'entrada estàndard
+
+
+Opcio --help-progress
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions del progrés
+  --progress                            Mostra el diàleg d'indicació de progrés
+  --text=TEXT                           Estableix el text del diàleg
+  --percentage=PERCENTATGE              Estableix el percentatge inicial
+  --pulsate                             Barra de progrés parpellejant
+  --auto-close                          Tanca el diàleg quan s'arribi al 100%
+  --auto-kill                           Mata el procés para si es prem el botó de cancel·lar
+
+
+Opcio --help-question
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions de preguntes
+  --question                            Mostra el diàleg de pregunta
+  --text=TEXT                           Estableix el text del diàleg
+  --ok-label=TEXT                       Estableix l'etiqueta del botó D'acord
+  --cancel-label=TEXT                   Estableix l'etiqueta del botó Cancel·la
+  --no-wrap                             No habilites l'ajustament del text
+
+
+Opcio --help-warning
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions d'avisos
+  --warning                             Mostra el diàleg d'avís
+  --text=TEXT                           Estableix el text del diàleg
+  --no-wrap                             No habilites l'ajustament del text
+
+
+Opcio --help-scale
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions d'escala
+  --scale                               Mostra el diàleg d'escala
+  --text=TEXT                           Estableix el text del diàleg
+  --value=VALOR                         Estableix un valor inicial
+  --min-value=VALOR                     Estableix el valor mínim
+  --max-value=VALOR                     Estableix el valor màxim
+  --step=VALOR                          Estableix el valor dels augments
+  --print-partial                       Imprimeix valors parcials
+  --hide-value                          Amaga el valor
+
+
+Opcio --help-text-info
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Mostra les opcions de text informatiu
+  --text-info                           Mostra el diàleg de text informatiu
+  --filename=NOM DE FITXER              Obre un fitxer
+  --editable                            Permet canvis al text
+
+
+Opcio --help-misc
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions miscel·lànies
+  --about                               Quant a zenity
+  --version                             Imprimeix la versió
+
+
+Opcio --help-gtk
+Forma d'ús:
+  zenity [OPCIÓ...]
+
+Opcions del GTK+
+  --class=CLASS                         Program class as used by the window manager
+  --name=NAME                           Program name as used by the window manager
+  --display=DISPLAY                     X display to use
+  --screen=SCREEN                       X screen to use
+  --sync                                Make X calls synchronous
+  --gtk-module=MODULES                  Load additional GTK+ modules
+  --g-fatal-warnings                    Make all warnings fatal
+
+
