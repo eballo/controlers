@@ -1,5 +1,5 @@
 <?php
-	include_once 'functions.php';
+	include_once 'includes/headers.php';
 	
 	$link=conectar('bdsintesi');
 	$query="SELECT ID,NAME FROM user";

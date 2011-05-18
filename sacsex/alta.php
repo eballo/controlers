@@ -32,7 +32,7 @@ include_once 'includes/functions.php';
 	}
 	echo "<script type='text/javascript'>
 				alert('$error');
-				document.location = 'form.php?id=$id';
+				document.location = 'admin.php';
 			</script>";
 	
 	?>

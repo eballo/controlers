@@ -34,6 +34,7 @@ if ($login == "true"){
 		$_SESSION['id'] = "";
 
 		echo"<script type='text/javascript'>
+			alert();
 				document.location = 'login.php?loginError=3';
 			</script>";
 	}
