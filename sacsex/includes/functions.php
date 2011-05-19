@@ -101,5 +101,27 @@
 		
 		return $a==1;
 	}
+	function newUser($user,$pass,$limit,$dlimit){
+		/*
+		 * Funcion de Inserción de nuevos usuarios
+		 */
+		$id=buscaUser($user);
+		if ($id2==''){
+			srand(time());
+			$id = (rand()%9999999)+100000;
+			while (!idValido($id2)){
+				$id = (rand()%9999999)+100000;
+			}
+			$link=conectar('bdsintesi');
+			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
+			$result=mysql_query($query,$link);
+			desconectar($link);
+			echo "<script type='text/javascript'>
+				document.location = 'administrador.php';
+			</script>";
+		}else{
+			$error="Ya consta en la base de datos un usuario con los datos introducidos";
+		}
+	}
 ?>
 
