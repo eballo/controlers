@@ -1,4 +1,5 @@
 <?php
+	//include_once 'includes/headers.php';
 	//Funciones de validacion de datos
 	
 	function esNumero($val){
@@ -30,6 +31,7 @@
 		$ip=$GLOBALS['MYSQL_IP'];
 		$user=$GLOBALS['MYSQL_USER'];
 		$pass=$GLOBALS['MYSQL_PASSWORD'];
+		
 		//$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
 		// TODO Buscar form mas simple, si la hay
 		$link=mysql_connect($ip,$user,$pass);
@@ -84,6 +86,7 @@
 		$link=conectar('bdsintesi');
 		$query="SELECT * FROM user WHERE ID=$id";
 		$busca=mysql_query($query,$link);
+		echo "busca=$busca";
 		$a=mysql_num_rows($busca);
 		
 		return $a==0;
@@ -105,10 +108,10 @@
 		 * Funcion de Inserción de nuevos usuarios
 		 */
 		$id=buscaUser($user);
-		if ($id2==''){
+		if ($id==''){
 			srand(time());
 			$id = (rand()%9999999)+100000;
-			while (!idValido($id2)){
+			while (!idValido($id)){
 				$id = (rand()%9999999)+100000;
 			}
 			$link=conectar('bdsintesi');

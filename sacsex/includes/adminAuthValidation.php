@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 if (! ($_SESSION['login'] && $_SESSION['type'] == "admin")){
 		//TODO Comentar
 		$_SESSION['login'] = false;
