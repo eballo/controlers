@@ -1,5 +1,4 @@
 <?php
-	include_once 'config/sacsex.properties.php' ;
 	//Funciones de validacion de datos
 	
 	function esNumero($val){
