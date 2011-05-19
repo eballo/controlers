@@ -1,5 +1,5 @@
 <?php
-	include_once 'includes/functions.php';
+	include_once '../includes/servicesHeaders.php';
 	//Comprobara si existe el usuario en la BD y si, en la casilla de "INSTALL" de la BD
 	// Tiene un 0 o un 1
 	$user=$_GET['user'];
