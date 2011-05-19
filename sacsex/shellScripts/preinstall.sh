@@ -1,5 +1,6 @@
 # !/bin/bash
-
+#Script que comprueba los requisitos previos de instalacion y genera 
+# el sacsex.properties
 SVR_IP='192.168.0.79'
 
 
