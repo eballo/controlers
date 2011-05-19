@@ -1,5 +1,5 @@
 <?php
-   include_once ("functions.php"); 
+   include_once ("includes/functions.php"); 
     
    $link=conectar('bdsintesi');
    $id=$_GET['id']; 
