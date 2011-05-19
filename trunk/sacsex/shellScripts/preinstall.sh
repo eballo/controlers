@@ -1,7 +1,7 @@
 # !/bin/bash
 #Script que comprueba los requisitos previos de instalacion y genera 
 # el sacsex.properties
-SVR_IP='192.168.0.79'
+SVR_IP='192.168.0.79' #Actualizar con la IP del Servidor
 
 
 zenityOk=`find / -name "zenity" 2>/dev/null | grep bin | wc -l `
@@ -15,7 +15,7 @@ then
     then
         zenity --title="Instalación de SACS-EX" --text="Error: Es necesario tener instalado el paquete de smbmount\n Para ello, puede utilizar la orden:\n\n apt-get install smbfs"
     else
-        echo -e "Error: Es necesario tener instalado el paquete de smbmount\n Para ello, puede utilizar la orden apt-get install smbfs"
+        echo -e "Error: Es necesario tener instalado el paquete de smbmount\n Para ello, puede utilizar la orden \n\napt-get install smbfs"
     fi
     exit 1
 else
@@ -35,8 +35,7 @@ else
     ###conexion con auth.php mediante lynx para validar usuario $SVR_HOST/sacsex/services/service.auth.php?user=$login&password=$passwd
 
     ## Si todo es correcto:
-    # Posible problema al ejecutarse desde root, para obtener el /home. Buscar soluciones
-    
+     
     home=`echo ~`
     mkdir "$home/.sacsexBckps"
     SACSEXHOME="$home/.sacsexBckps"
