@@ -1,6 +1,6 @@
 <?php
 	include_once 'includes/userAuthValidation.php';
-	include_once './includes/headers.php';
+	include_once 'includes/headers.php';
 
 	$id_user=$_SESSION['id'];
 	$link=conectar('bdsintesi');

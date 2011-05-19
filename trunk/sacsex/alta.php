@@ -7,27 +7,8 @@ include_once 'includes/functions.php';
 	$limit=$_POST['espMax'];
 	$dlimit=$_POST['espDir'];
 	$id=$_POST['id'];
-	
 	if ($pass==$pass2) {
 		newUser($user,$pass,$limit,$dlimit);
-//		$id2=buscaUser($user);
-//		if ($id2==''){
-//			srand(time());
-//			$id2 = (rand()%9999999)+100000;
-//			while (!idValido($id2)){
-//				$id2 = (rand()%9999999)+100000;
-//			}
-//			$link=conectar('bdsintesi');
-//			$query="INSERT into user values ($id2,'$user','$pass',0,0,$limit,$dlimit)";
-//			$result=mysql_query($query,$link);
-//			desconectar($link);
-//			$id2=verificaUser($user, $pass);
-//			echo "<script type='text/javascript'>
-//				document.location = 'administrador.php';
-//			</script>";
-//		}else{
-//			$error="Ya consta en la base de datos un usuario con los datos introducidos";
-//		}
 	}else{
 		$error= "Error: La contrasenya no es identica.";
 	}
