@@ -26,13 +26,17 @@
 <body>
 	<form action='administrador.php' method='POST'>
 		<input type="radio" name="accion" value="auser">Alta de usuario
-		<input type="radio" name="accion" value="buser" checked>Baja de usuario
+		<input type="radio" name="accion" value="buser">Baja de usuario
 		<input type='submit' value='Seleccionar'  />
 	</form>
 <!--	<a href='administrador.php' name='ausr'>Alta de Usuario</a>-->
 <!--	<a href='administrador.php' name='busr'>Baja de Usuario</a>-->
 <?php 
-	$accion=$_POST['accion'];
+	if (isset($_POST['accion'])){
+		$accion=$_POST['accion'];
+	}else{
+		$accion="";
+	}
 	if ($accion == 'auser' ){
 		echo "<form action='alta.php' id='newuser' method='post'>
 			Usuario: <input type='text' name='user' /> <br />

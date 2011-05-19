@@ -10,7 +10,7 @@
 <title>SACS_EX. Formulario de Alta de Nuevos Usuarios</title>
 <script type="text/javascript">
 
-	function validarLogin(){
+	function validarPass(){
 		$("#pass1").val($.md5($("#pass1").val()));
 		$("#pass2").val($.md5($("#pass2").val()));
 		$("#newuser").submit();
@@ -29,7 +29,7 @@
 	Usuario: <input type="text" name='user' /> <br />
 	Contraseña: <input type="password" id="pass1" name='pass' />
 	Repite Contraseña: <input type="password" id="pass2" name='passver' /><br />
-	TamaÃ±o Maximo permitido Diario: <input type="text" name='espDir' /><br />
+	Tamaño Maximo permitido Diario: <input type="text" name='espDir' /><br />
 	Espacio Maximo Assignado: <input type="text" name='espMax' /><br />	
 	<input type='button' value='Seleccionar' onclick="validarPass()" />
 </form>
