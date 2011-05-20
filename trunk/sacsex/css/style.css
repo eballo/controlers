@@ -17,7 +17,7 @@
 	background-repeat: repeat-x;
 	position: fixed;
 	float:left;
-	width: 350px;
+	width: 280px;
 	top: 20px;	
 	background-color: #d9e2ff;
 	border: 1px solid;
@@ -42,7 +42,7 @@ input {
 	background-repeat: repeat-x;
 	float:right;
 	top: 180px;
-	width: 400px;	
+	width: 470px;	
 	margin-top: 10px;
 	background-color: #d9e2ff;
 	border: 1px solid;
