@@ -1,15 +1,21 @@
 <?php
 include_once 'includes/headers.php';
 
+if ( isset ($_POST['user']) && isset($_POST['pass']) && isset($_POST['login'])){
 $user=$_POST['user'];
 $pass=$_POST['pass'];
 $login=$_POST['login'];
+}else{
+	$user="";
+	$pass="";
+	$login="";
+}
 
 if ($login == "true"){
 	$id=verificaUser($user, $pass);
 	if ($id != "") {
 		if (esAdmin($id)){
-			//TODO Comentar
+			//Recogemos los valores de las variables de sesion para admin
 			$_SESSION['login'] = true;
 			$_SESSION['type'] = "admin";
 			$_SESSION['id'] = $id;
@@ -18,7 +24,7 @@ if ($login == "true"){
 						document.location = 'admin.php';
 					</script>";
 		}else{
-			//TODO Comentar
+			//Recogemos los valores de las variables de sesion para el usuario
 			$_SESSION['login'] = true;
 			$_SESSION['type'] = "user";
 			$_SESSION['id'] = $id;
@@ -28,7 +34,7 @@ if ($login == "true"){
 					</script>";
 		}
 	}else{
-		//TODO Comentar
+		//Seteamos los valores de sesion a los valores por defecto
 		$_SESSION['login'] = false;
 		$_SESSION['type'] = "";
 		$_SESSION['id'] = "";

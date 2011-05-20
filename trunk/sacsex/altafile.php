@@ -1,5 +1,5 @@
 <?php 
-	include_once './includes/headers.php';
+	include_once 'includes/headers.php';
 	
 	$id=$_SESSION['id'];
 	$filepath=$_POST['filepath'];

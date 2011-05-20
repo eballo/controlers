@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/functions.php';
+include_once 'includes/headers.php';
 	
 	$user=$_POST['user'];
 	$pass=$_POST['pass'];

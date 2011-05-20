@@ -1,5 +1,5 @@
 <?php
-	//include_once 'includes/headers.php';
+	//
 	//Funciones de validacion de datos
 	
 	function esNumero($val){
@@ -31,7 +31,6 @@
 		$ip=$GLOBALS['MYSQL_IP'];
 		$user=$GLOBALS['MYSQL_USER'];
 		$pass=$GLOBALS['MYSQL_PASSWORD'];
-		
 		//$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
 		// TODO Buscar form mas simple, si la hay
 		$link=mysql_connect($ip,$user,$pass);
@@ -63,7 +62,6 @@
 		return $id;
 	}
 	
-	//function verificaUser($user,$pass){
 	function verificaUser($user , $passwordLogin){
 		$id=buscaUser($user);		
 		$link=conectar('bdsintesi');
@@ -86,7 +84,6 @@
 		$link=conectar('bdsintesi');
 		$query="SELECT * FROM user WHERE ID=$id";
 		$busca=mysql_query($query,$link);
-		echo "busca=$busca";
 		$a=mysql_num_rows($busca);
 		
 		return $a==0;

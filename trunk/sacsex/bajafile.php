@@ -1,5 +1,5 @@
 <?php
-	include_once './includes/headers.php';
+	include_once 'includes/headers.php';
 	
 	$idFile=$_GET['idFile'];
 	
