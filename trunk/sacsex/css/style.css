@@ -1,1 +1,9 @@
 @CHARSET "ISO-8859-1";
+.adminMainContainer{
+	margin:0 auto;	
+}
+
+.addUserFormContainer{
+	position: fixed;
+	top: 0px;	
+}
