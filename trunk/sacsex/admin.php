@@ -104,11 +104,34 @@ $rows=mysql_num_rows($result);
 <div class="mainContainer">
 <div class='addUserFormContainer'>
 <form action='admin.php?action=addUser' id='newuser' method='post'>
-Usuario: <input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /> <br />
-Contraseña: <input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /> Repite
-Contraseña: <input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /><br />
-Tamaño Maximo permitido Diario: <input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /><br />
-Espacio Maximo Assignado: <input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /><br />
+<table>
+	<tr>
+		<td>Usuario</td>
+		<td><input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /></td>
+
+	</tr>
+	<tr>
+		<td>Contraseña: </td>
+		<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
+
+	</tr>
+	<tr>
+		<td>Repite Contraseña: </td>
+		<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
+	</tr>
+	<tr>
+		<td>Tamaño Maximo permitido Diario:</td>
+		<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
+
+	</tr>
+	<tr>
+		<td>Espacio Maximo Assignado:</td>
+		<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
+	
+	</tr>
+	
+</table>
+
 <input class="botonForm" type='button' value='valida' onclick='validarPass()' /></form>
 </div>
 <div class="userListContainer"><?php 
