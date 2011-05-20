@@ -1,12 +1,12 @@
 <?php
-	include_once 'includes/adminAuthValidation.php';
 	include_once 'includes/headers.php';
+	include_once 'includes/adminAuthValidation.php';
 	include_once 'includes/libsheader.php';
 ?>
 
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>SACS_EX. Formulario de Alta de Nuevos Usuarios</title>
 <script type="text/javascript">
 
@@ -17,7 +17,7 @@
 	}
 	function validarKeyEnter( e ){
 		if (e.keyCode == 13){
-			validarLogin();
+			validarPass();
 		}
 	}
 </script>

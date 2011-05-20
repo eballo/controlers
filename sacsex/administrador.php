@@ -1,6 +1,6 @@
 <?php
-	include_once 'includes/adminAuthValidation.php';
 	include_once 'includes/headers.php';
+	include_once 'includes/adminAuthValidation.php';
 	include_once 'includes/libsheader.php';
 	?>
 <html>
@@ -17,7 +17,7 @@
 	}
 	function validarKeyEnter( e ){
 		if (e.keyCode == 13){
-			validarLogin();
+			validarPass();
 		}
 	}
 </script>
