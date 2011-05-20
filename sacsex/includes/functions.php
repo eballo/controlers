@@ -115,11 +115,9 @@
 			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
 			$result=mysql_query($query,$link);
 			desconectar($link);
-			echo "<script type='text/javascript'>
-				document.location = 'administrador.php';
-			</script>";
+			return "";
 		}else{
-			$error="Ya consta en la base de datos un usuario con los datos introducidos";
+			return "Ya consta en la base de datos un usuario con los datos introducidos";
 		}
 	}
 ?>
