@@ -2,6 +2,12 @@
 include_once 'includes/headers.php';
 $link=conectar('bdsintesi');
 
+//Inicializacion variables
+if (isset($_GET['loginError'])){
+	$loginError=$_GET['loginError'];
+}else{
+	$loginError="";
+}
 if ( isset ($_POST['user']) && isset($_POST['pass']) && isset($_POST['login'])){
 $user=$_POST['user'];
 $pass=$_POST['pass'];
@@ -72,28 +78,51 @@ if ($login == "true"){
 </script>
 </head>
 <body onkeypress="validarKeyEnter( event )">
-<div id='divErrors' style='color: red'>
-<?php 
-if ( $_GET['loginError'] ){
-	switch ($_GET['loginError']){
-		case 3:
-			echo "Login no valido.";
-			break;
-		case 1:
-			echo "Acceso restringido para usuarios.";
-			break;
-		case 2:
-			echo "Acceso restringido para administradores.";
-			break;
-	}
-}
-?></div>
-	<form id='login' action='login.php' method='POST'>
-		<input type='text' name='user' />
-		<input id='passwordForm' type='password' name='pass' /> 
-		<input type='hidden' name='login' value='true' />
-		<input type='button' value='valida' onclick="validarLogin()" />
-	</form>
+	<div class='body'>
+		<div class='mainContainer'>
+			<div class='loginContainer'>
+				<form id='login' action='login.php' method='POST'>
+				<input type='hidden' name='login' value='true' />
+					<table>
+						<tr>
+							<td><b>Login Sacsex</b></td>
+							<td>
+								<div id='divErrors' style='color: red'>
+										<?php 
+										if ( $loginError ){
+											switch ( $loginError){
+												case 3:
+													echo "Login no valido.";
+													break;
+												case 1:
+													echo "Acceso restringido para usuarios.";
+													break;
+												case 2:
+													echo "Acceso restringido para administradores.";
+													break;
+											}
+										}
+										?>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td>Usuario: </td>
+							<td><input type='text' name='user' /></td>
+						</tr>
+						<tr>
+							<td>Password: </td>
+							<td><input id='passwordForm' type='password' name='pass' /> </td>
+						</tr>
+						<tr>
+							<td colspan="2"><input class="botonForm" type='button' value='valida' onclick="validarLogin()" /></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+	
 </body>
 </HTML>
 <?php 

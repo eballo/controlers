@@ -13,7 +13,8 @@
  		while ($row=mysql_fetch_array($result)){
  			$fich=$fich." ".$row['FILEPATH'];
  		}
- 		desconectar($link);	
+ 		
  	}
+ 	desconectar($link);	
  	echo $fich;
 ?>
