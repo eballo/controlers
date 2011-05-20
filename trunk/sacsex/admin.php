@@ -12,14 +12,17 @@ if (isset($_GET['action'])){
 	$accion=$_GET['action'];
 	
 	if ( $accion == "addUser"){
+		
 		$user=$_POST['user'];
 		$pass=$_POST['pass'];
 		$pass2=$_POST['passver'];
 		$limit=$_POST['espMax'];
 		$dlimit=$_POST['espDir'];
 		
+		
+		
 		if ($pass==$pass2) {
-			$errors= newUser($user,$pass,$limit,$dlimit);
+			$errors= newUser($user,$pass,$limit,$dlimit,$adminLink);
 		}else{
 			$errors= "Error: La contrasenya no es identica.";
 		}
@@ -39,7 +42,7 @@ if (isset($_GET['action'])){
 $query="SELECT ID,NAME FROM user";
 $result=mysql_query($query,$adminLink);
 $rows=mysql_num_rows($result);
-desconectar($adminLink);
+
 
 ?>
 <html>
@@ -61,11 +64,11 @@ desconectar($adminLink);
 <div class="adminMainContainer">
 <div class='addUserFormContainer'>
 <form action='admin.php?action=addUser' id='newuser' method='post'>
-Usuario: <input type='text' name='user' /> <br />
-Contraseña: <input type='password' id='pass1' name='pass' /> Repite
-Contraseña: <input type='password' id='pass2' name='passver' /><br />
-Tamaño Maximo permitido Diario: <input type='text' name='espDir' /><br />
-Espacio Maximo Assignado: <input type='text' name='espMax' /><br />
+Usuario: <input class='<?php echo $inputErrors["user"];?>' type='text' name='user' /> <br />
+Contraseña: <input class='<?php echo $inputErrors["password"];?>'  type='password' id='pass1' name='pass' /> Repite
+Contraseña: <input  class='<?php echo $inputErrors["password"];?>'  type='password' id='pass2' name='passver' /><br />
+Tamaño Maximo permitido Diario: <input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' /><br />
+Espacio Maximo Assignado: <input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' /><br />
 <input type='button' value='valida' onclick='validarPass()' /></form>
 </div>
 <div><?php 
@@ -74,9 +77,14 @@ if ($rows >0){
 	while ($row=mysql_fetch_array($result)){
 		echo "<tr>".
 		"<td>" . $row["ID"] . "</td>".
-		"<td>" . $row["NAME"] ."</td>".
-		"<td><a href='admin.php?action=delUser&id=".$row["ID"]."' >Borrar</a></td>".
-		"</tr>";
+		"<td>" . $row["NAME"] ."</td>";
+		
+		if (!esAdmin($row["ID"], $adminLink)){
+			echo "<td><a href='admin.php?action=delUser&id=".$row["ID"]."' >Borrar</a></td>";
+		}else{
+			echo "<td>Bloqueado</td>";
+		}
+		echo "</tr>";
 		}
 	echo "</table>";
 }else{
@@ -91,6 +99,7 @@ if ($rows >0){
 		if ($errors != ""){
 			echo "alert('$errors');";
 		}
+		desconectar($adminLink);
 	?>
 </script>
 </html>
