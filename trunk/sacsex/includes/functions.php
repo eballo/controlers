@@ -21,10 +21,10 @@
 	}
 	
 	/**
-	 * Enter description here ...
+	 * Funcion que sirve para controlar el valor recibido segun sea el tipo de dato
 	 * @param String $text Texto a validar
 	 * @param String $tipo Numerico o Cadena de texto
-	 * @return Valor style del elemento
+	 * @return Cierto o Falso segun sea valido o no
 	 */
 	function validarInput( $text , $tipo){
 		if ($tipo=='string' ){
@@ -124,9 +124,9 @@
 		$id=buscaUser($user,$link);
 		if ($id==''){
 			srand(time());
-			$id = (rand()%9999999)+100000;
+			$id = (rand()%9999999)+1000000;
 			while (!idValido($id,$link)){
-				$id = (rand()%9999999)+100000;
+				$id = (rand()%9999999)+1000000;
 			}
 			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
 			$result=mysql_query($query,$link);

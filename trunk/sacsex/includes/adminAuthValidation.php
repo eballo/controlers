@@ -1,7 +1,7 @@
 <?php
 
 if (! ($_SESSION['login'] && $_SESSION['type'] == "admin")){
-		//TODO Comentar
+		//Si no se ha establecido la sesion o el tipo de usuario no es administrador
 		$_SESSION['login'] = false;
 		$_SESSION['type'] = "";
 		$_SESSION['id'] = $id;

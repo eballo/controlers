@@ -17,7 +17,7 @@ $login=$_POST['login'];
 	$pass="";
 	$login="";
 }
-
+//TODO Plantearse la posibilidad de poner un boton para cerrar sesion
 if ($login == "true"){
 	$id=verificaUser($user, $pass,$link);
 	if ($id != "") {
