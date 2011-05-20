@@ -9,16 +9,16 @@
 }
 .mainContainer{
 	margin:0px auto;
-	width: 600px;
+	width: 820px;
 }
 
 .addUserFormContainer{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	position: fixed;
-	width: 560px;
-	top: 0px;	
-	margin-top: 10px;
+	float:left;
+	width: 350px;
+	top: 20px;	
 	background-color: #d9e2ff;
 	border: 1px solid;
 	border-color: #000;
@@ -40,9 +40,9 @@ input {
 .userListContainer{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
-	position: relative;
+	float:right;
 	top: 180px;
-	width: 560px;	
+	width: 400px;	
 	margin-top: 10px;
 	background-color: #d9e2ff;
 	border: 1px solid;
