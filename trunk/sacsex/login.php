@@ -1,5 +1,6 @@
 <?php
 include_once 'includes/headers.php';
+$link=conectar('bdsintesi');
 
 if ( isset ($_POST['user']) && isset($_POST['pass']) && isset($_POST['login'])){
 $user=$_POST['user'];
@@ -12,9 +13,9 @@ $login=$_POST['login'];
 }
 
 if ($login == "true"){
-	$id=verificaUser($user, $pass);
+	$id=verificaUser($user, $pass,$link);
 	if ($id != "") {
-		if (esAdmin($id)){
+		if (esAdmin($id,$link)){
 			//Recogemos los valores de las variables de sesion para admin
 			$_SESSION['login'] = true;
 			$_SESSION['type'] = "admin";
@@ -95,3 +96,6 @@ if ( $_GET['loginError'] ){
 	</form>
 </body>
 </HTML>
+<?php 
+		desconectar($link);
+?>
