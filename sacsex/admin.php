@@ -120,7 +120,7 @@ if ($rows >0){
 		"<td>" . $row["NAME"] ."</td>";
 		
 		if (!esAdmin($row["ID"], $adminLink)){
-			echo "<td><a href='admin.php?action=delUser&id=".$row["ID"]."' >Borrar</a></td>";
+			echo "<td><a href='admin.php?action=delUser&id=".$row["ID"]."' ><img src='img/DeleteIcon.png' /></a></td>";
 		}else{
 			echo "<td>Bloqueado</td>";
 		}
