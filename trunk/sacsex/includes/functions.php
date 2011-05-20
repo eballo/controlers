@@ -28,7 +28,16 @@
 	 */
 	function validarInput( $text , $tipo){
 		
-		
+		if ($tipo=='string'){
+			if ($text!='' && strlen($text)<50){
+				$valido=true;
+			}else{
+				$valido=false;
+			}
+		}else{
+			$valido=esEntero($text);
+		}
+		return $valido;
 	}
 	
 	//Funciones de acceso a Base de Datos
@@ -106,7 +115,7 @@
 	}
 	function newUser($user,$pass,$limit,$dlimit,$link){
 		/*
-		 * Funcion de Inserción de nuevos usuarios
+		 * Funcion de Inserciï¿½n de nuevos usuarios
 		 */
 		
 		$id=buscaUser($user,$link);
