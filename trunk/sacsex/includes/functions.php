@@ -1,5 +1,5 @@
 <?php
-	//
+	//TODO Comentar todas las funciones con el mismo formato
 	//Funciones de validacion de datos
 	
 	function esNumero($val){
@@ -71,6 +71,7 @@
 		 */
 		mysql_close($link);
 	}
+	
 	function buscaUser($user , $link){
 		/*
 		 * Busca un Usuario en la BD y devuelve su id
