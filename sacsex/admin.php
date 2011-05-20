@@ -116,7 +116,6 @@ $rows=mysql_num_rows($result);
 	<tr>
 		<td>Contraseña: </td>
 		<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
-
 	</tr>
 	<tr>
 		<td>Repite Contraseña: </td>
