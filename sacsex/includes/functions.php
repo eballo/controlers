@@ -27,15 +27,18 @@
 	 * @return Valor style del elemento
 	 */
 	function validarInput( $text , $tipo){
-		
-		if ($tipo=='string'){
-			if ($text!='' && strlen($text)<50){
+		if ($tipo=='string' ){
+			if ($text!='' && strlen($text) != 0){
 				$valido=true;
 			}else{
 				$valido=false;
 			}
 		}else{
-			$valido=esEntero($text);
+			if (esEntero($text) && strlen($text) != 0){
+				$valido=true;
+			}else{
+				$valido=false;
+			}
 		}
 		return $valido;
 	}
@@ -117,7 +120,7 @@
 		/*
 		 * Funcion de Inserci�n de nuevos usuarios
 		 */
-		
+		$res= "";
 		$id=buscaUser($user,$link);
 		if ($id==''){
 			srand(time());
@@ -127,10 +130,17 @@
 			}
 			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
 			$result=mysql_query($query,$link);
-			return "";
+		
+			if ($result == ""){
+				$res="Problema insertando el usuario en la base de datos";
+			}
+			
 		}else{
-			return "Ya consta en la base de datos un usuario con los datos introducidos";
+			$res= "Ya consta en la base de datos un usuario con los datos introducidos";
 		}
+		
+		return $res;
+		
 	}
 ?>
 

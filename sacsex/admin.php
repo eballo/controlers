@@ -6,7 +6,13 @@ include_once 'includes/libsheader.php';
 //Conexion base de datos
 $adminLink=conectar('bdsintesi');
 
+//Inicializacion de bbdd
 $errors="";
+$user="";
+$pass="";
+$pass2="";
+$dlimit="";
+$limit="";
 
 if (isset($_GET['action'])){
 	$accion=$_GET['action'];
@@ -19,12 +25,41 @@ if (isset($_GET['action'])){
 		$limit=$_POST['espMax'];
 		$dlimit=$_POST['espDir'];
 		
-		
-		
-		if ($pass==$pass2) {
-			$errors= newUser($user,$pass,$limit,$dlimit,$adminLink);
+		if(validarInput($user, "string")){
+			$inputErrors['user']="inputCorrect";
 		}else{
-			$errors= "Error: La contrasenya no es identica.";
+			$inputErrors['user']="inputError";
+		}
+		if(validarInput($dlimit, "numerico")){
+			$inputErrors['espDir']="inputCorrect";
+		}else{
+			$inputErrors['espDir']="inputError";
+		}
+		if(validarInput($limit, "numerico")){
+			$inputErrors['espMax']="inputCorrect";
+		}else{
+			$inputErrors['espMax']="inputError";
+		}
+		
+		if ( validarInput($user, "string") && validarInput($dlimit, "numerico") && validarInput($limit, "numerico")) {
+			$errors= newUser($user,$pass,$limit,$dlimit,$adminLink);
+			if ($pass==$pass2 ){
+				if ($errors == ""){
+					$user="";
+					$pass="";
+					$pass2="";
+					$limit="";
+					$dlimit="";
+					
+					$inputErrors['user'] = "";
+					$inputErrors['espDir'] = "";
+					$inputErrors['espMax'] = "";
+					
+				}
+			}else{
+				$inputErrors['pass'] = "inputError";
+				$errors= "Error: La contrasenya no es identica.";
+			}
 		}
 	}elseif ($accion == "delUser"){
 	   $id=$_GET['id']; 
@@ -53,25 +88,30 @@ $rows=mysql_num_rows($result);
 <script type="text/javascript">
 
 	function validarPass(){
-		$("#pass1").val($.md5($("#pass1").val()));
-		$("#pass2").val($.md5($("#pass2").val()));
-		$("#newuser").submit();
+		if ($("#pass1").val() != "" && $("#pass2").val() != ""){
+			$("#pass1").val($.md5($("#pass1").val()));
+			$("#pass2").val($.md5($("#pass2").val()));
+			$("#newuser").submit();
+		}else{
+			alert("Password vacio!!");
+		}
 	}
 </script>
 
 </head>
 <body>
-<div class="adminMainContainer">
+<div class="body">
+<div class="mainContainer">
 <div class='addUserFormContainer'>
 <form action='admin.php?action=addUser' id='newuser' method='post'>
-Usuario: <input class='<?php echo $inputErrors["user"];?>' type='text' name='user' /> <br />
-Contraseña: <input class='<?php echo $inputErrors["password"];?>'  type='password' id='pass1' name='pass' /> Repite
-Contraseña: <input  class='<?php echo $inputErrors["password"];?>'  type='password' id='pass2' name='passver' /><br />
-Tamaño Maximo permitido Diario: <input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' /><br />
-Espacio Maximo Assignado: <input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' /><br />
-<input type='button' value='valida' onclick='validarPass()' /></form>
+Usuario: <input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /> <br />
+Contraseña: <input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /> Repite
+Contraseña: <input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /><br />
+Tamaño Maximo permitido Diario: <input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /><br />
+Espacio Maximo Assignado: <input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /><br />
+<input class="botonForm" type='button' value='valida' onclick='validarPass()' /></form>
 </div>
-<div><?php 
+<div class="userListContainer"><?php 
 if ($rows >0){
 	echo "<table><tr><th>ID Usuario</th><th>Nombre de Usuario</th></tr>";
 	while ($row=mysql_fetch_array($result)){
@@ -91,6 +131,7 @@ if ($rows >0){
 	echo "No hi ha cap usuari <br />";
 }
 ?></div>
+</div>
 </div>
 </body>
 <script type="text/javascript">
