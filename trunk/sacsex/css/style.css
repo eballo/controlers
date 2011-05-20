@@ -50,6 +50,13 @@ input {
 	-moz-box-shadow: 6px 6px 5px #ababab;
 }
 
+.userListContainer table{
+	border: 0;
+	width: 100%;	
+	text-align: left;
+
+}
+
 .loginContainer{
 	position: relative;
 	top: 50px;
