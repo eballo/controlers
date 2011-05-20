@@ -105,8 +105,18 @@ done
     2)
         validarMes
         echo $mes
+        mi_cron="/home/alumne/Escritorio/mi_cron.txt"
+        # Tendria que escribir un comentario segun si es inicio
+        # de mes o final de mes
+        echo "# Realiza la copia de backups cada dia del mes"
+        echo "* * $mes * * mkdir /home/alumne/Escritorio/Backup" >> $mi_cron
     ;;
     esac
+    
+
+
+
+
 
 
 
