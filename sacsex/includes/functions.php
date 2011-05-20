@@ -20,6 +20,16 @@
 		return preg_match_all("/[\D]/",$val,$l)==0;
 	}
 	
+	/**
+	 * Enter description here ...
+	 * @param String $text Texto a validar
+	 * @param String $tipo Numerico o Cadena de texto
+	 * @return Valor style del elemento
+	 */
+	function validarInput( $text , $tipo){
+		
+		
+	}
 	
 	//Funciones de acceso a Base de Datos
 	
@@ -49,50 +59,44 @@
 		 */
 		mysql_close($link);
 	}
-	function buscaUser($user){
+	function buscaUser($user , $link){
 		/*
 		 * Busca un Usuario en la BD y devuelve su id
 		 */
-		$link=conectar('bdsintesi');
 		$query="SELECT ID FROM user WHERE NAME='$user'";
 		$busca=mysql_query($query,$link);
 		$idA=mysql_fetch_array($busca);
-		$id=$idA[0];
-	 	desconectar($link);	 	
+		$id=$idA[0];	
 		return $id;
 	}
 	
-	function verificaUser($user , $passwordLogin){
-		$id=buscaUser($user);		
-		$link=conectar('bdsintesi');
+	function verificaUser($user , $passwordLogin , $link){
+		$id=buscaUser($user,$link);		
 		$query="SELECT PASSWORD FROM user WHERE ID='$id'";
 		$busca=mysql_query($query,$link);
 		$passwordA=mysql_fetch_array($busca);
 		$password = $passwordA[0];
-	 	desconectar($link);
 	 	if ($password == $passwordLogin ){
 	 		return $id;
 	 	}else{
 			return "";
 	 	}
 	}
-	function idValido($id){
+	function idValido($id , $link){
 		/*
 		 * devuelve Cierto si el nuevo id de usuario a asignar no consta 
 		 * como asignado a otro usuario  
 		 */
-		$link=conectar('bdsintesi');
 		$query="SELECT * FROM user WHERE ID=$id";
 		$busca=mysql_query($query,$link);
 		$a=mysql_num_rows($busca);
 		
 		return $a==0;
 	}
-	function esAdmin($id){
+	function esAdmin($id , $link){
 		/*
 		 * Devuelve Cierto si el id usuario pertenece a un Administrador 
 		 */
-		$link=conectar('bdsintesi');
 		$query="SELECT ADMIN FROM user WHERE ID=$id";
 		$busca=mysql_query($query,$link);
 		$a=mysql_fetch_array($busca);
@@ -100,21 +104,20 @@
 		
 		return $a==1;
 	}
-	function newUser($user,$pass,$limit,$dlimit){
+	function newUser($user,$pass,$limit,$dlimit,$link){
 		/*
 		 * Funcion de Inserción de nuevos usuarios
 		 */
-		$id=buscaUser($user);
+		
+		$id=buscaUser($user,$link);
 		if ($id==''){
 			srand(time());
 			$id = (rand()%9999999)+100000;
-			while (!idValido($id)){
+			while (!idValido($id,$link)){
 				$id = (rand()%9999999)+100000;
 			}
-			$link=conectar('bdsintesi');
 			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
 			$result=mysql_query($query,$link);
-			desconectar($link);
 			return "";
 		}else{
 			return "Ya consta en la base de datos un usuario con los datos introducidos";
