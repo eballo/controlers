@@ -74,7 +74,7 @@ if (isset($_GET['action'])){
 }
 
 //Usuarios de la bbdd
-$query="SELECT ID,NAME FROM user";
+$query="SELECT * FROM user";
 $result=mysql_query($query,$adminLink);
 $rows=mysql_num_rows($result);
 
@@ -106,6 +106,9 @@ $rows=mysql_num_rows($result);
 <form action='admin.php?action=addUser' id='newuser' method='post'>
 <table>
 	<tr>
+		<td colspan="2"><b>Alta de usuario</b></td>
+	</tr>
+	<tr>
 		<td>Usuario</td>
 		<td><input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /></td>
 
@@ -120,28 +123,36 @@ $rows=mysql_num_rows($result);
 		<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
 	</tr>
 	<tr>
-		<td>Tamaño Maximo permitido Diario:</td>
+		<td>Tam Max en KB:</td>
 		<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
 
 	</tr>
 	<tr>
-		<td>Espacio Maximo Assignado:</td>
+		<td>Quota esp en KB:</td>
 		<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
 	
 	</tr>
 	
 </table>
 
-<input class="botonForm" type='button' value='valida' onclick='validarPass()' /></form>
+<input class="botonForm" type='button' value='Dar de alta' onclick='validarPass()' /></form>
 </div>
-<div class="userListContainer"><?php 
+<div class="userListContainer">
+<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
+<?php 
 if ($rows >0){
-	echo "<table><tr><th>ID Usuario</th><th>Nombre de Usuario</th></tr>";
+	echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Eliminar</th></tr>";
 	while ($row=mysql_fetch_array($result)){
-		echo "<tr>".
-		"<td>" . $row["ID"] . "</td>".
-		"<td>" . $row["NAME"] ."</td>";
-		
+		echo "<tr>";
+			if ($row["INSTALAT"] == "1"){
+			echo "<td><img src='img/inst.png'/> </td>";
+		}else{
+			echo "<td></td>";
+		}
+		echo "<td>" . $row["ID"] . "</td>".
+		"<td>" . $row["NAME"] ."</td>".
+		"<td>" . $row["DAY_LIMIT"] . "</td>".
+		"<td>" . $row["LIMIT"] ."</td>";		
 		if (!esAdmin($row["ID"], $adminLink)){
 			echo "<td><a href='admin.php?action=delUser&id=".$row["ID"]."' ><img src='img/DeleteIcon.png' /></a></td>";
 		}else{
