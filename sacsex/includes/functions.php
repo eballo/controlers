@@ -54,7 +54,7 @@
 		$user=$GLOBALS['MYSQL_USER'];
 		$pass=$GLOBALS['MYSQL_PASSWORD'];
 		//$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
-		// TODO Buscar form mas simple, si la hay
+		//TODO Buscar form mas simple, si la hay
 		$link=mysql_connect($ip,$user,$pass);
 		if ( ! $link ){
 			echo "Error al intentar conectar a mysql";
