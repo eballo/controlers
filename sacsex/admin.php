@@ -68,6 +68,14 @@ if (isset($_GET['action'])){
 		if ($x!=1){
 			$errors ="Error: No se ha podido eliminar el usuario con id $id.";
 		}
+	}elseif ($accion == "finSesion"){
+			
+		$_SESSION['id']="";
+		$_SESSION['type'] = '';
+		$_SESSION['login'] =false;
+		echo "<script type='text/javascript'>
+					document.location='index.php';
+				</script>";				
 	}
 }else{
 	$accion="";
@@ -84,7 +92,6 @@ $rows=mysql_num_rows($result);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Pagina del Administrador de SACSEX</title>
-
 <script type="text/javascript">
 
 	function validarPass(){
@@ -97,7 +104,6 @@ $rows=mysql_num_rows($result);
 		}
 	}
 </script>
-
 </head>
 <body>
 <div class="body">
@@ -164,7 +170,11 @@ if ($rows >0){
 	echo "No hi ha cap usuari <br />";
 }
 ?></div>
+
 </div>
+</div>
+<div class="cierreSesion">
+	<a href='admin.php?action=finSesion'><input type='button' value='Cerrar Sesion' /></a>
 </div>
 </body>
 <script type="text/javascript">
