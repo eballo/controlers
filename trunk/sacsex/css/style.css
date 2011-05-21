@@ -96,3 +96,11 @@ input {
 .botonForm{
 	float:right;	
 }
+.cierreSesion{
+	position:fixed;
+	padding:10px;
+	left:1100px;
+}
+.cierreSesion a{
+	text-decoration:none;
+}

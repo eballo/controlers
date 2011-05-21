@@ -31,5 +31,6 @@
 		<input type="submit" value='valida' /><br />
 		<input type='hidden' name='alta' value='true' />
 	</form>
+	<a href='asistenteBusqueda.php'>Buscar</a>
 </body>
 </html>
