@@ -17,12 +17,16 @@
 			$query="SELECT INSTALAT from user where ID=$id";
 			$busca=mysql_query($query,$link);
 			$isinstallA=mysql_fetch_array($busca);
-			$isinstall=($isinstallA[0])+2;
+			$isinstall=($isinstallA[0])+2; //En la tabla, 0 indica que no esta instalado. 1 que si lo esta
 			$resp="$isinstall/$id";
 		}
 		echo $resp;
 	}else{
-		echo $id;
+		if ( $id != ''){
+			echo $id;
+		}else{
+			echo 1;
+		}
 	}
 	
 	desconectar($link);

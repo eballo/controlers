@@ -1,70 +1,79 @@
 # !/bin/bash
 #Script que comprueba los requisitos previos de instalacion y genera 
 # el sacsex.properties
-SVR_IP='192.168.0.79' #Actualizar con la IP del Servidor
-SVR_PORT='8888'
-echo "Indica la IP y el puerto del servidor. Formato x.x.x.x:xxxx"
-read SVR_HOST
 
-zenityOk=`find / -name "zenity" 2>/dev/null | grep bin | wc -l `
-
-## Comprobar si samba-client esta instalado. Si no lo esta, warning de que no lo esta e instrucciones de instalacion?
-smb=`find / -name "smbmount" 2>/dev/null | wc -l` 
-
-if [ $smb -eq 0 ]
+linksOk=`whereis links | grep bin`
+if [ ! '$linksOk' ]
 then
-    if [ $zenityOk -eq 1 ]
-    then
-        zenity --title="Instalación de SACS-EX" --text="Error: Es necesario tener instalado el paquete de smbmount\n Para ello, puede utilizar la orden:\n\n apt-get install smbfs"
-    else
-        echo -e "Error: Es necesario tener instalado el paquete de smbmount\n Para ello, puede utilizar la orden \n\napt-get install smbfs"
-    fi
-    exit 1
+	echo -e "Error: Es imprescindible tener instalado el paquete de links, para realizar las conexiones con el servidor. \n Para obtenrelo, utilice la orden:\n\n sudo apt-get install links"
+	exit 1
 else
-    if [ $zenityOk -eq 1 ]
-    then
-        loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login"`
-        password=`zenity --entry --title="SACS-EX Login" --text="$loginName, introduce tu contraseÃ±a"`
-    else
-        echo "Introduce tu login"
-        read loginName
-        echo "$loginName, introduce tu contraseÃ±a"
-        read password
-    fi
+	zenityOk=`whereis zenity | grep bin`
+	# Pedimos los datos del servidor
+	if [ '$zenityOk' ]
+	then
+		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor"`
+		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web"`
+	else
+		echo "Introduce la direccion IP del servidor"
+		read SVR_IP
+		echo "El puerto abierto para los servicios de servidor web"
+		read SVR_PORT
+	fi
+	# comprobamos el acceso al host y puertos indicados
+	echo "Comprobando conexion"
+	nc -z "$SVR_IP" "$SVR_PORT" 2>/dev/null
+	if [ $? -eq 0 ]
+	then
+		SVR_CONN=${SVR_IP}:${SVR_PORT}
+		if [ '$zenitiOk' ]
+		then
+		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login"`
+			password=`zenity --entry --title="SACS-EX Login" --text="$loginName, introduce tu contrasena"`
+		else
+			echo "Introduce tu login"
+			read loginName
+			echo "$loginName, introduce tu contraseÃ±a"
+			read password
+		fi 
+		
+		pwd5md=`links -source "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$password"`
+		busca=`links -source "http://$SVR_CONN/sacsex/services/service.auth.php?user=$loginName&pass=$pwd5md&install=true"`
+		# Recojo el id y si se puede o no proceder a la instalacion 
+		id=`echo $busca | cut -f2 -d" "`
+		installOk=`echo $busca | cut -f1 -d"/"`
+		## Si todo es correcto Genero el fichero de propiedades:
+		if [ "$installOk" -eq 2 ]
+		then
+			home=`echo ~`
+			if [ ! -d "$home/.sacsexBckps" ]
+			then
+				mkdir "$home/.sacsexBckps"				
+			fi
+			SACSEXHOME="$home/.sacsexBckps"
+			if [ ! -f $SACSEXHOME/sacsex.properties ]
+			then
+				touch $SACSEXHOME/sacsex.properties
+			fi
+			propiertiesFile="$SACSEXHOME/sacsex.properties"
+			
+			USER=$loginName
+			PASS=$pwd5md
 
-	
-    ### validar usuario
-    ####Conexion con servicio md5convert para traducir la contraseña a md5
-    pass=`links -source "http://SVR_HOST/sacsex/services/service.md5convert.php?text=$password"`
-	
-	###conexion con auth.php mediante lynx para validar usuario $SVR_HOST/sacsex/services/service.auth.php?user=$login&password=$passwd
-	instalOK=`links -source "http://SVR_HOST/sacsex/services/service.auth.php?user=$loginName&pass=$pass&install=true"`
-    
-    
-    ## Si todo es correcto:
-     
-    home=`echo ~`
-    mkdir "$home/.sacsexBckps"
-    SACSEXHOME="$home/.sacsexBckps"
-    touch $SACSEXHOME/sacsex.properties
-    propiertiesFile="$SACSEXHOME/sacsex.properties"
-
-    # Recojo la IP del host del usuario
-    IP=`ifconfig | grep "inet " | cut -d":" -f2 | cut -d" " -f1 | grep -v "^127"`
-
-    if [ -z "$IP" ]
-    then
-        echo "no hay IP assignada"    
-    fi
-
-    USER=$loginName
-    PASS=$password
-
-    echo "USER=$USER" > $propiertiesFile
-    echo "PASS=$PASS" >> $propiertiesFile
-    echo "HOST_IP=$IP" >> $propiertiesFile
-    echo "SVR_IP=$SVR_IP" >> $propiertiesFile
-    echo "USER_HOME=$home" >> $propiertiesFile
-
-    cat $propiertiesFile
+			echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
+			echo "SACS_USER=$USER" >> $propiertiesFile
+			echo "SACS_PASS=$PASS" >> $propiertiesFile
+			echo "SACS_USER_HOME=$home" >> $propiertiesFile
+		else
+			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
+		fi
+	else
+		if [ '$zenityOk' ]
+		then
+			zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
+		else
+			echo -e "Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
+		fi
+	fi
 fi
+
