@@ -47,4 +47,5 @@
 	}else{
 		echo "Error: No se ha localizado ningun usuario con los datos aportados";
 	}
+	desconectar($link);
 ?>
