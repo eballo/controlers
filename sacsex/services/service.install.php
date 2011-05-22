@@ -20,5 +20,5 @@
 	}else{
 		echo 1;
 	}
-	
+	desconectar($link);
 ?>
