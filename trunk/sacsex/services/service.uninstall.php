@@ -1,0 +1,25 @@
+<?php
+include_once "../includes/servicesHeaders.php";
+
+// 				uninstall.php recibe como parametros el usuario y la contraseña en md5 y 
+//					le asigna un 0 conforme la aplicacion fue desinstalada.
+	$user=$_GET['user'];
+	$pass=$_GET['pass'];
+	
+	$link=conectar('bdsintesi');
+	$id=verificaUser($user, $pass, $link);
+	if ( $id != ''){
+		$query="UPDATE user SET INSTALAT=0 WHERE ID=$id";
+		$result=mysql_query($query,$link);
+		//Devolverá 0 si se ha podido proceder. En caso contrario de vuelve 1
+		if ($result){
+			echo 0; 
+		}else{
+			echo 1;
+		}
+	}else{
+		echo 1;
+	}
+	desconectar($link);
+	
+?>

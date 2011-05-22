@@ -71,10 +71,12 @@ input {
 	border: 1px solid;
 	border-color: #000;
 	text-shadow: -1px 1px 0px #FFF;
-	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
 	padding: 10px;
 	z-index: 1;
-	-moz-box-shadow: 6px 6px 8px #ababab;
+	box-shadow: 6px 6px 8px #ababab;
+	-webkit-box-shadow: 6px 6px 8px #ababab;
 	margin: 0px auto;
 }
 
