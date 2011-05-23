@@ -68,14 +68,6 @@ if (isset($_GET['action'])){
 		if ($x!=1){
 			$errors ="Error: No se ha podido eliminar el usuario con id $id.";
 		}
-	}elseif ($accion == "finSesion"){
-			
-		$_SESSION['id']="";
-		$_SESSION['type'] = '';
-		$_SESSION['login'] =false;
-		echo "<script type='text/javascript'>
-					document.location='index.php';
-				</script>";				
 	}
 }else{
 	$accion="";
@@ -106,6 +98,7 @@ $rows=mysql_num_rows($result);
 </script>
 </head>
 <body>
+<?php include_once 'includes/cabecera.php';?>
 <div class="body">
 <div class="mainContainer">
 <div class='addUserFormContainer'>
@@ -173,9 +166,7 @@ if ($rows >0){
 
 </div>
 </div>
-<div class="cierreSesion">
-	<a href='admin.php?action=finSesion'><input type='button' value='Cerrar Sesion' /></a>
-</div>
+
 </body>
 <script type="text/javascript">
 	<?php 
