@@ -2,12 +2,13 @@
 	include_once 'includes/headers.php';
 	include_once 'includes/userAuthValidation.php';
 	include_once 'includes/libsheader.php';
+	include_once 'includes/cabecera.php';
+	
 	$link=conectar('bdsintesi');
 	
 	$id=$_SESSION['id'];
 	if (isset($_GET['accion'])){
 		$accion=$_GET['accion'];
-		echo $accion;
 		if ($accion=="subir"){
 			$filepath=$_POST['filepath'];
 			$insQuery="INSERT INTO filepath (FILEPATH,USER_ID) VALUES ('$filepath',$id)";
@@ -45,7 +46,7 @@
 	<title>Alta de Files de Usuario</title>
 </head>
 <body>
-<?php include_once 'includes/cabecera.php';?>
+
 <table><tr><td rowspan='2'></table>
 	<h3> Alta de File: </h3>
 	<form action='search.php?accion=subir' method='post'>
