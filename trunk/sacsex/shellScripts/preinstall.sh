@@ -37,10 +37,11 @@ else
 			read password
 		fi 
 		
-		pwd5md=`links -source "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$password"`
-		busca=`links -source "http://$SVR_CONN/sacsex/services/service.auth.php?user=$loginName&pass=$pwd5md&install=true"`
+		pass=`links -dump "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$password"`
+		pwd5md=`echo $pass | cut -d'/' -f2`
+		busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$loginName&pass=$pwd5md&install=true"`
 		# Recojo el id y si se puede o no proceder a la instalacion 
-		id=`echo $busca | cut -f2 -d" "`
+		id=`echo $busca | cut -f2 -d"/"`
 		installOk=`echo $busca | cut -f1 -d"/"`
 		## Si todo es correcto Genero el fichero de propiedades:
 		if [ "$installOk" -eq 2 ]
@@ -48,7 +49,7 @@ else
 			home=`echo ~`
 			if [ ! -d "$home/.sacsexBckps" ]
 			then
-				mkdir "$home/.sacsexBckps"				
+				mkdir "$home/.sacsexBckps"
 			fi
 			SACSEXHOME="$home/.sacsexBckps"
 			if [ ! -f $SACSEXHOME/sacsex.properties ]
@@ -59,7 +60,6 @@ else
 			
 			USER=$loginName
 			PASS=$pwd5md
-
 			echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
 			echo "SACS_USER=$USER" >> $propiertiesFile
 			echo "SACS_PASS=$PASS" >> $propiertiesFile
@@ -76,4 +76,3 @@ else
 		fi
 	fi
 fi
-
