@@ -39,15 +39,20 @@ then
 				if [ $? -eq 0 ]
 				then
 					SVR_CONN=${SVR_IP}:${SVR_PORT}
-					busca=`links -source "http://$SVR_CONN/sacsex/services/service.auth.php?user=$user&pass=$pwd5md&install=false"`
+					busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$user&pass=$pwd5md&install=false"`
 					id=`echo $busca | cut -f2 -d" "`
 					# Comprobamos el id devuelto
 					if [ "$id" != "1" ]
 					then
-						rutas=`links -source "http://$SVR_CONN/sacsex/services/service.dirlist.php?id=$id"`
+						rutas=`links -dump "http://$SVR_CONN/sacsex/services/service.dirlist.php?id=$id"`
 						for i in $rutas
 						do
-							echo $i
+							if [ -d $i ]
+							then
+								echo "El Directorio : $i"
+							else
+								echo "$i No existe"
+							fi
 						done
 					else
 						echo "Error: Usuario '$user' no localizado en la base de datos."
