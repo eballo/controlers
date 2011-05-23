@@ -3,14 +3,14 @@
 # el sacsex.properties
 
 linksOk=`whereis links | grep bin`
-if [ ! '$linksOk' ]
+if [ ! "$linksOk" ]
 then
 	echo -e "Error: Es imprescindible tener instalado el paquete de links, para realizar las conexiones con el servidor. \n Para obtenrelo, utilice la orden:\n\n sudo apt-get install links"
 	exit 1
 else
 	zenityOk=`whereis zenity | grep bin`
 	# Pedimos los datos del servidor
-	if [ '$zenityOk' ]
+	if [ "$zenityOk" ]
 	then
 		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor"`
 		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web"`
@@ -26,7 +26,7 @@ else
 	if [ $? -eq 0 ]
 	then
 		SVR_CONN=${SVR_IP}:${SVR_PORT}
-		if [ '$zenitiOk' ]
+		if [ "$zenityOk" ]
 		then
 		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login"`
 			password=`zenity --entry --title="SACS-EX Login" --text="$loginName, introduce tu contrasena"`
@@ -64,11 +64,12 @@ else
 			echo "SACS_USER=$USER" >> $propiertiesFile
 			echo "SACS_PASS=$PASS" >> $propiertiesFile
 			echo "SACS_USER_HOME=$home" >> $propiertiesFile
+			
 		else
 			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
 		fi
 	else
-		if [ '$zenityOk' ]
+		if [ "$zenityOk" ]
 		then
 			zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
 		else
