@@ -64,6 +64,10 @@ input {
 	-webkit-box-shadow: 6px 6px 8px #ababab;
 }
 
+img[onclick]{
+	cursor: pointer;	
+}
+
 .userListContainer table{
 	border: 0;
 	width: 100%;	
