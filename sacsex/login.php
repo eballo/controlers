@@ -9,9 +9,9 @@ if (isset($_GET['loginError'])){
 	$loginError="";
 }
 if ( isset ($_POST['user']) && isset($_POST['pass']) && isset($_POST['login'])){
-$user=$_POST['user'];
-$pass=$_POST['pass'];
-$login=$_POST['login'];
+	$user=$_POST['user'];
+	$pass=$_POST['pass'];
+	$login=$_POST['login'];
 }else{
 	$user="";
 	$pass="";
