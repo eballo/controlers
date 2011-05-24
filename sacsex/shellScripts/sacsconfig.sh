@@ -94,6 +94,16 @@ function validarMes (){
 
 # MAIN
 
+# Ruta de fichero para editar crontab
+cron="/tmp/cron_$USER"
+
+# Ruta del directorio Backup de cliente
+dirBackup="$HOME/Backup"
+
+# Ruta directorio destino del usuario en Servidor
+# Si fuese por SCP seria poner el comando a la hora de guardar en fichero
+dirServidor="$HOME/Escritorio"
+
 seguir=false
 
 while ! $seguir
@@ -120,16 +130,6 @@ done
             h=`echo $hora | cut -d: -f1`
             m=`echo $hora | cut -d: -f2`
             
-            # Ruta de fichero para editar crontab
-            cron="/tmp/cron_$USER"
-            
-            # Ruta del directorio Backup de cliente
-            dirBackup="$HOME/Backup"
-            
-            # Ruta directorio destino del usuario en Servidor
-            # Si fuese por SCP seria poner el comando a la hora de guardar en fichero
-            dirServidor="$HOME/Escritorio"
-            
             # Guardado de orden crontab en fichero
             echo "# Copia de contenido Backup a Servidor a la(s) $hora todos los dias" > $cron
             echo "$m $h * * * cp -R $dirBackup $dirServidor" >> $cron
@@ -138,23 +138,12 @@ done
         fi
     ;;
     1)
-
         if validarDia
         then
             if validarHora
             then
                 h=`echo $hora | cut -d: -f1`
                 m=`echo $hora | cut -d: -f2`
-                
-                # Ruta de fichero para editar crontab
-                cron="/tmp/cron_$USER"
-                
-                # Ruta del directorio Backup de cliente
-                dirBackup="$HOME/Backup"
-                
-                # Ruta directorio destino del usuario en Servidor
-                # Si fuese por SCP seria poner el comando a la hora de guardar en fichero
-                dirServidor="$HOME/Escritorio"
                 
                 # Guardado de orden crontab en fichero
                 echo "# Copia de contenido Backup a Servidor a la(s) $hora en dia de la semana ($dia)" > $cron
@@ -167,16 +156,6 @@ done
     2)
         if validarMes
         then
-            # Ruta de fichero para editar crontab
-            cron="/tmp/cron_$USER"
-            
-            # Ruta del directorio Backup de cliente
-            dirBackup="$HOME/Backup"
-            
-            # Ruta directorio destino del usuario en Servidor
-            # Si fuese por SCP seria poner el comando a la hora de guardar en fichero
-            dirServidor="$HOME/Escritorio"
-            
             # Guardado de orden crontab en fichero
             if [ "$mes" -eq 0 ]
             then
@@ -189,11 +168,6 @@ done
             # Guardado de contenido de fichero en crontab
             crontab $cron
         fi
-        mi_cron="/home/alumne/Escritorio/mi_cron.txt"
-        # Tendria que escribir un comentario segun si es inicio
-        # de mes o final de mes
-        echo "# Realiza la copia de backups cada dia del mes"
-        echo "* * $mes * * mkdir /home/alumne/Escritorio/Backup" >> $mi_cron
     ;;
     esac
     
