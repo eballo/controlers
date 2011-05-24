@@ -152,7 +152,7 @@ if ($rows >0){
 		"<td>" . $row["DAY_LIMIT"] . "</td>".
 		"<td>" . $row["LIMIT"] ."</td>";		
 		if (!esAdmin($row["ID"], $adminLink)){
-			echo "<td><a href='admin.php?action=delUser&id=".$row["ID"]."' ><img src='img/DeleteIcon.png' /></a></td>";
+			echo "<td><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/></td>";
 		}else{
 			echo "<td>Bloqueado</td>";
 		}
