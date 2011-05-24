@@ -66,6 +66,10 @@ input {
 	text-align: left;
 }
 
+img[onclick]{
+	cursor: pointer;	
+}
+
 .loginContainer{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
