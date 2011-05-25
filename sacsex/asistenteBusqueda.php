@@ -32,7 +32,7 @@
 	//Construyo la parte de la query para el nombre de fichero a buscar
 	if(isset($_POST['fname']) && $_POST['fname']!=''){
 		$fname=$_POST['fname'];
-		$nameQ=' AND FILENAME==$fname';
+		$nameQ=" AND FILENAME='$fname'";
 	}else{
 		$nameQ='';
 	}
@@ -69,7 +69,7 @@
 				<optgroup label="tiempo">
 					<option value='dias'>dias</option>
 					<option value='meses'>meses</option>
-					<option value='anyos'>años</option>	
+					<option value='anyos'>aÃ±os</option>	
 				</optgroup>		
 			</select>
 		</td>
@@ -82,7 +82,7 @@
 </form>
 <?php 
 	if($rows>0){
-		echo "<table><tr><th>Fichero</th><th>Tamaño</th><th>Fecha</th></tr>";
+		echo "<table><tr><th>Fichero</th><th>TamaÃ±o</th><th>Fecha</th></tr>";
 		while($row=mysql_fetch_array($result)){
 			echo "<tr>";
 				echo "<td>".$row['FILENAME']."</td>";
