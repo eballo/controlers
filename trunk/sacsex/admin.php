@@ -102,7 +102,7 @@ $rows=mysql_num_rows($result);
 <div class="body">
 <div class="mainContainer">
 <div class='addUserFormContainer'>
-<form action='admin.php?action=addUser' id='newuser' method='post'>
+<form action='admin.php?action=addUser' id='newuser' method='post' onkeypress="validarKeyEnter( event )">
 <table>
 	<tr>
 		<td colspan="2"><b>Alta de usuario</b></td>
@@ -113,11 +113,11 @@ $rows=mysql_num_rows($result);
 
 	</tr>
 	<tr>
-		<td>Contraseña: </td>
+		<td>Contraseï¿½a: </td>
 		<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
 	</tr>
 	<tr>
-		<td>Repite Contraseña: </td>
+		<td>Repite Contraseï¿½a: </td>
 		<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
 	</tr>
 	<tr>

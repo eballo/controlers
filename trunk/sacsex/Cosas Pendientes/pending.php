@@ -1,6 +1,4 @@
 <?php 
-//TODO Revisar el codigo. En google Chrome, en la zona de administrador, no detecta el return como para hacer el submit
-//
 //TODO Boton de cierre de sesion 
 //			(ahora resulta un poco incomodo sobretodo para hacer pruebas y pasar de un tipo de usuario a otro)
 //
@@ -12,9 +10,9 @@
 //
 //
 //TODO Servicio fstabLine.php
-//			No se si ahora será necesario (supongo que si). Recibe usuario y contraseña
-// 			y añade una linea a /etc/fstab con los datos de la unidad montada
+//			No se si ahora serï¿½ necesario (supongo que si). Recibe usuario y contraseï¿½a
+// 			y aï¿½ade una linea a /etc/fstab con los datos de la unidad montada
 //
-//TODO script de backups 
+//TODO script de backups : Estoy en ello
 
 ?>
