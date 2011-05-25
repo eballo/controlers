@@ -3,4 +3,9 @@
 			validarPass();
 		}
 	}
-	
+	function muestraForm(){
+		$("#buscaForm").fadeIn("slow");
+	}
+	function ocultaForm(){
+		$("#buscaForm").fadeOut("slow");
+	}
