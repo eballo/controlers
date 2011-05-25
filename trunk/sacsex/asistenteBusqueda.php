@@ -6,6 +6,7 @@
 	$id=$_SESSION['id'];
 	//Construyo la parte de query temporal
 	$hoy=getdate();
+	$dateQ='';
 	if(isset($_GET['accion'])){		
 		if (isset($_POST['numd']) && $_POST['numd']!=''){
 			$dias=$_POST['numd'];
@@ -48,6 +49,12 @@
 
 <html>
 <body>
+<div class='searchHead'>
+	<div class='searchButton' onclick="muestraForm()"> Muestra </div>
+	<div class='searchButtonOff' onclick="ocultaForm()"> Oculta </div>
+</div>
+<div id="buscaForm">
+<div class="valoresBusc">
 <form action='asistenteBusqueda.php?accion=buscar' method=post>
 	<table>
 	<tr>
@@ -80,9 +87,11 @@
 	</table>
 	
 </form>
+</div>
+<div class="tablaRes">
 <?php 
 	if($rows>0){
-		echo "<table><tr><th>Fichero</th><th>TamaÃ±o</th><th>Fecha</th></tr>";
+		echo "<table><tr><th>Fichero</th><th>Tamaño</th><th>Fecha</th></tr>";
 		while($row=mysql_fetch_array($result)){
 			echo "<tr>";
 				echo "<td>".$row['FILENAME']."</td>";
@@ -96,5 +105,7 @@
 	}	
 	desconectar($bLink);
 ?>
+</div>
+</div>
 </body>
 </html>
