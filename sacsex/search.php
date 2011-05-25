@@ -2,12 +2,14 @@
 	include_once 'includes/headers.php';
 	include_once 'includes/userAuthValidation.php';
 	include_once 'includes/libsheader.php';
-	//include_once 'includes/cabecera.php';
+	include_once 'includes/cabecera.php';
 	
 	$link=conectar('bdsintesi');
-	
-	/*$postsubir=$_POST['accion'];
-	echo "Si weeey",$postsubir,"<br>";*/
+//	if (isset($_POST['estilo'])){
+//		$stile=$_POST['estilo'];
+//	}else{
+//		$stile='none';
+//	}
 	
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
@@ -16,6 +18,8 @@
 	}
 	
 	$id=$_SESSION['id'];
+	$hoy=getdate();
+	$dateQ='';
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
 		if ($accion == "subir"){
@@ -45,10 +49,47 @@
 				/*$error="No se pudo eliminar el directorio indicado";*/
 			}
 		}
+		elseif($accion == "buscar"){
+			if (isset($_POST['numd']) && $_POST['numd']!=''){
+				$dias=$_POST['numd'];
+				switch ($_POST['freq']) {
+					case 'dias':
+						$text='DAY';
+						break;
+					case 'meses':
+						$text='MONTH';
+						break;
+					case 'anyos':
+						$text='YEAR';
+					break;
+				} 
+				if ($_POST['rel']=='min'){
+					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
+				}else{
+					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) > $dias";
+				}
+			}else{
+				$dateQ='';
+			}
+		}
+		//Construyo la parte de la query para el nombre de fichero a buscar
+		if(isset($_POST['fname']) && $_POST['fname']!=''){
+			$fname=$_POST['fname'];
+			$nameQ=" AND FILENAME='$fname'";
+		}else{
+			$nameQ='';
+		}
 	}
-?>
+	
+	$query="SELECT * FROM backups WHERE USER_ID=$id".$nameQ.$dateQ.";";
+	//Establezco el enlace con el que trabajara las busquedas y lanzo la consulta
 
-<?php
+	$bResult=mysql_query($query,$link);
+	$brows=-1;
+	if($bResult){
+		$brows=mysql_num_rows($bResult);
+	}
+
 /* Borrar */
 	$query="SELECT USER_ID,FILEPATH,IDF FROM filepath WHERE USER_ID=$id";
 	$result=mysql_query($query,$link);
@@ -66,21 +107,10 @@
 	<div class='searchButton' onclick="configuracion()"> Configuracion</div>
 	<div class='searchButtonOff' onclick="busqueda()">Busqueda</div>
 </div>
-<div id='searchFiles' class='searchFiles'>
-	<div class='borraFile'>
-	<h2> Modificacion de rutas de Directorio (En construccion)</h2>
-	<?php if ($rows >0){
-		echo "<h3> Directorios: </h3>";
-		echo "<table><tr><th colspan='2'>Rutas Del Usuario:</th></tr>";
-		while($row=mysql_fetch_array($result)){
-			printf("<tr><td>%s</td><td><a href=\"search.php?accion=borrar&idFile=%d\">Eliminar</a></td></tr>",$row['FILEPATH'],$row['IDF']);
-		}
-		echo "</table><br>";
-	}
-	?>
-	</div>
+<div id='searchFiles' class='searchFiles' style="display:none;">
+	
 	<div class='altafiles'>
-	<h3> Alta de File: </h3>
+	<h3>Alta de archivos:</h3>
 	<form action='search.php?accion=subir' method='POST'>
 		<div id='divErrors' style='color: red'>		
 			<?php
@@ -97,12 +127,77 @@
 			}
 			?>
 		</div>
-		File: <input type="text" name='filepath' />
+		File: <input type="text" name='filepath' size="40"/>
 		<input type="submit" value='valida' /><br />
 	</form>
 	</div>
+	<div class='borraFile'>
+
+	<?php if ($rows >0){
+		echo "<h3> Directorios: </h3>";
+		echo "<table><tr><th colspan='2'>Rutas Del Usuario:</th></tr>";
+		while($row=mysql_fetch_array($result)){
+			printf("<tr><td>%s</td><td><a href=\"search.php?accion=borrar&idFile=%d\">Eliminar</a></td></tr>",$row['FILEPATH'],$row['IDF']);
+		}
+		echo "</table><br>";
+	}
+	?>
+	</div>
 </div>
-	<a href='asistenteBusqueda.php'>Buscar</a>
+
+<div id="buscaForm" class="buscaForm" style="display:none;">
+<div class="valoresBusc">
+<form action='search.php?accion=buscar' method=post>
+	<table>
+	<tr>
+		<th>Fichero</th>
+		<th>Periodo</th>
+		<td></td>
+	</tr>
+	<tr>
+		<td><input type='text' name='fname' /></td>
+		<td>
+			<SELECT name="rel">
+				<optgroup label="relacion">
+					<OPTION value='min'>Hace menos de</OPTION>
+					<OPTION value='max'>Hace mas de</OPTION>
+				</optgroup>
+			</SELECT>
+			<input type=text name='numd' style="width:40px;" />
+			<select name='freq'>
+				<optgroup label="tiempo">
+					<option value='dias'>dias</option>
+					<option value='meses'>meses</option>
+					<option value='anyos'>años</option>	
+				</optgroup>		
+			</select>
+		</td>
+		<td>
+			<input type='submit' value='buscar' />
+		</td>
+	</tr>
+	</table>
+	
+</form>
+</div>
+<div class="tablaRes">
+<?php 
+	if($brows>0){
+		echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
+		while($row=mysql_fetch_array($bResult)){
+			echo "<tr>";
+				echo "<td>".$row['FILENAME']."</td>";
+				echo "<td class='inTable'>".$row['SIZE']."</td>";
+				echo "<td class='inTable'>".$row['DATE']."</td>";
+			echo "</tr>";			
+		}
+		echo"</table>";
+	}else{
+		echo "No se han encontrado resultados para los parametros facilitados";
+	}
+?>
+</div>
+</div>
 
 </body>
 </html>
