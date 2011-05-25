@@ -135,39 +135,44 @@ img[onclick]{
 	-moz-box-shadow: 0px 6px 8px #ababab;
 }
 .searchButton{
+	position:absolute;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
-	float: left;
-	top:10px;
+	left: 200px;
+	top:135px;
 	width: 100px;
 	border:solid 1px;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
-	box-shadow: 0px 6px 8px #ababab;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
 	padding-left:5px;
 	text-shadow: -1px 1px 0px #FFF;	
 }
 .searchButtonOff{
+	position:absolute;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
-	float:right;
+	left: 1300px;
+	top:135px;
 	width: 100px;
-	top:20px;
-	left: 550 px;
 	border:solid 1px;
-	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
-	box-shadow: 0px 6px 8px #ababab;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
 	padding-left:5px;
 	text-shadow: -1px 1px 0px #FFF;	
 }
 .buscaForm{
 	position:absolute;
-	top:100px;
-	left:200px;
-	width:500 px;
+	top:135px;
+	left:445px;
+	width:700 px;
 	border:solid 1px;
 	border-radius: 4px;
 	background-color: #d9e2ff;
@@ -177,10 +182,12 @@ img[onclick]{
 }
 .valoresBusc{
 	position:relative;
+	
 }
 
 .tablaRes{
 	position:relative;
+	
 }
 .tablaRes table{
 	width: 100%;
@@ -192,9 +199,9 @@ img[onclick]{
 	
 .searchFiles{
 	position:absolute;
-	top:150px;
-	left:380px;
-	width:500 px;
+	top:135px;
+	left:550px;
+	width:450 px;
 	border-radius: 4px;
 
 }
@@ -220,5 +227,6 @@ img[onclick]{
 	padding-left:5px;
 	text-shadow: -1px 1px 0px #FFF;	
 }
-	
+
+
 	

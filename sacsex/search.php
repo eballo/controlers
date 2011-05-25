@@ -103,14 +103,16 @@
 	<title>Usuarios</title>
 </head>
 <body>
+
 <div class='searchHead'>
 	<div class='searchButton' onclick="configuracion()"> Configuracion</div>
 	<div class='searchButtonOff' onclick="busqueda()">Busqueda</div>
 </div>
-<div id='searchFiles' class='searchFiles' style="display:none;">
+
+<div id='searchFiles' class='searchFiles'>
 	
 	<div class='altafiles'>
-	<h3>Alta de archivos:</h3>
+	<h3>Alta de directorios:</h3>
 	<form action='search.php?accion=subir' method='POST'>
 		<div id='divErrors' style='color: red'>		
 			<?php
@@ -131,11 +133,11 @@
 		<input type="submit" value='valida' /><br />
 	</form>
 	</div>
+	
 	<div class='borraFile'>
-
 	<?php if ($rows >0){
 		echo "<h3> Directorios: </h3>";
-		echo "<table><tr><th colspan='2'>Rutas Del Usuario:</th></tr>";
+		echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
 		while($row=mysql_fetch_array($result)){
 			printf("<tr><td>%s</td><td><a href=\"search.php?accion=borrar&idFile=%d\">Eliminar</a></td></tr>",$row['FILEPATH'],$row['IDF']);
 		}
@@ -146,57 +148,57 @@
 </div>
 
 <div id="buscaForm" class="buscaForm" style="display:none;">
-<div class="valoresBusc">
-<form action='search.php?accion=buscar' method=post>
-	<table>
-	<tr>
-		<th>Fichero</th>
-		<th>Periodo</th>
-		<td></td>
-	</tr>
-	<tr>
-		<td><input type='text' name='fname' /></td>
-		<td>
-			<SELECT name="rel">
-				<optgroup label="relacion">
-					<OPTION value='min'>Hace menos de</OPTION>
-					<OPTION value='max'>Hace mas de</OPTION>
-				</optgroup>
-			</SELECT>
-			<input type=text name='numd' style="width:40px;" />
-			<select name='freq'>
-				<optgroup label="tiempo">
-					<option value='dias'>dias</option>
-					<option value='meses'>meses</option>
-					<option value='anyos'>años</option>	
-				</optgroup>		
-			</select>
-		</td>
-		<td>
-			<input type='submit' value='buscar' />
-		</td>
-	</tr>
-	</table>
-	
-</form>
-</div>
-<div class="tablaRes">
-<?php 
-	if($brows>0){
-		echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
-		while($row=mysql_fetch_array($bResult)){
-			echo "<tr>";
-				echo "<td>".$row['FILENAME']."</td>";
-				echo "<td class='inTable'>".$row['SIZE']."</td>";
-				echo "<td class='inTable'>".$row['DATE']."</td>";
-			echo "</tr>";			
+	<div class="valoresBusc">
+	<form action='search.php?accion=buscar' method=post>
+		<table>
+		<tr>
+			<th>Fichero</th>
+			<th>Periodo</th>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type='text' name='fname' size='40'/></td>
+			<td>
+				<SELECT name="rel">
+					<optgroup label="relacion">
+						<OPTION value='min'>Hace menos de</OPTION>
+						<OPTION value='max'>Hace mas de</OPTION>
+					</optgroup>
+				</SELECT>
+				<input type=text name='numd' style="width:40px;" />
+				<select name='freq'>
+					<optgroup label="tiempo">
+						<option value='dias'>dias</option>
+						<option value='meses'>meses</option>
+						<option value='anyos'>años</option>	
+					</optgroup>		
+				</select>
+			</td>
+			<td>
+				<input type='submit' value='buscar' />
+			</td>
+		</tr>
+		</table>
+		
+	</form>
+	</div>
+	<div class="tablaRes">
+	<?php 
+		if($brows>0){
+			echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
+			while($row=mysql_fetch_array($bResult)){
+				echo "<tr>";
+					echo "<td>".$row['FILENAME']."</td>";
+					echo "<td class='inTable'>".$row['SIZE']."</td>";
+					echo "<td class='inTable'>".$row['DATE']."</td>";
+				echo "</tr>";			
+			}
+			echo"</table>";
+		}else{
+			echo "No se han encontrado resultados para los parametros facilitados";
 		}
-		echo"</table>";
-	}else{
-		echo "No se han encontrado resultados para los parametros facilitados";
-	}
-?>
-</div>
+	?>
+	</div>
 </div>
 
 </body>
