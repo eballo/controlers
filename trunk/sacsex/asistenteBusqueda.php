@@ -2,6 +2,7 @@
 	include_once 'includes/headers.php';
 	include_once 'includes/userAuthValidation.php';
 	include_once 'includes/libsheader.php';
+	include_once 'includes/cabecera.php';
 	
 	$id=$_SESSION['id'];
 	//Construyo la parte de query temporal
@@ -53,7 +54,7 @@
 	<div class='searchButton' onclick="muestraForm()"> Muestra </div>
 	<div class='searchButtonOff' onclick="ocultaForm()"> Oculta </div>
 </div>
-<div id="buscaForm">
+<div id="buscaForm" class="buscaForm" style="display:none;">
 <div class="valoresBusc">
 <form action='asistenteBusqueda.php?accion=buscar' method=post>
 	<table>
@@ -91,12 +92,12 @@
 <div class="tablaRes">
 <?php 
 	if($rows>0){
-		echo "<table><tr><th>Fichero</th><th>Tamaño</th><th>Fecha</th></tr>";
+		echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
 		while($row=mysql_fetch_array($result)){
 			echo "<tr>";
 				echo "<td>".$row['FILENAME']."</td>";
-				echo "<td>".$row['SIZE']."</td>";
-				echo "<td>".$row['DATE']."</td>";
+				echo "<td class='inTable'>".$row['SIZE']."</td>";
+				echo "<td class='inTable'>".$row['DATE']."</td>";
 			echo "</tr>";			
 		}
 		echo"</table>";
