@@ -47,27 +47,29 @@
 		}
 	}
 ?>
-<!--
-<HTML>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Opciones del Usuario</title>
-</head>
-<body>
-	<h3> OPCIONES </h3>
-				<script type='text/javascript'>
-					document.location = 'search.php?accion=subir';
-				</script>";
 
-</body>
--->
 <?php
 /* Borrar */
 	$query="SELECT USER_ID,FILEPATH,IDF FROM filepath WHERE USER_ID=$id";
 	$result=mysql_query($query,$link);
 	$rows=mysql_num_rows($result);
-	echo "<h2> Modificacion de rutas de Directorio (En construccion)</h2>";
-	if ($rows >0){
+?>
+	
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Usuarios</title>
+</head>
+<body>
+<div class='searchHead'>
+	<div class='searchButton' onclick="configuracion()"> Configuracion</div>
+	<div class='searchButtonOff' onclick="busqueda()">Busqueda</div>
+</div>
+<div id='searchFiles' class='searchFiles'>
+	<div class='borraFile'>
+	<h2> Modificacion de rutas de Directorio (En construccion)</h2>
+	<?php if ($rows >0){
 		echo "<h3> Directorios: </h3>";
 		echo "<table><tr><th colspan='2'>Rutas Del Usuario:</th></tr>";
 		while($row=mysql_fetch_array($result)){
@@ -75,18 +77,11 @@
 		}
 		echo "</table><br>";
 	}
-
-?>
-<html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Alta de Files de Usuario</title>
-</head>
-<body>
-	
+	?>
+	</div>
+	<div class='altafiles'>
 	<h3> Alta de File: </h3>
 	<form action='search.php?accion=subir' method='POST'>
-		<!-- <input type='hidden' name='accion' value='subir'/> -->
 		<div id='divErrors' style='color: red'>		
 			<?php
 			if ($error){
@@ -105,6 +100,8 @@
 		File: <input type="text" name='filepath' />
 		<input type="submit" value='valida' /><br />
 	</form>
+	</div>
+</div>
 	<a href='asistenteBusqueda.php'>Buscar</a>
 
 </body>

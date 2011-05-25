@@ -187,3 +187,19 @@ img[onclick]{
 .inTable{
 	text-align: center;
 	}
+	
+.searchFiles{
+	position:absolute;
+	top:100px;
+	left:200px;
+	width:500 px;
+	border:solid 1px;
+	border-radius: 4px;
+	background-color: #d9e2ff;
+	box-shadow: 0px 6px 8px #ababab;
+	padding-left:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+.altaFiles{
+	border:solid 1px;
+	}
