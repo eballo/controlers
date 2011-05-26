@@ -96,7 +96,7 @@
 	}
 
 /* Borrar */
-	$query="SELECT USER_ID,FILEPATH,IDF FROM filepath WHERE USER_ID=$id";
+	$query="SELECT * FROM filepath WHERE USER_ID=$id";
 	$result=mysql_query($query,$link);
 	$rows=mysql_num_rows($result);
 ?>
@@ -142,19 +142,22 @@
 	<div class='borraFile'>
 	<?php 
 	if ($rows >0){
-		echo "<h3> Directorios: </h3>";
-		echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
+		echo "<h3> Rutas del usuario: </h3>";
+		echo "<table>";
+		//echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
+		echo "<tr> <th>Ruta</th> <th>Valido</th> </tr>";
 		while($row=mysql_fetch_array($result)){
-			printf("<tr><td>%s</td><td><a href=\"search.php?accion=borrar&idFile=%d\">Eliminar</a></td></tr>",$row['FILEPATH'],$row['IDF']);
+			printf("<tr> <td>%s</td>", $row['FILEPATH']);
+			printf("<td>%d</td>", $row['VALID']);
+			printf("<td><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=borrar&idFile=%d'\" /></td>",$row['IDF']);
+			echo "</tr>";
 		}
-		echo "</table><br>";
 	}
 	else{
-		echo "<h3> Directorios: </h3>";
-		echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
-		echo "<td>Ninguna ruta establecida</td>";
-		echo "</table><br>";
+		echo "<h3> Rutas del usuario: </h3>";
+		echo "<td>Ninguna ruta establecida</td><br>";
 	}
+	echo "</table><br>";
 	?>
 	</div>
 </div>
@@ -196,9 +199,9 @@
 	</div>
 	<div class="tablaRes">
 	<?php
-
+		echo "<table>";
 		if($brows>0){
-			echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
+			echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
 			while($row=mysql_fetch_array($bResult)){
 				echo "<tr>";
 					echo "<td>".$row['FILENAME']."</td>";
@@ -206,11 +209,11 @@
 					echo "<td class='inTable'>".$row['DATE']."</td>";
 				echo "</tr>";			
 			}
-			echo"</table>";
 		}else{
 			//echo "No se han encontrado resultados para los parametros facilitados";
-			echo "No se han encontrado resultados";
+			echo "<td>No se han encontrado resultados<td>";
 		}
+		echo"</table>";
 	?>
 	</div>
 </div>

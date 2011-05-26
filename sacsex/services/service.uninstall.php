@@ -1,7 +1,7 @@
 <?php
-include_once "../includes/servicesHeaders.php";
+	include_once "../includes/servicesHeaders.php";
 
-// 				uninstall.php recibe como parametros el usuario y la contraseña en md5 y 
+// 				uninstall.php recibe como parametros el usuario y la contraseï¿½a en md5 y 
 //					le asigna un 0 conforme la aplicacion fue desinstalada.
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
@@ -11,7 +11,7 @@ include_once "../includes/servicesHeaders.php";
 	if ( $id != ''){
 		$query="UPDATE user SET INSTALAT=0 WHERE ID=$id";
 		$result=mysql_query($query,$link);
-		//Devolverá 0 si se ha podido proceder. En caso contrario de vuelve 1
+		//Devolvera 0 si se ha podido proceder. En caso contrario devuelve 1
 		if ($result){
 			echo 0; 
 		}else{
