@@ -5,24 +5,21 @@
 	include_once 'includes/cabecera.php';
 	
 	$link=conectar('bdsintesi');
-//	if (isset($_POST['estilo'])){
-//		$stile=$_POST['estilo'];
-//	}else{
-//		$stile='none';
-//	}
-	
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
 	} else{
 		$error = "";
 	}
-	
 	$id=$_SESSION['id'];
 	$hoy=getdate();
 	$dateQ='';
+	$searchStile='display:none';
+	$insertStile='display:none';
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
 		if ($accion == "subir"){
+			$insertStile='display:block';
+			$searchStile='display:none';
 			$filepath = $_POST['filepath'];
 			if ($filepath != ""){
 				$insQuery="INSERT INTO filepath (FILEPATH,USER_ID) VALUES ('$filepath',$id)";
@@ -38,7 +35,9 @@
 				</script>";
 			}
 		}
-		elseif($accion == "borrar"){
+		elseif($accion == "borrar"){			
+			$insertStile='display:block';
+			$searchStile='display:none';
 			$idFile = $_GET['idFile'];	
 			$delQuery = "DELETE FROM filepath WHERE IDF=$idFile";
 			$res = mysql_query($delQuery,$link);
@@ -50,6 +49,8 @@
 			}
 		}
 		elseif($accion == "buscar"){
+			$searchStile='display:block';
+			$insertStile='display:none';
 			if (isset($_POST['numd']) && $_POST['numd']!=''){
 				$dias=$_POST['numd'];
 				switch ($_POST['freq']) {
@@ -109,7 +110,7 @@
 	<div class='searchButtonOff' onclick="busqueda()">Busqueda</div>
 </div>
 
-<div id='searchFiles' class='searchFiles'>
+<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
 	
 	<div class='altafiles'>
 	<h3>Alta de directorios:</h3>
@@ -147,7 +148,7 @@
 	</div>
 </div>
 
-<div id="buscaForm" class="buscaForm" style="display:none;">
+<div id="buscaForm" class="buscaForm" style="<?php echo $searchStile ?>;">
 	<div class="valoresBusc">
 	<form action='search.php?accion=buscar' method=post>
 		<table>
