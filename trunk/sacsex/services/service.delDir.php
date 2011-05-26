@@ -1,16 +1,24 @@
 <?php
-	include_once '../includes/functions.php';
+	include_once "../includes/servicesHeaders.php";
 	
-	//elimina una ruta de la BD
+	//Recibe ruta directorio, nombre y password(md5) de usuario y elimina la ruta de la BD
 	$ruta=$_GET['dir'];
-	$id=$_GET['id'];
+	$user=$_GET['user'];
+	$pass=$_GET['pass'];
+	//$id=$_GET['id'];
 	
 	$link=conectar('bdsintesi');
-	$delQuery = "DELETE FROM filepath WHERE FILEPATH='$ruta' AND USER_ID=$id";
-	$res=mysql_query($delQuery,$link);
-	if ($res){
-		echo "/0";
-	}else{
+	$id=verificaUser($user, $pass, $link);
+	if ( $id != ''){
+		$delQuery = "DELETE FROM filepath WHERE FILEPATH='$ruta' AND USER_ID=$id";
+		$res=mysql_query($delQuery,$link);
+		if ($res){
+			echo "/0";
+		}else{
+			echo "/1";
+		}
+	}
+	else{
 		echo "/1";
 	}
 ?>
