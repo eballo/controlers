@@ -11,7 +11,7 @@
 	if ( $id != ''){
 		$query="UPDATE user SET INSTALAT=1 WHERE ID=$id";
 		$result=mysql_query($query,$link);
-		//Devolvera 0 si se ha podido proceder. En caso contrario de vuelve 1
+		//Devolvera 0 si se ha podido proceder. En caso contrario devuelve 1
 		if ($result){
 			echo 0; 
 		}else{

@@ -13,7 +13,7 @@
 	$link=conectar('bdsintesi');
 	$id=verificaUser($user,$pass,$link);
 	if ( $id != ''){
-		$invQuery = "UPDATE filepath SET VALID=1 WHERE FILEPATH='$ruta'";
+		$invQuery = "UPDATE filepath SET VALID=1 WHERE FILEPATH='$ruta' AND USER_ID=$id";
 		$res=mysql_query($invQuery,$link);
 		if ($res){
 			echo "/0";

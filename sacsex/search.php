@@ -109,6 +109,43 @@
 </head>
 <body>
 
+<div class='infoUser'>
+<?php 
+
+	$queryUser="SELECT * FROM user WHERE ID=$id";
+	$resultUser=mysql_query($queryUser,$link);
+	$array=mysql_fetch_array($resultUser);
+	$usuario=$array['NAME'];
+	$sizeTotal=$array['LIMIT'];
+ 
+	$tamOcup="SELECT sum(size)as 'total' FROM backups GROUP BY USER_ID HAVING USER_ID=$id";
+	$resultTam=mysql_query($tamOcup,$link);
+	$sizeA=mysql_fetch_array($resultTam);
+	$sizeOcup=$sizeA[0];
+	
+	$sizeOcup=(string)$sizeOcup;
+	
+	$sizeRes=$sizeTotal - $sizeOcup;
+/*
+	if ($sizeOcup == 0){
+		$sizeOcup = 0;
+	echo "$sizeOcup";
+		echo "HOLA";
+	}
+	if ($sizeRes){
+		echo $sizeRes;
+	}
+	MOSTRAR CERO
+	*/
+	echo "<h3>Información:</h3>";
+	echo "<table>		
+		<tr><td>Usuario: ".$usuario."</td></tr>
+		<tr><td>Espacio ocupado: ".$sizeOcup." MB</td></tr>
+		<tr><td>Espacio restante: ".$sizeRes." MB</td></tr>
+	</table>";
+?>
+</div>
+
 <div class='searchHead'>
 	<div class='searchButton' onclick="configuracion()"> Configuracion</div>
 	<div class='searchButtonOff' onclick="busqueda()"> Busqueda</div>
@@ -140,25 +177,29 @@
 	</div>
 	
 	<div class='borraFile'>
-	<?php 
+	<div class="tablaRes">
+	<?php
+	echo "<h3> Rutas del usuario: </h3>";
 	if ($rows >0){
-		echo "<h3> Rutas del usuario: </h3>";
-		echo "<table>";
-		//echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
-		echo "<tr> <th>Ruta</th> <th>Valido</th> </tr>";
+		echo "<table>		
+			<tr><th class='inTable'>Ruta</th>
+			<th class='inTable'>Valido</th>
+			<th class='inTable'>Eliminar</th>
+			</tr>";
 		while($row=mysql_fetch_array($result)){
-			printf("<tr> <td>%s</td>", $row['FILEPATH']);
-			printf("<td>%d</td>", $row['VALID']);
-			printf("<td><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=borrar&idFile=%d'\" /></td>",$row['IDF']);
-			echo "</tr>";
+			echo "<tr>".
+			"<td class='inTable'>".$row['FILEPATH']."</td>".
+			"<td class='inTable'>".$row['VALID']."</td>".
+			"<td class='inTable'><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=borrar&idFile=".$row['IDF']."'\" /></td>".
+			"</tr>";
 		}
 	}
 	else{
-		echo "<h3> Rutas del usuario: </h3>";
 		echo "<td>Ninguna ruta establecida</td><br>";
 	}
 	echo "</table><br>";
 	?>
+	</div>
 	</div>
 </div>
 
@@ -204,20 +245,19 @@
 			echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
 			while($row=mysql_fetch_array($bResult)){
 				echo "<tr>";
-					echo "<td>".$row['FILENAME']."</td>";
+					echo "<td class='inTable'>".$row['FILENAME']."</td>";
 					echo "<td class='inTable'>".$row['SIZE']."</td>";
 					echo "<td class='inTable'>".$row['DATE']."</td>";
 				echo "</tr>";			
 			}
 		}else{
 			//echo "No se han encontrado resultados para los parametros facilitados";
-			echo "<td>No se han encontrado resultados<td>";
+			echo "No se han encontrado resultados";
 		}
 		echo"</table>";
 	?>
 	</div>
 </div>
-
+<?php desconectar($link); ?>
 </body>
 </html>
-<?php desconectar($link); ?>

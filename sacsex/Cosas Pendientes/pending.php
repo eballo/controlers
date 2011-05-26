@@ -28,5 +28,10 @@
 //
 //*la buskeda no funciona bien
 //
-//*en la administracion falta mostrar el espacio k queda y en la pantalla del usuario tb en el header Usuario : pam Espacio restante : Pam espacio ocupado : Pam
+//*en la administracion falta mostrar el espacio k queda y en la pantalla 
+   del usuario tb en el header
+ 	Usuario : pam 
+ 	Espacio restante : Pam 
+ 	espacio ocupado : Pam
+ */
 ?>
