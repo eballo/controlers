@@ -15,4 +15,18 @@
 //
 //TODO script de backups : Estoy en ello
 
+// by adri
+// TODO Temas a corregir. (ver listado)
+/*Ficheros repetidos corregir
+//
+//*No se pueden eliminar ficheros subidos
+//*no se pueden descargar ficheros subidos *no se puede buscar contenido
+//
+//*no se puede editar un usuario
+//
+//*no se puede editar un directorio
+//
+//*la buskeda no funciona bien
+//
+//*en la administracion falta mostrar el espacio k queda y en la pantalla del usuario tb en el header Usuario : pam Espacio restante : Pam espacio ocupado : Pam
 ?>
