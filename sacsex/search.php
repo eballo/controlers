@@ -14,7 +14,9 @@
 	$hoy=getdate();
 	$dateQ='';
 	$searchStile='display:none';
-	$insertStile='display:none';
+	//$insertStile='display:none';
+	$insertStile='display:block';
+	
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
 		if ($accion == "subir"){
@@ -30,6 +32,8 @@
 					</script>";
 				}
 			} else {
+				/*$insertStile='display:block';
+				$searchStile='display:none';*/
 				echo "<script type='text/javascript'>
 					document.location = 'search.php?error=1';
 				</script>";
@@ -107,7 +111,7 @@
 
 <div class='searchHead'>
 	<div class='searchButton' onclick="configuracion()"> Configuracion</div>
-	<div class='searchButtonOff' onclick="busqueda()">Busqueda</div>
+	<div class='searchButtonOff' onclick="busqueda()"> Busqueda</div>
 </div>
 
 <div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
@@ -136,12 +140,19 @@
 	</div>
 	
 	<div class='borraFile'>
-	<?php if ($rows >0){
+	<?php 
+	if ($rows >0){
 		echo "<h3> Directorios: </h3>";
 		echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
 		while($row=mysql_fetch_array($result)){
 			printf("<tr><td>%s</td><td><a href=\"search.php?accion=borrar&idFile=%d\">Eliminar</a></td></tr>",$row['FILEPATH'],$row['IDF']);
 		}
+		echo "</table><br>";
+	}
+	else{
+		echo "<h3> Directorios: </h3>";
+		echo "<table><tr><th colspan='2'>Rutas del usuario:</th></tr>";
+		echo "<td>Ninguna ruta establecida</td>";
 		echo "</table><br>";
 	}
 	?>
@@ -184,7 +195,8 @@
 	</form>
 	</div>
 	<div class="tablaRes">
-	<?php 
+	<?php
+
 		if($brows>0){
 			echo "<table><tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
 			while($row=mysql_fetch_array($bResult)){
@@ -196,7 +208,8 @@
 			}
 			echo"</table>";
 		}else{
-			echo "No se han encontrado resultados para los parametros facilitados";
+			//echo "No se han encontrado resultados para los parametros facilitados";
+			echo "No se han encontrado resultados";
 		}
 	?>
 	</div>
