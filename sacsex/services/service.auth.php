@@ -29,9 +29,9 @@
 		}
 	}else{
 		if ( $id != ''){
-			echo $id;
+			echo "/".$id;
 		}else{
-			echo 1;
+			echo "/1";
 		}
 	}
 	
