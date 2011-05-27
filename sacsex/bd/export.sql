@@ -28,7 +28,7 @@ CREATE TABLE `user` (
   `PASSWORD` varchar(255) NOT NULL,
   `ADMIN` tinyint(1) NOT NULL,
   `INSTALAT` tinyint(1) NOT NULL,
-  `LIMIT` int(10) unsigned NOT NULL COMMENT 'Espacio maximo asignado',
+  `MAX_LIMIT` int(10) unsigned NOT NULL COMMENT 'Espacio maximo asignado',
   `DAY_LIMIT` int(10) unsigned NOT NULL COMMENT 'Tamaño Diario Maximo',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME` (`NAME`)

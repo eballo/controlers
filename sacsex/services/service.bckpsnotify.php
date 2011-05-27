@@ -26,7 +26,7 @@
 		$espRes=mysql_query($espOcpQ,$link);
 		if ( $busca ){
 			$userQ=mysql_fetch_array($busca);
-			$limit=$userQ['LIMIT'];
+			$limit=$userQ['MAX_LIMIT'];
 			$dlimit=$userQ['DAY_LIMIT'];
 			$esp=mysql_fetch_array($espRes);
 			$total=$esp['total'];//Total de espacio ocupado en el Servidor

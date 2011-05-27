@@ -15,7 +15,7 @@
 		}
 		
 		if (isset($_POST['limit'])){
-			$query="UPDATE user SET LIMIT=".$_POST['limit']." WHERE ID=".$_POST['iduser'];
+			$query="UPDATE user SET MAX_LIMIT=".$_POST['limit']." WHERE ID=".$_POST['iduser'];
 			$update2=mysql_query($query,$link);
 		}
 		echo "$query";
