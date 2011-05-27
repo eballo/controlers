@@ -17,16 +17,14 @@
 
 // by adri
 // TODO Temas a corregir. (ver listado)
-/*Ficheros repetidos corregir
+/* Ficheros repetidos corregir
 //
 //*No se pueden eliminar ficheros subidos
 //*no se pueden descargar ficheros subidos 
 // 
 //*no se puede buscar contenido
 //
-//*no se puede editar un usuario
-//
-//*no se puede editar un directorio
+//*no se puede editar un usuario YA ESTA (ESPACIO OCUPADO Y RESTANTE)
 //
 //*la buskeda no funciona bien
 //
@@ -35,5 +33,6 @@
  	Usuario : pam 
  	Espacio restante : Pam 
  	espacio ocupado : Pam
+ 	YA ESTA MOSTRADO, CABECERA PARA USUARIO
  */
 ?>
