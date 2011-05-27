@@ -57,14 +57,18 @@ else
 				touch $SACSEXHOME/sacsex.properties
 			fi
 			propiertiesFile="$SACSEXHOME/sacsex.properties"
-			
+			sshLogin="sacs@${SVR_IP}"
 			USER=$loginName
 			PASS=$pwd5md
 			echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
 			echo "SACS_USER=$USER" >> $propiertiesFile
 			echo "SACS_PASS=$PASS" >> $propiertiesFile
 			echo "SACS_USER_HOME=$home" >> $propiertiesFile
+			echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
 			
+			DESTDIR="/var/www/sacsex/shared/$id" #Carpeta a la que accedera el usuario
+			ssh $sshLogin mkdir -p $DESTDIR
+			ssh $sshLogin ln -s $DESTDIR $id/
 		else
 			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
 		fi
