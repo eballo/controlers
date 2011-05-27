@@ -5,10 +5,23 @@
 	}
 	
 	function configuracion(){
+		
+		$(".searchButtonOffClick:first").addClass("searchButtonOff");
+		$(".searchButtonOffClick:first").removeClass("searchButtonOffClick");
+		
+		$(".searchButton:first").addClass("searchButtonClick");
+		$(".searchButton:first").removeClass("searchButton");
+		
 		$("#searchFiles").fadeIn("slow");
 		$("#buscaForm").fadeOut("slow");
 	}
 	function busqueda(){
+		$(".searchButtonClick:first").addClass("searchButton");
+		$(".searchButtonClick:first").removeClass("searchButtonClick");
+		
+		$(".searchButtonOff:first").addClass("searchButtonOffClick");
+		$(".searchButtonOff:first").removeClass("searchButtonOff");
+		
 		$("#searchFiles").fadeOut("slow");
 		$("#buscaForm").fadeIn("slow");		
 	}

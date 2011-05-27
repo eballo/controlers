@@ -3,6 +3,8 @@
 	include_once 'includes/userAuthValidation.php';
 	include_once 'includes/libsheader.php';
 	
+	$nameQ="";
+	
 	$link=conectar('bdsintesi');
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
@@ -133,7 +135,7 @@
 	<div class="mainContainerSearch">
 		<div class='searchHead'>
 			<div class='searchButton' onclick="configuracion()"> Configuracion</div>
-			<div class='searchButtonOff' onclick="busqueda()"> Busqueda</div>
+			<div class='searchButtonOffClick' onclick="busqueda()"> Busqueda</div>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">

@@ -14,7 +14,12 @@
 	margin:0px auto;
 	width: 780px;
 }
-
+.mainContainerSearch{
+	position:relative;
+	top: 80px;
+	margin:0px auto;
+	width: 820px;
+}
 .addUserFormContainer{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -64,14 +69,14 @@ input {
 	-webkit-box-shadow: 6px 6px 8px #ababab;
 }
 
-img[onclick]{
-	cursor: pointer;	
-}
-
 .userListContainer table{
 	border: 0;
 	width: 100%;	
 	text-align: left;
+}
+
+img[onclick]{
+	cursor: pointer;	
 }
 
 .loginContainer{
@@ -113,19 +118,6 @@ img[onclick]{
 .botonForm{
 	float:right;	
 }
-.cierreSesion{
-	float:right;
-	padding:10px;
-}
-
-.tituloHeader{
-	float:left;
-	padding:10px;
-	font-size: x-large;
-	text-shadow: -1px 1px 0px #FFF;
-	color: #000;
-}
-
 .headerMain{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -139,4 +131,151 @@ img[onclick]{
 	border-color: #000;	
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
+}
+.cierreSesion{
+	position: absolute;
+	right: 0px;
+	cursor: pointer;	
+	padding:10px;
+}
+.tituloHeader{
+	position: absolute;
+	left: 0px;
+	padding:10px;
+	font-size: large;
+	text-shadow: -1px 1px 0px #DEDEDE;
+	color: #FFF;
+}
+.infoUser{
+	position: absolute;
+	left:200px;
+	top: 15px;
+	text-shadow: -1px 1px 0px #DEDEDE;
+	color: #000;
+}
+.infoUser span{
+	margin: 6px;
+}
+.searchHead {
+    margin: 0 auto;
+    width: 220px;
+}
+.searchButton{
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100px;
+	height: 20px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left:8px;
+	padding-top:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+.searchButtonOff{
+	position:relative;
+	left: 120px;
+	top: -27px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100px;
+	height: 20px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left:8px;
+	padding-top:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+.searchFormContainer{
+   position: absolute;
+    top: 50px;
+    width: 100%;
+}
+.buscaForm{
+	margin: 0 auto;
+	width: 750px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding:10px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+.valoresBusc{
+	position:relative;
+}
+
+.tablaRes{
+	position:relative;
+	
+}
+.tablaRes table{
+	width: 100%;
+}
+
+.inTable{
+	text-align: left;
+}
+	
+.searchFiles{
+	width:100%;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+.altaFiles{
+	position: relative;
+	margin: 0 auto;
+	width:450px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+	}
+
+.borraFile{
+	position: relative;
+	top: 25px;
+	margin: 0 auto;
+	width:450px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+
+
+.inputEditable{
+	border:0;
+	background-color: transparent;
+	width:80px;
+	border-color: #000;
+	text-shadow: -1px 1px 0px #FFF;
+}
+.inputEditable:FOCUS{
+	border:1px solid;
+	background-color: transparent;
+	width:80px;
+	border-color: #000;
+	text-shadow: -1px 1px 0px #FFF;
+	height: 18px;
+	background-color: #FFF;
 }
