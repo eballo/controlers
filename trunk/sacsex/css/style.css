@@ -115,7 +115,6 @@ img[onclick]{
 .botonForm{
 	float:right;	
 }
-
 .headerMain{
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -129,6 +128,7 @@ img[onclick]{
 	border-color: #000;	
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
+	z-index: 99;
 }
 .cierreSesion{
 	position: absolute;
@@ -151,7 +151,6 @@ img[onclick]{
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
 }
-
 .infoUser span{
 	margin: 6px;
 }
@@ -160,6 +159,7 @@ img[onclick]{
     width: 220px;
 }
 .searchButton{
+	position:relative;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -174,6 +174,22 @@ img[onclick]{
 	padding-left:8px;
 	padding-top:5px;
 	text-shadow: -1px 1px 0px #FFF;	
+}
+.searchButtonClick{
+	position:relative;
+	cursor: pointer;
+	top:5px;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100px;
+	height: 20px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	padding-left:8px;
+	padding-top:5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
 .searchButtonOff{
 	position:relative;
@@ -190,6 +206,23 @@ img[onclick]{
 	background-color: #d9e2ff;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left:8px;
+	padding-top:5px;
+	text-shadow: -1px 1px 0px #FFF;	
+}
+.searchButtonOffClick{
+	position:relative;
+	left: 120px;
+	top: -22px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100px;
+	height: 20px;
+	border:solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
 	padding-left:8px;
 	padding-top:5px;
 	text-shadow: -1px 1px 0px #FFF;	
