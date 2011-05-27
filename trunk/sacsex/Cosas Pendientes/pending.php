@@ -19,14 +19,13 @@
 // TODO Temas a corregir. (ver listado)
 /* Ficheros repetidos corregir
 //
-//*No se pueden eliminar ficheros subidos
-//*no se pueden descargar ficheros subidos 
+//*No se pueden eliminar ficheros subidos	AUN NO SE PODRA
+//*no se pueden descargar ficheros subidos 	AUN NO SE PODRA
 // 
-//*no se puede buscar contenido
+//*no se puede buscar contenido CRISTINA
 //
 //*no se puede editar un usuario YA ESTA (ESPACIO OCUPADO Y RESTANTE)
 //
-//*la buskeda no funciona bien
 //
 //*en la administracion falta mostrar el espacio k queda y en la pantalla 
    del usuario tb en el header
@@ -34,5 +33,8 @@
  	Espacio restante : Pam 
  	espacio ocupado : Pam
  	YA ESTA MOSTRADO, CABECERA PARA USUARIO
+
+ // Falta configurar puertos del servidor (80, 22) http, ssh (solo aceptar) y ping
+  * 
  */
 ?>
