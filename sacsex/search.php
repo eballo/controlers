@@ -113,14 +113,15 @@
 	$resultTam=mysql_query($tamOcup,$link);
 	$sizeA=mysql_fetch_array($resultTam);
 	$sizeOcup=$sizeA[0];
-	
-	$sizeRes=$sizeTotal - $sizeOcup;
 
+	$sizeRes=$sizeTotal - $sizeOcup;
+	if ($sizeRes <= 0){
+		$sizeRes = "0";
+	} 
 	if ($sizeOcup == 0){
 		$sizeOcup = "0";
 	}
-	
-	
+
 ?>
 	
 
@@ -145,16 +146,12 @@
 			<form action='search.php?accion=subir' method='POST'>
 				<div id='divErrors' style='color: red'>		
 					<?php
-					if ($error){
-						switch($error){
-							case 1:
-								/* Error al validar un archivo nulo */
-								echo "Directorio nulo no valido.";break;
-								
-							/*echo "<script type='text/javascript'>
-								alert('$error');
-							</script>";*/
-						}
+					if ($error == 1){
+						/* Error al validar un archivo nulo */
+						echo "Directorio nulo no valido.";
+						/*echo "<script type='text/javascript'>
+							alert('$error');
+						</script>";*/
 					}
 					?>
 				</div>
@@ -238,7 +235,7 @@
 						while($row=mysql_fetch_array($bResult)){
 							echo "<tr>";
 								echo "<td class='inTable'>".$row['FILENAME']."</td>";
-								echo "<td class='inTable'>".$row['SIZE']."</td>";
+								echo "<td class='inTable'>".$row['SIZE']." KB </td>";
 								echo "<td class='inTable'>".$row['DATE']."</td>";
 							echo "</tr>";			
 						}

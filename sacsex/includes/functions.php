@@ -50,6 +50,9 @@
 	function kastomegas($num){
 		return $num/1024;
 	}
+	function megasToGiga($num){
+		return ($num/1024)/1024;
+	}
 	//Funciones de acceso a Base de Datos
 	
 	function conectar($db){
