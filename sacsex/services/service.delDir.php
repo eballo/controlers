@@ -1,11 +1,10 @@
 <?php
-	include_once "../includes/servicesHeaders.php";
+	include_once '../includes/servicesHeaders.php';
 	
 	//Recibe ruta directorio, nombre y password(md5) de usuario y elimina la ruta de la BD
 	$ruta=$_GET['dir'];
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
-	//$id=$_GET['id'];
 	
 	$link=conectar('bdsintesi');
 	$id=verificaUser($user, $pass, $link);
@@ -21,4 +20,5 @@
 	else{
 		echo "/1";
 	}
+	desconectar($link);
 ?>

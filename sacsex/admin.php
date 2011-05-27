@@ -42,7 +42,7 @@ if (isset($_GET['action'])){
 		}
 		
 		if ( validarInput($user, "string") && validarInput($dlimit, "numerico") && validarInput($limit, "numerico")) {
-			$errors= newUser($user,$pass,$limit,$dlimit,$adminLink);
+			$errors= newUser($user,$pass,megastokas($limit),megastokas($dlimit),$adminLink);
 			if ($pass==$pass2 ){
 				if ($errors == ""){
 					$user="";
@@ -121,14 +121,13 @@ $rows=mysql_num_rows($result);
 		<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
 	</tr>
 	<tr>
-		<td>Tam Max en KB:</td>
+		<td>Tam Max en MB:</td>
 		<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
 
 	</tr>
 	<tr>
-		<td>Quota esp en KB:</td>
+		<td>Cuota esp en MB:</td>
 		<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
-	
 	</tr>
 	
 </table>
@@ -139,9 +138,9 @@ $rows=mysql_num_rows($result);
 <div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
 <?php 
 if ($rows >0){
-	echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Eliminar</th></tr>";
+	echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Accion</th></tr>";
 	while ($row=mysql_fetch_array($result)){
-		echo "<tr>";
+		echo "<tr id='data".$row["ID"]."'>";
 			if ($row["INSTALAT"] == "1"){
 			echo "<td><img src='img/inst.png'/> </td>";
 		}else{
@@ -149,10 +148,13 @@ if ($rows >0){
 		}
 		echo "<td>" . $row["ID"] . "</td>".
 		"<td>" . $row["NAME"] ."</td>".
-		"<td>" . $row["DAY_LIMIT"] . "</td>".
-		"<td>" . $row["LIMIT"] ."</td>";		
+		"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>
+		<td><input class='inputEditable' name='limit' type='text' value='".$row["LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
 		if (!esAdmin($row["ID"], $adminLink)){
-			echo "<td><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/></td>";
+			echo "<td>
+					<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
+					<img id='imgSave' src='img/save_icon.png' style='display:none' onclick=\"save('".$row["ID"]."')\"/>
+				</td>";
 		}else{
 			echo "<td>Bloqueado</td>";
 		}

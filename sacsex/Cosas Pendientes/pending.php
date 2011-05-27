@@ -20,7 +20,9 @@
 /*Ficheros repetidos corregir
 //
 //*No se pueden eliminar ficheros subidos
-//*no se pueden descargar ficheros subidos *no se puede buscar contenido
+//*no se pueden descargar ficheros subidos 
+// 
+//*no se puede buscar contenido
 //
 //*no se puede editar un usuario
 //
