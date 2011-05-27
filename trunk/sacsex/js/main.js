@@ -28,8 +28,9 @@
 	    	  async: false,
 	    	  data: 'limit='+limit+'&dayLimit='+dayLimit+'&iduser='+id,
 	    	  success: function( res ){
-				    if (res=="0"){
-				    	saveOk();
+	    			
+	    		if (res==0){
+				    	saveOk(id);
 				    }else{
 				    	errorSave();
 				    }
@@ -39,7 +40,7 @@
 
 	}
 	
-	function saveOk(){
+	function saveOk(id){
 		$("#data"+ id).find("#imgSave").fadeOut("slow");
 	}
 	
