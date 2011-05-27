@@ -178,7 +178,7 @@
 						echo "<tr>
 							<td style='width:20px'>";
 								if ($row['VALID'] != 0){
-									echo "<img src='img/warn.png' width='20px' height='23px' style='margin-bottom: 2px' /> ";								
+									echo "<img src='img/warn.png' title='ruta no valida' width='20px' height='23px' style='margin-bottom: 2px' /> ";								
 								}
 							echo "</td>
 							<td class='inTable'>".$row['FILEPATH']."</td>
