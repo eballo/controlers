@@ -67,8 +67,8 @@ else
 			echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
 			
 			DESTDIR="/var/www/sacsex/shared/$id" #Carpeta a la que accedera el usuario
-			ssh $sshLogin mkdir -p $DESTDIR
-			ssh $sshLogin ln -s $DESTDIR $id/
+			
+			ssh $sshLogin ln -s $DESTDIR $id
 		else
 			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
 		fi

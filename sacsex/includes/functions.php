@@ -50,6 +50,32 @@
 	function kastomegas($num){
 		return $num/1024;
 	}
+	
+	function comparafechas($fecha1,$freq,$num){
+		$hoy=getdate();
+		$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
+		
+		$datetime1 = new DateTime($fecha1);
+		$datetime2 = new DateTime($hoy);
+		$interval = $datetime1->diff($datetime2);
+		if($freq=='mes'){
+			$dias=$num*30;
+		}elseif($freq=='anyos'){
+			$dias=$num*365;
+		}else{
+			$dias=$num;
+		}
+		$total=$interval->format('%a');
+		
+		if (($total-$dias)>0){
+			return 1;
+		}elseif(($total-$dias)<0){
+			return -1;
+		}else{
+			return 0;
+		}
+			
+	}
 	function megasToGiga($num){
 		return ($num/1024)/1024;
 	}
