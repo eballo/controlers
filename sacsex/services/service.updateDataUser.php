@@ -18,14 +18,12 @@
 			$query="UPDATE user SET MAX_LIMIT=".$_POST['limit']." WHERE ID=".$_POST['iduser'];
 			$update2=mysql_query($query,$link);
 		}
-		echo "$query";
-		
-		echo "U=$update U2=$update2";
+
 		
 		if ( $update2 == 1 && $update == 1 ){
-			echo "<0>";
+			echo "0";
 		}else{
-			echo "<1>";
+			echo "1";
 		}
 		
 	}
