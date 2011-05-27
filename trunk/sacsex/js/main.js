@@ -12,3 +12,37 @@
 		$("#searchFiles").fadeOut("slow");
 		$("#buscaForm").fadeIn("slow");		
 	}
+	
+	function marcarChange( id ){
+		$("#data"+ id).find("#imgSave").fadeIn("slow");
+	}
+	
+	function save(id){
+		
+		var limit = $("#data"+ id).find("input[name='limit']:first").val();
+	    var dayLimit = $("#data"+ id).find("input[name='dayLimit']:first").val();
+	    
+	    $.ajax({
+	    	  url: 'services/service.updateDataUser.php',
+	    	  type: 'POST',
+	    	  async: false,
+	    	  data: 'limit='+limit+'&dayLimit='+dayLimit+'&iduser='+id,
+	    	  success: function( res ){
+				    if (res=="0"){
+				    	saveOk();
+				    }else{
+				    	errorSave();
+				    }
+	    	  },
+	    	  error: errorSave
+	    	});
+
+	}
+	
+	function saveOk(){
+		$("#data"+ id).find("#imgSave").fadeOut("slow");
+	}
+	
+	function errorSave(){
+		alert("No se han podido actualizar los datos del usuario.");
+	}

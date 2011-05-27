@@ -43,6 +43,13 @@
 		return $valido;
 	}
 	
+	function megastokas($num){
+		return $num*1024;
+		
+	}
+	function kastomegas($num){
+		return $num/1024;
+	}
 	//Funciones de acceso a Base de Datos
 	
 	function conectar($db){
