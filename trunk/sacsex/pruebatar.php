@@ -1,105 +1,116 @@
 <?php
-$dir="/home/kirsley/Escriptori/shels.tar.gz";
-$comando="tar -tvf $dir | tr -s ' ' | cut -f3- -d' '";
-exec($comando,$aqui);
-
-$datetime1 = new DateTime('2009-05-11');
-$datetime2 = new DateTime('2009-10-13');
-$interval = $datetime1->diff($datetime2);
-echo $interval->format('%R%a days');
-$dias=$interval->format('%d');
-$meses=$interval->format('%m');
-$anyos=$interval->format('%y');
-
-$total=$interval->format('%a');
-
-function comparafechas($fecha1,$freq,$num){
-	$hoy=getdate();
-	$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
-	
-	$datetime1 = new DateTime($fecha1);
-	$datetime2 = new DateTime($hoy);
-	$interval = $datetime1->diff($datetime2);
-	echo "<br>".$interval->format('%R%d days');
-	if($freq=='mes'){
-		$dias=$num*30;
-	}elseif($freq=='anyo'){
-		$dias=$num*365;
-	}else{
-		$dias=$num;
-	}
-	echo $dias;
-	$total=$interval->format('%a');
-	
-	if (($total-$dias)>0){
-		return 1;
-	}elseif(($total-$dias)<0){
-		return -1;
-	}else{
-		return 0;
-	}
-		
-}
-/*
-$res=comparafechas('2010-05-11','mes',1);
-echo $res;
-if ($res==-1){
-	echo "Menos";
-}elseif($res==1){
-	echo "Mas";
-}else{
-	echo "iguales";
-}
-*/
-echo "<br><br>";
-echo "<table><tr><td>nom</td><td>Data</td><td>tamany</td></tr>";
-
-foreach($aqui as $line ) { 
-	 
-	$res=explode(" ",$line);
-	$tam=$res[0];
-	$fecha="$res[1]";
-	$nom=$res[3];
-	list($year,$month, $day) =explode("-",$res[1]);
-	$fecha="$day-$month-$year";
-
-
-	echo "<tr><td>".$nom."</td>";
-	$resFech=comparafechas($res[1],'dias',4);
-
-	if ($resFech==-1){
-		echo "<td>Menos de 3 Dias $fecha</td>";
-	}elseif($resFech==1){
-		echo "<td>Mas de 3 Dias $fecha</td>";
-	}else{
-		echo "<td>Hace 3 Dias $fecha</td>";
-	}
-/*
-	echo "<td>".$fecha."</td>";
-*/
-	
-	echo "<td>".$tam."</td></tr>";
-
-/*
-$hoy=getdate();
-$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
-$datetime1 = new DateTime($res[1]);
-$datetime2 = new DateTime($hoy);
-$interval = $datetime1->diff($datetime2);
-echo "<br>".$interval->format('%R%d days');
-*/
-
-/*	echo "<br>$nom $fechahora $tam<br>";
-
-	foreach($res as $a){
-		echo" <td>$a</td>";
-	}
-*/
-	echo "</tr>";
-}
-
-echo "</table>";
-/*
-$output = `dir`;
-	echo "$output";*/
+	include_once "includes/functions.php";
+	include_once "includes/libsheader.php";
+	$compFecha=false;
 ?> 
+<html>
+<body>
+<div class="valoresBusc">
+	<form action='pruebatar.php?accion=buscar' method=post>
+		<table>
+		<tr>
+			<th>Fichero</th>
+			<th>Periodo</th>
+			<td></td>
+		</tr>
+		<tr>
+			<td><input type='text' name='fname' size='40'/></td>
+			<td>
+				<SELECT name="rel">
+					<optgroup label="relacion">
+						<OPTION value='min'>Hace menos de</OPTION>
+						<OPTION value='max'>Hace mas de</OPTION>
+					</optgroup>
+				</SELECT>
+				<input type=text name='numd' style="width:40px;" />
+				<select name='freq'>
+					<optgroup label="tiempo">
+						<option value='dias'>dias</option>
+						<option value='mes'>meses</option>
+						<option value='anyos'>años</option>	
+					</optgroup>		
+				</select>
+			</td>
+			<td>
+				<input type='submit' value='buscar' />
+			</td>
+		</tr>
+		</table>
+		
+	</form>
+</div>
+
+<?php 
+if (isset($_POST['numd']) && $_POST['numd']!=''){
+		$num=$_POST['numd'];
+		//comparafechas($res[1],$text,$num);
+		$text=$_POST['freq'];
+		$rel=$_POST['rel'];
+		$compFecha=true;
+	}else{
+		$compFecha=false;
+	}
+$dir="/home/sacs/1912702";
+$cmd="ls $dir";
+exec($cmd,$result);
+
+foreach($result as $cont){
+	$ruta="$dir/$cont";
+	$cmd="ls $ruta";
+	exec($cmd,$contFecha);
+	echo $ruta;
+	echo '<div class="tablaRes">
+		<table>
+			<tr><th colspan=4>'.$ruta.'</th></tr>
+			<tr><td>Tar Origen</td><td>nom</td><td>Data</td><td>tamany</td>
+			</tr>';
+		
+		foreach($contFecha as $elem){
+			$ruta2="$ruta/$elem";
+			$comando="tar -tvf $ruta2 | tr -s ' ' | cut -f3- -d' '";
+			exec($comando,$aqui);
+			
+			foreach($aqui as $line ) { 
+				if ($compFecha){
+					
+					$res=explode(" ",$line);
+					$fecha="$res[1]";
+					list($year,$month, $day) =explode("-",$res[1]);
+					$fecha="$day-$month-$year";
+					$resFech=comparafechas($res[1],$text,$num);
+						if ($resFech==-1 && $rel=='min' || $resFech==1 && $rel=='max'){
+							$nom=$res[3];
+							$tam=$res[0];
+							echo "<tr><td>".$ruta2."</td>";
+							echo "<td>".$nom."</td>";
+							echo "<td>".$fecha."</td>";
+							echo "<td>".$tam."</td></tr>";
+							echo "</tr>";
+						}
+					}else{
+						$res=explode(" ",$line);
+						$fecha="$res[1]";
+						list($year,$month, $day) =explode("-",$res[1]);
+						$fecha="$day-$month-$year";
+						$nom=$res[3];
+						$tam=$res[0];
+						echo "<tr><td>".$ruta2."</td>";
+						echo "<td>".$nom."</td>";
+						echo "<td>".$fecha."</td>";
+						echo "<td>".$tam."</td></tr>";
+						echo "</tr>";
+					}
+				
+			}
+			unset($aqui);
+		}
+		unset($contFecha);
+		
+		echo "</table>
+	
+	</div>";
+}
+?>
+
+</body>
+</html>
