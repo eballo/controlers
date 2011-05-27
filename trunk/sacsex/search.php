@@ -105,7 +105,7 @@
 	$resultUser=mysql_query($queryUser,$link);
 	$array=mysql_fetch_array($resultUser);
 	$usuario=$array['NAME'];
-	$sizeTotal=$array['LIMIT'];
+	$sizeTotal=$array['MAX_LIMIT'];
  
 	$tamOcup="SELECT sum(size)as 'total' FROM backups GROUP BY USER_ID HAVING USER_ID=$id";
 	$resultTam=mysql_query($tamOcup,$link);

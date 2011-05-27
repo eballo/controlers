@@ -149,7 +149,7 @@ if ($rows >0){
 		echo "<td>" . $row["ID"] . "</td>".
 		"<td>" . $row["NAME"] ."</td>".
 		"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>
-		<td><input class='inputEditable' name='limit' type='text' value='".$row["LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
+		<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
 		if (!esAdmin($row["ID"], $adminLink)){
 			echo "<td>
 					<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>

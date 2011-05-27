@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `PASSWORD` varchar(255) NOT NULL,
   `ADMIN` tinyint(1) NOT NULL,
   `INSTALAT` tinyint(1) NOT NULL,
-  `LIMIT` int(10) unsigned NOT NULL COMMENT 'Espacio maximo asignado',
+  `MAX_LIMIT` int(10) unsigned NOT NULL COMMENT 'Espacio maximo asignado',
   `DAY_LIMIT` int(10) unsigned NOT NULL COMMENT 'Tamaño Diario Maximo',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `NAME` (`NAME`)
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Volcar la base de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`ID`, `NAME`, `PASSWORD`, `ADMIN`, `INSTALAT`, `LIMIT`, `DAY_LIMIT`) VALUES
+INSERT INTO `user` (`ID`, `NAME`, `PASSWORD`, `ADMIN`, `INSTALAT`, `MAX_LIMIT`, `DAY_LIMIT`) VALUES
 (2651487, 'Giorgio', '5caae99531c54bc794f2489f5f2e6f33', 0, 0, 10100, 50),
 (5998348, 'kirsley', '1c0cd5422dbb158b8f9ffb5b0f432e23', 0, 0, 30, 3000),
 (8499529, 'pikachu', '4283a71a500fc5c645a1855588888367', 0, 0, 50, 20),
