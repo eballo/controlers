@@ -8,8 +8,9 @@ function validarHora (){
     #          1 -> false
     
     horaValida=1
-    echo "Indica la hora en formato hh:mm"
-    read hora
+    #echo "Indica la hora en formato hh:mm"
+    #read hora
+    hora=`zenity --entry --text="Indica la hora en formato hh:mm" --title="Hora"`
     h=`echo $hora | grep "[^0-9:]" | wc -l`
     if [ $h -eq 0 ]
     then
@@ -18,10 +19,12 @@ function validarHora (){
         then
             horaValida=0
         else
-            echo "Hora erronea"
+            # echo "Hora erronea"
+            zenity --error --text="Hora erronea"
         fi
     else
-        echo "Formato de hora Erroneo"
+        # echo "Formato de hora Erroneo"
+        zenity --error --text="Formato de hora Erroneo"
     fi
     return $horaValida
 }
