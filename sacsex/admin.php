@@ -62,12 +62,9 @@ if (isset($_GET['action'])){
 			}
 		}
 	}elseif ($accion == "delUser"){
+		
 	   $id=$_GET['id']; 
-	   $query="delete from user where ID = $id";
-	   $x=mysql_query($query,$adminLink);
-		if ($x!=1){
-			$errors ="Error: No se ha podido eliminar el usuario con id $id.";
-		}
+	   $errors=bajaUser($id, $adminLink);
 	}
 }else{
 	$accion="";
@@ -98,77 +95,76 @@ $rows=mysql_num_rows($result);
 </script>
 </head>
 <body>
-<?php include_once 'includes/cabeceraAdmin.php';?>
+<?php //include_once 'includes/cabeceraAdmin.php';?>
 <div class="body">
-<div class="mainContainer">
-<div class='addUserFormContainer'>
-<form action='admin.php?action=addUser' id='newuser' method='post' onkeypress="validarKeyEnter( event )">
-<table>
-	<tr>
-		<td colspan="2"><b>Alta de usuario</b></td>
-	</tr>
-	<tr>
-		<td>Usuario</td>
-		<td><input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /></td>
-
-	</tr>
-	<tr>
-		<td>Contrase�a: </td>
-		<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
-	</tr>
-	<tr>
-		<td>Repite Contrase�a: </td>
-		<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
-	</tr>
-	<tr>
-		<td>Tam Max en MB:</td>
-		<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
-
-	</tr>
-	<tr>
-		<td>Cuota esp en MB:</td>
-		<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
-	</tr>
-	
-</table>
-
-<input class="botonForm" type='button' value='Dar de alta' onclick='validarPass()' /></form>
+	<div class="mainContainer">
+		<div class='addUserFormContainer'>
+			<form action='admin.php?action=addUser' id='newuser' method='post' onkeypress="validarKeyEnter( event )">
+			<table>
+				<tr>
+					<td colspan="2"><b>Alta de usuario</b></td>
+				</tr>
+				<tr>
+					<td>Usuario</td>
+					<td><input class='<?php echo $inputErrors["user"];?>' type='text' name='user' value="<?php echo $user; ?>" /></td>
+			
+				</tr>
+				<tr>
+					<td>Contrase�a: </td>
+					<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
+				</tr>
+				<tr>
+					<td>Repite Contrase�a: </td>
+					<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
+				</tr>
+				<tr>
+					<td>Tam Max en MB:</td>
+					<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
+			
+				</tr>
+				<tr>
+					<td>Cuota esp en MB:</td>
+					<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
+				</tr>
+				
+		</table>
+			<input class="botonForm" type='button' value='Dar de alta' onclick='validarPass()' /></form>
+		</div>
+		<div class="userListContainer">
+			<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
+			<?php 
+				if ($rows >0){
+					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Accion</th></tr>";
+					while ($row=mysql_fetch_array($result)){
+						echo "<tr id='data".$row["ID"]."'>";
+							if ($row["INSTALAT"] == "1"){
+							echo "<td><img src='img/inst.png'/> </td>";
+						}else{
+							echo "<td></td>";
+						}
+						echo "<td>" . $row["ID"] . "</td>".
+						"<td>" . $row["NAME"] ."</td>".
+						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>
+						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
+						if (!esAdmin($row["ID"], $adminLink)){
+							echo "<td>
+									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
+									<img id='imgSave' src='img/save_icon.png' style='display:none' onclick=\"save('".$row["ID"]."')\"/>
+								</td>";
+						}else{
+							echo "<td>Bloqueado</td>";
+						}
+						echo "</tr>";
+						}
+					echo "</table>";
+				}else{
+					echo "No hi ha cap usuari <br />";
+				}
+			?>
+		</div>
+		
+	</div>
 </div>
-<div class="userListContainer">
-<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
-<?php 
-if ($rows >0){
-	echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Accion</th></tr>";
-	while ($row=mysql_fetch_array($result)){
-		echo "<tr id='data".$row["ID"]."'>";
-			if ($row["INSTALAT"] == "1"){
-			echo "<td><img src='img/inst.png'/> </td>";
-		}else{
-			echo "<td></td>";
-		}
-		echo "<td>" . $row["ID"] . "</td>".
-		"<td>" . $row["NAME"] ."</td>".
-		"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>
-		<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
-		if (!esAdmin($row["ID"], $adminLink)){
-			echo "<td>
-					<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
-					<img id='imgSave' src='img/save_icon.png' style='display:none' onclick=\"save('".$row["ID"]."')\"/>
-				</td>";
-		}else{
-			echo "<td>Bloqueado</td>";
-		}
-		echo "</tr>";
-		}
-	echo "</table>";
-}else{
-	echo "No hi ha cap usuari <br />";
-}
-?></div>
-
-</div>
-</div>2
-
 </body>
 <script type="text/javascript">
 	<?php 
