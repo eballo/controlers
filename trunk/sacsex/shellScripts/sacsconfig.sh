@@ -61,10 +61,8 @@ function validarMes (){
     #          1 -> false
     
     mesValido=1
-    echo "Indica opcion para el mes"
-    echo -e "  (0) Inicio del mes\n  (1) Quincena del mes\n  (2) Final del mes"
-    read mes
-
+    mes=`zenity --list --title="Mes" --text="Indica opción para el mes" --column="Opc" --column="Tiempo" 0 "Inicio del mes" 1 "Quincena del mes" 2 "Final del mes"`
+    echo $mes
     m=`echo $mes | grep "^[0-2]" | wc -l`
 
     if [ $m -eq 1 ]
