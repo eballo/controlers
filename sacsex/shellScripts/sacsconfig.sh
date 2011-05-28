@@ -1,5 +1,10 @@
 #!/bin/bash
-# Valores de configuracion de frecuencia en crontab
+# Programa: sacsconfig.sh
+# Autores: Giorgio y Cristina
+# Fecha de creación: durante credito de sintesis   
+# Descripcion:
+#  Script para configurar la aplicación crontab del usuario
+#  Permite establecer la frecuencia con la se realizara la copia de Backups a Servidor
 # 
 
 function validarHora (){
@@ -8,8 +13,6 @@ function validarHora (){
     #          1 -> false
     
     horaValida=1
-    #echo "Indica la hora en formato hh:mm"
-    #read hora
     hora=`zenity --entry --text="Indica la hora en formato hh:mm" --title="Hora"`
     h=`echo $hora | grep "[^0-9:]" | wc -l`
     if [ $h -eq 0 ]
@@ -19,11 +22,9 @@ function validarHora (){
         then
             horaValida=0
         else
-            # echo "Hora erronea"
             zenity --error --text="Hora erronea"
         fi
     else
-        # echo "Formato de hora Erroneo"
         zenity --error --text="Formato de hora Erroneo"
     fi
     return $horaValida
@@ -35,15 +36,7 @@ function validarDia (){
     #          1 -> false
     
     diaValido=1
-    echo "Indica dia de la semana [ 0-6 ]"
-    echo "  0. Domingo"
-    echo "  1. Lunes"
-    echo "  2. Martes"
-    echo "  3. Miércoles"
-    echo "  4. Jueves"
-    echo "  5. Viernes"
-    echo "  6. Sábado"
-    read dia
+    dia=`zenity --list --title="Semama" --text="Indica dia de la semana " --column="Opc" --column="Dia" 0 Domingo 1 Lunes 2 Martes 3 Miércoles 4 Jueves 5 Viernes 6 Sábado`
     d=`echo $dia | grep "^[0-6]" | wc -l`
 
     if [ $d -eq 1 ]
@@ -51,12 +44,12 @@ function validarDia (){
         test "$dia" -gt 6 -o "$dia" -lt 0 2>/dev/null
         if [ $? -eq 0 ]
         then
-            echo "Dia erroneo"
+            zenity --error --text="Dia erronea"
         else
             diaValido=0
         fi
     else
-        echo "Formato de dia Erroneo"
+        zenity --error --text="Formato de dia Erroneo"
     fi
     return $diaValido
 }
@@ -69,28 +62,31 @@ function validarMes (){
     
     mesValido=1
     echo "Indica opcion para el mes"
-    echo -e "  (0) Inicio del mes\n  (1) Final del mes"
+    echo -e "  (0) Inicio del mes\n  (1) Quincena del mes\n  (2) Final del mes"
     read mes
-    
-    m=`echo $mes | grep "^[0-1]" | wc -l`
+
+    m=`echo $mes | grep "^[0-2]" | wc -l`
 
     if [ $m -eq 1 ]
     then
-        test "$mes" -gt 1 -o "$mes" -lt 0 2>/dev/null
+        test "$mes" -gt 2 -o "$mes" -lt 0 2>/dev/null
         if [ $? -eq 0 ]
         then
-            echo "Opcion para mes es erroneo"
+            zenity --error --text="Opcion para mes es erroneo"
         else
             mesValido=0
             if [ "$mes" == 0 ]
             then
                 mes=1
+            elif [ "$mes" == 1 ]
+            then
+                mes=15
             else
                 mes=28
             fi
         fi
     else
-        echo "Formato de mes erroneo"
+        zenity --error --text="Formato de mes erroneo"
     fi
     return $mesValido
 }
@@ -164,6 +160,10 @@ done
             then
                 echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
                 echo "* * 1 * * cp -R $dirBackup $dirServidor" >> $cron
+            elif [ "$mes" -eq 1 ]
+            then
+                echo "# Copia de contenido Backup a Servidor (quincena de mes)" > $cron
+                echo "* * 15 * * cp -R $dirBackup $dirServidor" >> $cron
             else
                 echo "# Copia de contenido Backup a Servidor (fin de mes)" > $cron
                 echo "* * 28 * * cp -R $dirBackup $dirServidor" >> $cron
@@ -173,9 +173,3 @@ done
         fi
     ;;
     esac
-    
-
-
-
-
-
