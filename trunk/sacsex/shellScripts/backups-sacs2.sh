@@ -11,11 +11,11 @@
 # Desc: Copia de elementos definidos en un fichero por red         #
 #                                                                  #
 # Opciones:                                                        #
-#	 							   								   #
-#	[ Ruta ficheros ] [ Ruta propiedades ]                     	   #
-#	                                                               #
-#	:1: Ruta fichero de elementos                                  #
-#	:2: Ruta fichero de propiedades                                #
+#	 							   #
+#	[ Ruta ficheros ] [ Ruta propiedades ]                     #
+#	                                                           #
+#	:1: Ruta fichero de elementos                              #
+#	:2: Ruta fichero de propiedades                            #
 #                                                                  #
 # * Es necesario que el host destino tenga la clave publica        #
 #   del origen, de no ser asÃ­ el script no funcionar               # 
@@ -99,11 +99,8 @@ echo -e "\033[0;31m ################################################# \033[0m"
 				id=`echo $busca | cut -f2 -d"/"`
 				# Comprobamos el id devuelto
 				if [ "$id" != "1" ]
-				then
-					echo $id
-					
+				then					
 					rutas=`links -dump "http://$SVR_CONN/sacsex/services/service.dirlist.php?user=$user&pass=$pwd5md"`
-					echo $rutas
 					rvalidas=()
 					novalidas=()
 					val=0
@@ -126,7 +123,6 @@ echo -e "\033[0;31m ################################################# \033[0m"
 					for elem in ${novalidas[*]}
 					do	
 						res=`links -dump "http://$SVR_CONN/sacsex/services/service.invalidpath.php?dir=$elem&user=$user&pass=$pwd5md"`
-						echo $res
 						if [ `echo $res | cut -d'/' -f2` -ne 0 ]
 						then
 							log "No se ha podido eliminar $elem de la base de datos y este elemento no es valido"
@@ -138,7 +134,11 @@ echo -e "\033[0;31m ################################################# \033[0m"
 					for ruta in ${rvalidas[*]}
 					do
 						#Creamos el comprimido de archivos
-					 	tar -cvzf "${ruta}.tar.gz" "$ruta" >>${log} 2>>${errorlog}
+						name=`basename "$ruta"`
+						echo $name
+						tarname="${destDateAppend}.${name}.tar.gz"
+						echo "TAR: $tarname"
+					 	tar -cvzf "$tarname" "$ruta" >>${log} 2>>${errorlog}
 						 if [ "$?" -eq 0 ]
 						 then
 							 echo -e "#  [ Comprimiendo \033[1;33m${ruta}\033[0m ]			\033[0;32m [ OK ] \033[0m"
@@ -148,41 +148,45 @@ echo -e "\033[0;31m ################################################# \033[0m"
 							 log  "  [ Comprimiendo ${ruta} ]			 [ Error ]"
 						 fi
 					done
-					DESTDIR="$id/$destDateAppend"
+					DESTDIR="/home/sacs/bkps/$id"
 					sshLogin="${SUSER}@${SVR_IP}"
 					echo $DESTDIR
-					ssh $sshLogin mkdir -p $DESTDIR
+					#ssh $sshLogin mkdir -p $DESTDIR
 					#ssh $sshLogin ln -s $DESTDIR $id/
 					#compruebo si existe el directorio del usuario
 					
-					for i in ${rvalidas[*]}
+					for ruta in ${rvalidas[*]}
 					do	
 						hoy=`date +%Y-%m-%d`
 						#recibo el tamaño en bytes y lo transformo a Kb
-						size=`stat -c%s ${i}.tar.gz`
+						name=`basename "$ruta"`
+						echo $name
+						tarname="${destDateAppend}.${name}.tar.gz"
+						size=`stat -c%s $tarname`
 						echo $size
 						((size=$size/1024))
-						scp "${i}.tar.gz" ${sshLogin}:$id/$destDateAppend
+						echo "TAR2: $tarname"
+						scp "$tarname" ${sshLogin}:$DESTDIR
 						if [ $? -eq 0 ]
 						then
 							echo "Success!"
-							res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=${i}.tar.gz&date=$hoy&size=$size"`
+							res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"`
 							echo $res
 							ok=`echo $res | cut -d: -f1`
 							
 							if [ "$ok" != "Error" ]
 							then
-								log "$i Copiado"
+								log "$ruta Copiado"
 							else
-								ssh $sshLogin rm "${i}.tar.gz"
+								ssh $sshLogin rm "$tarname"
 								log "$res"
 								echo $res
 							fi
 						else
-						 	echo "Error con $i"
+						 	echo "Error con $ruta"
 						fi
 						#Por ultimo, eliminamos el tar del origen
-						rm "${i}.tar.gz"
+						rm "$tarname"
 					done
 				else
 					echo "Error: Usuario '$user' no localizado en la base de datos." >> ${errorlog}

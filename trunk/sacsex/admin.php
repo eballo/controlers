@@ -95,7 +95,7 @@ $rows=mysql_num_rows($result);
 </script>
 </head>
 <body>
-<?php //include_once 'includes/cabeceraAdmin.php';?>
+<?php include_once 'includes/cabeceraAdmin.php';?>
 <div class="body">
 	<div class="mainContainer">
 		<div class='addUserFormContainer'>

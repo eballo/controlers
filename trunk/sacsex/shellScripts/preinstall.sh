@@ -12,8 +12,8 @@ else
 	# Pedimos los datos del servidor
 	if [ "$zenityOk" ]
 	then
-		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor"`
-		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web"`
+		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor" 2>/dev/null`
+		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web" 2>/dev/null`
 	else
 		echo "Introduce la direccion IP del servidor"
 		read SVR_IP
@@ -28,8 +28,8 @@ else
 		SVR_CONN=${SVR_IP}:${SVR_PORT}
 		if [ "$zenityOk" ]
 		then
-		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login"`
-			password=`zenity --entry --title="SACS-EX Login" --text="$loginName, introduce tu contrasena"`
+		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login" 2>/dev/null`
+			password=`zenity --entry --title="SACS-EX Login" --text="$loginName, introduce tu contrasena" 2>/dev/null`
 		else
 			echo "Introduce tu login"
 			read loginName
@@ -58,44 +58,39 @@ else
 			fi
 			propiertiesFile="$SACSEXHOME/sacsex.properties"
 			sshLogin="sacs@${SVR_IP}"
-			USER=$loginName
-			PASS=$pwd5md
-			DESTDIR="/var/www/sacsex/shared/$id" #Carpeta reservada para el usuario
+			user=$loginName
+			pass=$pwd5md
 			
-			ssh $sshLogin mdir -p $DESTDIR 2>/dev/null
-			if [ $? -eq 0 ]
-				ssh $sshLogin ln -s $DESTDIR $id 2>/dev/null
-				if [ $? -eq 0 ]
+			
+			instalado=`links -dump "http://$SVR_CONN/sacsex/services/service.install.php?user=$user&pass=$pass"`
+			if [ $instalado -eq 0 ] 
+			then
+				echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
+				echo "SACS_USER=$user" >> $propiertiesFile
+				echo "SACS_PASS=$pass" >> $propiertiesFile
+				echo "SACS_USER_HOME=$home" >> $propiertiesFile
+				echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+				if [ "$zenityOk" ]
 				then
-					echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
-					echo "SACS_USER=$USER" >> $propiertiesFile
-					echo "SACS_PASS=$PASS" >> $propiertiesFile
-					echo "SACS_USER_HOME=$home" >> $propiertiesFile
-					echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+					zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null
 				else
-					if [ "$zenityOk" ]
-					then
-						zenity --warning --title="Error de Instal·lacion" --text="Error: No se ha podido completar la instal·lacion de la aplicacion"
-					else
-						echo -e "Error: No se ha podido completar la instal·lacion de la aplicacion"
-					fi
+					echo -e "La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web."
 				fi
 			else
 				if [ "$zenityOk" ]
 				then
-					zenity --warning --title="Error de Instal·lacion" --text="Error: No se ha podido crear la carpeta destino en el servidor"
+					zenity --warning --title="Fallo de conexion" --text="Error: No se ha conectar a la base de datos.\n Asegurese que la conexióna internet es correcta" 2>/dev/null
 				else
-					echo -e "Error: No se ha podido crear la carpeta destino en el servidor"
+					echo -e "Error: No se ha conectar a la base de datos.\n Asegurese que la conexióna internet es correcta"
 				fi
 			fi
-			
 		else
 			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
 		fi
 	else
 		if [ "$zenityOk" ]
 		then
-			zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
+			zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto" 2>/dev/null
 		else
 			echo -e "Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
 		fi
