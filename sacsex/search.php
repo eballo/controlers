@@ -57,33 +57,48 @@
 			$searchStile='display:block';
 			$insertStile='display:none';
 			if (isset($_POST['numd']) && $_POST['numd']!=''){
-				$dias=$_POST['numd'];
-				switch ($_POST['freq']) {
-					case 'dias':
-						$text='DAY';
-						break;
-					case 'meses':
-						$text='MONTH';
-						break;
-					case 'anyos':
-						$text='YEAR';
-					break;
-				} 
-				if ($_POST['rel']=='min'){
-					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
-				}else{
-					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) > $dias";
-				}
+				$num=$_POST['numd'];
+				$text=$_POST['freq'];
+				$rel=$_POST['rel'];
+				$compFecha=true;
 			}else{
-				$dateQ='';
+				$compFecha=false;
 			}
-		}
-		//Construyo la parte de la query para el nombre de fichero a buscar
-		if(isset($_POST['fname']) && $_POST['fname']!=''){
-			$fname=$_POST['fname'];
-			$nameQ=" AND FILENAME='$fname'";
-		}else{
-			$nameQ='';
+			if (isset($_POST['fname']) && $_POST['fname']!=''){
+				$bnom=true;
+				$nom=$_POST['fname'];
+			}else{
+				$bnom=false;
+			}
+//			if (isset($_POST['numd']) && $_POST['numd']!=''){
+//				$dias=$_POST['numd'];
+//				switch ($_POST['freq']) {
+//					case 'dias':
+//						$text='DAY';
+//						break;
+//					case 'meses':
+//						$text='MONTH';
+//						break;
+//					case 'anyos':
+//						$text='YEAR';
+//					break;
+//				} 
+//				if ($_POST['rel']=='min'){
+//					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
+//				}else{
+//					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) > $dias";
+//				}
+//			}else{
+//				$dateQ='';
+//			}
+//		}
+//		//Construyo la parte de la query para el nombre de fichero a buscar
+//		if(isset($_POST['fname']) && $_POST['fname']!=''){
+//			$fname=$_POST['fname'];
+//			$nameQ=" AND FILENAME='$fname'";
+//		}else{
+//			$nameQ='';
+//		}
 		}
 	}
 	
@@ -123,8 +138,6 @@
 	}
 
 ?>
-	
-
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -137,6 +150,7 @@
 		<div class='searchHead'>
 			<div class='searchButton' onclick="configuracion()"> Configuracion</div>
 			<div class='searchButtonOffClick' onclick="busqueda()"> Busqueda</div>
+			<a href="pruebatar.php">Prueba Tar</a>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
@@ -229,22 +243,92 @@
 				</div>
 				<div class="tablaRes">
 				<?php
-					echo "<table>";
-					if($brows>0){
-						echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
-						while($row=mysql_fetch_array($bResult)){
-							echo "<tr>";
-								echo "<td class='inTable'>".$row['FILENAME']."</td>";
-								echo "<td class='inTable'>".$row['SIZE']." KB </td>";
-								echo "<td class='inTable'>".$row['DATE']."</td>";
-							echo "</tr>";			
-						}
-					}else{
-						//echo "No se han encontrado resultados para los parametros facilitados";
-						echo "No se han encontrado resultados";
+					$dir="/home/sacs/$id";
+					$cmd="ls $dir";
+					exec($cmd,$result);
+					$nvoltes=0;
+					echo '<table>';
+//								echo "<tr><th colspan=4>'.$ruta.'</th></tr>"; //ruta en el servidor
+								echo '<tr><th>Nom</th><th>Data</th><th>tamany</th>
+								</tr>';
+					foreach($result as $cont){
+						$ruta="$dir/$cont";
+						$cmd="ls $ruta";
+						exec($cmd,$contFecha);
+						
+
+							foreach($contFecha as $elem){
+								$ruta2="$ruta/$elem";
+								if($bnom){
+									$comando="tar -tvf $ruta2 | grep $nom | tr -s ' ' | cut -f3- -d' '";
+								}else{
+									$comando="tar -tvf $ruta2 | tr -s ' ' | cut -f3- -d' '";
+								}
+								exec($comando,$aqui);
+								
+								foreach($aqui as $line ) { 
+									if ($compFecha){
+										
+										$res=explode(" ",$line);
+										$fecha="$res[1]";
+										list($year,$month, $day) =explode("-",$res[1]);
+										$fecha="$day-$month-$year";
+										$resFech=comparafechas($res[1],$text,$num);
+											if ($resFech==-1 && $rel=='min' || $resFech==1 && $rel=='max'){
+												$nom=$res[3];
+												$tam=$res[0];
+												echo "<tr>";
+//												echo "<td>".$ruta2."</td>"; // Ruta del fichero
+												echo "<td>".$nom."</td>";
+												echo "<td>".$fecha."</td>";
+												echo "<td>".$tam."</td></tr>";
+												echo "</tr>";
+											}
+										}else{
+											$res=explode(" ",$line);
+											$fecha="$res[1]";
+											list($year,$month, $day) =explode("-",$res[1]);
+											$fecha="$day-$month-$year";
+											$nom=$res[3];
+											$tam=$res[0];
+											echo "<tr>";
+//											echo "<td>".$ruta2."</td>"; // Ruta del fichero
+											echo "<td>".$nom."</td>";
+											echo "<td>".$fecha."</td>";
+											echo "<td>".$tam."</td></tr>";
+											echo "</tr>";
+										}
+									
+								}
+								unset($aqui);
+							}
+							unset($contFecha);
+							
+							
+						
 					}
-					echo"</table>";
+					
+						echo "</table>";
+					
+					?>
+					<?php 
+//					echo "<table>";
+//					if($brows>0){
+//						echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
+//						while($row=mysql_fetch_array($bResult)){
+//							echo "<tr>";
+//								echo "<td class='inTable'>".$row['FILENAME']."</td>";
+//								echo "<td class='inTable'>".$row['SIZE']." KB </td>";
+//								echo "<td class='inTable'>".$row['DATE']."</td>";
+//							echo "</tr>";			
+//						}
+//					}else{
+//						//echo "No se han encontrado resultados para los parametros facilitados";
+//						echo "No se han encontrado resultados";
+//					}
+//					echo"</table>";
 				?>
+					
 				</div>
 			</div>
 		</div>

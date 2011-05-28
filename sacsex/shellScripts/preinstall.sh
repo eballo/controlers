@@ -60,15 +60,35 @@ else
 			sshLogin="sacs@${SVR_IP}"
 			USER=$loginName
 			PASS=$pwd5md
-			echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
-			echo "SACS_USER=$USER" >> $propiertiesFile
-			echo "SACS_PASS=$PASS" >> $propiertiesFile
-			echo "SACS_USER_HOME=$home" >> $propiertiesFile
-			echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+			DESTDIR="/var/www/sacsex/shared/$id" #Carpeta reservada para el usuario
 			
-			DESTDIR="/var/www/sacsex/shared/$id" #Carpeta a la que accedera el usuario
+			ssh $sshLogin mdir -p $DESTDIR 2>/dev/null
+			if [ $? -eq 0 ]
+				ssh $sshLogin ln -s $DESTDIR $id 2>/dev/null
+				if [ $? -eq 0 ]
+				then
+					echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
+					echo "SACS_USER=$USER" >> $propiertiesFile
+					echo "SACS_PASS=$PASS" >> $propiertiesFile
+					echo "SACS_USER_HOME=$home" >> $propiertiesFile
+					echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+				else
+					if [ "$zenityOk" ]
+					then
+						zenity --warning --title="Error de Instal·lacion" --text="Error: No se ha podido completar la instal·lacion de la aplicacion"
+					else
+						echo -e "Error: No se ha podido completar la instal·lacion de la aplicacion"
+					fi
+				fi
+			else
+				if [ "$zenityOk" ]
+				then
+					zenity --warning --title="Error de Instal·lacion" --text="Error: No se ha podido crear la carpeta destino en el servidor"
+				else
+					echo -e "Error: No se ha podido crear la carpeta destino en el servidor"
+				fi
+			fi
 			
-			ssh $sshLogin ln -s $DESTDIR $id
 		else
 			echo "Error: El usuario no existe o ya tiene instalada la aplicacion"
 		fi
