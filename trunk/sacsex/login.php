@@ -69,6 +69,7 @@ if ($login == "true"){
 		$("#passwordForm").val($.md5($("#passwordForm").val()));
 		$("#login").submit();
 	}
+
 	function validarKeyEnter( e ){
 		if (e.keyCode == 13){
 			validarLogin();
@@ -90,14 +91,14 @@ if ($login == "true"){
 										<?php 
 										if ( $loginError ){
 											switch ( $loginError){
-												case 3:
-													echo "Login no valido.";
-													break;
 												case 1:
 													echo "Acceso restringido para usuarios.";
 													break;
 												case 2:
 													echo "Acceso restringido para administradores.";
+													break;
+												case 3:
+													echo "Login no valido.";
 													break;
 											}
 										}
