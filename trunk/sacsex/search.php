@@ -102,14 +102,14 @@
 		}
 	}
 	
-	$query="SELECT * FROM backups WHERE USER_ID=$id".$nameQ.$dateQ.";";
-	//Establezco el enlace con el que trabajara las busquedas y lanzo la consulta
-
-	$bResult=mysql_query($query,$link);
-	$brows=-1;
-	if($bResult){
-		$brows=mysql_num_rows($bResult);
-	}
+//	$query="SELECT * FROM backups WHERE USER_ID=$id".$nameQ.$dateQ.";";
+//	//Establezco el enlace con el que trabajara las busquedas y lanzo la consulta
+//
+//	$bResult=mysql_query($query,$link);
+//	$brows=-1;
+//	if($bResult){
+//		$brows=mysql_num_rows($bResult);
+//	}
 
 /* Borrar */
 	$query="SELECT * FROM filepath WHERE USER_ID=$id";
@@ -227,7 +227,7 @@
 							<select name='freq'>
 								<optgroup label="tiempo">
 									<option value='dias'>dias</option>
-									<option value='meses'>meses</option>
+									<option value='mes'>meses</option>
 									<option value='anyos'>años</option>	
 								</optgroup>		
 							</select>
