@@ -1,6 +1,5 @@
 <?php 
-include_once 'includes/headers.php';
-
+	include_once 'includes/headers.php';
 	if ($_SESSION['id'] != "" && $_SESSION['login']) {
 		if ($_SESSION['type'] == "admin"){
 			echo"<script type='text/javascript'>

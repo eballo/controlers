@@ -2,11 +2,6 @@
 	//TODO Comentar todas las funciones con el mismo formato
 	//Funciones de validacion de datos
 
-	/**
-	 * Función para comprobar si valor es de tipo numérico
-	 * @param String $val Numérico o cadena de texto  
-	 * @return Cierto o Falso segun sea numérico o no
-	 */
 	function esNumero($val){
 		$a=preg_match_all("/[\D]/",$val,$lista); //Numero de veces que aparece un valor no numerico
 		$b=0;
@@ -230,29 +225,26 @@
 			if ($result == ""){
 				$res="Problema insertando el usuario en la base de datos";
 			}else{
-				umask(octdec("0002"));// modifico la mascara para que por defecto el usuario del grupo tambien pueda escribir
+				// modifico la mascara para que por defecto el usuario del grupo tambien pueda escribir
+				umask(octdec("0002"));				
+				// La carpeta shared debe existir y tener permisos 2777 
+				// ademas de pertenecer al grupo sacs. El usuario creado exclusivamente
 				$newdir="/var/www/sacsex/shared/".$id;
 				if(!mkdir("$newdir")){
-					echo "<script type='javascript'>
-						alert('Error al crear la carpeta');
-					</script>";
-				}else{		
-					$enlace="/home/sacs/bkps/".$id;			
-					if ($_SERVER['WINDIR'] || $_SERVER['windir']) {
-				     	$res=exec('junction "' . $id . '" "' . $newdir . '"');				     	
-				   	} else {
-				     	if(symlink($newdir,$enlace)){
-				     		echo "<script type='javascript'>
-								alert('Creado el enlace');
-							</script>";
-				     	}else{
-				     		echo "<script type='javascript'>
-								alert('Error al crear el enlace');
-							</script>";
-				     		rmdir($newdir);
-				     	}					
-					}
+					$res='Error al crear la carpeta';
 					
+				}else{		
+					$enlace="/home/sacs/bkps/".$id;	
+					// Al igual que la ruta de $newdir, la ruta /home/sacs/bkps Debe existir y tener los
+					// mismos permisos establecidos  
+			     	if(symlink($newdir,$enlace)){
+			     		echo "<script type='javascript'>
+							alert('Creado el enlace');
+						</script>";
+			     	}else{
+			     		$res='Error al crear el enlace';
+			     		rmdir($newdir);
+			     	}
 				}
 			}
 			
@@ -263,6 +255,7 @@
 		return $res;
 		
 	}
+	
 	function eliminaRecursivo($dir) {
 		//Si es un directorio
 		$error=0;
@@ -296,13 +289,12 @@
 		$query="delete from user where ID = $id";
 	   	$x=mysql_query($query,$link);
 		if ($x!=1){
-			$errors ="Error: No se ha podido eliminar el usuario con id $id.";
+			$error="Error: No se ha podido eliminar el usuario con id $id.";
 		}else{
-			
-			echo "Aqui!";
 			$directorio="shared/".$id;
 			if(eliminaRecursivo($directorio)==0){
 				$dir="/home/sacs/bkps/".$id;
+				// unlink --> elimina ficheros o lo que sea!! diferente de directorio
 				if(!unlink($dir)){
 					$error="Error al eliminar el enlace";
 				}else{

@@ -119,10 +119,10 @@ echo -e "\033[0;31m ################################################# \033[0m"
 							((nval++))
 						fi
 					done
-					
 					for elem in ${novalidas[*]}
 					do	
 						res=`links -dump "http://$SVR_CONN/sacsex/services/service.invalidpath.php?dir=$elem&user=$user&pass=$pwd5md"`
+						echo $res
 						if [ `echo $res | cut -d'/' -f2` -ne 0 ]
 						then
 							log "No se ha podido eliminar $elem de la base de datos y este elemento no es valido"

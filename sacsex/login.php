@@ -1,5 +1,6 @@
 <?php
 include_once 'includes/headers.php';
+
 $link=conectar('bdsintesi');
 
 //Inicializacion variables
