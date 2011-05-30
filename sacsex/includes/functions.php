@@ -1,6 +1,5 @@
 <?php
 	//TODO Comentar todas las funciones con el mismo formato
-	// ES necesario mantener estas funciones? ::::		
 	//Funciones de validacion de datos
 
 	/**
@@ -105,7 +104,9 @@
 		}
 			
 	}
-
+	function megasToGiga($num){
+		return ($num/1024)/1024;
+	}
 	//Funciones de acceso a Base de Datos
 	
 	/**
@@ -230,6 +231,31 @@
 		
 			if ($result == ""){
 				$res="Problema insertando el usuario en la base de datos";
+			}else{
+				umask(octdec("0002"));// modifico la mascara para que por defecto el usuario del grupo tambien pueda escribir
+				$newdir="/var/www/sacsex/shared/".$id;
+				if(!mkdir("$newdir")){
+					echo "<script type='javascript'>
+						alert('Error al crear la carpeta');
+					</script>";
+				}else{		
+					$enlace="/home/sacs/bkps/".$id;			
+					if ($_SERVER['WINDIR'] || $_SERVER['windir']) {
+				     	$res=exec('junction "' . $id . '" "' . $newdir . '"');				     	
+				   	} else {
+				     	if(symlink($newdir,$enlace)){
+				     		echo "<script type='javascript'>
+								alert('Creado el enlace');
+							</script>";
+				     	}else{
+				     		echo "<script type='javascript'>
+								alert('Error al crear el enlace');
+							</script>";
+				     		rmdir($newdir);
+				     	}					
+					}
+					
+				}
 			}
 			
 		}else{
@@ -238,6 +264,57 @@
 		
 		return $res;
 		
+	}
+	function eliminaRecursivo($dir) {
+		//Si es un directorio
+		$error=0;
+		if (is_dir($dir)) {
+			$cont=scandir($dir); //Recojemos todo el contenido del directorio
+			foreach ($cont as $elem) {
+				//Por cada elemento del contenido, si no es el . o los ..
+				if ($elem != "." && $elem != "..") {
+					//generamos la nueva ruta
+					$ruta=$dir."/".$elem;
+					if (is_dir($ruta)){
+						//si es un directorio volvemos a llamar a la funcion
+						$error=$error+eliminaRecursivo($ruta); 
+					}else{
+						//si no lo es, intentamos eliminar el archivo (o lo que sea)
+						if(!unlink($ruta)){
+							$error=$error+1;
+						}
+					}
+				}
+			}
+			unset($cont);//reseteamos la array de contenidos e intentamos eliminar el directorio
+			if(!rmdir($dir)){
+				$error=$error+1;
+			}
+		}
+		return $error;
+	}
+	
+	function bajaUser($id, $link){
+		$query="delete from user where ID = $id";
+	   	$x=mysql_query($query,$link);
+		if ($x!=1){
+			$errors ="Error: No se ha podido eliminar el usuario con id $id.";
+		}else{
+			
+			echo "Aqui!";
+			$directorio="shared/".$id;
+			if(eliminaRecursivo($directorio)==0){
+				$dir="/home/sacs/bkps/".$id;
+				if(!unlink($dir)){
+					$error="Error al eliminar el enlace";
+				}else{
+					$error='';
+				}
+			}else{
+				$error="Error al eliminar el directorio";
+			}			
+		}
+		return $error;
 	}
 ?>
 
