@@ -150,11 +150,13 @@
 	
 	/**
 	 * Función para validar si datos del usuario son correctos
+	 *  validando mediante busqueda de su $id y comprobando si $passwordlogin
+	 *  es identico al PASSWORD almacenado en la base de datos
 	 * @param String $user nombre de usuario
 	 * @param String $passwordLogin password login md5 del usuario 
 	 * @param $link enlace de conexión
-	 * @return String $id de usuario si es valido
-	 * 		   null si datos del usuario no es valido
+	 * @return String $id de usuario si el usuario es valido
+	 * 		   null si el usuario no es valido
 	 */
 	function verificaUser($user , $passwordLogin , $link){
 		$id=buscaUser($user,$link);		
