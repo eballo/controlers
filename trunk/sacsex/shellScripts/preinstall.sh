@@ -29,7 +29,7 @@ else
 		if [ "$zenityOk" ]
 		then
 		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login" 2>/dev/null`
-			password=`zenity --entry --title="SACS-EX Login" --hide-text="$loginName, introduce tu contrasena" 2>/dev/null`
+			password=`zenity --entry --title="SACS-EX Login" --hide-text --text="$loginName, introduce tu contrasena" 2>/dev/null`
 		else
 			echo "Introduce tu login"
 			read loginName
