@@ -1,7 +1,15 @@
 <?php
+	/** 
+	 * Servicio auth.php que recibe usuario, password en md5, instala 
+	 * Comprueba si existe el usuario en la base de datos y si tiene instalada la aplicación.
+	 * Campo INSTALL de la tabla user
+	 * 		0 --> No tiene instalada la aplicación
+	 *		1 --> Tiene instalada la aplicación
+	 * Retorna '2/$id' si la aplicación se ha podido instalar
+	 * 
+	 */
+	
 	include_once '../includes/servicesHeaders.php';
-	//Comprobara si existe el usuario en la BD y si, en la casilla de "INSTALL" de la BD
-	// Tiene un 0 o un 1
 
 	//Conexion base de datos
 	$link=conectar('bdsintesi');
