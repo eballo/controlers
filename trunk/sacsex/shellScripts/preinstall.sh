@@ -48,11 +48,11 @@ else
                 echo "100" ; sleep 1
             fi
         ) | 
-        zenity --progress --title="SACS-EX" --text="Iniciando comprobación..." --auto-close --pulsate --width="400" --height="100" --no-cancel --percentage=0
+        zenity --progress --title="SACS-EX" --text="Iniciando comprobación..." --auto-close --pulsate --width="400" --height="100" --percentage=0 2>/dev/null
     else
         echo "Comprobando conexion"
     fi
-	
+
 	if [ "$conexion" -eq 0 ]
 	then
 		SVR_CONN=${SVR_IP}:${SVR_PORT}
@@ -100,6 +100,7 @@ else
 				echo "SACS_PASS=$pass" >> $propiertiesFile
 				echo "SACS_USER_HOME=$home" >> $propiertiesFile
 				echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+				#bash sacsconfig.sh
 				if [ "$zenityOk" ]
 				then
 					zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null
