@@ -173,7 +173,7 @@ done
             
             # Guardado de orden crontab en fichero
             echo "# Copia de contenido Backup a Servidor a la(s) $hora todos los dias" > $cron
-            echo "$m $h * * * cp -R $dirBackup $dirServidor" >> $cron
+            echo "$m $h * * * /bin/bash backups-sacs2.sh" >> $cron
             # Guardado de contenido de fichero en crontab
             crontab $cron
             if [ $? -eq 0 ];then
@@ -197,7 +197,7 @@ done
                 
                 # Guardado de orden crontab en fichero
                 echo "# Copia de contenido Backup a Servidor a la(s) $hora en dia de la semana ($dia)" > $cron
-                echo "$m $h * * $dia cp -R $dirBackup $dirServidor" >> $cron
+                echo "$m $h * * $dia /bin/bash backups-sacs2.sh" >> $cron
                 # Guardado de contenido de fichero en crontab
                 crontab $cron
                 if [ $? -eq 0 ];then
@@ -219,15 +219,15 @@ done
             if [ "$mes" -eq 0 ]
             then
                 echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
-                echo "* * 1 * * cp -R $dirBackup $dirServidor" >> $cron
-#                echo "* * 1 * * /bin/bash backups-sacs2.sh >> $cron
+#                echo "* * 1 * * cp -R $dirBackup $dirServidor" >> $cron
+                echo "* * 1 * * /bin/bash backups-sacs2.sh" >> $cron
             elif [ "$mes" -eq 1 ]
             then
                 echo "# Copia de contenido Backup a Servidor (quincena de mes)" > $cron
-                echo "* * 15 * * cp -R $dirBackup $dirServidor" >> $cron
+                echo "* * 15 * * /bin/bash backups-sacs2.sh" >> $cron
             else
                 echo "# Copia de contenido Backup a Servidor (fin de mes)" > $cron
-                echo "* * 28 * * cp -R $dirBackup $dirServidor" >> $cron
+                echo "* * 28 * * /bin/bash backups-sacs2.sh" >> $cron
             fi
             # Guardado de contenido de fichero en crontab
             crontab $cron

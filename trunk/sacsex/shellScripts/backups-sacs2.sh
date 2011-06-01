@@ -172,10 +172,16 @@ echo -e "\033[0;31m ################################################# \033[0m"
 						if [ "$ok" == '0' ]
 						then
 							IDF=`echo $res | cut -d: -f2`
-							tarname=${IDF}.${tarname}
-							scp "$tarname" ${sshLogin}:$DESTDIR
-							if [ $? -eq 0 ]
+							
+							longtarname=${IDF}.${tarname}
+							mv $tarname $longtarname
+							echo 177
+							scp "$longtarname" ${sshLogin}:$DESTDIR
+							copiado=$?
+							echo 179
+							if [ $copiado -eq 0 ]
 							then
+								echo "OK"
 								log "$ruta Copiado"
 							else
 								res=`links -dump "http://$SVR_CONN/sacsex/services/service.delback.php?user=$user&pass=$pwd5md&idf=$IDF"` #Lo eliminamos de la bd
@@ -185,13 +191,17 @@ echo -e "\033[0;31m ################################################# \033[0m"
 						 	log "$res"
 						fi
 						#Por ultimo, eliminamos el tar del origen
-						rm "$tarname"
+						rm "$longtarname" 2>/dev/null
+						if [ $? -ne 0 ]
+						then
+							rm "$tarname"
 						fi
 					done
 				else
 					echo "Error: Usuario '$user' no localizado en la base de datos." >> ${errorlog}
 				fi
 			else
+				zenity --warning --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
 				echo -e "Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto" >> ${errorlog}
 			fi
 		else
