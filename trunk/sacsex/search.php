@@ -242,61 +242,88 @@
 				</div>
 				<div class="tablaRes">
 				<?php
-					$dir="/home/sacs/bkps/$id";
+					require_once 'Archive/Tar.php';
+					
+					function readTar($nombre){
+						$obj = new Archive_Tar($nombre); // name of archive
+						$files = $obj->listContent();       // array of file information						
+						echo '<table>';
+						#echo '<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th></tr>';
+						// Recorrer array 'foreach'	
+						foreach ($files as $f) {
+							if ($f['size']>0){
+							echo "<tr>";
+							echo "<form action=tarfile.php?accion=d method=POST >";
+							echo "<input type='hidden' name='file' value='".$f['filename']."' />";
+								echo "<td>".$f['filename']."</td>";
+								echo "<td>".$f['size']."</td>";
+								echo "<td>".date("d-m-Y", $f['mtime'])."</td>";
+								echo "<td><input type=submit value=descarga /></td>";
+								echo"</form>";
+							echo "</tr>";	
+							}	    
+						}echo "</table>";
+					}
+					
+					$dir="/home/alumne/Escritorio";
+					#$ruta2="/home/sacs/bkps/$id";
 					$cmd="ls $dir";
 					exec($cmd,$result);
-					$nvoltes=0;
+//					$nvoltes=0;
 					echo '<table>';
 //						echo "<tr><th colspan=4>'.$ruta.'</th></tr>"; //ruta en el servidor
-						echo '<tr><th>Nom</th><th>Data</th><th>tamany</th>
-						</tr>';				
+						echo '<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th>
+						</tr>';
 
 					foreach($result as $elem){
-						$ruta2="$dir/$elem";
-						if($bnom){
-							$comando="tar -tvf $ruta2 | grep $nom | tr -s ' ' | cut -f3- -d' '";
-						}else{
-							$comando="tar -tvf $ruta2 | tr -s ' ' | cut -f3- -d' '";
-						}
-						exec($comando,$aqui);
+						$rutabkp="$dir/$elem";
 						
-						foreach($aqui as $line ) { 
-							if ($compFecha){
-								$res=explode(" ",$line);
-								$fecha="$res[1]";
-								list($year,$month, $day) =explode("-",$res[1]);
-								$fecha="$day-$month-$year";
-								$resFech=comparafechas($res[1],$text,$num);
-									if ($resFech==-1 && $rel=='min' || $resFech==1 && $rel=='max'){
-										$nom=$res[3];
-										$tam=$res[0];
-										echo "<tr>";
-//										echo "<td>".$ruta2."</td>"; // Ruta del fichero
-										echo "<td>".$nom."</td>";
-										echo "<td>".$fecha."</td>";
-										echo "<td>".$tam."</td></tr>";
-										echo "</tr>";
-									}
-							}else{
-								$res=explode(" ",$line);
-								$fecha="$res[1]";
-								list($year,$month, $day) =explode("-",$res[1]);
-								$fecha="$day-$month-$year";
-								$nom=$res[3];
-								$tam=$res[0];
-								echo "<tr>";
-//											echo "<td>".$ruta2."</td>"; // Ruta del fichero
-								echo "<td>".$nom."</td>";
-								echo "<td>".$fecha."</td>";
-								echo "<td>".$tam."</td></tr>";
-								echo "</tr>";
-							}
-							
-						}
-						unset($aqui);
+						readTar($rutabkp);
+					}	
+//						if($bnom){
+//							$comando="tar -tvf $ruta2 | grep $nom | tr -s ' ' | cut -f3- -d' '";
+//						}else{
+//							$comando="tar -tvf $ruta2 | tr -s ' ' | cut -f3- -d' '";
+//						}
+//						exec($comando,$aqui);
+//						
+//						foreach($aqui as $line ) { 
+//							if ($compFecha){
+//								$res=explode(" ",$line);
+//								$fecha="$res[1]";
+//								list($year,$month, $day) =explode("-",$res[1]);
+//								$fecha="$day-$month-$year";
+//								$resFech=comparafechas($res[1],$text,$num);
+//									if ($resFech==-1 && $rel=='min' || $resFech==1 && $rel=='max'){
+//										$nom=$res[3];
+//										$tam=$res[0];
+//										echo "<tr>";
+////										echo "<td>".$ruta2."</td>"; // Ruta del fichero
+//										echo "<td>".$nom."</td>";
+//										echo "<td>".$fecha."</td>";
+//										echo "<td>".$tam."</td></tr>";
+//										echo "</tr>";
+//									}
+//							}else{
+//								$res=explode(" ",$line);
+//								$fecha="$res[1]";
+//								list($year,$month, $day) =explode("-",$res[1]);
+//								$fecha="$day-$month-$year";
+//								$nom=$res[3];
+//								$tam=$res[0];
+//								echo "<tr>";
+////											echo "<td>".$ruta2."</td>"; // Ruta del fichero
+//								echo "<td>".$nom."</td>";
+//								echo "<td>".$fecha."</td>";
+//								echo "<td>".$tam."</td></tr>";
+//								echo "</tr>";
+//							}
+//							
+//						}
+//						unset($aqui);
 							
 							//unset($contFecha);
-					}
+					
 					echo "</table>";
 					
 ?>
