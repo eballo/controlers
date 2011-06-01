@@ -27,6 +27,7 @@ if (is_file($path)) {
  // Descargar archivo
  readfile($path);
 } else {
- die("El archivo no existe.");
+	echo "hola";	
+	die("El archivo no existe.");
 }
 ?>
