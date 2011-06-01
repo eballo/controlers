@@ -1,12 +1,11 @@
 <?php
 	/** 
-	 * Servicio auth.php que recibe usuario, password en md5, instala 
+	 * Servicio auth.php que recibe como parametros el usuario, password en md5 y un boleano para instalar 
 	 * Comprueba si existe el usuario en la base de datos y si tiene instalada la aplicación.
 	 * Campo INSTALL de la tabla user
 	 * 		0 --> No tiene instalada la aplicación
 	 *		1 --> Tiene instalada la aplicación
 	 * Retorna '2/$id' si la aplicación se ha podido instalar
-	 * 
 	 */
 	
 	include_once '../includes/servicesHeaders.php';
