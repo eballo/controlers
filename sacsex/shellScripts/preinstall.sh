@@ -100,7 +100,7 @@ else
 				echo "SACS_PASS=$pass" >> $propiertiesFile
 				echo "SACS_USER_HOME=$home" >> $propiertiesFile
 				echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
-				#bash sacsconfig.sh
+				bash sacsconfig.sh
 				if [ "$zenityOk" ]
 				then
 					zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null

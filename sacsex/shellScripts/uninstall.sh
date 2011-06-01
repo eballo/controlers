@@ -16,7 +16,7 @@ else
 	zenityOk=`whereis zenity | grep bin`
 	if [ "$zenityOk" ]
 	then
-		zenity --question --title="Desinstalacion SACSEX" --text="Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar?"
+		zenity --question --title="Desinstalacion SACSEX" --text="Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar?" 2>/dev/null
 		uninstall=$?
 	else
 		echo "Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar? (0 para aceptar)"
@@ -47,23 +47,23 @@ else
 			rm -R "$SACSEXHOME"
 			if [ $? -eq 0 ]
 			then
-				res=`links -dump "http://$SVR_CONN/sacsex/services/service.uninstall.php?user=$user&pass=$pwd5md`
+				res=`links -dump "http://$SVR_CONN/sacsex/services/service.uninstall.php?user=$user&pass=$pwd5md"`
 				newCron="/tmp/cron_$USER"
-				if [ `echo $res | cut -d"/" -f1` -eq 0 ]
+				if [ `echo $res | cut -d":" -f1` -eq 0 ]
 				then
 					crontab -l | grep -v backups > $newCron
 					crontab -r
-					cron $newCron
+					crontab "$newCron" 2>/dev/null
 					if [ $? -eq 0 ]
 					then
-						if [ $zenityOk ] 
+						if [ "$zenityOk" ] 
 						then
 							zenity --info --title="Desinstalacion Completa" --text="Se ha completado la desinstalacion con éxito" 2>/dev/null
 						else
 							echo "Se ha completado la desinstalacion con éxito"
 						fi
 					else
-						if [ $zenityOk ] 
+						if [ "$zenityOk" ] 
 						then
 							zenity --warning --title="Desinstalacion incompleta" --text="Fallo al eliminar la entrada en crontab.\n\n Consulte con el administrador para que lo haga manualmente" 2>/dev/null
 						else
@@ -71,8 +71,8 @@ else
 						fi					
 					fi
 				else
-					motivo=`echo $res | cut -d"/" -f2`
-					if [ $zenityOk ] 
+					motivo=`echo $res | cut -d":" -f2`
+					if [ "$zenityOk" ] 
 					then
 						zenity --warning --title="Desinstalacion no Completada" --text="No se ha podido completar la desinstalacion con éxito. \n $motivo" 2>/dev/null
 					else
@@ -80,7 +80,7 @@ else
 					fi
 				fi
 			else
-				if [ $zenityOk ] 
+				if [ "$zenityOk" ] 
 				then
 					zenity --warning --title="Desinstalacion no Completada" --text="No se ha podido completar la desinstalacion con éxito. \n Fallo al eliminar $SACSEXHOME" 2>/dev/null
 				else
@@ -88,7 +88,7 @@ else
 				fi
 			fi
 		else
-			if [ $zenityOk ] 
+			if [ "$zenityOk" ] 
 			then
 				zenity --warning --title="Desinstalacion no Completada" --text="No se ha podido completar la desinstalacion con éxito. \n No se encuentra la carpeta $SACSEXHOME" 2>/dev/null
 			else
@@ -96,7 +96,7 @@ else
 			fi
 		fi
 	else
-		if [ $zenityOk ] 
+		if [ "$zenityOk" ] 
 		then
 			zenity --warning --title="Desinstalacion Cancelada" --text="Ha sido cancelada la desinstalacion" 2>/dev/null
 		else
