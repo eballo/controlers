@@ -166,27 +166,27 @@ echo -e "\033[0;31m ################################################# \033[0m"
 						echo $size
 						((size=$size/1024))
 						echo "TAR2: $tarname"
-						scp "$tarname" ${sshLogin}:$DESTDIR
-						if [ $? -eq 0 ]
+						res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Obtenemos el id del Fichero
+						echo $res
+						ok=`echo $res | cut -d: -f1`
+						if [ "$ok" == '0' ]
 						then
-							echo "Success!"
-							res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"`
-							echo $res
-							ok=`echo $res | cut -d: -f1`
-							
-							if [ "$ok" != "Error" ]
+							IDF=`echo $res | cut -d: -f2`
+							tarname=${IDF}.${tarname}
+							scp "$tarname" ${sshLogin}:$DESTDIR
+							if [ $? -eq 0 ]
 							then
 								log "$ruta Copiado"
 							else
-								ssh $sshLogin rm "$tarname"
-								log "$res"
-								echo $res
+								res=`links -dump "http://$SVR_CONN/sacsex/services/service.delback.php?user=$user&pass=$pwd5md&idf=$IDF"` #Lo eliminamos de la bd
+								log "No se pudo copiar al servidor el fichero $ruta"
 							fi
 						else
-						 	echo "Error con $ruta"
+						 	log "$res"
 						fi
 						#Por ultimo, eliminamos el tar del origen
 						rm "$tarname"
+						fi
 					done
 				else
 					echo "Error: Usuario '$user' no localizado en la base de datos." >> ${errorlog}

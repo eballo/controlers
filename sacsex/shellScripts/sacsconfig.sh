@@ -220,6 +220,7 @@ done
             then
                 echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
                 echo "* * 1 * * cp -R $dirBackup $dirServidor" >> $cron
+#                echo "* * 1 * * /bin/bash backups-sacs2.sh >> $cron
             elif [ "$mes" -eq 1 ]
             then
                 echo "# Copia de contenido Backup a Servidor (quincena de mes)" > $cron
