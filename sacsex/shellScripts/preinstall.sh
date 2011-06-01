@@ -5,7 +5,7 @@
 linksOk=`whereis links | grep bin`
 if [ ! "$linksOk" ]
 then
-	echo -e "Error: Es imprescindible tener instalado el paquete de links, para realizar las conexiones con el servidor. \n Para obtenrelo, utilice la orden:\n\n sudo apt-get install links"
+	echo -e "Error: Es imprescindible tener instalado el paquete de links, para realizar las conexiones con el servidor. \n Para obtenerlo, utilice la orden:\n\n sudo apt-get install links"
 	exit 1
 else
 	zenityOk=`whereis zenity | grep bin`
@@ -20,10 +20,40 @@ else
 		echo "El puerto abierto para los servicios de servidor web"
 		read SVR_PORT
 	fi
-	# comprobamos el acceso al host y puertos indicados
-	echo "Comprobando conexion"
-	nc -z "$SVR_IP" "$SVR_PORT" 2>/dev/null
-	if [ $? -eq 0 ]
+	
+    # Comprobamos el acceso al host y puertos indicados
+    nc -z "$SVR_IP" "$SVR_PORT" 2>/dev/null
+    if [ $? -eq 0 ]
+    then
+        conexion=0
+    else
+        conexion=1
+    fi
+    
+    if [ "$zenityOk" ]
+    then
+        # Ventana de animación al conectar
+        (
+        echo "10" ; sleep 1
+        echo "# Comprobando acceso a host $SVR_IP" ; sleep 1
+        echo "20" ; sleep 1
+        echo "# Comprobando puerto $SVR_PORT" ; sleep 1
+        echo "50" ; sleep 1
+        echo "# Comprobando conexión"; sleep 1
+            if [ "$conexion" -eq 0 ]; then
+                echo "75"; sleep 1
+                echo "# Conexión establecida"; sleep 1
+                echo "100" ;
+            else
+                echo "100" ; sleep 1
+            fi
+        ) | 
+        zenity --progress --title="SACS-EX" --text="Iniciando comprobación..." --auto-close --pulsate --width="400" --height="100" --no-cancel --percentage=0
+    else
+        echo "Comprobando conexion"
+    fi
+	
+	if [ "$conexion" -eq 0 ]
 	then
 		SVR_CONN=${SVR_IP}:${SVR_PORT}
 		if [ "$zenityOk" ]
@@ -79,9 +109,9 @@ else
 			else
 				if [ "$zenityOk" ]
 				then
-					zenity --warning --title="Fallo de conexion" --text="Error: No se ha conectar a la base de datos.\n Asegurese que la conexióna internet es correcta" 2>/dev/null
+					zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido conectar a la base de datos.\n Asegurese que la conexión a internet sea correcta" 2>/dev/null
 				else
-					echo -e "Error: No se ha conectar a la base de datos.\n Asegurese que la conexióna internet es correcta"
+					echo -e "Error: No se ha podido conectar a la base de datos.\n Asegurese que la conexión a internet sea correcta"
 				fi
 			fi
 		else
@@ -90,9 +120,9 @@ else
 	else
 		if [ "$zenityOk" ]
 		then
-			zenity --warning --title="Fallo de conexion" --text="Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto" 2>/dev/null
+			zenity --warning --title="Fallo de conexión" --text="Error: No se ha podido acceder al puerto $SVR_PORT \ndel servidor $SVR_IP. \n\nCompruebe los datos y asegurese de que dicho puerto figura abierto" 2>/dev/null
 		else
-			echo -e "Error: No se ha podido acceder al puerto $SVR_PORT\n del servidor $SVR_IP.\n\n Compruebe los datos y asegurese de que dicho puerto figura abierto"
+            echo -e "Error: No se ha podido acceder al puerto $SVR_PORT \ndel servidor $SVR_IP. \n\nCompruebe los datos y asegurese de que dicho puerto figura abierto"
 		fi
 	fi
 fi
