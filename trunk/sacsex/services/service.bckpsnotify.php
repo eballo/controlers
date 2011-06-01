@@ -36,13 +36,17 @@
 				$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
 				$res=mysql_query($insQ,$link);
 				if ($res){
-					echo "0:Insert Realizado";
+					$idFQ="SELECT ID FROM backups WHERE FILENAME='$file' AND DATE='$date' AND USER_ID=$id";
+					$busca=mysql_query($idFQ,$link);
+					$idF=mysql_fetch_array($busca);
+					$idF=$idF[0];
+					echo "0:".$idF;
 				}else{
 					echo "Error: No se ha podido hacer el insert";
 				}
 			}
 		}else{
-			echo "Error al procesar la consulta";
+			echo "Error: al procesar la consulta";
 		}
 	}else{
 		echo "Error: No se ha localizado ningun usuario con los datos aportados";

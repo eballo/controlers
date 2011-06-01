@@ -13,12 +13,12 @@
 		$result=mysql_query($query,$link);
 		//Devolvera 0 si se ha podido proceder. En caso contrario devuelve 1
 		if ($result){
-			echo 0; 
+			echo "0:Ok"; 
 		}else{
-			echo 1;
+			echo "1:Fallo al dar de baja la aplicacion en la BD";
 		}
 	}else{
-		echo 1;
+		echo "1:El usuario no ha sido localizado";
 	}
 	desconectar($link);
 	
