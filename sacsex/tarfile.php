@@ -1,17 +1,24 @@
 <?php
 	require_once 'Archive/Tar.php';
 	
+	/**
+	 * Función para mostrar contenido de un tar
+	 * @param String $nombre del fichero tar
+	 */
 	function readTar($nombre){
+		// Es el que muestra las cosas
+		// crea una estancia para leer el fichero tar en php
 		$obj = new Archive_Tar($nombre); // name of archive
 		
 		$files = $obj->listContent();       // array of file information
 		
 		echo '<table>';
-		echo '<tr><th>Nom</th><th>Data</th><th>tamany</th><th>Descarga</th></tr>';		
+		echo '<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th></tr>';
+		// Recorrer array 'foreach'	
 		foreach ($files as $f) {
 			if ($f['size']>0){
-			echo "<tr>";			
-			echo "<form method=POST action=tarfile.php?accion=d>";
+			echo "<tr>";
+			echo "<form action=tarfile.php?accion=d method=POST >";
 			echo "<input type='hidden' name='file' value='".$f['filename']."' />";
 				echo "<td>".$f['filename']."</td>";
 				echo "<td>".$f['size']."</td>";
