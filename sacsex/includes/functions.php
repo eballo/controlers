@@ -308,5 +308,26 @@
 		}
 		return $error;
 	}
+	
+	function eliminaBackup($idf,$id,$link){
+		//Este es un prototipo. Habrá que adecuarlo al resultado de la busqueda
+		$nomQ="SELECT FILENAME from backups WHERE ID=$idf AND USER_ID=$id";
+		$buscaN=mysql_query($nomQ,$link);
+		$nomRes=mysql_fetch_array($buscaN);
+		$nomRes=$nomRes[0];
+		$delQuery = "DELETE FROM backups WHERE ID='$idf' AND USER_ID=$id";
+		$res=mysql_query($delQuery,$link);
+		if ($res){
+			//Si lo encuentro, lo elimino tambien del Servidor
+			$ruta="shared/".$id."/".$idf.".".$nomRes; //Hay que perdilar como sera el nombre real.
+			if(unlink($ruta)){
+				$error='';
+			}else{				
+				$error="Error al eliminar el archivo";
+			}
+		}else{
+			$error="Error al eliminar el archivo";
+		}
+	}
 ?>
 
