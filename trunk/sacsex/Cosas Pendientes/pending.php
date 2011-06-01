@@ -37,4 +37,8 @@
  // Falta configurar puertos del servidor (80, 22) http, ssh (solo aceptar) y ping
   * 
  */
+/*
+ * Agregar opcion -e para reestablecer crontab en sacsconfig 
+ * 
+ * */
 ?>
