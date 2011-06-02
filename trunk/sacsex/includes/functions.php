@@ -297,13 +297,14 @@
 		}else{
 			$directorio=$GLOBALS['BKPS_PATH']."/".$id;
 			if(eliminaRecursivo($directorio)==0){
-				$dir="/home/sacs/bkps/".$id; //TODO Enlace then?
+				$error='';
+//				$dir="/home/sacs/bkps/".$id; //TODO Enlace then?
 				// unlink --> elimina ficheros o lo que sea!! diferente de directorio
-				if(!unlink($dir)){
-					$error="Error al eliminar el enlace";
-				}else{
-					$error='';
-				}
+//				if(!unlink($dir)){
+//					$error="Error al eliminar el enlace";
+//				}else{
+//					$error='';
+//				}
 			}else{
 				$error="Error al eliminar el directorio";
 			}			
@@ -321,7 +322,7 @@
 		$res=mysql_query($delQuery,$link);
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
-			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdilar como sera el nombre real.
+			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
 			if(unlink($ruta)){
 				$error='';
 			}else{				

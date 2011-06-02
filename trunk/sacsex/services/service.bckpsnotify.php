@@ -18,14 +18,13 @@
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
 	if ( $id!=''){
-		$oldname=$_GLOBALS['TMP_PATH']."/".$file;
-		$newpath=$_GLOBALS['BKPS_PATH']."/".$id."/".$file;
+		$oldname=$GLOBALS['TMP_PATH']."/".$file;
+		$newpath=$GLOBALS['BKPS_PATH']."/".$id."/".$file;
 		if(rename($oldname,$newpath)){
-		//Genero la busqueda de la info del usuario (para obtener los limites)
 			$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
 			$res=mysql_query($insQ,$link);
 			if ($res){
-				echo "0";
+				echo "0:";
 			}else{
 				echo "Error: No se ha podido hacer el insert";
 			}
