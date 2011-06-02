@@ -180,7 +180,7 @@ img[onclick]{
 }
 .searchButtonClick{
 	position:relative;
-     left: -60px;
+    left: -60px;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
