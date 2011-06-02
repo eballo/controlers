@@ -53,6 +53,7 @@
 				/*$error="No se pudo eliminar el directorio indicado";*/
 			}
 		}
+		/* Accion buscar */
 		elseif($accion == "buscar"){
 			$searchStile='display:block';
 			$insertStile='display:none';
@@ -144,7 +145,7 @@
 	<title>Usuarios</title>
 </head>
 <body>
-<?php include_once 'includes/cabecera.php'; ?>
+<?php  include_once 'includes/cabecera.php';?>
 <div class="body">
 	<div class="mainContainerSearch">
 		<div class='searchHead'>
@@ -246,40 +247,63 @@
 					
 					function readTar($nombre){
 						$obj = new Archive_Tar($nombre); // name of archive
-						$files = $obj->listContent();       // array of file information						
-						echo '<table>';
-						#echo '<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th></tr>';
-						// Recorrer array 'foreach'	
-						foreach ($files as $f) {
-							if ($f['size']>0){
-							echo "<tr>";
-							echo "<form action=tarfile.php?accion=d method=POST >";
-							echo "<input type='hidden' name='file' value='".$f['filename']."' />";
-								echo "<td>".$f['filename']."</td>";
-								echo "<td>".$f['size']."</td>";
-								echo "<td>".date("d-m-Y", $f['mtime'])."</td>";
-								echo "<td><input type=submit value=descarga /></td>";
-								echo"</form>";
-							echo "</tr>";	
-							}	    
-						}echo "</table>";
+						$files = $obj->listContent();       // array of file information
+					return $files;
 					}
 					
-					$dir="/home/alumne/Escritorio";
+					$dir="/home/giorgio/Escritorio/Prueba/usuario1";
 					#$ruta2="/home/sacs/bkps/$id";
 					$cmd="ls $dir";
-					exec($cmd,$result);
+					exec($cmd,$tarbkpsA);
 //					$nvoltes=0;
-					echo '<table>';
-//						echo "<tr><th colspan=4>'.$ruta.'</th></tr>"; //ruta en el servidor
-						echo '<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th>
-						</tr>';
-
-					foreach($result as $elem){
-						$rutabkp="$dir/$elem";
+					echo "<table>";
+//						echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th></tr>";
+						echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th></tr>";
 						
-						readTar($rutabkp);
-					}	
+						if ($bnom){
+							// Establecido nombre de fichero a buscar
+							foreach($tarbkpsA as $elem){
+								$rutabkp="$dir/$elem";		// /home/giorgio/Escritorio/Prueba/usuario1/ejercicios_csv.tar.gz
+								$tarA=readTar($rutabkp);
+								$enc=false;
+								foreach ($tarA as $subelem){
+									if ($subelem['size']>0){
+										$nomfitxer=basename($subelem['filename']);
+										if ($nomfitxer == $nom){
+											echo "<tr><td>".$subelem['filename']."</td>
+												  <td>".$subelem['size']." KB</td>
+												  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
+											echo "</tr>";
+											$enc=true;
+										}
+									}
+								}
+							}
+							if (! $enc){
+								echo "<tr><td>No se han encontrado resultados para los parametros facilitados</td></tr>";
+							}
+						}else{
+							// Sin establecer nombre de fichero a buscar
+							$nomfq="SELECT * FROM backups WHERE USER_ID=$id";
+							$resultsf=mysql_query($nomfq,$link);
+							while($row=mysql_fetch_array($resultsf)){
+								//echo "<tr><td>".$row['ID']. "</td></tr>";
+								echo "<tr><td>".$row['FILENAME']. "</td>
+									<td>".$row['SIZE']. " KB </td>
+									<td>".$row['DATE']. "</td>";
+								echo "</tr>";
+							}
+						}
+					echo "</table>";
+
+//				LEIDO de TAR
+//					foreach($result as $elem){
+//						$rutabkp="$dir/$elem";
+//						
+//						readTar($rutabkp);
+//					}
+
+					
 //						if($bnom){
 //							$comando="tar -tvf $ruta2 | grep $nom | tr -s ' ' | cut -f3- -d' '";
 //						}else{
@@ -324,10 +348,25 @@
 							
 							//unset($contFecha);
 					
-					echo "</table>";
+					
 					
 ?>
 					<?php 
+					/*
+					 * 
+					 * Si ninguna de las opciones se rellenó, mostrar los archivos subidos (los tar) YA ESTA
+
+						Si se rellena el nombre, pero no la fecha: Sobre todos los archivos, igualmente, 
+						buscar aquellos que contenga el archivo introducido		YA ESTA
+
+						si se rellena la fecha, los archivos.tar subidos en esa fecha
+
+						y si se rellena fecha y nombre: Los archivos.tar subidos a esa 
+						fecha que incluyan el nombre a buscar
+
+					 * */
+					
+					
 //					echo "<table>";
 //					if($brows>0){
 //						echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
