@@ -18,35 +18,19 @@
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
 	if ( $id!=''){
+		$oldname=$_GLOBALS['TMP_PATH']."/".$file;
+		$newpath=$_GLOBALS['BKPS_PATH']."/".$id."/".$file;
+		if(rename($oldname,$newpath)){
 		//Genero la busqueda de la info del usuario (para obtener los limites)
-		$userDetQ="SELECT * FROM user WHERE ID=$id";
-		$busca=mysql_query($userDetQ,$link);
-		//Genero la consulta en backups para controlar cuanto espacio lleva ocupado
-		$espOcpQ="SELECT USER_ID,sum(size)as 'total' FROM backups GROUP BY USER_ID HAVING USER_ID=$id";
-		$espRes=mysql_query($espOcpQ,$link);
-		if ( $busca ){
-			$userQ=mysql_fetch_array($busca);
-			$limit=$userQ['MAX_LIMIT'];
-			$dlimit=$userQ['DAY_LIMIT'];
-			$esp=mysql_fetch_array($espRes);
-			$total=$esp['total'];//Total de espacio ocupado en el Servidor
-			if ($size > $dlimit || (($size+$total)>$limit)){
-				echo "Error: Usuario excedio la quota maxima de espacio";
+			$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
+			$res=mysql_query($insQ,$link);
+			if ($res){
+				echo "0";
 			}else{
-				$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
-				$res=mysql_query($insQ,$link);
-				if ($res){
-					$idFQ="SELECT ID FROM backups WHERE FILENAME='$file' AND DATE='$date' AND USER_ID=$id";
-					$busca=mysql_query($idFQ,$link);
-					$idF=mysql_fetch_array($busca);
-					$idF=$idF[0];
-					echo "0:".$idF;
-				}else{
-					echo "Error: No se ha podido hacer el insert";
-				}
+				echo "Error: No se ha podido hacer el insert";
 			}
 		}else{
-			echo "Error: al procesar la consulta";
+			echo "Error: No se ha podido mover a backups";
 		}
 	}else{
 		echo "Error: No se ha localizado ningun usuario con los datos aportados";
