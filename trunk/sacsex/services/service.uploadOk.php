@@ -4,7 +4,7 @@
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	$file=$_GET['file'];
-	$date=$_GET['date'];
+//	$date=$_GET['date'];
 	$size=$_GET['size'];
 	
 	$link=conectar('bdsintesi');

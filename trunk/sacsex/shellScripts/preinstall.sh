@@ -87,7 +87,7 @@ else
 				touch $SACSEXHOME/sacsex.properties
 			fi
 			propiertiesFile="$SACSEXHOME/sacsex.properties"
-			sshLogin="sacs@${SVR_IP}"
+			# sshLogin="sacs@${SVR_IP}"
 			user=$loginName
 			pass=$pwd5md
 			
@@ -99,7 +99,7 @@ else
 				echo "SACS_USER=$user" >> $propiertiesFile
 				echo "SACS_PASS=$pass" >> $propiertiesFile
 				echo "SACS_USER_HOME=$home" >> $propiertiesFile
-				echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
+				# echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
 				bash sacsconfig.sh
 				if [ "$zenityOk" ]
 				then

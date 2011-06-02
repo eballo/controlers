@@ -58,9 +58,9 @@ then
 		elif [ `echo $elem | grep "SACS_PASS=" | wc -l` -eq 1 ]
 		then
 			pwd5md=`echo $elem | cut -d'=' -f2`
-		elif [ `echo $elem | grep "SACS_LOGIN=" | wc -l` -eq 1 ]
-		then
-			sshLogin=`echo $elem | cut -d'=' -f2`
+		# elif [ `echo $elem | grep "SACS_LOGIN=" | wc -l` -eq 1 ]
+#		then
+#			sshLogin=`echo $elem | cut -d'=' -f2`
 		fi
 	done
 #
@@ -115,7 +115,6 @@ then
 				#Creamos el comprimido de las rutas especificadas 
 				tarname="${destDateAppend}.tar.gz"
 				echo "TAR: $tarname"
-				echo "${rvalidas[*]}" 
 				a=${rvalidas[*]}
 				tar -cvzf "$tarname" `echo $a` >>${log} 2>>${errorlog}
 				if [ "$?" -eq 0 ]
@@ -126,17 +125,18 @@ then
 					echo -e "#  [ Comprimiendo \033[1;33m${rvalidas[*]}\033[0m ]			\033[0;31m [ Error ] \033[0m"
 					log  "  [ Comprimiendo ]			 [ Error ]"
 				fi
-				hoy=`date +%Y-%m-%d`
+				
 				#recibo el tamaño en bytes y lo transformo a Kb
 				size=`stat -c%s $tarname`
 				((size=$size/1024))
 				echo $size
 				#1.- Se pide confirmacion de que el espacio maximo no haya sido superado
 
-				uok=`links -dump "http://$SVR_CONN/sacsex/services/service.uploadOk.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Pedimos autorizacion de subida
+				uok=`links -dump "http://$SVR_CONN/sacsex/services/service.uploadOk.php?user=$user&pass=$pwd5md&file=$tarname&size=$size"` #Pedimos autorizacion de subida
 				ok=`echo $uok | cut -d":" -f1`
 				if [ "$ok" == 0 ]
 				then
+					hoy=`date +%Y-%m-%d`
 					#Si ok, se recoge el sshLogin y se hace el scp sobre la ruta de temporal
 					sshLogin=`echo $uok | cut -d":" -f2-`
 					scp "$tarname" ${sshLogin}:$DESTDIR
@@ -146,7 +146,7 @@ then
 					then
 						echo "OK"
 						log "$ruta Copiado"					
-						res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Obtenemos el id del Fichero
+						res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` 
 						ok=`echo $res | cut -d: -f1`
 						if [ "$ok" == 'Error' ]
 						then
