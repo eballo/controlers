@@ -139,7 +139,8 @@ then
 					hoy=`date +%Y-%m-%d`
 					#Si ok, se recoge el sshLogin y se hace el scp sobre la ruta de temporal
 					sshLogin=`echo $uok | cut -d":" -f2-`
-					scp "$tarname" ${sshLogin}:$DESTDIR
+					echo $sshLogin
+					scp "$tarname" ${sshLogin}
 					copiado=$?
 					# Si scpOk, se ejecuta el service.bkpsnotify para subirlo a la BD
 					if [ $copiado -eq 0 ]
@@ -150,7 +151,7 @@ then
 						ok=`echo $res | cut -d: -f1`
 						if [ "$ok" == 'Error' ]
 						then
-							log "$ok"
+							log "$res"
 						fi
 					else
 						log "Error al intentar subir los archivos a $DESTDIR"
