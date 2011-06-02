@@ -64,75 +64,56 @@
 			
 			$configB="searchButton";
 			$searchB="searchButtonOffClick";
-			
-			if (isset($_POST['numd']) && $_POST['numd']!=''){
-				$num=$_POST['numd'];
-				$text=$_POST['freq'];
-				$rel=$_POST['rel'];
-				$compFecha=true;
-			}else{
-				$compFecha=false;
-			}
+
 			if (isset($_POST['fname']) && $_POST['fname']!=''){
 				$bnom=true;
 				$nom=$_POST['fname'];
 			}else{
 				$bnom=false;
 			}
-//			if (isset($_POST['numd']) && $_POST['numd']!=''){
-//				$dias=$_POST['numd'];
-//				switch ($_POST['freq']) {
-//					case 'dias':
-//						$text='DAY';
-//						break;
-//					case 'meses':
-//						$text='MONTH';
-//						break;
-//					case 'anyos':
-//						$text='YEAR';
-//					break;
-//				} 
-//				if ($_POST['rel']=='min'){
-//					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
-//				}else{
-//					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) > $dias";
-//				}
-//			}else{
-//				$dateQ='';
-//			}
-//		}
-//		//Construyo la parte de la query para el nombre de fichero a buscar
-//		if(isset($_POST['fname']) && $_POST['fname']!=''){
-//			$fname=$_POST['fname'];
-//			$nameQ=" AND FILENAME='$fname'";
-//		}else{
-//			$nameQ='';
-//		}
+			if (isset($_POST['numd']) && $_POST['numd']!=''){
+				$dias=$_POST['numd'];
+				switch ($_POST['freq']) {
+					case 'dias':
+						$text='DAY';
+						break;
+					case 'meses':
+						$text='MONTH';
+						break;
+					case 'anyos':
+						$text='YEAR';
+					break;
+				} 
+				if ($_POST['rel']=='min'){
+					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
+				}else{
+					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) >= $dias";
+				}
+			}else{
+				$dateQ='';
+			}
 		}
 	}
-	
-//	$query="SELECT * FROM backups WHERE USER_ID=$id".$nameQ.$dateQ.";";
-//	//Establezco el enlace con el que trabajara las busquedas y lanzo la consulta
-//
-//	$bResult=mysql_query($query,$link);
-//	$brows=-1;
-//	if($bResult){
-//		$brows=mysql_num_rows($bResult);
-//	}
+/* Query para accion Buscar ficheros tar */
+	$query="SELECT * FROM backups WHERE USER_ID=$id".$dateQ.";";
+	$bResult=mysql_query($query,$link);
+	$brows=-1;
+	if($bResult){
+		$brows=mysql_num_rows($bResult);
+	}
 
-/* Borrar */
+/* Query para accion Borrar */
 	$query="SELECT * FROM filepath WHERE USER_ID=$id";
 	$result=mysql_query($query,$link);
 	$rows=mysql_num_rows($result);
 	
-//Datos cabecera
-
+/* Query para la cabecera del usuario */
 	$queryUser="SELECT * FROM user WHERE ID=$id";
 	$resultUser=mysql_query($queryUser,$link);
 	$array=mysql_fetch_array($resultUser);
 	$usuario=$array['NAME'];
 	$sizeTotal=$array['MAX_LIMIT'];
- 
+	/* Query para la suma total de tamaño de ficheros tar del usuario */
 	$tamOcup="SELECT sum(size)as 'total' FROM backups GROUP BY USER_ID HAVING USER_ID=$id";
 	$resultTam=mysql_query($tamOcup,$link);
 	$sizeA=mysql_fetch_array($resultTam);
@@ -236,7 +217,7 @@
 							<select name='freq'>
 								<optgroup label="tiempo">
 									<option value='dias'>dias</option>
-									<option value='mes'>meses</option>
+									<option value='meses'>meses</option>
 									<option value='anyos'>años</option>	
 								</optgroup>		
 							</select>
@@ -258,49 +239,54 @@
 						$files = $obj->listContent();       // array of file information
 					return $files;
 					}
-					
-					$dir="/home/giorgio/Escritorio/Prueba/usuario1";
-					#$ruta2="/home/sacs/bkps/$id";
-					$cmd="ls $dir";
-					exec($cmd,$tarbkpsA);
-//					$nvoltes=0;
 					echo "<table>";
-//						echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Descarga</th></tr>";
 						echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th></tr>";
 						
-						if ($bnom){
-							// Establecido nombre de fichero a buscar
-							foreach($tarbkpsA as $elem){
-								$rutabkp="$dir/$elem";		// /home/giorgio/Escritorio/Prueba/usuario1/ejercicios_csv.tar.gz
-								$tarA=readTar($rutabkp);
-								$enc=false;
-								foreach ($tarA as $subelem){
-									if ($subelem['size']>0){
-										$nomfitxer=basename($subelem['filename']);
-										if ($nomfitxer == $nom){
-											echo "<tr><td>".$subelem['filename']."</td>
-												  <td>".$subelem['size']." KB</td>
-												  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
-											echo "</tr>";
-											$enc=true;
+						$enc=false;
+						if ( $brows > 0 ){								
+							while($row=mysql_fetch_array($bResult)){
+								//echo "<tr><td>".$row['ID']. "</td></tr>";
+								$idf=$row['ID'];  //id del archivo en la BD
+								$filename=$row['FILENAME'];	 //tar que estamos mirando
+								
+								if ( $bnom ){
+									//$ruta2="/home/sacs/bkps/$id";
+									$dir="/home/giorgio/Escritorio/usuario1";
+									$rutabkp="$dir/$filename";
+									// Funcion readTar para obtener contenido de tar backup
+									$tarA=readTar($rutabkp);											
+									foreach ($tarA as $subelem){
+										if ($subelem['size']>0){
+											$nomfitxer=basename($subelem['filename']);
+
+											if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
+												if(isset($dias) && $dias!=''){
+													echo "<tr><td>".$row['FILENAME']. "</td>
+														  <td>".$row['SIZE']. " KB </td>
+														  <td>".$row['DATE']. "</td>";
+													echo "</tr>";
+													$enc=true;
+												} else{
+													echo "<tr><td>".$subelem['filename']."</td>
+														  <td>".$subelem['size']." KB</td>
+														  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
+													echo "</tr>";
+													$enc=true;
+												}
+											}
 										}
-									}
+									}									
+								}else{
+									echo "<tr><td>".$row['FILENAME']. "</td>
+										<td>".$row['SIZE']. " KB </td>
+										<td>".$row['DATE']. "</td>";
+									echo "</tr>";
+									$enc=true;
 								}
 							}
-							if (! $enc){
-								echo "<tr><td>No se han encontrado resultados para los parametros facilitados</td></tr>";
-							}
-						}else{
-							// Sin establecer nombre de fichero a buscar
-							$nomfq="SELECT * FROM backups WHERE USER_ID=$id";
-							$resultsf=mysql_query($nomfq,$link);
-							while($row=mysql_fetch_array($resultsf)){
-								//echo "<tr><td>".$row['ID']. "</td></tr>";
-								echo "<tr><td>".$row['FILENAME']. "</td>
-									<td>".$row['SIZE']. " KB </td>
-									<td>".$row['DATE']. "</td>";
-								echo "</tr>";
-							}
+						}
+						if (! $enc){
+							echo "<tr><td>No se han encontrado resultados para los parametros facilitados</td></tr>";
 						}
 					echo "</table>";
 
@@ -367,9 +353,9 @@
 						Si se rellena el nombre, pero no la fecha: Sobre todos los archivos, igualmente, 
 						buscar aquellos que contenga el archivo introducido		YA ESTA
 
-						si se rellena la fecha, los archivos.tar subidos en esa fecha
+						si se rellena la fecha, los archivos.tar subidos en esa fecha	YA ESTA
 
-						y si se rellena fecha y nombre: Los archivos.tar subidos a esa 
+						y si se rellena fecha y nombre: Los archivos.tar subidos a esa 	YA ESTA
 						fecha que incluyan el nombre a buscar
 
 					 * */
