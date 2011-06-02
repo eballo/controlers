@@ -71,8 +71,8 @@ else
 		pwd5md=`echo $pass | cut -d'/' -f2`
 		busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$loginName&pass=$pwd5md&install=true"`
 		# Recojo el id y si se puede o no proceder a la instalacion 
-		id=`echo $busca | cut -f2 -d"/"`
-		installOk=`echo $busca | cut -f1 -d"/"`
+		id=`echo $busca | cut -f2 -d":"`
+		installOk=`echo $busca | cut -f1 -d":"`
 		## Si todo es correcto Genero el fichero de propiedades:
 		if [ "$installOk" -eq 2 ]
 		then

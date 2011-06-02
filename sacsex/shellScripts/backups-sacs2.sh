@@ -5,23 +5,21 @@
 #                                                                  #
 # Autores : Cristina y Giorgio                                     #
 #                                                                  #
-# Version : 1.0                                                    #
+# Version : 1.5                                                    #
 #                                                                  #
 # Desc: Copia de elementos definidos en un fichero por red         #
 # * Requisitos de funcionamiento:                                  #
-# 	* El host destino debe tener la clave publica del cliente  #
-#  de no ser así el script no funcionará                           #
+# 	* El host destino debe tener la clave publica del cliente  		#
+#  de no ser así el script no funcionará                          #
 #       * El host cliente debe tener instalado el paquete links    #
 #                                                                  #
 #################################################################### 
 
 #Constantes
 
-CHOSTNAME=${HOSTNAME}
 SACSEXHOME="$HOME/.sacsexBckps"
 SUSER=sacs
 #Variables globales###
-diractual=`pwd`
 errors=0             
 numfiles=0           
 numdirs=0
@@ -48,9 +46,6 @@ echo -e "\033[0;31m ################################################# \033[0m"
 
 if [ -f "$propiertiesFile" ]
 then
-	
-	#El delimitador son los saltos de linea
-	#export IFS=$'\n'
 	#Cargando parÃ¡metros de configuraciÃ³n.
 	for elem in `cat $propiertiesFile`
 	do
@@ -81,10 +76,11 @@ then
 		then
 			SVR_CONN=${SVR_IP}:${SVR_PORT}
 			busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$user&pass=$pwd5md&install=false"`
-			id=`echo $busca | cut -f2 -d"/"`
+			id=`echo $busca | cut -f2 -d":"`
 			# Comprobamos el id devuelto
 			if [ "$id" != "1" ]
-			then					
+			then			
+				DESTDIR=`echo $busca | cut -d":" -f3-`		
 				rutas=`links -dump "http://$SVR_CONN/sacsex/services/service.dirlist.php?user=$user&pass=$pwd5md"`
 				rvalidas=()
 				novalidas=()
@@ -116,58 +112,54 @@ then
 					fi
 				done
 				
-				#~ for ruta in ${rvalidas[*]}
-				#~ do
-					#Creamos el comprimido de archivos
+				#Creamos el comprimido de las rutas especificadas 
 				tarname="${destDateAppend}.tar.gz"
 				echo "TAR: $tarname"
 				echo "${rvalidas[*]}" 
 				a=${rvalidas[*]}
-				tar -cvzf "$tarname" `echo $a` >>${log} #2>>${errorlog}
-				 if [ "$?" -eq 0 ]
-				 then
-					 echo -e "#  [ Comprimiendo \033[1;33m${ruta}\033[0m ]			\033[0;32m [ OK ] \033[0m"
-					 log "  [ Comprimiendo ]			 [ OK ] "
-				 else 
-					 echo -e "#  [ Comprimiendo \033[1;33m${ruta}\033[0m ]			\033[0;31m [ Error ] \033[0m"
-					 log  "  [ Comprimiendo ]			 [ Error ]"
-				 fi
-				DESTDIR="/home/sacs/bkps/$id"
-				sshLogin="${SUSER}@${SVR_IP}"
-				
+				tar -cvzf "$tarname" `echo $a` >>${log} 2>>${errorlog}
+				if [ "$?" -eq 0 ]
+				then
+				echo -e "#  [ Comprimiendo \033[1;33m${rvalidas[*]}\033[0m ]			\033[0;32m [ OK ] \033[0m"
+					log "  [ Comprimiendo ]			 [ OK ] "
+				else 
+					echo -e "#  [ Comprimiendo \033[1;33m${rvalidas[*]}\033[0m ]			\033[0;31m [ Error ] \033[0m"
+					log  "  [ Comprimiendo ]			 [ Error ]"
+				fi
 				hoy=`date +%Y-%m-%d`
 				#recibo el tamaño en bytes y lo transformo a Kb
 				size=`stat -c%s $tarname`
 				((size=$size/1024))
 				echo $size
-				res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Obtenemos el id del Fichero
-				ok=`echo $res | cut -d: -f1`
-				if [ "$ok" == '0' ]
+				#1.- Se pide confirmacion de que el espacio maximo no haya sido superado
+
+				uok=`links -dump "http://$SVR_CONN/sacsex/services/service.uploadOk.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Pedimos autorizacion de subida
+				ok=`echo $uok | cut -d":" -f1`
+				if [ "$ok" == 0 ]
 				then
-					IDF=`echo $res | cut -d: -f2`
-					echo $IDF
-					longtarname=${IDF}.${tarname}
-					mv $tarname $longtarname
-					scp "$longtarname" ${sshLogin}:$DESTDIR
+					#Si ok, se recoge el sshLogin y se hace el scp sobre la ruta de temporal
+					sshLogin=`echo $uok | cut -d":" -f2-`
+					scp "$tarname" ${sshLogin}:$DESTDIR
 					copiado=$?
+					# Si scpOk, se ejecuta el service.bkpsnotify para subirlo a la BD
 					if [ $copiado -eq 0 ]
 					then
 						echo "OK"
-						log "$ruta Copiado"
+						log "$ruta Copiado"					
+						res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` #Obtenemos el id del Fichero
+						ok=`echo $res | cut -d: -f1`
+						if [ "$ok" == 'Error' ]
+						then
+							log "$ok"
+						fi
 					else
-						res=`links -dump "http://$SVR_CONN/sacsex/services/service.delback.php?user=$user&pass=$pwd5md&idf=$IDF"` #Lo eliminamos de la bd
-						log "No se pudo copiar al servidor el fichero $ruta"
+						log "Error al intentar subir los archivos a $DESTDIR"
 					fi
 				else
-					log "$res"
+					log "$uok"
 				fi
 				#Por ultimo, eliminamos el tar del origen
-				rm "$longtarname" 2>/dev/null
-				if [ $? -ne 0 ]
-				then
-					rm "$tarname" 2>/dev/null #Si por algun motivo se creo el tar, pero no se pudo cambiar el nombre, eliminamos el tar original
-				fi
-				#~ done
+				rm "$tarname" 2>/dev/null 
 			else
 				echo "Error: Usuario '$user' no localizado en la base de datos." >> ${errorlog}
 			fi

@@ -26,9 +26,9 @@
 				$busca=mysql_query($query,$link);
 				$isinstallA=mysql_fetch_array($busca);
 				$isinstall=($isinstallA[0])+2; //En la tabla, 0 indica que no esta instalado. 1 que si lo esta
-				$resp="$isinstall/$id";
+				$resp="$isinstall:$id";
 			}else{
-				$resp="3/NoValido";
+				$resp="3:NoValido";
 			}
 			echo $resp;
 		}else{
@@ -36,9 +36,9 @@
 		}
 	}else{
 		if ( $id != ''){
-			echo "/".$id;
+			echo ":".$id.":".$GLOBALS['TMP_PATH'];
 		}else{
-			echo "/1";
+			echo ":1";
 		}
 	}
 	

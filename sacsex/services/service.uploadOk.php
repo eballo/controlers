@@ -26,6 +26,7 @@
 			if ($size > $dlimit || (($size+$total)>$limit)){
 				echo "Error: Usuario excedio la quota maxima de espacio";
 			}else{
+				//Si se puede hacer el insert, devuelve los datos de conexion para el scp
 				echo "0:".$GLOBALS['USER_BKPS']."@".$GLOBALS['IP_SERVER'].":".$GLOBALS['TMP_PATH'];
 			}
 		}else{
