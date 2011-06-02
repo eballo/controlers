@@ -1,7 +1,6 @@
 <?php
 	include_once '../includes/servicesHeaders.php';
 
-
 	//Conexion base de datos
 	$link=conectar('bdsintesi');
 	$update = "";

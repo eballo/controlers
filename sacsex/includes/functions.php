@@ -228,25 +228,27 @@
 				$res="Problema insertando el usuario en la base de datos";
 			}else{
 				// modifico la mascara para que por defecto el usuario del grupo tambien pueda escribir
-				umask(octdec("0002"));				
+				//umask(octdec("0002"));				
 				// La carpeta shared debe existir y tener permisos 2777 
 				// ademas de pertenecer al grupo sacs. El usuario creado exclusivamente
-				$newdir="/var/www/sacsex/shared/".$id;
+				$a=$GLOBALS['BKPS_PATH'];
+				echo "A".$a;
+				$newdir=$GLOBALS['BKPS_PATH']."/".$id;
+				echo "ne".$newdir;
 				if(!mkdir("$newdir")){
 					$res='Error al crear la carpeta';
-					
-				}else{		
-					$enlace="/home/sacs/bkps/".$id;	
-					// Al igual que la ruta de $newdir, la ruta /home/sacs/bkps Debe existir y tener los
-					// mismos permisos establecidos  
-			     	if(symlink($newdir,$enlace)){
-			     		echo "<script type='javascript'>
-							alert('Creado el enlace');
-						</script>";
-			     	}else{
-			     		$res='Error al crear el enlace';
-			     		rmdir($newdir);
-			     	}
+//				}else{		//TODO fg
+//					$enlace="/home/sacs/bkps/".$id;	
+//					// Al igual que la ruta de $newdir, la ruta /home/sacs/bkps Debe existir y tener los
+//					// mismos permisos establecidos  
+//			     	if(symlink($newdir,$enlace)){
+//			     		echo "<script type='javascript'>
+//							alert('Creado el enlace');
+//						</script>";
+//			     	}else{
+//			     		$res='Error al crear el enlace';
+//			     		rmdir($newdir);
+//			     	}
 				}
 			}
 			
@@ -293,9 +295,9 @@
 		if ($x!=1){
 			$error="Error: No se ha podido eliminar el usuario con id $id.";
 		}else{
-			$directorio="shared/".$id;
+			$directorio=$GLOBALS['BKPS_PATH']."/".$id;
 			if(eliminaRecursivo($directorio)==0){
-				$dir="/home/sacs/bkps/".$id;
+				$dir="/home/sacs/bkps/".$id; //TODO Enlace then?
 				// unlink --> elimina ficheros o lo que sea!! diferente de directorio
 				if(!unlink($dir)){
 					$error="Error al eliminar el enlace";
@@ -310,7 +312,7 @@
 	}
 	
 	function eliminaBackup($idf,$id,$link){
-		//Este es un prototipo. Habrá que adecuarlo al resultado de la busqueda
+		//Este es un prototipo. Habra que adecuarlo al resultado de la busqueda
 		$nomQ="SELECT FILENAME from backups WHERE ID=$idf AND USER_ID=$id";
 		$buscaN=mysql_query($nomQ,$link);
 		$nomRes=mysql_fetch_array($buscaN);
@@ -319,7 +321,7 @@
 		$res=mysql_query($delQuery,$link);
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
-			$ruta="shared/".$id."/".$idf.".".$nomRes; //Hay que perdilar como sera el nombre real.
+			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdilar como sera el nombre real.
 			if(unlink($ruta)){
 				$error='';
 			}else{				
