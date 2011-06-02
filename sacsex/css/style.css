@@ -254,6 +254,7 @@ img[onclick]{
 }
 .tablaRes table{
 	width: 100%;
+	text-align: left;
 }
 
 .inTable{
