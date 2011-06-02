@@ -5,6 +5,10 @@
 	
 	$nameQ="";
 	
+	//variables para el control de los botones
+	$configB="searchButtonClick";
+	$searchB="searchButtonOff";
+	
 	$link=conectar('bdsintesi');
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
@@ -57,6 +61,10 @@
 		elseif($accion == "buscar"){
 			$searchStile='display:block';
 			$insertStile='display:none';
+			
+			$configB="searchButton";
+			$searchB="searchButtonOffClick";
+			
 			if (isset($_POST['numd']) && $_POST['numd']!=''){
 				$num=$_POST['numd'];
 				$text=$_POST['freq'];
@@ -149,8 +157,8 @@
 <div class="body">
 	<div class="mainContainerSearch">
 		<div class='searchHead'>
-			<div class='searchButton' onclick="configuracion()"> Configuracion</div>
-			<div class='searchButtonOffClick' onclick="busqueda()"> Busqueda</div>
+			<div id='configB' class='<?php echo "$configB"; ?>' onclick="configuracion()"> Configuracion</div>
+			<div id='searchB' class='<?php echo "$searchB"; ?>' onclick="busqueda()"> Busqueda</div>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
