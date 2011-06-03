@@ -20,7 +20,6 @@
 			
 			$path=$GLOBALS['BKPS_PATH']."/".$_SESSION['id']."/".$file;
 			
-			echo "$path";
 			/**
 			 * Validamos que exista el fichero en el disco
 			 */
