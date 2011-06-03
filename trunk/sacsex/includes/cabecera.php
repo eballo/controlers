@@ -1,4 +1,4 @@
-<div class="headerMain">
+<div class="<?php echo "$styleHeader"; ?>">
 	<div class="tituloHeader">
 		Sacsex V.1.0
 	</div>
@@ -18,6 +18,10 @@
 		}
 		else{
 			printf("<span><b>Espacio restante:</b> %.2f MB</span>",kastomegas($sizeRes));
+		}
+		
+		if ( $msgError != "" ){
+			echo "<span><b>$msgError</b></span>";
 		}
 	?>
 	</div>
