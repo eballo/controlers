@@ -128,6 +128,23 @@
 	$sizeOcup=$sizeA[0];
 
 	$sizeRes=$sizeTotal - $sizeOcup;
+	
+	$limitWarn = ( $sizeTotal * 75 ) / 100;
+	$limitError = ( $sizeTotal * 90 ) / 100; 
+	
+	$styleHeader ="headerMain";
+	$msgError = "";
+	
+	if ( $sizeOcup >= $limitError ){
+		$styleHeader="headerMainLimitError";
+		$msgError="Superado el 90% del espacio total";
+	}else{
+		if ( $sizeOcup >= $limitWarn ){
+				$styleHeader="headerMainLimitWarn";
+				$msgError="Superado el 75% del espacio total";
+		}
+	}
+	
 	if ($sizeRes <= 0){
 		$sizeRes = "0";
 	} 
@@ -252,7 +269,6 @@
 								
 								if ( $bnom ){
 									$dir=$GLOBALS['BKPS_PATH']."/".$id;
-									//$dir="/home/giorgio/Escritorio/usuario1";
 									$rutabkp="$dir/$filename";
 									// Funcion readTar para obtener contenido de tar backup
 									$tarA=readTar($rutabkp);											
