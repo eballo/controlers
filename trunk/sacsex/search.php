@@ -44,11 +44,11 @@
 				</script>";
 			}
 		}
-		elseif($accion == "borrar"){			
+		elseif($accion == "borrar"){
 			$insertStile='display:block';
 			$searchStile='display:none';
 			$idFile = $_GET['idFile'];
-			$delQuery = "DELETE FROM filepath WHERE IDF=$idFile";
+			$delQuery = "DELETE FROM filepath WHERE IDF=$idFile AND USER_ID=$id";
 			$res = mysql_query($delQuery,$link);
 			if (!$res){
 				echo "<script type='text/javascript'>
