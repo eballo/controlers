@@ -285,8 +285,8 @@
 													$enc=true;
 												} else{
 													echo "
-														 <td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
-														 <tr><td>".$subelem['filename']."</td>
+														 <tr><td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+														 <td>".$subelem['filename']."</td>
 														  <td>".$subelem['size']." KB</td>
 														  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
 													$enc=true;

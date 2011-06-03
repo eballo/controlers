@@ -13,7 +13,7 @@
 		/**
 		 * Si retorna un nombre de fichero es por que existe y pertenece a el usuario que lo solicita
 		 */
-		$fileNameA = $passwordA=mysql_fetch_array($fileName);
+		$fileNameA =mysql_fetch_array($fileName);
 		$file =$fileNameA[0];
 		
 		if ($file != ""){
