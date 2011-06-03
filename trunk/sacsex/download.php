@@ -43,7 +43,6 @@
 				// Descargar archivo
 				readfile($path);
 			} else {
-				echo "hola";
 				die("El archivo no existe.");
 			}
 		}else{
