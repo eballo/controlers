@@ -74,7 +74,7 @@ else
 		id=`echo $busca | cut -f2 -d":"`
 		installOk=`echo $busca | cut -f1 -d":"`
 		## Si todo es correcto Genero el fichero de propiedades:
-		if [ "$installOk" -eq 2 ]
+		if [ "$installOk" == '2' ]
 		then
 			home=`echo ~`
 			if [ ! -d "$home/.sacsexBckps" ]
@@ -93,7 +93,7 @@ else
 			
 			
 			instalado=`links -dump "http://$SVR_CONN/sacsex/services/service.install.php?user=$user&pass=$pass"`
-			if [ $instalado -eq 0 ] 
+			if [ "$instalado" -eq 0 ] 
 			then
 				echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
 				echo "SACS_USER=$user" >> $propiertiesFile

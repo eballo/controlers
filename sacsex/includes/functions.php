@@ -2,6 +2,14 @@
 	//TODO Comentar todas las funciones con el mismo formato
 	//Funciones de validacion de datos
 
+	require_once 'Archive/Tar.php';
+					
+	function readTar($nombre){
+		$obj = new Archive_Tar($nombre); // name of archive
+		$files = $obj->listContent();       // array of file information
+	return $files;
+	}
+	
 	function esNumero($val){
 		$a=preg_match_all("/[\D]/",$val,$lista); //Numero de veces que aparece un valor no numerico
 		$b=0;
@@ -330,8 +338,8 @@
 		$res=mysql_query($delQuery,$link);
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
-			//$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
-			$ruta="/home/giorgio/Escritorio/usuario1/".$nomRes;
+			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
+			//$ruta="/home/giorgio/Escritorio/usuario1/".$nomRes;
 
 			if(unlink($ruta)){	// Va mal el unlink, y no se porque?¿, no borra el tar fisico
 				$error='';
