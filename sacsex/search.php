@@ -257,7 +257,7 @@
 									// Funcion readTar para obtener contenido de tar backup
 									$tarA=readTar($rutabkp);											
 									foreach ($tarA as $subelem){
-										if ($subelem['size']>0){
+										//if ($subelem['size']>0){
 											$nomfitxer=basename($subelem['filename']);
 											if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
 												if(isset($dias) && $dias!=''){
@@ -276,7 +276,7 @@
 												</td>";
 												echo "</tr>";
 											}
-										}
+										//}
 									}								
 								}else{
 									echo "<tr><td>".$row['FILENAME']. "</td>
