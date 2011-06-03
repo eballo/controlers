@@ -79,6 +79,7 @@
 		list($date, $time) = explode(' ', $fecha); //Separamos fecha y hora
 		list($y, $M, $d) = explode('-', $date);
 		list($h, $m, $s) = explode(':',$time);
+		return "$d-$M-$y $h:$m:$s";
 	}
 	
 //	/**
