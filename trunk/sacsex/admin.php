@@ -110,20 +110,20 @@ $rows=mysql_num_rows($result);
 			
 				</tr>
 				<tr>
-					<td>Contrase�a: </td>
+					<td>Contraseña: </td>
 					<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
 				</tr>
 				<tr>
-					<td>Repite Contrase�a: </td>
+					<td>Repite Contraseña: </td>
 					<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
 				</tr>
 				<tr>
-					<td>Tam Max en MB:</td>
+					<td>Tam Max de subida en MB:</td>
 					<td><input class='<?php echo $inputErrors["espDir"];?>'  type='text' name='espDir' value="<?php echo $dlimit; ?>" /></td>
 			
 				</tr>
 				<tr>
-					<td>Cuota esp en MB:</td>
+					<td>Esp Total en MB:</td>
 					<td><input class='<?php echo $inputErrors["espMax"];?>'  type='text' name='espMax' value="<?php echo $limit; ?>" /></td>
 				</tr>
 				
@@ -134,7 +134,7 @@ $rows=mysql_num_rows($result);
 			<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
 			<?php 
 				if ($rows >0){
-					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por dia</th><th>Max total</th><th>Accion</th></tr>";
+					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por Subida</th><th>Espacio Max Total</th><th>Accion</th></tr>";
 					while ($row=mysql_fetch_array($result)){
 						echo "<tr id='data".$row["ID"]."'>";
 							if ($row["INSTALAT"] == "1"){
@@ -144,8 +144,8 @@ $rows=mysql_num_rows($result);
 						}
 						echo "<td>" . $row["ID"] . "</td>".
 						"<td>" . $row["NAME"] ."</td>".
-						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>
-						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td>";	
+						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\">KB</td>
+						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\">KB</td>";
 						if (!esAdmin($row["ID"], $adminLink)){
 							echo "<td>
 									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
