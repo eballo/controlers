@@ -75,38 +75,43 @@
 		return ($num/1024)/1024;
 	}
 	
-	/**
-	 * Función 
-	 * @param unknown_type $fecha1
-	 * @param unknown_type $freq
-	 * @param unknown_type $num
-	 * @return number
-	 */
-	function comparafechas($fecha1,$freq,$num){
-		$hoy=getdate();
-		$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
-		
-		$datetime1 = new DateTime($fecha1);
-		$datetime2 = new DateTime($hoy);
-		$interval = $datetime1->diff($datetime2);
-		if($freq=='mes'){
-			$dias=$num*30;
-		}elseif($freq=='anyos'){
-			$dias=$num*365;
-		}else{
-			$dias=$num;
-		}
-		$total=$interval->format('%a');
-		
-		if (($total-$dias)>0){
-			return 1;
-		}elseif(($total-$dias)<0){
-			return -1;
-		}else{
-			return 0;
-		}
-			
+	function fechaEsp($fecha){
+		list($date, $time) = explode(' ', $fecha); //Separamos fecha y hora
+		list($y, $M, $d) = explode('-', $date);
+		list($h, $m, $s) = explode(':',$time);
 	}
+	
+//	/**
+//	 * Función 
+//	 * @param unknown_type $fecha1
+//	 * @param unknown_type $freq
+//	 * @param unknown_type $num
+//	 * @return number
+//	 */
+//	function comparafechas($fecha1,$freq,$num){
+//		$hoy=getdate();
+//		$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
+//		
+//		$datetime1 = new DateTime($fecha1);
+//		$datetime2 = new DateTime($hoy);
+//		$interval = $datetime1->diff($datetime2);
+//		if($freq=='mes'){
+//			$dias=$num*30;
+//		}elseif($freq=='anyos'){
+//			$dias=$num*365;
+//		}else{
+//			$dias=$num;
+//		}
+//		$total=$interval->format('%a');
+//		
+//		if (($total-$dias)>0){
+//			return 1;
+//		}elseif(($total-$dias)<0){
+//			return -1;
+//		}else{
+//			return 0;
+//		}
+//	}
 
 	//Funciones de acceso a Base de Datos
 	
