@@ -21,7 +21,7 @@
 	$searchStile='display:none';
 	//$insertStile='display:none';
 	$insertStile='display:block';
-	
+	$bnom='';
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
 		if ($accion == "subir"){
@@ -65,16 +65,13 @@
 			$configB="searchButton";
 			$searchB="searchButtonOffClick";
 			
-			if (isset($_GET['elimBkp'])){
-				$elimBkp=$_GET['elimBkp'];
+			if (isset($_GET['elimBkp']) && $_GET['elimBkp']){
+				$idBkp = $_GET['idBkp'];
+				eliminaBackup($idBkp,$id,$link);				
 			} else{
-				$elimBkp = "";
+				$elimBkp = false;
 			}
-			$idBkp = $_GET['idBkp'];
 			
-			if ($elimBkp){
-				eliminaBackup($idBkp,$id,$link);
-			}
 			
 			if (isset($_POST['fname']) && $_POST['fname']!=''){
 				$bnom=true;
@@ -260,7 +257,7 @@
 								$filename=$row['FILENAME'];	 //tar que estamos mirando
 								
 								if ( $bnom ){
-									//$dir="/var/sacsexBkps/$id";
+									//$dir=$GLOBALS['BKPS_PATH']."/".$id";
 									$dir="/home/giorgio/Escritorio/usuario1";
 									$rutabkp="$dir/$filename";
 									// Funcion readTar para obtener contenido de tar backup
@@ -268,24 +265,25 @@
 									foreach ($tarA as $subelem){
 										if ($subelem['size']>0){
 											$nomfitxer=basename($subelem['filename']);
-
 											if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
 												if(isset($dias) && $dias!=''){
 													echo "<tr><td>".$row['FILENAME']. "</td>
 														  <td>".$row['SIZE']. " KB </td>
 														  <td>".$row['DATE']. "</td>";
-													echo "</tr>";
 													$enc=true;
 												} else{
 													echo "<tr><td>".$subelem['filename']."</td>
 														  <td>".$subelem['size']." KB</td>
 														  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
-													echo "</tr>";
 													$enc=true;
 												}
+												echo "<td>
+												<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
+												</td>";
+												echo "</tr>";
 											}
 										}
-									}									
+									}								
 								}else{
 									echo "<tr><td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
