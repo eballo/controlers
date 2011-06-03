@@ -312,8 +312,16 @@
 		return $error;
 	}
 	
+	
+	/**
+	 * Función para eliminar un backup
+	 * Lo elimina de la base de datos y del directorio de backups
+	 * @param Entero $idf	identificador del tar backup
+	 * @param Entero $id	identificador del usuario	
+	 * @param $link 		enlace de conexión
+	 */
 	function eliminaBackup($idf,$id,$link){
-		//Este es un prototipo. Habra que adecuarlo al resultado de la busqueda
+
 		$nomQ="SELECT FILENAME from backups WHERE ID=$idf AND USER_ID=$id";
 		$buscaN=mysql_query($nomQ,$link);
 		$nomRes=mysql_fetch_array($buscaN);
@@ -322,10 +330,12 @@
 		$res=mysql_query($delQuery,$link);
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
-			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
-			if(unlink($ruta)){
+			//$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
+			$ruta="/home/giorgio/Escritorio/usuario1/".$nomRes;
+
+			if(unlink($ruta)){	// Va mal el unlink, y no se porque?¿, no borra el tar fisico
 				$error='';
-			}else{				
+			}else{
 				$error="Error al eliminar el archivo";
 			}
 		}else{
