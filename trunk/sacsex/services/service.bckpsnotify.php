@@ -20,9 +20,7 @@
 	if ( $id!=''){
 		$oldname=$GLOBALS['TMP_PATH']."/".$file;
 		$newpath=$GLOBALS['BKPS_PATH']."/".$id."/".$file;
-		$cmd='cp '.$oldname.' '.$newpath;
-		exec($cmd,$output,$ret);
-		if($ret==0){
+		if(rename($oldname,$newpath)){
 			$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
 			$res=mysql_query($insQ,$link);
 			if ($res){
