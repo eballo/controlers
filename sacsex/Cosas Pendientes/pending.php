@@ -17,3 +17,10 @@
 3: Quitar el limite de dia <- no es de dia es limite por upload
 4: Terminar de mostrar bien en las buskedas el tar
 5: Guardar la hora en la bbdd
+6: Cliente instalable
+	- install.sh
+	- uninstall.sh
+	- data
+		- sacsex.sh
+		
+	*Implica unir ficheros script desperdigados
