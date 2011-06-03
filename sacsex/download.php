@@ -18,7 +18,7 @@
 		
 		if ($file != ""){
 			
-			$path=$GLOBALS['BKPS_PATH']."/".$file;
+			$path=$GLOBALS['BKPS_PATH']."/".$_SESSION['id']."/".$file;
 			
 			echo "$path";
 			/**
