@@ -18,10 +18,13 @@
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
 	if ( $id!=''){
+		
 		$oldname=$GLOBALS['TMP_PATH']."/".$file;
-		$newpath=$GLOBALS['BKPS_PATH']."/".$id."/".$file;
+		$filename=explode("_",$file);
+		$filename=$filename[1]; //modifico el nombre del fichero para quitarle el ID de usuario
+		$newpath=$GLOBALS['BKPS_PATH']."/".$id."/".$filename;
 		if(rename($oldname,$newpath)){
-			$insQ="INSERT into backups (FILENAME,SIZE,DATE,USER_ID) VALUES ('$file',$size,'$date',$id)";
+			$insQ="INSERT into backups (FILENAME,SIZE,TIMEDATE,USER_ID) VALUES ('$filename',$size,'$date',$id)";
 			$res=mysql_query($insQ,$link);
 			if ($res){
 				echo "0:";
