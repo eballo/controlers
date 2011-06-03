@@ -261,7 +261,7 @@
 					echo "<table>";
 						$enc=false;
 						if ( $brows > 0 ){
-							echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Accion</th></tr>"; 								
+							echo "<tr><th>Down</th><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Accion</th></tr>"; 								
 							while($row=mysql_fetch_array($bResult)){
 								//echo "<tr><td>".$row['ID']. "</td></tr>";
 								$idf=$row['ID'];  //id del archivo en la BD
@@ -277,12 +277,16 @@
 											$nomfitxer=basename($subelem['filename']);
 											if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
 												if(isset($dias) && $dias!=''){
-													echo "<tr><td>".$row['FILENAME']. "</td>
+													echo "<tr>
+														  <td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
+													      <td>".$row['FILENAME']. "</td>
 														  <td>".$row['SIZE']. " KB </td>
 														  <td>".$row['DATE']. "</td>";
 													$enc=true;
 												} else{
-													echo "<tr><td>".$subelem['filename']."</td>
+													echo "
+														 <td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+														 <tr><td>".$subelem['filename']."</td>
 														  <td>".$subelem['size']." KB</td>
 														  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
 													$enc=true;
@@ -295,7 +299,8 @@
 										//}
 									}								
 								}else{
-									echo "<tr><td>".$row['FILENAME']. "</td>
+									echo "<tr><td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+										<td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
 										<td>".$row['DATE']. "</td>";
 									echo "<td>

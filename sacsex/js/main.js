@@ -60,3 +60,7 @@
 	function errorSave(){
 		alert("No se han podido actualizar los datos del usuario.");
 	}
+	
+	function descargarFichero( idfile ){
+		document.location='download.php?idfile=' + idfile ;
+	}
