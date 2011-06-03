@@ -47,7 +47,7 @@
 		elseif($accion == "borrar"){			
 			$insertStile='display:block';
 			$searchStile='display:none';
-			$idFile = $_GET['idFile'];	
+			$idFile = $_GET['idFile'];
 			$delQuery = "DELETE FROM filepath WHERE IDF=$idFile";
 			$res = mysql_query($delQuery,$link);
 			if (!$res){
@@ -64,7 +64,18 @@
 			
 			$configB="searchButton";
 			$searchB="searchButtonOffClick";
-
+			
+			if (isset($_GET['elimBkp'])){
+				$elimBkp=$_GET['elimBkp'];
+			} else{
+				$elimBkp = "";
+			}
+			$idBkp = $_GET['idBkp'];
+			
+			if ($elimBkp){
+				eliminaBackup($idBkp,$id,$link);
+			}
+			
 			if (isset($_POST['fname']) && $_POST['fname']!=''){
 				$bnom=true;
 				$nom=$_POST['fname'];
@@ -134,7 +145,7 @@
 	<title>Usuarios</title>
 </head>
 <body>
-<?php  include_once 'includes/cabecera.php';?>
+<?php  include_once 'includes/cabecera.php'; ?>
 <div class="body">
 	<div class="mainContainerSearch">
 		<div class='searchHead'>
@@ -240,17 +251,16 @@
 					return $files;
 					}
 					echo "<table>";
-						echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th></tr>";
-						
 						$enc=false;
-						if ( $brows > 0 ){								
+						if ( $brows > 0 ){
+							echo "<tr><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Accion</th></tr>"; 								
 							while($row=mysql_fetch_array($bResult)){
 								//echo "<tr><td>".$row['ID']. "</td></tr>";
 								$idf=$row['ID'];  //id del archivo en la BD
 								$filename=$row['FILENAME'];	 //tar que estamos mirando
 								
 								if ( $bnom ){
-									//$ruta2="/home/sacs/bkps/$id";
+									//$dir="/var/sacsexBkps/$id";
 									$dir="/home/giorgio/Escritorio/usuario1";
 									$rutabkp="$dir/$filename";
 									// Funcion readTar para obtener contenido de tar backup
@@ -280,6 +290,9 @@
 									echo "<tr><td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
 										<td>".$row['DATE']. "</td>";
+									echo "<td>
+									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
+									</td>";
 									echo "</tr>";
 									$enc=true;
 								}
@@ -290,94 +303,7 @@
 						}
 					echo "</table>";
 
-//				LEIDO de TAR
-//					foreach($result as $elem){
-//						$rutabkp="$dir/$elem";
-//						
-//						readTar($rutabkp);
-//					}
-
-					
-//						if($bnom){
-//							$comando="tar -tvf $ruta2 | grep $nom | tr -s ' ' | cut -f3- -d' '";
-//						}else{
-//							$comando="tar -tvf $ruta2 | tr -s ' ' | cut -f3- -d' '";
-//						}
-//						exec($comando,$aqui);
-//						
-//						foreach($aqui as $line ) { 
-//							if ($compFecha){
-//								$res=explode(" ",$line);
-//								$fecha="$res[1]";
-//								list($year,$month, $day) =explode("-",$res[1]);
-//								$fecha="$day-$month-$year";
-//								$resFech=comparafechas($res[1],$text,$num);
-//									if ($resFech==-1 && $rel=='min' || $resFech==1 && $rel=='max'){
-//										$nom=$res[3];
-//										$tam=$res[0];
-//										echo "<tr>";
-////										echo "<td>".$ruta2."</td>"; // Ruta del fichero
-//										echo "<td>".$nom."</td>";
-//										echo "<td>".$fecha."</td>";
-//										echo "<td>".$tam."</td></tr>";
-//										echo "</tr>";
-//									}
-//							}else{
-//								$res=explode(" ",$line);
-//								$fecha="$res[1]";
-//								list($year,$month, $day) =explode("-",$res[1]);
-//								$fecha="$day-$month-$year";
-//								$nom=$res[3];
-//								$tam=$res[0];
-//								echo "<tr>";
-////											echo "<td>".$ruta2."</td>"; // Ruta del fichero
-//								echo "<td>".$nom."</td>";
-//								echo "<td>".$fecha."</td>";
-//								echo "<td>".$tam."</td></tr>";
-//								echo "</tr>";
-//							}
-//							
-//						}
-//						unset($aqui);
-							
-							//unset($contFecha);
-					
-					
-					
-?>
-					<?php 
-					/*
-					 * 
-					 * Si ninguna de las opciones se rellenó, mostrar los archivos subidos (los tar) YA ESTA
-
-						Si se rellena el nombre, pero no la fecha: Sobre todos los archivos, igualmente, 
-						buscar aquellos que contenga el archivo introducido		YA ESTA
-
-						si se rellena la fecha, los archivos.tar subidos en esa fecha	YA ESTA
-
-						y si se rellena fecha y nombre: Los archivos.tar subidos a esa 	YA ESTA
-						fecha que incluyan el nombre a buscar
-
-					 * */
-					
-					
-//					echo "<table>";
-//					if($brows>0){
-//						echo "<tr><th>Fichero</th><th class='inTable'>Tamaño</th><th class='inTable'>Fecha</th></tr>";
-//						while($row=mysql_fetch_array($bResult)){
-//							echo "<tr>";
-//								echo "<td class='inTable'>".$row['FILENAME']."</td>";
-//								echo "<td class='inTable'>".$row['SIZE']." KB </td>";
-//								echo "<td class='inTable'>".$row['DATE']."</td>";
-//							echo "</tr>";			
-//						}
-//					}else{
-//						//echo "No se han encontrado resultados para los parametros facilitados";
-//						echo "No se han encontrado resultados";
-//					}
-//					echo"</table>";
 				?>
-					
 				</div>
 			</div>
 		</div>
