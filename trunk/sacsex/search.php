@@ -240,13 +240,7 @@
 				</div>
 				<div class="tablaRes">
 				<?php
-					require_once 'Archive/Tar.php';
 					
-					function readTar($nombre){
-						$obj = new Archive_Tar($nombre); // name of archive
-						$files = $obj->listContent();       // array of file information
-					return $files;
-					}
 					echo "<table>";
 						$enc=false;
 						if ( $brows > 0 ){
@@ -257,8 +251,8 @@
 								$filename=$row['FILENAME'];	 //tar que estamos mirando
 								
 								if ( $bnom ){
-									//$dir=$GLOBALS['BKPS_PATH']."/".$id";
-									$dir="/home/giorgio/Escritorio/usuario1";
+									$dir=$GLOBALS['BKPS_PATH']."/".$id;
+									//$dir="/home/giorgio/Escritorio/usuario1";
 									$rutabkp="$dir/$filename";
 									// Funcion readTar para obtener contenido de tar backup
 									$tarA=readTar($rutabkp);											
