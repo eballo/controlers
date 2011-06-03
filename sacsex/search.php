@@ -260,10 +260,10 @@
 					
 					echo "<table>";
 						$enc=false;
-						if ( $brows > 0 ){
-							echo "<tr><th>Down</th><th>Nom</th><th>Tamany</th><th>Fecha</th><th>Accion</th></tr>"; 								
+						if ( $brows > 0 ){							
+							$title=true; 								
 							while($row=mysql_fetch_array($bResult)){
-								//echo "<tr><td>".$row['ID']. "</td></tr>";
+								
 								$idf=$row['ID'];  //id del archivo en la BD
 								$filename=$row['FILENAME'];	 //tar que estamos mirando
 								
@@ -271,35 +271,44 @@
 									$dir=$GLOBALS['BKPS_PATH']."/".$id;
 									$rutabkp="$dir/$filename";
 									// Funcion readTar para obtener contenido de tar backup
-									$tarA=readTar($rutabkp);											
+									$tarA=readTar($rutabkp);										
 									foreach ($tarA as $subelem){
-										//if ($subelem['size']>0){
-											$nomfitxer=basename($subelem['filename']);
-											if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
-												if(isset($dias) && $dias!=''){
-													echo "<tr>
-														  <td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
-													      <td>".$row['FILENAME']. "</td>
-														  <td>".$row['SIZE']. " KB </td>
-														  <td>".$row['DATE']. "</td>";
-													$enc=true;
-												} else{
-													echo "
-														 <tr><td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
-														 <td>".$subelem['filename']."</td>
-														  <td>".$subelem['size']." KB</td>
-														  <td>".date("d-m-Y", $subelem['mtime'])."</td>";
-													$enc=true;
+										$nomfitxer=basename($subelem['filename']);
+										if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
+											if(isset($dias) && $dias!=''){
+												if ($title){
+													echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
-												echo "<td>
-												<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
-												</td>";
-												echo "</tr>";
+												echo "<tr>
+													  <td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
+												      <td>".$row['FILENAME']. "</td>
+													  <td>".$row['SIZE']. " KB </td>
+													  <td>".$row['DATE']. "</td>";
+												$enc=true;
+											} else{
+												if ($title){
+													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
+												}
+												echo "<tr>
+													 <td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+													 <td>".$subelem['filename']."</td>
+													 <td>".$row['FILENAME']. "</td>
+												     <td>".$subelem['size']." KB</td>
+												     <td>".date("d-m-Y", $subelem['mtime'])."</td>";
+												$enc=true;
 											}
-										//}
+											echo "<td>
+											<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
+											</td>";
+											echo "</tr>";
+											$title=false;
+										}
 									}								
 								}else{
-									echo "<tr><td><img src='img/save_icon.png' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+									if ($title){
+										echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
+									}
+									echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 										<td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
 										<td>".$row['DATE']. "</td>";
@@ -308,6 +317,7 @@
 									</td>";
 									echo "</tr>";
 									$enc=true;
+									$title=false;
 								}
 							}
 						}

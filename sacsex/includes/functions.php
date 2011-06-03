@@ -339,7 +339,6 @@
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
 			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
-			//$ruta="/home/giorgio/Escritorio/usuario1/".$nomRes;
 
 			if(unlink($ruta)){	// Va mal el unlink, y no se porque?¿, no borra el tar fisico
 				$error='';
