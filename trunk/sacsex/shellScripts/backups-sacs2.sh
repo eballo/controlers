@@ -140,6 +140,7 @@ then
 					#Si ok, se recoge el sshLogin y se hace el scp sobre la ruta de temporal
 					sshLogin=`echo $uok | cut -d":" -f2-`
 					echo $sshLogin
+					chmod 660 $tarname
 					scp "$tarname" ${sshLogin}
 					copiado=$?
 					# Si scpOk, se ejecuta el service.bkpsnotify para subirlo a la BD
