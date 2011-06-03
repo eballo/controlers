@@ -93,9 +93,9 @@
 					break;
 				} 
 				if ($_POST['rel']=='min'){
-					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) < $dias";
+					$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) < $dias";
 				}else{
-					$dateQ=" AND TIMESTAMPDIFF($text,DATE,curdate()) >= $dias";
+					$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) >= $dias";
 				}
 			}else{
 				$dateQ='';
@@ -263,7 +263,6 @@
 						if ( $brows > 0 ){							
 							$title=true; 								
 							while($row=mysql_fetch_array($bResult)){
-								
 								$idf=$row['ID'];  //id del archivo en la BD
 								$filename=$row['FILENAME'];	 //tar que estamos mirando
 								
@@ -280,26 +279,26 @@
 													echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
 												echo "<tr>
-													  <td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
-												      <td>".$row['FILENAME']. "</td>
-													  <td>".$row['SIZE']. " KB </td>
-													  <td>".$row['DATE']. "</td>";
+													<td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
+											      	<td>".$row['FILENAME']. "</td>
+												  	<td>".$row['SIZE']. " KB </td>
+													<td>".fechaEsp($row['TIMEDATE']). "</td>";
 												$enc=true;
-											} else{
-												if ($title){
+											}else{
+												if($title){
 													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
 												echo "<tr>
-													 <td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
-													 <td>".$subelem['filename']."</td>
-													 <td>".$row['FILENAME']. "</td>
-												     <td>".$subelem['size']." KB</td>
-												     <td>".date("d-m-Y", $subelem['mtime'])."</td>";
+												 	<td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+												 	<td>".$subelem['filename']."</td>
+												 	<td>".$row['FILENAME']. "</td>
+											     	<td>".$subelem['size']." KB</td>
+													<td>".date("d-m-Y H:i:s",$subelem['mtime'])."</td>";
 												$enc=true;
 											}
 											echo "<td>
-											<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
-											</td>";
+												<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
+												</td>";
 											echo "</tr>";
 											$title=false;
 										}
@@ -311,7 +310,7 @@
 									echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 										<td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
-										<td>".$row['DATE']. "</td>";
+										<td>".fechaEsp($row['TIMEDATE']). "</td>";
 									echo "<td>
 									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
 									</td>";
@@ -325,7 +324,6 @@
 							echo "<tr><td>No se han encontrado resultados para los parametros facilitados</td></tr>";
 						}
 					echo "</table>";
-
 				?>
 				</div>
 			</div>

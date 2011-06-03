@@ -113,7 +113,7 @@ then
 				done
 				
 				#Creamos el comprimido de las rutas especificadas 
-				tarname="${destDateAppend}.tar.gz"
+				tarname="${id}_${destDateAppend}.tar.gz"
 				echo "TAR: $tarname"
 				a=${rvalidas[*]}
 				tar -cvzf "$tarname" `echo $a` >>${log} 2>>${errorlog}
@@ -131,12 +131,12 @@ then
 				((size=$size/1024))
 				echo $size
 				#1.- Se pide confirmacion de que el espacio maximo no haya sido superado
-
+ 
 				uok=`links -dump "http://$SVR_CONN/sacsex/services/service.uploadOk.php?user=$user&pass=$pwd5md&file=$tarname&size=$size"` #Pedimos autorizacion de subida
 				ok=`echo $uok | cut -d":" -f1`
 				if [ "$ok" == 0 ]
 				then
-					hoy=`date +%Y-%m-%d`
+					hoy=`date +'%Y-%m-%d %H:%M:%S'`
 					#Si ok, se recoge el sshLogin y se hace el scp sobre la ruta de temporal
 					sshLogin=`echo $uok | cut -d":" -f2-`
 					echo $sshLogin
