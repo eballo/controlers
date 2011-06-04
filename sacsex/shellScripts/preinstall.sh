@@ -1,6 +1,18 @@
 # !/bin/bash
-#Script que comprueba los requisitos previos de instalacion y genera 
-# el sacsex.properties
+#
+# Nombre: preinstall.sh
+# Autores: Giorgio y Cristina
+# Descripción:
+#  Script de instalación Sacs-ex
+#  Comprueba los requisitos previos de instalación
+#  Genera el sacsex.properties
+#  Configura el crontab
+# Requisitos:
+#  Para un buena y correcta ejecución del programa
+#  Tener instalado la aplicación links
+#  Tener instalado la aplicación zenity
+#  Tener el script backups-sacs2.sh en el mismo directorio que este script
+#
 
 linksOk=`whereis links | grep bin`
 # Ruta de fichero para editar crontab
@@ -141,8 +153,8 @@ else
 	# Pedimos los datos del servidor
 	if [ "$zenityOk" ] && [ $res -eq 0 ]
 	then
-		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor" 2>/dev/null`
-		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web" 2>/dev/null`
+		SVR_IP=`zenity --entry --title="Datos Del Servidor" --text="Introduce la direccion IP del servidor"`
+		SVR_PORT=`zenity --entry --title="Datos Del Servidor" --text="El puerto abierto para los servicios de servidor web"`
 	else
 		echo "Introduce la direccion IP del servidor"
 		read SVR_IP
@@ -187,22 +199,26 @@ else
 		SVR_CONN=${SVR_IP}:${SVR_PORT}
 		if [ "$zenityOk" ]
 		then
-		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login" 2>/dev/null`
-			password=`zenity --entry --title="SACS-EX Login" --hide-text --text="$loginName, introduce tu contrasena" 2>/dev/null`
+		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login"`
+			password=`zenity --entry --title="SACS-EX Login" --hide-text --text="$loginName, introduce tu contrasena"`
 		else
 			echo "Introduce tu login"
 			read loginName
 			echo "$loginName, introduce tu contraseña"
 			read password
 		fi 
-		
+		# Conexión con el servicio para convertir pass a md5
 		pass=`links -dump "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$password"`
 		pwd5md=`echo $pass | cut -d'/' -f2`
+
+        # Conexión con el servicio para autenticar y proceder a instalar
 		busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$loginName&pass=$pwd5md&install=true"`
+
 		# Recojo el id y si se puede o no proceder a la instalacion 
 		id=`echo $busca | cut -f2 -d":"`
 		installOk=`echo $busca | cut -f1 -d":"`
-		## Si todo es correcto Genero el fichero de propiedades:
+
+		# Si todo es correcto Genero el fichero de propiedades:
 		if [ "$installOk" == '2' ]
 		then
 			home=`echo ~`
@@ -220,7 +236,7 @@ else
 			user=$loginName
 			pass=$pwd5md
 			
-			
+			# Conexión con el servicio para notificar la instalación a la base de datos
 			instalado=`links -dump "http://$SVR_CONN/sacsex/services/service.install.php?user=$user&pass=$pass"`
 			if [ "$instalado" -eq 0 ] 
 			then
@@ -264,14 +280,10 @@ else
 						# Guardado de contenido de fichero en crontab
 						crontab $cron
 						if [ $? -eq 0 ];then
-							echo "###################################"
 							echo " crontab configurado correctamente"
-							echo "###################################"
 							ok=0
 						else
-							echo "###########################################"
 							echo " Error, no se ha podido configurar crontab"
-							echo "###########################################"
 						fi
 					fi
 				;;
@@ -289,14 +301,10 @@ else
 							# Guardado de contenido de fichero en crontab
 							crontab $cron
 							if [ $? -eq 0 ];then
-								echo "###################################"
 								echo " crontab configurado correctamente"
-								echo "###################################"
 								ok=0
 							else
-								echo "###########################################"
 								echo " Error, no se ha podido configurar crontab"
-								echo "###########################################"
 							fi
 						fi
 					fi
@@ -308,7 +316,6 @@ else
 						if [ "$mes" -eq 0 ]
 						then
 							echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
-			#                echo "* * 1 * * cp -R $dirBackup $dirServidor" >> $cron
 							echo "* * 1 * * /bin/bash backups-sacs2.sh" >> $cron
 						elif [ "$mes" -eq 1 ]
 						then
@@ -321,14 +328,11 @@ else
 						# Guardado de contenido de fichero en crontab
 						crontab $cron
 						if [ $? -eq 0 ];then
-							echo "###################################"
 							echo " crontab configurado correctamente"
-							echo "###################################"
 							ok=0
 						else
-							echo "###########################################"
 							echo " Error, no se ha podido configurar crontab"
-							echo "###########################################"
+							#echo "###########################################"
 						fi
 					fi
 				;;
@@ -341,13 +345,14 @@ else
 					fi
 				;;
 				esac
+
 				if [ $ok ]
 				then
 					if [ "$zenityOk" ]
 					then
-						zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null
+						zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n Para gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null
 					else
-						echo -e "La aplicacion ha sido instalada correctamente.\n para Gestionar sus directorios, \n puede hacerlo desde la pagina web."
+						echo -e "La aplicacion ha sido instalada correctamente.\n Para gestionar sus directorios, \n puede hacerlo desde la pagina web."
 					fi
 				fi
 			else
@@ -370,3 +375,5 @@ else
 		fi
 	fi
 fi
+
+

@@ -1,5 +1,7 @@
 <?php
-	/** 
+	/**
+	 * auth.php
+	 * Este servicio es utilizado por el script 'install.sh'
 	 * Servicio auth.php que recibe como parametros el usuario, password en md5 y un boleano para instalar 
 	 * Comprueba si existe el usuario en la base de datos y si tiene instalada la aplicación.
 	 * Campo INSTALL de la tabla user
