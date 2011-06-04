@@ -1,5 +1,7 @@
 <?php
-	/** 
+	/**
+	 * install.php
+	 * Este servicio es utilizado por el script 'install.sh' 
 	 * Servicio install.php que recibe como parametros usuario y pass en md5
 	 * Modifica el campo INSTALAT de 0 a 1 del usuario en la tabla user
 	 * conforme se ha instalado la aplicacion.
