@@ -176,11 +176,7 @@
 					<?php
 					if ($error == 1){
 						/* Error al validar un archivo nulo */
-						echo "Directorio nulo no valido.";
-						/*echo "<script type='text/javascript'>
-							alert('$error');
-						</script>";*/
-					}
+						echo "Directorio nulo no valido.";					}
 					?>
 				</div>
 				File: <input type="text" name='filepath' size="40"/>
@@ -278,9 +274,9 @@
 												if ($title){
 													echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
-												echo "<tr>
-													<td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td> 
-											      	<td>".$row['FILENAME']. "</td>
+												echo "<tr>";	
+												echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+													<td>".$row['FILENAME']. "</td>
 												  	<td>".$row['SIZE']. " KB </td>
 													<td>".fechaEsp($row['TIMEDATE']). "</td>";
 												$enc=true;
@@ -288,9 +284,9 @@
 												if($title){
 													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
-												echo "<tr>
-												 	<td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
-												 	<td>".$subelem['filename']."</td>
+												echo "<tr>";
+												echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+													<td>".$subelem['filename']."</td>
 												 	<td>".$row['FILENAME']. "</td>
 											     	<td>".$subelem['size']." KB</td>
 													<td>".date("d-m-Y H:i:s",$subelem['mtime'])."</td>";
