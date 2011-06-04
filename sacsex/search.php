@@ -275,7 +275,7 @@
 													echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
 												echo "<tr>";	
-												echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+												echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 													<td>".$row['FILENAME']. "</td>
 												  	<td>".$row['SIZE']. " KB </td>
 													<td>".fechaEsp($row['TIMEDATE']). "</td>";
@@ -285,7 +285,7 @@
 													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 												}
 												echo "<tr>";
-												echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+												echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 													<td>".$subelem['filename']."</td>
 												 	<td>".$row['FILENAME']. "</td>
 											     	<td>".$subelem['size']." KB</td>
@@ -303,7 +303,7 @@
 									if ($title){
 										echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
 									}
-									echo "<tr><td><img src='img/downloadIcon.gif' onclick=\"descargarFichero('".$row['ID']."')\"></td>
+									echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 										<td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
 										<td>".fechaEsp($row['TIMEDATE']). "</td>";
