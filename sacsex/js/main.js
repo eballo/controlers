@@ -62,5 +62,5 @@
 	}
 	
 	function descargarFichero( idfile ){
-		document.location='download.php?idfile=' + idfile ;
+	document.location='download.php?idfile=' + idfile ;
 	}
