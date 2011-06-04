@@ -134,7 +134,7 @@ $rows=mysql_num_rows($result);
 			<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
 			<?php 
 				if ($rows >0){
-					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th>Max por Subida</th><th>Espacio Max Total</th><th>Accion</th></tr>";
+					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th colspan=2>Max por Subida</th><th colspan=2>Espacio Max Total</th><th>Accion</th></tr>";
 					while ($row=mysql_fetch_array($result)){
 						echo "<tr id='data".$row["ID"]."'>";
 							if ($row["INSTALAT"] == "1"){
@@ -144,8 +144,8 @@ $rows=mysql_num_rows($result);
 						}
 						echo "<td>" . $row["ID"] . "</td>".
 						"<td>" . $row["NAME"] ."</td>".
-						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\">KB</td>
-						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\">KB</td>";
+						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>
+						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>";
 						if (!esAdmin($row["ID"], $adminLink)){
 							echo "<td>
 									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
