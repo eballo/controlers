@@ -1,23 +1,29 @@
 <?php
-	include_once "../includes/servicesHeaders.php";
+	/**
+	 * invalidpath.php
+	 * 
+	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Servicio invalidpath.php que recibe como parametro ruta de directorio, usuario y password en md5
+	 * Modifica el campo a invalido de la BD con un '1' si la ruta no es valida 
+	 * Retorna '/0' si la notificación a la base de datos es correcta
+	 * 		   '/1' si no se ha podido hacer la notificacion o usuario invalido
+	 */
 
-	// Recibe ruta de directorio, nombre y password de usuario
-	// Modifica el campo VALID en tabla 'filepath'
-	//		Por defecto VALID es 0
-	// 		Si la ruta FILEPATH no existe VALID es 1
+	include_once "../includes/servicesHeaders.php";
 	
 	$ruta=$_GET['dir'];
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	
-	echo "$ruta, $user, $pass";
+	// echo "$ruta, $user, $pass";
 	$link=conectar('bdsintesi');
 	$id=verificaUser($user,$pass,$link);
-	echo "ID:".$id;
+	// echo "ID:".$id;
 	if ( $id != ''){
+		// Notificación a BD con '1' de ruta invalida
 		$invQuery = "UPDATE filepath SET VALID=1 WHERE FILEPATH='$ruta' AND USER_ID=$id";
 		$res=mysql_query($invQuery,$link);
-		echo "Res=$res";
+		// echo "Res=$res";
 		if ($res){
 			echo "/0";
 		}else{

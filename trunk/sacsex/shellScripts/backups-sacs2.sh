@@ -8,10 +8,10 @@
 # Version : 1.5                                                    #
 #                                                                  #
 # Desc: Copia de elementos definidos en un fichero por red         #
-# * Requisitos de funcionamiento:                                  #
-# 	* El host destino debe tener la clave publica del cliente  		#
-#  de no ser así el script no funcionará                          #
-#       * El host cliente debe tener instalado el paquete links    #
+#     Requisitos de funcionamiento:                                #
+# 	  * El host destino debe tener la clave publica del cliente    #
+#     de no ser así el script no funcionará                        #
+#     * El host cliente debe tener instalado el paquete links      #
 #                                                                  #
 #################################################################### 
 
@@ -19,6 +19,7 @@
 
 SACSEXHOME="$HOME/.sacsexBckps"
 SUSER=sacs
+
 #Variables globales###
 errors=0             
 numfiles=0           
@@ -34,6 +35,7 @@ function log(){
 	#Concatenamos los datos al fichero
 	echo "[  `date +"%Y/%m/%d %H-%M-%S"`   ] - $1" >>$log
 }
+
 #Separador en el fichero de log
 log " ##### SACSEX-BKP #####" 
 
@@ -46,7 +48,7 @@ echo -e "\033[0;31m ################################################# \033[0m"
 
 if [ -f "$propiertiesFile" ]
 then
-	#Cargando parÃ¡metros de configuraciÃ³n.
+	#Cargando parámetros de configuración.
 	for elem in `cat $propiertiesFile`
 	do
 		if [ `echo $elem | grep "SACS_SVR_IP=" | wc -l` -eq 1 ]
@@ -143,11 +145,12 @@ then
 					chmod 660 $tarname
 					scp "$tarname" ${sshLogin}
 					copiado=$?
-					# Si scpOk, se ejecuta el service.bkpsnotify para subirlo a la BD
+					# Si scp Ok, se ejecuta el service.bkpsnotify para subirlo a la BD
 					if [ $copiado -eq 0 ]
 					then
 						echo "OK"
-						log "$ruta Copiado"					
+						log "$ruta Copiado"
+                        # Se mueve el tar del directorio temporal al directorio final mediante el servicio			
 						res=`links -dump "http://$SVR_CONN/sacsex/services/service.bckpsnotify.php?user=$user&pass=$pwd5md&file=$tarname&date=$hoy&size=$size"` 
 						ok=`echo $res | cut -d: -f1`
 						if [ "$ok" == 'Error' ]
