@@ -42,11 +42,15 @@
 					$text='YEAR';
 				break;
 			} 
-			$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) >= $dias";
+			$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) >=". $dias;
 			$query="SELECT * FROM backups WHERE USER_ID=$id".$dateQ.";";
-			$res=mysql_query($quey,$link);
+echo $query;
+			$res=mysql_query($query,$link);
 			$path=$GLOBALS['BKPS_PATH']."/".$id;
+			echo $path;
 			while ($row=mysql_fetch_array($res)){
+				echo $path."/".$row['FILENAME'];
+
 				if(unlink($path."/".$row['FILENAME'])){
 					$delQ="DELETE from backups WHERE USER_ID=".$id." AND ID=".$row['ID'];
 					$res=mysql_query($delQ,$link);			
