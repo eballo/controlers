@@ -18,12 +18,41 @@
 	$file=$_GET['file'];
 	$date=$_GET['date'];
 	$size=$_GET['size'];
-	
-	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
+	$bd=$GLOBALS['MYSQL_BDNAME'];
+	$link=conectar($bd);
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
 	if ( $id!=''){
-		
+		$purgarQ="SELECT VALOR,FREQ from purga WHERE USER_ID=$id";
+		$res=mysql_query($purgarQ,$link);
+		$purgarA=mysql_fetch_array($res);
+		$valor=$purgarA[0];
+		$freq=$purgarA[1];
+		if ($valor!=0){
+			//Pongo comentario
+			$dias=$valor;
+			switch ($freq) {
+				case 0:
+					$text='DAY';
+					break;
+				case 1:
+					$text='MONTH';
+					break;
+				case 2:
+					$text='YEAR';
+				break;
+			} 
+			$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) >= $dias";
+			$query="SELECT * FROM backups WHERE USER_ID=$id".$dateQ.";";
+			$res=mysql_query($quey,$link);
+			$path=$GLOBALS['BKPS_PATH']."/".$id;
+			while ($row=mysql_fetch_array($res)){
+				if(unlink($path."/".$row['FILENAME'])){
+					$delQ="DELETE from backups WHERE USER_ID=".$id." AND ID=".$row['ID'];
+					$res=mysql_query($delQ,$link);			
+				}
+			}
+		}						
 		$oldname=$GLOBALS['TMP_PATH']."/".$file;
 		$filename=explode("_",$file);
 		$filename=$filename[1]; //modifico el nombre del fichero para quitarle el ID de usuario
