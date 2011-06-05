@@ -14,7 +14,7 @@
 	$pass=$_GET['pass'];
  	$fich="";
  	
- 	$link=conectar('bdsintesi');
+ 	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
  	$id=verificaUser($user, $pass, $link);
 	if ( $id != ''){
 	 	$query="SELECT FILEPATH FROM filepath where USER_ID='$id' AND VALID=0";

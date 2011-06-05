@@ -15,7 +15,7 @@
 	$pass=$_GET['pass'];
 	$pwd5mdnew=$_GET['passnew'];
 
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);
 	
 	if ( $id != ''){

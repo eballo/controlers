@@ -19,7 +19,7 @@
 	$date=$_GET['date'];
 	$size=$_GET['size'];
 	
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
 	if ( $id!=''){

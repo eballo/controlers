@@ -16,7 +16,7 @@
 	$pass=$_GET['pass'];
 	
 	// echo "$ruta, $user, $pass";
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	$id=verificaUser($user,$pass,$link);
 	// echo "ID:".$id;
 	if ( $id != ''){
