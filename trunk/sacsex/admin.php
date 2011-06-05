@@ -4,7 +4,7 @@ include_once 'includes/adminAuthValidation.php';
 include_once 'includes/libsheader.php';
 
 //Conexion base de datos
-$adminLink=conectar('bdsintesi');
+$adminLink=conectar($GLOBALS['$MYSQL_BDNAME']);
 
 //Inicializacion de bbdd
 $errors="";
