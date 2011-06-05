@@ -152,6 +152,24 @@ else
 	then
 		zenityOk=`whereis zenity | grep bin`
 	fi
+	home=`echo ~`
+	if [ ! -d "$home/.sacsexBckps" ]
+	then
+		mkdir "$home/.sacsexBckps"
+	fi
+	SACSEXHOME="$home/.sacsexBckps"
+	chmod 700 $SACSEXHOME
+	if [ -f $SACSEXHOME/sacsex.properties ]
+	then
+		if [ "$zenityOk" ]
+		then
+			zenity --warning --title="SACS-EX Ya Instalado" --text="La aplicacion fue instalada con anterioridad desde esta cuenta de usuario linux.\n\n Si desea reconfigurar la misma, ejecute la opcion reconfigure.sh." 2>/dev/null
+		else
+			echo -e "La aplicacion fue instalada con anterioridad desde esta cuenta de usuario linux.\n\n Si desea reconfigurar la misma, ejecute la opcion reconfigure.sh."					
+		fi
+		exit 1
+	fi
+	propiertiesFile="$SACSEXHOME/sacsex.properties"
 	# Pedimos los datos del servidor
 	if [ "$zenityOk" ] && [ $res -eq 1 ]
 	then
@@ -207,7 +225,7 @@ else
 			echo "Introduce tu login"
 			read loginName
 			echo "$loginName, introduce tu contraseña"
-			read password
+			read -s password
 		fi 
 		# Conexión con el servicio para convertir pass a md5
 		pass=`links -dump "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$password" 2>/dev/null`
@@ -229,12 +247,17 @@ else
 				mkdir "$home/.sacsexBckps"
 			fi
 			SACSEXHOME="$home/.sacsexBckps"
-			if [ ! -f $SACSEXHOME/sacsex.properties ]
+			if [ -f $SACSEXHOME/sacsex.properties ]
 			then
-				touch $SACSEXHOME/sacsex.properties
+				if [ "$zenityOk" ]
+				then
+					zenity --warning --title="SACS-EX Ya Instalado" --text="La aplicacion fue instalada con anterioridad desde esta cuenta de usuario linux.\n\n Si desea reconfigurar la misma, ejecute la opcion reconfigure.sh." 2>/dev/null
+				else
+					echo -e "La aplicacion fue instalada con anterioridad desde esta cuenta de usuario linux.\n\n Si desea reconfigurar la misma, ejecute la opcion reconfigure.sh."					
+				fi
+				exit 1
 			fi
 			propiertiesFile="$SACSEXHOME/sacsex.properties"
-			# sshLogin="sacs@${SVR_IP}"
 			user=$loginName
 			pass=$pwd5md
 			
@@ -332,7 +355,6 @@ else
 							ok=0
 						else
 							echo " Error, no se ha podido configurar crontab"
-							#echo "###########################################"
 							error=1
 						fi
 					fi
@@ -350,6 +372,7 @@ else
 				
 				if [ $ok ]
 				then
+					touch $SACSEXHOME/sacsex.properties
 					echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
 					echo "SACS_USER=$user" >> $propiertiesFile
 					echo "SACS_PASS=$pass" >> $propiertiesFile
@@ -359,7 +382,7 @@ else
                     if [ ! "$sacsexInstall" ]
                     then
                         if [ "$zenityOk" ];then
-						    zenity --warning --title="Warn" --text="Para proceder con la instalación sera necesario ejecutar con root un comando, porfavor introduzca la password de root." 2>/dev/null
+						    zenity --warning --title="Atencion Se necesita a root" --text="Para proceder con la instalación sera necesario ejecutar con root un comando, porfavor introduzca la password de root." 2>/dev/null
 					    else
 						    echo -e "Para proceder con la instalación sera necesario ejecutar con root un comando, porfavor introduzca la password de root."
 						    error=1
@@ -387,6 +410,13 @@ else
 					        fi
                             res=`links -dump "http://$SVR_CONN/sacsex/services/service.uninstall.php?user=$user&pass=$pwd5md"`
                         fi
+                    else
+						if [ "$zenityOk" ]
+						then
+							zenity --info --title="SACS-EX Instalado" --text="La aplicacion ha sido instalada correctamente.\n Para gestionar sus directorios, \n puede hacerlo desde la pagina web." 2>/dev/null
+						else
+							echo -e "La aplicacion ha sido instalada correctamente.\n Para gestionar sus directorios, \n puede hacerlo desde la pagina web."
+						fi
                     fi
 	
 				else
