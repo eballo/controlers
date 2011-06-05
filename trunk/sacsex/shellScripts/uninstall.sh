@@ -13,7 +13,14 @@ then
 	echo -e "Error: Es imprescindible tener instalado el paquete de links, para realizar las conexiones con el servidor. \n Para obtenerlo, utilice la orden:\n\n sudo apt-get install links"
 	exit 1
 else
-	zenityOk=`whereis zenity | grep bin`
+	zenity 2>"/tmp/sacs.zenityck" 
+	cat /tmp/sacs.zenityck | grep "open display"
+	res=$?
+	if [ $res -eq 1 ]
+	then
+		zenityOk=`whereis zenity | grep bin`
+	fi
+	
 	if [ "$zenityOk" ]
 	then
 		zenity --question --title="Desinstalacion SACSEX" --text="Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar?" 2>/dev/null

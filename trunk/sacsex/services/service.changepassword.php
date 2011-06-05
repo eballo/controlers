@@ -19,7 +19,7 @@
 	$id=verificaUser($user, $pass, $link);
 	
 	if ( $id != ''){
-		$query="UPDATE user SET PASSWORD=$pwd5mdnew WHERE ID=$id";
+		$query="UPDATE user SET PASSWORD='$pwd5mdnew' WHERE ID=$id";
 		$result=mysql_query($query,$link);
 		//Devolvera 0 si se ha podido proceder. En caso contrario devuelve 1		
 		if ($result){
