@@ -5,8 +5,8 @@
 	require_once 'Archive/Tar.php';
 					
 	function readTar($nombre){
-		$obj = new Archive_Tar($nombre); // name of archive
-		$files = $obj->listContent();       // array of file information
+		$obj = new Archive_Tar($nombre); // nombre del archivo
+		$files = $obj->listContent();       // array con informacion del fichero
 	return $files;
 	}
 	
@@ -81,38 +81,6 @@
 		list($h, $m, $s) = explode(':',$time);
 		return "$d-$M-$y $h:$m:$s";
 	}
-	
-//	/**
-//	 * Función 
-//	 * @param unknown_type $fecha1
-//	 * @param unknown_type $freq
-//	 * @param unknown_type $num
-//	 * @return number
-//	 */
-//	function comparafechas($fecha1,$freq,$num){
-//		$hoy=getdate();
-//		$hoy=$hoy['year']."-".$hoy['mon']."-".$hoy['mday'];
-//		
-//		$datetime1 = new DateTime($fecha1);
-//		$datetime2 = new DateTime($hoy);
-//		$interval = $datetime1->diff($datetime2);
-//		if($freq=='mes'){
-//			$dias=$num*30;
-//		}elseif($freq=='anyos'){
-//			$dias=$num*365;
-//		}else{
-//			$dias=$num;
-//		}
-//		$total=$interval->format('%a');
-//		
-//		if (($total-$dias)>0){
-//			return 1;
-//		}elseif(($total-$dias)<0){
-//			return -1;
-//		}else{
-//			return 0;
-//		}
-//	}
 
 	//Funciones de acceso a Base de Datos
 	
@@ -126,8 +94,6 @@
 		$ip=$GLOBALS['MYSQL_IP'];
 		$user=$GLOBALS['MYSQL_USER'];
 		$pass=$GLOBALS['MYSQL_PASSWORD'];
-		//$link=mysql_connect($MYSQL_IP,$MYSQL_USER,$MYSQL_PASSWORD);
-		//TODO Buscar form mas simple, si la hay
 		$link=mysql_connect($ip,$user,$pass);
 		if ( ! $link ){
 			echo "Error al intentar conectar a mysql";
@@ -241,28 +207,10 @@
 			if ($result == ""){
 				$res="Problema insertando el usuario en la base de datos";
 			}else{
-				// modifico la mascara para que por defecto el usuario del grupo tambien pueda escribir
-				//umask(octdec("0002"));				
-				// La carpeta shared debe existir y tener permisos 2777 
-				// ademas de pertenecer al grupo sacs. El usuario creado exclusivamente
 				$a=$GLOBALS['BKPS_PATH'];
-				echo "A".$a;
 				$newdir=$GLOBALS['BKPS_PATH']."/".$id;
-				echo "ne".$newdir;
 				if(!mkdir("$newdir")){
 					$res='Error al crear la carpeta';
-//				}else{		//TODO fg
-//					$enlace="/home/sacs/bkps/".$id;	
-//					// Al igual que la ruta de $newdir, la ruta /home/sacs/bkps Debe existir y tener los
-//					// mismos permisos establecidos  
-//			     	if(symlink($newdir,$enlace)){
-//			     		echo "<script type='javascript'>
-//							alert('Creado el enlace');
-//						</script>";
-//			     	}else{
-//			     		$res='Error al crear el enlace';
-//			     		rmdir($newdir);
-//			     	}
 				}
 			}
 			
@@ -312,13 +260,6 @@
 			$directorio=$GLOBALS['BKPS_PATH']."/".$id;
 			if(eliminaRecursivo($directorio)==0){
 				$error='';
-//				$dir="/home/sacs/bkps/".$id; //TODO Enlace then?
-				// unlink --> elimina ficheros o lo que sea!! diferente de directorio
-//				if(!unlink($dir)){
-//					$error="Error al eliminar el enlace";
-//				}else{
-//					$error='';
-//				}
 			}else{
 				$error="Error al eliminar el directorio";
 			}			
@@ -344,9 +285,8 @@
 		$res=mysql_query($delQuery,$link);
 		if ($res){
 			//Si lo encuentro, lo elimino tambien del Servidor
-			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; //Hay que perdir como sera el nombre real.
-
-			if(unlink($ruta)){	// Va mal el unlink, y no se porque?¿, no borra el tar fisico
+			$ruta=$GLOBALS['BKPS_PATH']."/".$id."/".$nomRes; 
+			if(unlink($ruta)){	
 				$error='';
 			}else{
 				$error="Error al eliminar el archivo";
