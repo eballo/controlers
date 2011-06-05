@@ -18,7 +18,6 @@
 #Constantes
 
 SACSEXHOME="$HOME/.sacsexBckps"
-SUSER=sacs
 
 #Variables globales###
 errors=0             
