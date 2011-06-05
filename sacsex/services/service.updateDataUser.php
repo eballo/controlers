@@ -2,7 +2,7 @@
 	include_once '../includes/servicesHeaders.php';
 
 	//Conexion base de datos
-	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
+	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	$update = "";
 	$update2 = "";
 	
