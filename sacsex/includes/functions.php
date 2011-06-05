@@ -214,6 +214,9 @@
 				}else{
 					$pq="INSERT INTO purga (VALOR,FREQ,USER_ID) values (0,0,$id)";
 					$res=mysql_query($pq,$link);
+					if( $res == ""){
+						$res="Error: No se pudo establecer la configuracion del purgatorio";
+					}
 				}
 			}
 			
