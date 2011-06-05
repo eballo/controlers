@@ -9,7 +9,7 @@
 	$configB="searchButtonClick";
 	$searchB="searchButtonOff";
 	
-	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
+	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
 	} else{

@@ -1,7 +1,7 @@
 <?php
 include_once 'includes/headers.php';
 
-$link=conectar($GLOBALS['$MYSQL_BDNAME']);
+$link=conectar($GLOBALS['MYSQL_BDNAME']);
 
 //Inicializacion variables
 if (isset($_GET['loginError'])){

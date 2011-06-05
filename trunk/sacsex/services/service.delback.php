@@ -6,7 +6,7 @@
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	
-	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
+	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);
 	if ( $id != ''){
 		$delQuery = "DELETE FROM backups WHERE ID='$idf' AND USER_ID=$id";
