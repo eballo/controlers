@@ -6,7 +6,7 @@
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);
 	if ( $id != ''){
 		$query="UPDATE user SET INSTALAT=0 WHERE ID=$id";

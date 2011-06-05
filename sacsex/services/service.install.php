@@ -15,7 +15,7 @@
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);
 	if ( $id != ''){
 		// Se modifica el valor a 1 del campo INSTALAT de la base de datos
