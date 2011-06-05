@@ -8,6 +8,9 @@
 	//variables para el control de los botones
 	$configB="searchButtonClick";
 	$searchB="searchButtonOff";
+	$purgaB="purgaButton";
+	
+	$purgaError=false; //variable para controlar los errores del formulario purga
 	
 	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	if (isset($_GET['error'])){
@@ -20,13 +23,18 @@
 	$dateQ='';
 	$searchStile='display:none';
 	$insertStile='display:block';
+	$purgaStile='display:none';
+	
 	$bnom='';
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
 		/* Accion subir */
 		if ($accion == "subir"){
-			$insertStile='display:block';
+			
 			$searchStile='display:none';
+			$insertStile='display:block';
+			$purgaStile='display:none';
+	
 			$filepath = $_POST['filepath'];
 			if ($filepath != ""){
 				$insQuery="INSERT INTO filepath (FILEPATH,USER_ID) VALUES ('$filepath',$id)";
@@ -46,8 +54,10 @@
 		}
 		/* Accion borrar */
 		elseif($accion == "borrar"){
-			$insertStile='display:block';
 			$searchStile='display:none';
+			$insertStile='display:block';
+			$purgaStile='display:none';
+	
 			$idFile = $_GET['idFile'];
 			$delQuery = "DELETE FROM filepath WHERE IDF=$idFile AND USER_ID=$id";
 			$res = mysql_query($delQuery,$link);
@@ -62,7 +72,8 @@
 		elseif($accion == "buscar"){
 			$searchStile='display:block';
 			$insertStile='display:none';
-			
+			$purgaStile='display:none';
+				
 			$configB="searchButton";
 			$searchB="searchButtonOffClick";
 			
@@ -101,6 +112,28 @@
 			}else{
 				$dateQ='';
 			}
+		}elseif ($accion=='upurga') {
+			$searchStile='display:none';
+			$insertStile='display:none';
+			$purgaStile='display:block';
+			
+			$configB="searchButton";
+			$searchB="searchButtonOff";
+			$purgaB="purgaButtonClick";
+			
+			if (isset($_POST['freqPurga']) && isset($_POST['numPurga'])){
+				if ( esNumero($_POST['freqPurga']) && esNumero($_POST['numPurga']) ){
+					$updatePurga = "UPDATE PURGA SET VALOR=".$_POST['numPurga']." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
+					$resPurga = mysql_query($updatePurga,$link);
+					if (!$resPurga){
+						$valorPurgaError=$_POST['numPurga'];
+						$purgaError=true;
+					}
+				}else{
+					$valorPurgaError=$_POST['numPurga'];
+					$purgaError=true;
+				}
+			}
 		}
 	}
 /* Query para accion Buscar ficheros tar */
@@ -111,6 +144,16 @@
 		$brows=mysql_num_rows($bResult);
 	}
 
+/* Query para cargar los datos de la purga */
+	$query="SELECT * FROM purga WHERE USER_ID=$id";
+	$dataPurga=mysql_query($query,$link);
+	$purgaRows=-1;
+	if($dataPurga){
+		$purgaDataA=mysql_fetch_array($dataPurga);
+		$modoPurga=$purgaDataA['FREQ'];
+		$valorPurga=$purgaDataA['VALOR'];
+	}
+	
 /* Query para accion Borrar */
 	$query="SELECT * FROM filepath WHERE USER_ID=$id";
 	$result=mysql_query($query,$link);
@@ -166,6 +209,7 @@
 		<div class='searchHead'>
 			<div id='configB' class='<?php echo "$configB"; ?>' onclick="configuracion()"> Configuracion</div>
 			<div id='searchB' class='<?php echo "$searchB"; ?>' onclick="busqueda()"> Busqueda</div>
+			<div id='purgaB' class='<?php echo "$purgaB"; ?>' onclick="purga()"> Lipieza automatica</div>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
@@ -322,6 +366,37 @@
 						}
 					echo "</table>";
 				?>
+				</div>
+			</div>
+		</div>
+		<div class="purgaContainer">
+			<div id="purgaForm" class="purgaForm"  style="<?php echo $purgaStile; ?>;">
+				<div class="<?php if ($purgaError){ echo "purgaInfoError"; }else{ echo "purgaInfo";} ?>"  >
+				Configure la limpieza automatizada de sus backups seleccionado el numero de
+				<b>dias , meses o años</b>  que desea guardar, 
+				<b>la tarea de limpieza será lanzada cuando el cliente sacsex lanze un nuevo backup.</b>
+				</div>
+				<div class="purgaFormContainer">
+					<form action="search.php?accion=upurga" method="POST">
+					<table>
+						<tr>
+							<td>
+								<input <?php if ($purgaError){ echo "class='inputError'"; } ?> type="text" name="numPurga" size="4" value="<?php if(!$purgaError) { echo $valorPurga; }else{ echo $valorPurgaError; } ?>"></input>
+							</td>
+							<td>
+								<select name="freqPurga"  >
+									<option value="0"  <?php if ( $modoPurga == 0){ echo "selected='selected'"; }?>>Dia/s</option>
+									<option value="1" <?php if ( $modoPurga == 1){ echo "selected='selected'"; }?>>Mes/es</option>
+									<option value="2" <?php if ( $modoPurga == 2){ echo "selected='selected'"; }?>>Año/s</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+						<b> Para no eliminar backpus introduzca 0.</b>
+						<div style="position:relative; left:300px; top:10px;">
+							<input type='submit' value='Guardar' />
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>

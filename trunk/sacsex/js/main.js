@@ -9,21 +9,46 @@
 		$(".searchButtonOffClick:first").addClass("searchButtonOff");
 		$(".searchButtonOffClick:first").removeClass("searchButtonOffClick");
 		
+		$(".purgaButtonClick:first").addClass("purgaButton");
+		$(".purgaButtonClick:first").removeClass("purgaButtonClick");
+		
+		
 		$(".searchButton:first").addClass("searchButtonClick");
 		$(".searchButton:first").removeClass("searchButton");
 		
 		$("#searchFiles").fadeIn("slow");
 		$("#buscaForm").fadeOut("slow");
+		$("#purgaForm").fadeOut("slow");	
 	}
 	function busqueda(){
 		$(".searchButtonClick:first").addClass("searchButton");
 		$(".searchButtonClick:first").removeClass("searchButtonClick");
 		
+		$(".purgaButtonClick:first").addClass("purgaButton");
+		$(".purgaButtonClick:first").removeClass("purgaButtonClick");
+		
 		$(".searchButtonOff:first").addClass("searchButtonOffClick");
 		$(".searchButtonOff:first").removeClass("searchButtonOff");
 		
 		$("#searchFiles").fadeOut("slow");
-		$("#buscaForm").fadeIn("slow");		
+		$("#buscaForm").fadeIn("slow");	
+		$("#purgaForm").fadeOut("slow");	
+	}
+	
+	function purga(){
+
+		$(".searchButtonClick:first").addClass("searchButton");
+		$(".searchButtonClick:first").removeClass("searchButtonClick");
+		
+		$(".purgaButton:first").addClass("purgaButtonClick");
+		$(".purgaButton:first").removeClass("purgaButton");
+		
+		$(".searchButtonOffClick:first").addClass("searchButtonOff");
+		$(".searchButtonOffClick:first").removeClass("searchButtonOffClick");
+		
+		$("#searchFiles").fadeOut("slow");
+		$("#buscaForm").fadeOut("slow");	
+		$("#purgaForm").fadeIn("slow");		
 	}
 	
 	function marcarChange( id ){
