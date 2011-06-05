@@ -20,5 +20,7 @@ if (estos pending estan hechos){
 	La gloria uoooooooooooooooooooooooooooooo xD
 }
 */
- 
+
 ?>
+
+ Controlar k maximo por dia no es superior al total y alreves
