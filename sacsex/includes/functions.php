@@ -211,6 +211,9 @@
 				$newdir=$GLOBALS['BKPS_PATH']."/".$id;
 				if(!mkdir("$newdir")){
 					$res='Error al crear la carpeta';
+				}else{
+					$pq="INSERT INTO purga (VALOR,FREQ,USER_ID) values (0,0,$id)";
+					$res=mysql_query($pq,$link);
 				}
 			}
 			
