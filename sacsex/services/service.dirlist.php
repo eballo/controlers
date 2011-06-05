@@ -1,8 +1,14 @@
 <?php
+	/**
+	 * dirlist.php
+	 * 
+	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Servicio dirlist.php que recibe como parametro usuario y password en md5
+	 * Recoge todas las rutas de la base de datos y las valida
+	 * Retorna las rutas validas separadas por un espacio
+	 */
+	
  	include_once '../includes/servicesHeaders.php';
- 
- 	//Recibe nombre y password(md5) de usuario y 
- 	// devuelve todas las rutas validas almacenadas en la BD separadas por un espacio
 
  	$user=$_GET['user'];
 	$pass=$_GET['pass'];

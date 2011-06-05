@@ -1,10 +1,18 @@
 <?php
+	/**
+	 * uploadOk.php
+	 * 
+	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Servicio uploadOk.php que recibe como parametro usuario, password en md5, nombre del fichero tar y tamaño del tar
+	 * Comprueba que el fichero tar backup no exceda el tamaño de subida ni que sobrepase el limite de espacio en servidor.
+	 * Retorna los datos de conexión para scp si ha cumplido las condiciones
+	 */
+
 	include_once '../includes/servicesHeaders.php';
-//TODO Servicio de peticion de aprobacion de subida de backups:
+
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	$file=$_GET['file'];
-//	$date=$_GET['date'];
 	$size=$_GET['size'];
 	
 	$link=conectar('bdsintesi');
@@ -24,9 +32,9 @@
 			$esp=mysql_fetch_array($espRes);
 			$total=$esp['total'];//Total de espacio ocupado en el Servidor
 			if ($size > $dlimit || (($size+$total)>$limit)){
-				echo "Error: Usuario excedio la quota maxima de espacio";
+				echo "Error: Usuario ha excedido la cuota maxima de espacio";
 			}else{
-				//Si se puede hacer el insert, devuelve los datos de conexion para el scp
+				// Devuelve los datos de conexion para el scp
 				echo "0:".$GLOBALS['USER_BKPS']."@".$GLOBALS['IP_SERVER'].":".$GLOBALS['TMP_PATH'];
 			}
 		}else{

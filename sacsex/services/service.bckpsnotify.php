@@ -1,13 +1,18 @@
 <?php
+	/**
+	 * bckpsnotify.php
+	 * 
+	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Servicio bckpsnotify.php que recibe como parametro usuario, password en md5, nombre del fichero tar
+	 * fecha de creación del tar y tamaño del tar
+	 * Comprueba, por un lado que el fichero tar no exceda el tamaño de subida ni el espacio total reservado.
+	 * Mueve el fichero tar que esta en la carpeta temporal de backups hacia el directorio final.
+	 * Retorna '0:' si la notificación del insert del fichero tar backup ha sido correcto 
+	 * 			Caso contrario una descripción del error
+	 */
+
 	include_once '../includes/servicesHeaders.php';
-//TODO Servicio de notificacion de backups:
-//		bckpsnotify.php: Recibe como parametros de entrada  usuario, passwd, fichero, fecha i tama�o
-//			Comprueba, por un lado que el fichero no exceda el tama�o permitido diario ni el total de 
-//			espacio reservado al usuario.
-//			Si todo es correcto, sube los datos a la tabla backups i devuelve un 0
-//			Si no, devolver� un 1 si el usuario ha excedido el espacio
-//				y un 2 CUANDO?
-//			En cualquier caso (devuelva un 1 o un 2) se eliminara el BK del servidor
+
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	$file=$_GET['file'];
