@@ -209,7 +209,7 @@
 		<div class='searchHead'>
 			<div id='configB' class='<?php echo "$configB"; ?>' onclick="configuracion()"> Configuracion</div>
 			<div id='searchB' class='<?php echo "$searchB"; ?>' onclick="busqueda()"> Busqueda</div>
-			<div id='purgaB' class='<?php echo "$purgaB"; ?>' onclick="purga()"> Lipieza automatica</div>
+			<div id='purgaB' class='<?php echo "$purgaB"; ?>' onclick="purga()"> Limpieza automatica</div>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
