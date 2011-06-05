@@ -9,7 +9,7 @@
 	$configB="searchButtonClick";
 	$searchB="searchButtonOff";
 	
-	$link=conectar('bdsintesi');
+	$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 	if (isset($_GET['error'])){
 		$error = $_GET['error'];
 	} else{
@@ -19,11 +19,11 @@
 	$hoy=getdate();
 	$dateQ='';
 	$searchStile='display:none';
-	//$insertStile='display:none';
 	$insertStile='display:block';
 	$bnom='';
 	if (isset($_GET['accion'])){
 		$accion = $_GET['accion'];
+		/* Accion subir */
 		if ($accion == "subir"){
 			$insertStile='display:block';
 			$searchStile='display:none';
@@ -44,6 +44,7 @@
 				</script>";
 			}
 		}
+		/* Accion borrar */
 		elseif($accion == "borrar"){
 			$insertStile='display:block';
 			$searchStile='display:none';

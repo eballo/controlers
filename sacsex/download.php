@@ -7,7 +7,7 @@
 	if (isset($_GET['idfile'])){
 		$idFile=$_GET['idfile'];
 		$uid=$_SESSION['id'];
-		$link=conectar('bdsintesi');
+		$link=conectar($GLOBALS['$MYSQL_BDNAME']);
 		$fileQ="SELECT filename FROM backups WHERE ID=".$idFile." AND USER_ID=".$uid;
 		$fileName = mysql_query($fileQ,$link);
 		/**
