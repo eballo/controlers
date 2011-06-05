@@ -1,31 +1,34 @@
 @CHARSET "ISO-8859-1";
 
-*{
+* {
 	font-family: sans-serif;
 	font-size: small;
 }
-.body{
-	width: 100%;	
+
+.body {
+	width: 100%;
 }
-.mainContainer{
-	margin:0px auto;
-	width: 820px;
-}
-.mainContainerSearch{
-	position:relative;
-	top: 80px;
-	margin:0px auto;
+
+.mainContainer {
+	margin: 0px auto;
 	width: 820px;
 }
 
-.addUserFormContainer{
+.mainContainerSearch {
+	position: relative;
+	top: 80px;
+	margin: 0px auto;
+	width: 820px;
+}
+
+.addUserFormContainer {
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	position: fixed;
-	float:left;
+	float: left;
 	width: 280px;
-	top: 70px;	
-	background-color: #d9e2ff;
+	top: 70px;
+	background-color: #c4d2fd;
 	border: 1px solid;
 	border-color: #000;
 	text-shadow: -1px 1px 0px #FFF;
@@ -43,18 +46,18 @@ input {
 	-webkit-border-radius: 4px;
 	border: 1px solid;
 	border-color: #000;
-	margin:3px;
+	margin: 3px;
 }
 
-.userListContainer{
+.userListContainer {
 	position: relative;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
-	float:right;
+	float: right;
 	top: 50px;
-	width: 470px;	
+	width: 470px;
 	margin-top: 10px;
-	background-color: #d9e2ff;
+	background-color: #c4d2fd;
 	border: 1px solid;
 	border-color: #000;
 	text-shadow: -1px 1px 0px #FFF;
@@ -66,22 +69,22 @@ input {
 	-webkit-box-shadow: 6px 6px 8px #ababab;
 }
 
-.userListContainer table{
+.userListContainer table {
 	border: 0;
-	width: 100%;	
+	width: 100%;
 	text-align: left;
 }
 
-img[onclick]{
-	cursor: pointer;	
+img[onclick] {
+	cursor: pointer;
 }
 
-.loginContainer{
+.loginContainer {
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	position: relative;
 	top: 50px;
-	width: 300px;	
+	width: 300px;
 	background-color: #d9e2ff;
 	border: 1px solid;
 	border-color: #000;
@@ -97,132 +100,143 @@ img[onclick]{
 	margin: 0px auto;
 }
 
-.loginContainer table{
+.loginContainer table {
 	border: 0px;
 	width: 100%;
 }
 
-.inputCorrect{
+.inputCorrect {
 	font-size: small;
-	background-color: #bef39e;	
+	background-color: #bef39e;
 }
 
-.inputError{
+.inputError {
 	font-size: small;
 	background-color: #f39e9e;
 }
 
-.botonForm{
-	float:right;	
+.botonForm {
+	float: right;
 }
-.headerMain{
+
+.headerMain {
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	width: 100%;
 	height: 50px;
 	position: fixed;
- 	top: 0px;
- 	left: 0px;
+	top: 0px;
+	left: 0px;
 	background-color: #4e6bc9;
 	border-bottom: 1px solid;
-	border-color: #000;	
+	border-color: #000;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
 	z-index: 99;
 }
-.headerMainLimitError{
+
+.headerMainLimitError {
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	width: 100%;
 	height: 50px;
 	position: fixed;
- 	top: 0px;
- 	left: 0px;
+	top: 0px;
+	left: 0px;
 	background-color: #ff2323;
 	border-bottom: 1px solid;
-	border-color: #000;	
+	border-color: #000;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
 	z-index: 99;
 }
-.headerMainLimitWarn{
+
+.headerMainLimitWarn {
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	width: 100%;
 	height: 50px;
 	position: fixed;
- 	top: 0px;
- 	left: 0px;
+	top: 0px;
+	left: 0px;
 	background-color: #d4e100;
 	border-bottom: 1px solid;
-	border-color: #000;	
+	border-color: #000;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
 	z-index: 99;
 }
-.cierreSesion{
+
+.cierreSesion {
 	position: absolute;
 	right: 0px;
-	cursor: pointer;	
-	padding:10px;
+	cursor: pointer;
+	padding: 10px;
 }
-.tituloHeader{
+
+.tituloHeader {
 	position: absolute;
 	left: 0px;
-	padding:10px;
+	padding: 10px;
 	font-size: x-large;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
 }
-.infoUser{
+
+.infoUser {
 	position: absolute;
-	left:175px;
+	left: 175px;
 	top: 15px;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
 }
-.infoUser span{
+
+.infoUser span {
 	margin: 6px;
 }
+
 .searchHead {
-    margin: 0 auto;
-    width: 220px;
+	margin: 0 auto;
+	width: 390px;
 }
-.searchButton{
-	position:relative;
+
+.searchButton {
+	position: relative;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	width: 100px;
 	height: 20px;
-	border:solid 1px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
-	padding-left:8px;
-	padding-top:5px;
-	text-shadow: -1px 1px 0px #FFF;	
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
-.searchButtonClick{
-	position:relative;
+
+.searchButtonClick {
+	position: relative;
 	cursor: pointer;
-	top:5px;
+	top: 5px;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
 	width: 100px;
 	height: 20px;
-	border:solid 1px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
-	padding-left:8px;
-	padding-top:5px;
+	padding-left: 8px;
+	padding-top: 5px;
 	text-shadow: -1px 1px 0px #FFF;
 }
-.searchButtonOff{
-	position:relative;
+
+.searchButtonOff {
+	position: relative;
 	left: 120px;
 	top: -27px;
 	cursor: pointer;
@@ -230,18 +244,19 @@ img[onclick]{
 	background-repeat: repeat-x;
 	width: 100px;
 	height: 20px;
-	border:solid 1px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
-	padding-left:8px;
-	padding-top:5px;
-	text-shadow: -1px 1px 0px #FFF;	
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
-.searchButtonOffClick{
-	position:relative;
+
+.searchButtonOffClick {
+	position: relative;
 	left: 120px;
 	top: -22px;
 	cursor: pointer;
@@ -249,94 +264,197 @@ img[onclick]{
 	background-repeat: repeat-x;
 	width: 100px;
 	height: 20px;
-	border:solid 1px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
-	padding-left:8px;
-	padding-top:5px;
-	text-shadow: -1px 1px 0px #FFF;	
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
-.searchFormContainer{
-   position: absolute;
-    top: 50px;
-    width: 100%;
-}
-.buscaForm{
-	margin: 0 auto;
-	width: 750px;
-	border:solid 1px;
+
+.purgaButton {
+	position: relative;
+	left: 240px;
+	top: -54px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 130px;
+	height: 20px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	background-color: #d9e2ff;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
-	padding:10px;
-	text-shadow: -1px 1px 0px #FFF;	
-}
-.valoresBusc{
-	position:relative;
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
 
-.tablaRes{
-	position:relative;
-	
+.purgaButtonClick {
+	position: relative;
+	left: 240px;
+	top: -49px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 130px;
+	height: 20px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
 }
-.tablaRes table{
+
+.searchFormContainer {
+	position: absolute;
+	top: 70px;
+	width: 100%;
+}
+
+.buscaForm {
+	margin: 0 auto;
+	width: 750px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #c4d2fd;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding: 10px;
+	text-shadow: -1px 1px 0px #FFF;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+}
+
+.purgaContainer {
+	position: absolute;
+	top: 70px;
+	width: 100%;
+}
+
+.purgaForm {
+	margin: 0 auto;
+	width: 400px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #c4d2fd;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding: 10px;
+	text-shadow: -1px 1px 0px #FFF;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+}
+
+.purgaInfo {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #a2c397;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+}
+
+.purgaInfoError {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #c39797;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+}
+
+.purgaFormContainer {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #e0e0e0;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+	margin-top: 15px;
+}
+
+.valoresBusc {
+	position: relative;
+}
+
+.tablaRes {
+	position: relative;
+}
+
+.tablaRes table {
 	width: 100%;
 	text-align: left;
 }
 
-.inTable{
+.inTable {
 	text-align: left;
 }
-	
-.searchFiles{
-	width:100%;
+
+.searchFiles {
+	width: 100%;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 }
-.altaFiles{
+
+.altaFiles {
 	position: relative;
 	margin: 0 auto;
-	width:450px;
-	border:solid 1px;
+	width: 450px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	background-color: #d9e2ff;
+	background-color: #c4d2fd;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
-	padding-left:5px;
-	text-shadow: -1px 1px 0px #FFF;	
-	}
+	padding-left: 5px;
+	text-shadow: -1px 1px 0px #FFF;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+}
 
-.borraFile{
+.borraFile {
 	position: relative;
 	top: 25px;
 	margin: 0 auto;
-	width:450px;
-	border:solid 1px;
+	width: 450px;
+	border: solid 1px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
-	background-color: #d9e2ff;
+	background-color: #c4d2fd;
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
-	padding-left:5px;
-	text-shadow: -1px 1px 0px #FFF;	
+	padding-left: 5px;
+	text-shadow: -1px 1px 0px #FFF;
+		background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
 }
 
-
-.inputEditable{
-	border:0;
+.inputEditable {
+	border: 0;
 	background-color: transparent;
-	width:80px;
+	width: 80px;
 	border-color: #000;
 	text-shadow: -1px 1px 0px #FFF;
 }
-.inputEditable:FOCUS{
-	border:1px solid;
+
+.inputEditable:FOCUS {
+	border: 1px solid;
 	background-color: transparent;
-	width:80px;
+	width: 80px;
 	border-color: #000;
 	text-shadow: -1px 1px 0px #FFF;
 	height: 18px;
