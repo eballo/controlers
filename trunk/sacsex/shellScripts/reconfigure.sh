@@ -137,7 +137,7 @@ then
 	exit 1
 else
     zenity 2>"/tmp/sacs.zenityck" 
-    cat /tmp/sacs.zenityck | grep "open display" 2>/dev/null
+    cat /tmp/sacs.zenityck | grep "open display" >/dev/null
     res=$?
     if [ $res -eq 1 ]
     then
