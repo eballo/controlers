@@ -42,8 +42,8 @@ if (isset($_GET['action'])){
 		}
 		
 		if ( validarInput($user, "string") && validarInput($dlimit, "numerico") && validarInput($limit, "numerico")) {
-			$errors= newUser($user,$pass,megastokas($limit),megastokas($dlimit),$adminLink);
 			if ($pass==$pass2 ){
+				$errors= newUser($user,$pass,megastokas($limit),megastokas($dlimit),$adminLink);
 				if ($errors == ""){
 					$user="";
 					$pass="";
