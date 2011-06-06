@@ -58,8 +58,7 @@ else
 				newCron="/tmp/cron_$USER"
 				if [ `echo $res | cut -d":" -f1` -eq 0 ]
 				then
-					crontab -l | grep -v backups > $newCron
-					crontab -r
+					crontab -l | grep -v sacsex > $newCron
 					crontab "$newCron" 2>/dev/null
 					if [ $? -eq 0 ]
 					then

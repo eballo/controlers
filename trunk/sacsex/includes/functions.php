@@ -193,37 +193,41 @@
 	 */
 	function newUser($user,$pass,$limit,$dlimit,$link){
 
-		$res= "";
-		$id=buscaUser($user,$link);
-		if ($id==''){
-			srand(time());
-			$id = (rand()%9999999)+1000000;
-			while (!idValido($id,$link)){
+		if ($dlimit>$limit){
+			$res="Error: La cuota Diaria supera al espacio total permitido";
+		}else{
+			$res= "";
+			$id=buscaUser($user,$link);
+			if ($id==''){
+				srand(time());
 				$id = (rand()%9999999)+1000000;
-			}
-			$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
-			$result=mysql_query($query,$link);
-		
-			if ($result == ""){
-				$res="Problema insertando el usuario en la base de datos";
-			}else{
-				$a=$GLOBALS['BKPS_PATH'];
-				$newdir=$GLOBALS['BKPS_PATH']."/".$id;
-				if(!mkdir("$newdir")){
-					$res='Error al crear la carpeta';
+				while (!idValido($id,$link)){
+					$id = (rand()%9999999)+1000000;
+				}
+				$query="INSERT into user values ($id,'$user','$pass',0,0,$limit,$dlimit)";
+				$result=mysql_query($query,$link);
+			
+				if ($result == ""){
+					$res="Problema insertando el usuario en la base de datos";
 				}else{
-					$pq="INSERT INTO purga (VALOR,FREQ,USER_ID) values (0,0,$id)";
-					$res=mysql_query($pq,$link);
-					if( $res == ""){
-						$res="Error: No se pudo establecer la configuracion del purgatorio";
+					$a=$GLOBALS['BKPS_PATH'];
+					$newdir=$GLOBALS['BKPS_PATH']."/".$id;
+					if(!mkdir("$newdir")){
+						$res='Error al crear la carpeta';
 					}else{
-						$res="";
+						$pq="INSERT INTO purga (VALOR,FREQ,USER_ID) values (0,0,$id)";
+						$res=mysql_query($pq,$link);
+						if( $res == ""){
+							$res="Error: No se pudo establecer la configuracion del purgatorio";
+						}else{
+							$res="";
+						}
 					}
 				}
+				
+			}else{
+				$res= "Ya consta en la base de datos un usuario con los datos introducidos";
 			}
-			
-		}else{
-			$res= "Ya consta en la base de datos un usuario con los datos introducidos";
 		}
 		
 		return $res;
