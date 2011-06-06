@@ -15,6 +15,15 @@
 #                                                                  #
 #################################################################### 
 
+#Validacion de la instalacion
+SACSEXHOME="$HOME/.sacsexBckps"
+if [ ! -f $SACSEXHOME/sacsex.properties ]
+then
+        echo "Sacsex no esta instalado para este usuario."
+        exit 1
+fi
+
+
 #Constantes
 
 SACSEXHOME="$HOME/.sacsexBckps"
