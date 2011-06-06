@@ -132,6 +132,39 @@ img[onclick]{
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
 }
+
+.headerMainLimitError {
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #ff2323;
+	border-bottom: 1px solid;
+	border-color: #000;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	z-index: 99;
+}
+
+.headerMainLimitWarn {
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 100%;
+	height: 50px;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	background-color: #d4e100;
+	border-bottom: 1px solid;
+	border-color: #000;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	z-index: 99;
+}
+
 .cierreSesion{
 	position: absolute;
 	right: 0px;
@@ -158,11 +191,11 @@ img[onclick]{
 }
 .searchHead {
     margin: 0 auto;
-    width: 220px;
+    width: 390px;
 }
 .searchButton{
 	position:relative;
-    left: -60px;
+    left: -140px;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -180,7 +213,7 @@ img[onclick]{
 }
 .searchButtonClick{
 	position:relative;
-    left: -60px;
+    left: -140px;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
 	background-repeat: repeat-x;
@@ -198,7 +231,7 @@ img[onclick]{
 }
 .searchButtonOff {
 	position:relative;
-	left: 60px;
+	left: -20px;
 	top: -23px;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
@@ -217,7 +250,7 @@ img[onclick]{
 }
 .searchButtonOffClick{
 	position:relative;
-	left: 60px;
+	left: -20px;
 	top: -23px;
 	cursor: pointer;
 	background-image: url('../img/reflejoMin.png');
@@ -232,9 +265,47 @@ img[onclick]{
 	padding-top:5px;
 	text-shadow: -1px 1px 0px #FFF;	
 }
+.purgaButton {
+	position: relative;
+	left: 120px;
+	top: -46px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 145px;
+	height: 20px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
+}
+
+.purgaButtonClick {
+	position: relative;
+	left: 120px;
+	top: -46px;
+	cursor: pointer;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	width: 145px;
+	height: 20px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #d9e2ff;
+	padding-left: 8px;
+	padding-top: 5px;
+	text-shadow: -1px 1px 0px #FFF;
+}
+
 .searchFormContainer{
    position: absolute;
-    top: 50px;
+    top: 70px;
     width: 100%;
     left: 0px;
 }
@@ -249,6 +320,66 @@ img[onclick]{
 	-moz-box-shadow: 0px 6px 8px #ababab;
 	padding:10px;
 	text-shadow: -1px 1px 0px #FFF;	
+}
+
+.purgaContainer {
+	position: absolute;
+	top: 70px;
+	width: 100%;
+	left: 0px;
+}
+
+.purgaForm {
+	margin: 0 auto;
+	width: 400px;
+	border: solid 1px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	background-color: #c4d2fd;
+	-webkit-box-shadow: 0px 6px 8px #ababab;
+	-moz-box-shadow: 0px 6px 8px #ababab;
+	padding: 10px;
+	text-shadow: -1px 1px 0px #FFF;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+}
+
+.purgaInfo {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #a2c397;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+}
+
+.purgaInfoError {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #c39797;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+}
+.purgaSaveB{
+	position:relative; 
+	left:140px; 
+	top:5px;
+}
+.purgaFormContainer {
+	margin: 0 auto;
+	width: 370px;
+	background-color: #e0e0e0;
+	background-image: url('../img/reflejoMin.png');
+	background-repeat: repeat-x;
+	border-color: #000;
+	border: 1px solid;
+	padding: 10px;
+	margin-top: 15px;
 }
 .valoresBusc{
 	position:relative;
