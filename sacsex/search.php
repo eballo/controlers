@@ -393,7 +393,7 @@
 						</tr>
 					</table>
 						<b> Para no eliminar backpus introduzca 0.</b>
-						<div style="position:relative; left:300px; top:10px;">
+						<div class="purgaSaveB">
 							<input type='submit' value='Guardar' />
 						</div>
 					</form>

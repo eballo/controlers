@@ -374,7 +374,11 @@ img[onclick] {
 	border: 1px solid;
 	padding: 10px;
 }
-
+.purgaSaveB{
+	position:relative; 
+	left:300px; 
+	top:10px;
+}
 .purgaFormContainer {
 	margin: 0 auto;
 	width: 370px;
