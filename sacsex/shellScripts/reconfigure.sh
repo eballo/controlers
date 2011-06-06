@@ -2,8 +2,6 @@
 
 # reconfigure.sh
 
-# OJO: Controlar el tamaño de los tamaños maxima de subida ##########################################
-#   Modificar en uninstall.sh el elif del properties file 
 
 
 # Ruta de fichero para editar crontab
@@ -240,10 +238,9 @@ else
                                 pwd5mdnew=`echo $passnew | cut -d'/' -f2`
                                 
                                 # Conexión con el servicio para validar usuario y notificar a la BD el nuevo password
-                                cambio=`links -dump "http://$SVR_CONN/sacsex/services/service.changepassword.php?user=$user&pass=$pwd5md&passnew=$pwd5mdnew" 2>/dev/null`
+                                cambio=`links -dump "http://$SVR_CONN/sacsex/services/service.changepassword.php?user=$user&pass=$pwd5mdold&passnew=$pwd5mdnew" 2>/dev/null`
                                 cambioOk=`echo $cambio | cut -d':' -f1`
-                                
-                                if [ "$cambioOk" - 0 ]
+                                if [ "$cambioOk" == '0' ]
                                 then
                                     pass=$pwd5mdnew
                                     echo "SACS_SVR_IP=$SVR_CONN" >$propiertiesFile
@@ -295,8 +292,8 @@ else
 		oldCron="/tmp/cron_${USER}_old"
                                 
                 # Copia de configuracion crontab establecido a un fichero por si ocurre algun error
-                crontab -l > $cron
-		crontab -l > $oldCron
+                crontab -l | grep -v sacsex > $cron # Recogemos La nueva configuracion (sin la linea de ejecucion de la aplicacion)
+				crontab -l > $oldCron
                 case "$frec" in
                 0)
                     if validarHora
