@@ -216,6 +216,8 @@
 					$res=mysql_query($pq,$link);
 					if( $res == ""){
 						$res="Error: No se pudo establecer la configuracion del purgatorio";
+					}else{
+						$res="";
 					}
 				}
 			}
