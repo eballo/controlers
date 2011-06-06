@@ -123,7 +123,8 @@
 			
 			if (isset($_POST['freqPurga']) && isset($_POST['numPurga'])){
 				if ( esNumero($_POST['freqPurga']) && esNumero($_POST['numPurga']) ){
-					$updatePurga = "UPDATE PURGA SET VALOR=".$_POST['numPurga']." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
+					$updatePurga = "UPDATE purga SET VALOR=".$_POST['numPurga']." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
+					echo "$updatePurga";
 					$resPurga = mysql_query($updatePurga,$link);
 					if (!$resPurga){
 						$valorPurgaError=$_POST['numPurga'];
