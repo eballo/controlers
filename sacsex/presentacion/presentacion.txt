@@ -1,0 +1,48 @@
+- Explicacion de lo que presentareis
+	* que es , para que sirve
+
+- Explicacion del funcionamiento en formato esquema 
+	* Maquinas implicadas
+	* vias de comunicacion
+		*Metodos de comunicacion
+		*Seguridad de la comunicacion autentificacion
+	* Forma de subir ficheros
+		* Carpeta temporal con usuario limitado (Explicacion)
+		* Rsa necesario (Explicacion)
+		* Copia de la carpeta temporal a carpeta 
+			protegida que solo tiene acceso www-data
+		* servicio php para la descarga protegida con los roles del sacsex
+
+- Explicacion del servidor
+	* Apache - php - mysql - sshServer - iptables (Explicacion)
+	* Explicacion de la estructura directorios necesarios y permisos de los mismos (Explicacion)
+	* servicios programados para la comunicacion con el cliente (Explicacion de la copia de ficheros todos los pasos serivcios implicados)
+	* scripts php para la administracion del servicio , usuario / administrador
+	* mostrar pantalla administrador - dar de alta un usuario (Explicacion)
+	* mostrar pantalla usuario preparar directorios (alguno con error) y purga (Explicacion)
+
+- Explicacion del cliente 
+	* scripts shell con conexion a los servicios mediante links (Explicacion)
+	* lanzamiento del script de instalacion (Explicacion) poner una hora proxima a la explicacion (Por ejemplo 15 minutos )
+	* mostrar pantalla administracion confome sale el icono instalado.
+	* mostar crontab con la linea configurada.
+	* mostar sacsex.properties con la configuracion , permisos de lectura para proteger el MD5 (Explicacion)
+	* explicar como se desplega en el cliente la estructura de directorios carpetas
+	* explicar la exclusion del propio tar en caso de incluir la carpeta /tmp como directorio de backups 
+
+	----- EN este punto el backup se deberia haber ejecutado
+
+	* mostrar pantalla de usuario con los warns de los directorios incorrectos y eliminarlos con la cruz.
+	* mostrar el backup en pantalla , hacer una busqueda de un fichero contenido y jugar con los dias.
+	* Eliminar el backup.
+	* subir 3 ficheros 1 estado azul , al subir 2 estado warn , al subir 3 estado critico en la pantalla usuario.
+	* modificar las fechas por base de datos para demostrar que elimina y purga , en este punto 
+	demostrar k se puede ejecutar bajo demanda.
+	
+	Conclusiones
+		- Posibles mejoras :
+			* https
+			* incremental
+		- Explicacion de la facilidad con la que se podria montar mediante internet.
+		- Explicar que esta siendo utilizado en Sadiel.
+	
