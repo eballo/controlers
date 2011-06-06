@@ -124,7 +124,6 @@
 			if (isset($_POST['freqPurga']) && isset($_POST['numPurga'])){
 				if ( esNumero($_POST['freqPurga']) && esNumero($_POST['numPurga']) ){
 					$updatePurga = "UPDATE purga SET VALOR=".$_POST['numPurga']." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
-					echo "$updatePurga";
 					$resPurga = mysql_query($updatePurga,$link);
 					if (!$resPurga){
 						$valorPurgaError=$_POST['numPurga'];
@@ -374,8 +373,8 @@
 			<div id="purgaForm" class="purgaForm"  style="<?php echo $purgaStile; ?>;">
 				<div class="<?php if ($purgaError){ echo "purgaInfoError"; }else{ echo "purgaInfo";} ?>"  >
 				Configure la limpieza automatizada de sus backups seleccionado el numero de
-				<b>dias , meses o años</b>  que desea guardar, 
-				<b>la tarea de limpieza será lanzada cuando el cliente sacsex lanze un nuevo backup.</b>
+				<b>dias , meses o aï¿½os</b>  que desea guardar, 
+				<b>la tarea de limpieza serï¿½ lanzada cuando el cliente sacsex lanze un nuevo backup.</b>
 				</div>
 				<div class="purgaFormContainer">
 					<form action="search.php?accion=upurga" method="POST">
@@ -388,7 +387,7 @@
 								<select name="freqPurga"  >
 									<option value="0"  <?php if ( $modoPurga == 0){ echo "selected='selected'"; }?>>Dia/s</option>
 									<option value="1" <?php if ( $modoPurga == 1){ echo "selected='selected'"; }?>>Mes/es</option>
-									<option value="2" <?php if ( $modoPurga == 2){ echo "selected='selected'"; }?>>Año/s</option>
+									<option value="2" <?php if ( $modoPurga == 2){ echo "selected='selected'"; }?>>Aï¿½o/s</option>
 								</select>
 							</td>
 						</tr>
