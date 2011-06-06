@@ -45,10 +45,6 @@ function log(){
 	echo -e "$1" 
 }
 
-#Separador en el fichero de log
-log " ##### SACSEX-BKP #####" 
-
-
 #BANNER#
 echo -e "\033[0;31m ################################################# \033[0m"
 echo -e "\033[0;31m ####### \033[0m \033[0;33m SACSEX  1.0 \033[0m \033[0;34m BackUps por Red \033[0m \033[0;31m ####### \033[0m"

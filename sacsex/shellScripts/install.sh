@@ -18,7 +18,7 @@ linksOk=`whereis links | grep bin`
 sacsexInstall=`whereis sacsex | grep bin`
 
 # Ruta de fichero para editar crontab
-cron="/tmp/cron_$USER"
+newcron="/tmp/cron_$USER"
 
 function validarHora (){
     # Pide una hora en formato hh:mm para validar
@@ -146,7 +146,7 @@ then
 	exit 1
 else
 	zenity 2>"/tmp/sacs.zenityck" 
-	cat /tmp/sacs.zenityck | grep "open display"
+	cat /tmp/sacs.zenityck | grep "open display" 2>/dev/null
 	res=$?
 	if [ $res -eq 1 ]
 	then
@@ -261,11 +261,11 @@ else
 			user=$loginName
 			pass=$pwd5md
 			
+			
 			# Conexión con el servicio para notificar la instalación a la base de datos
 			instalado=`links -dump "http://$SVR_CONN/sacsex/services/service.install.php?user=$user&pass=$pass" 2>/dev/null`
 			if [ "$instalado" -eq 0 ] 
 			then
-				# echo "SACS_LOGIN=$sshLogin" >> $propiertiesFile
 				seguir=false
 
 				while ! $seguir
@@ -296,10 +296,10 @@ else
 						m=`echo $hora | cut -d: -f2`
 						
 						# Guardado de orden crontab en fichero
-						echo "# Copia de contenido Backup a Servidor a la(s) $hora todos los dias" > $cron
-						echo "$m $h * * * sacsex" >> $cron
+						crontab -l > $newcron
+						echo "$m $h * * * sacsex" >> $newcron
 						# Guardado de contenido de fichero en crontab
-						crontab $cron
+						crontab $newcron
 						if [ $? -eq 0 ];then
 							echo " crontab configurado correctamente"
 							ok=0
@@ -316,12 +316,11 @@ else
 						then
 							h=`echo $hora | cut -d: -f1`
 							m=`echo $hora | cut -d: -f2`
-							
+							crontab -l > $newcron
 							# Guardado de orden crontab en fichero
-							echo "# Copia de contenido Backup a Servidor a la(s) $hora en dia de la semana ($dia)" > $cron
-							echo "$m $h * * $dia /bin/bash backups-sacs2.sh" >> $cron
+							echo "$m $h * * $dia sacsex" >> $newcron
 							# Guardado de contenido de fichero en crontab
-							crontab $cron
+							crontab $newcron 2>/dev/null
 							if [ $? -eq 0 ];then
 								echo " crontab configurado correctamente"
 								ok=0
@@ -336,20 +335,19 @@ else
 					if validarMes
 					then
 						# Guardado de orden crontab en fichero
+						crontab -l > $newcron
 						if [ "$mes" -eq 0 ]
 						then
-							echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
-							echo "* * 1 * * /bin/bash backups-sacs2.sh" >> $cron
+							echo "* * 1 * * sacsex" >> $newcron
 						elif [ "$mes" -eq 1 ]
 						then
-							echo "# Copia de contenido Backup a Servidor (quincena de mes)" > $cron
-							echo "* * 15 * * /bin/bash backups-sacs2.sh" >> $cron
+							echo "* * 15 * * sacsex" >> $newcron
 						else
-							echo "# Copia de contenido Backup a Servidor (fin de mes)" > $cron
-							echo "* * 28 * * /bin/bash backups-sacs2.sh" >> $cron
+							echo "* * 28 * * sacsex" >> $newcron
 						fi
+						
 						# Guardado de contenido de fichero en crontab
-						crontab $cron
+						crontab $newcron 2>/dev/null
 						if [ $? -eq 0 ];then
 							echo " crontab configurado correctamente"
 							ok=0

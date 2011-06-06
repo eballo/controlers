@@ -137,7 +137,7 @@ then
 	exit 1
 else
     zenity 2>"/tmp/sacs.zenityck" 
-    cat /tmp/sacs.zenityck | grep "open display"
+    cat /tmp/sacs.zenityck | grep "open display" 2>/dev/null
     res=$?
     if [ $res -eq 1 ]
     then
@@ -290,11 +290,13 @@ else
                         seguir=true
                     fi
                 done
+
+		cron="/tmp/cron_$USER"
+		oldCron="/tmp/cron_${USER}_old"
                                 
                 # Copia de configuracion crontab establecido a un fichero por si ocurre algun error
-                cron_old="/tmp/cron_old_$USER"
-                echo $cron >> $cron_old
-
+                crontab -l > $cron
+		crontab -l > $oldCron
                 case "$frec" in
                 0)
                     if validarHora
@@ -303,7 +305,6 @@ else
                         m=`echo $hora | cut -d: -f2`
                         
                         # Guardado de orden crontab en fichero
-                        echo "# Copia de contenido Backup a Servidor a la(s) $hora todos los dias" > $cron
                         echo "$m $h * * * sacsex" >> $cron
                         # Guardado de contenido de fichero en crontab
                         crontab $cron
@@ -311,7 +312,7 @@ else
                             echo " crontab reconfigurado correctamente"
                             ok=0
                         else
-                            crontab $cron_old
+                            crontab $oldCron
                             echo " Error, no se ha podido reconfigurar crontab"
                             error=1
                         fi
@@ -326,7 +327,6 @@ else
                             m=`echo $hora | cut -d: -f2`
                             
                             # Guardado de orden crontab en fichero
-                            echo "# Copia de contenido Backup a Servidor a la(s) $hora en dia de la semana ($dia)" > $cron
                             echo "$m $h * * $dia sacsex" >> $cron
                             # Guardado de contenido de fichero en crontab
                             crontab $cron
@@ -334,7 +334,7 @@ else
                                 echo " crontab reconfigurado correctamente"
                                 ok=0
                             else
-                                crontab $cron_old
+                                crontab $oldCron
                                 echo " Error, no se ha podido reconfigurar crontab"
                                 error=1
                             fi
@@ -347,14 +347,11 @@ else
                         # Guardado de orden crontab en fichero
                         if [ "$mes" -eq 0 ]
                         then
-                            echo "# Copia de contenido Backup a Servidor (inicio de mes)" > $cron
                             echo "* * 1 * * sacsex" >> $cron
                         elif [ "$mes" -eq 1 ]
                         then
-                            echo "# Copia de contenido Backup a Servidor (quincena de mes)" > $cron
                             echo "* * 15 * * sacsex" >> $cron
                         else
-                            echo "# Copia de contenido Backup a Servidor (fin de mes)" > $cron
                             echo "* * 28 * * sacsex" >> $cron
                         fi
                         # Guardado de contenido de fichero en crontab
@@ -363,7 +360,7 @@ else
                             echo " crontab reconfigurado correctamente"
                             ok=0
                         else
-                            crontab $cron_old
+                            crontab $oldCron
                             echo " Error, no se ha podido reconfigurar crontab"
                             error=1
                         fi
