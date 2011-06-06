@@ -1,4 +1,4 @@
-@CHARSET "ISO-8859-1";
+@CHARSET "UTF-8";
 
 body{
 	background-image: url("../img/bg.png");
@@ -186,11 +186,15 @@ img[onclick] {
 	font-size: x-large;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
+	background-image: url("../img/Download-icon-32.png");
+	background-repeat: no-repeat;
+	background-position:right;
+	padding-right: 40px;	
 }
 
 .infoUser {
 	position: absolute;
-	left: 175px;
+	left: 205px;
 	top: 15px;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
