@@ -183,10 +183,14 @@ img[onclick]{
 	font-size: large;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #FFF;
+	background-image: url("../img/Download-icon-32.png");
+	background-repeat: no-repeat;
+	background-position:right;
+	padding-right: 40px;	
 }
 .infoUser{
 	position: absolute;
-	left:200px;
+	left:240px;
 	top: 15px;
 	text-shadow: -1px 1px 0px #DEDEDE;
 	color: #000;
