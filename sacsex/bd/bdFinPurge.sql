@@ -94,8 +94,8 @@ CREATE TABLE `purga` (
   `FREQ` tinyint(4) DEFAULT NULL,
   `USER_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_PURGA`),
-  KEY `FKUPU` (`USER_ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  CONSTRAINT `FKUPU` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`ID`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

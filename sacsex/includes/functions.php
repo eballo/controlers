@@ -82,6 +82,30 @@
 		return "$d-$M-$y $h:$m:$s";
 	}
 
+	 /**
+	  * Limpia un string preparandolo para utilizarlo en una consulta SQL
+	  * @param $value
+	  * @return unknown_type
+	  */
+	function limpiar($value){
+		$value=str_replace("'","",$value);
+		$value=str_replace(";","",$value);
+		$value=str_replace("&","",$value);
+		$value=str_replace("SELECT","",$value);
+		$value=str_replace("DELETE","",$value);
+		$value=str_replace("UPDATE","",$value);
+		$value=str_replace("INSERT","",$value);
+		$value=str_replace("DROP","",$value);
+		
+		
+		$value = trim(htmlentities($value)); // Evita introducción código HTML
+		
+		if (get_magic_quotes_gpc()) {	// quita los caracteres 
+			$value = stripslashes($value);
+		}
+		return $value;
+	}
+ 
 	//Funciones de acceso a Base de Datos
 	
 	/**

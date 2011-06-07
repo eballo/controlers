@@ -29,7 +29,7 @@
 		$valor=$purgarA[0];
 		$freq=$purgarA[1];
 		if ($valor!=0){
-			//Pongo comentario
+			//
 			$dias=$valor;
 			switch ($freq) {
 				case 0:

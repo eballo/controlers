@@ -58,7 +58,7 @@ if (isset($_GET['action'])){
 				}
 			}else{
 				$inputErrors['pass'] = "inputError";
-				$errors= "Error: La contrasenya no es identica.";
+				$errors= "Error: La contrase&ntilde;a no es id&eacute;ntica.";
 			}
 		}
 	}elseif ($accion == "delUser"){
@@ -80,7 +80,7 @@ $rows=mysql_num_rows($result);
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Pagina del Administrador de SACSEX</title>
+<title>P&aacute;gina del Administrador de SACSEX</title>
 <script type="text/javascript">
 
 	function validarPass(){
@@ -110,11 +110,11 @@ $rows=mysql_num_rows($result);
 			
 				</tr>
 				<tr>
-					<td>Contraseña: </td>
+					<td>Contrase&ntilde;a: </td>
 					<td><input class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass1' name='pass' /></td>
 				</tr>
 				<tr>
-					<td>Repite Contraseña: </td>
+					<td>Repite Contrase&ntilde;a: </td>
 					<td><input  class='<?php echo $inputErrors["pass"];?>'  type='password' id='pass2' name='passver' /></td>
 				</tr>
 				<tr>
@@ -134,7 +134,7 @@ $rows=mysql_num_rows($result);
 			<div style="padding-bottom: 10px;"><b>Listado de usuarios</b></div>
 			<?php 
 				if ($rows >0){
-					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th colspan=2>Max por Subida</th><th colspan=2>Espacio Max Total</th><th>Accion</th></tr>";
+					echo "<table><tr><th>Inst</th><th>ID</th><th>Usuario</th><th colspan=2>Max por Subida</th><th colspan=2>Espacio Max Total</th><th>Acci&oacute;n</th></tr>";
 					while ($row=mysql_fetch_array($result)){
 						echo "<tr id='data".$row["ID"]."'>";
 							if ($row["INSTALAT"] == "1"){
@@ -142,14 +142,14 @@ $rows=mysql_num_rows($result);
 						}else{
 							echo "<td></td>";
 						}
-						echo "<td>" . $row["ID"] . "</td>".
-						"<td>" . $row["NAME"] ."</td>".
-						"<td><input class='inputEditable' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>
-						<td><input class='inputEditable' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>";
+						echo "<td align='left'>" . $row["ID"] . "</td>".
+						"<td align='left'>" . $row["NAME"] ."</td>".
+						"<td><input class='inputEditable' style='text-align: right' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>
+						<td><input class='inputEditable' style='text-align: right' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>";
 						if (!esAdmin($row["ID"], $adminLink)){
 							echo "<td>
-									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
 									<img id='imgSave' src='img/save_icon.png' style='display:none' onclick=\"save('".$row["ID"]."')\"/>
+									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
 								</td>";
 						}else{
 							echo "<td>Bloqueado</td>";
@@ -158,11 +158,10 @@ $rows=mysql_num_rows($result);
 						}
 					echo "</table>";
 				}else{
-					echo "No hi ha cap usuari <br />";
+					echo "No hay usuarios registrados <br />";
 				}
 			?>
 		</div>
-		
 	</div>
 </div>
 </body>
