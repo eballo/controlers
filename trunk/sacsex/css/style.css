@@ -79,7 +79,9 @@ input {
 	width: 100%;
 	text-align: left;
 }
-
+.userListContainer th{
+	text-align:center;
+}
 img[onclick] {
 	cursor: pointer;
 }
@@ -138,6 +140,7 @@ img[onclick] {
 	-webkit-box-shadow: 0px 6px 8px #ababab;
 	-moz-box-shadow: 0px 6px 8px #ababab;
 	z-index: 99;
+	min-width: 850px;
 }
 
 .headerMainLimitError {

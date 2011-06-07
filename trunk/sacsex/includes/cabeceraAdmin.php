@@ -3,6 +3,6 @@
 		Sacsex V.1.0 Admin
 	</div>
 	<div class="cierreSesion">
-		<input type="button" value="Cerrar Sesion" onclick="javascript: document.location='logout.php'"/>
+		<input type="button" value="Cerrar Sesi&oacute;n" onclick="javascript: document.location='logout.php'"/>
 	</div>
 </div>

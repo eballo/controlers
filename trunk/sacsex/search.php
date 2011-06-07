@@ -207,9 +207,9 @@
 <div class="body">
 	<div class="mainContainerSearch">
 		<div class='searchHead'>
-			<div id='configB' class='<?php echo "$configB"; ?>' onclick="configuracion()"> Configuracion</div>
-			<div id='searchB' class='<?php echo "$searchB"; ?>' onclick="busqueda()"> Busqueda</div>
-			<div id='purgaB' class='<?php echo "$purgaB"; ?>' onclick="purga()"> Limpieza automatica</div>
+			<div id='configB' class='<?php echo "$configB"; ?>' onclick="configuracion()"> Configuraci&oacute;n</div>
+			<div id='searchB' class='<?php echo "$searchB"; ?>' onclick="busqueda()"> B&uacute;squeda</div>
+			<div id='purgaB' class='<?php echo "$purgaB"; ?>' onclick="purga()"> Limpieza autom&aacute;tica</div>
 		</div>
 		
 		<div id='searchFiles' class='searchFiles' style="<?php echo $insertStile ?>;">
@@ -274,17 +274,17 @@
 						<td><input type='text' name='fname' size='40'/></td>
 						<td>
 							<SELECT name="rel">
-								<optgroup label="relacion">
+								<optgroup label="relaci&oacute;n">
 									<OPTION value='min'>Hace menos de</OPTION>
-									<OPTION value='max'>Hace mas de</OPTION>
+									<OPTION value='max'>Hace m&aacute;s de</OPTION>
 								</optgroup>
 							</SELECT>
 							<input type=text name='numd' style="width:40px;" />
 							<select name='freq'>
 								<optgroup label="tiempo">
-									<option value='dias'>dias</option>
+									<option value='dias'>d&iacute;as</option>
 									<option value='meses'>meses</option>
-									<option value='anyos'>años</option>	
+									<option value='anyos'>a&ntilde;os</option>	
 								</optgroup>		
 							</select>
 						</td>
@@ -317,7 +317,7 @@
 										if ($nomfitxer == $nom){	// $nom -> nombre de fichero a buscar
 											if(isset($dias) && $dias!=''){
 												if ($title){
-													echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
+													echo "<tr><th>Down</th><th>Backup</th><th>Tama&ntilde;o</th><th>Fecha</th><th align=center>Acci&oacute;n</th></tr>";
 												}
 												echo "<tr>";	
 												echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
@@ -327,7 +327,7 @@
 												$enc=true;
 											}else{
 												if($title){
-													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
+													echo "<tr><th>Down</th><th>Fichero</th><th>Backup</th><th>Tama&ntilde;o</th><th>Fecha</th><th align=center>Acci&oacute;n</th></tr>";
 												}
 												echo "<tr>";
 												echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
@@ -337,7 +337,7 @@
 													<td>".date("d-m-Y H:i:s",$subelem['mtime'])."</td>";
 												$enc=true;
 											}
-											echo "<td>
+											echo "<td align=center>
 												<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
 												</td>";
 											echo "</tr>";
@@ -346,13 +346,13 @@
 									}								
 								}else{
 									if ($title){
-										echo "<tr><th>Down</th><th>Backup</th><th>Tamanyo</th><th>Fecha</th><th>Accion</th></tr>";
+										echo "<tr><th>Down</th><th>Backup</th><th>Tama&ntilde;o</th><th>Fecha</th><th align=center>Acci&oacute;n</th></tr>";
 									}
 									echo "<tr><td><img src='img/Download-icon-32.png' title='Descarga este tar' onclick=\"descargarFichero('".$row['ID']."')\"></td>
 										<td>".$row['FILENAME']. "</td>
 										<td>".$row['SIZE']. " KB </td>
 										<td>".fechaEsp($row['TIMEDATE']). "</td>";
-									echo "<td>
+									echo "<td align=center>
 									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=buscar&elimBkp=true&idBkp=".$idf." '\"/>
 									</td>";
 									echo "</tr>";
@@ -372,9 +372,9 @@
 		<div class="purgaContainer">
 			<div id="purgaForm" class="purgaForm"  style="<?php echo $purgaStile; ?>;">
 				<div class="<?php if ($purgaError){ echo "purgaInfoError"; }else{ echo "purgaInfo";} ?>"  >
-				Configure la limpieza automatizada de sus backups seleccionado el numero de
-				<b>dias , meses o a�os</b>  que desea guardar, 
-				<b>la tarea de limpieza ser� lanzada cuando el cliente sacsex lanze un nuevo backup.</b>
+				Configure la limpieza automatizada de sus backups seleccionando el n&uacute;mero de
+				<b>d&iacute;as, meses o a&ntilde;os</b>  que desea guardar, 
+				<b>la tarea de limpieza ser&aacute; ejecutada cuando el cliente sacsex lanze un nuevo backup.</b>
 				</div>
 				<div class="purgaFormContainer">
 					<form action="search.php?accion=upurga" method="POST">
@@ -385,9 +385,9 @@
 							</td>
 							<td>
 								<select name="freqPurga"  >
-									<option value="0"  <?php if ( $modoPurga == 0){ echo "selected='selected'"; }?>>Dia/s</option>
+									<option value="0"  <?php if ( $modoPurga == 0){ echo "selected='selected'"; }?>>D&iacute;a/s</option>
 									<option value="1" <?php if ( $modoPurga == 1){ echo "selected='selected'"; }?>>Mes/es</option>
-									<option value="2" <?php if ( $modoPurga == 2){ echo "selected='selected'"; }?>>A�o/s</option>
+									<option value="2" <?php if ( $modoPurga == 2){ echo "selected='selected'"; }?>>A&ntilde;o/s</option>
 								</select>
 							</td>
 						</tr>
