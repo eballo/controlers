@@ -332,28 +332,33 @@ else
 					fi
 				;;
 				2)
-					if validarMes
+					if validarHora
 					then
-						# Guardado de orden crontab en fichero
-						crontab -l > $newcron
-						if [ "$mes" -eq 0 ]
+						h=`echo $hora | cut -d: -f1`
+						m=`echo $hora | cut -d: -f2`
+						if validarMes
 						then
-							echo "* * 1 * * sacsex" >> $newcron
-						elif [ "$mes" -eq 1 ]
-						then
-							echo "* * 15 * * sacsex" >> $newcron
-						else
-							echo "* * 28 * * sacsex" >> $newcron
-						fi
+							# Guardado de orden crontab en fichero
+							crontab -l > $newcron
+							if [ "$mes" -eq 0 ]
+							then
+								echo "$m $h 1 * * sacsex" >> $newcron
+							elif [ "$mes" -eq 1 ]
+							then
+								echo "$m $h 15 * * sacsex" >> $newcron
+							else
+								echo "$m $h 28 * * sacsex" >> $newcron
+							fi
 						
-						# Guardado de contenido de fichero en crontab
-						crontab $newcron 2>/dev/null
-						if [ $? -eq 0 ];then
-							echo " crontab configurado correctamente"
-							ok=0
-						else
-							echo " Error, no se ha podido configurar crontab"
-							error=1
+							# Guardado de contenido de fichero en crontab
+							crontab $newcron 2>/dev/null
+							if [ $? -eq 0 ];then
+								echo " crontab configurado correctamente"
+								ok=0
+							else
+								echo " Error, no se ha podido configurar crontab"
+								error=1
+							fi
 						fi
 					fi
 				;;
