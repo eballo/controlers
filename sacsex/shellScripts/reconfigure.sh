@@ -339,28 +339,33 @@ else
                     fi
                 ;;
                 2)
-                    if validarMes
-                    then
-                        # Guardado de orden crontab en fichero
-                        if [ "$mes" -eq 0 ]
-                        then
-                            echo "* * 1 * * sacsex" >> $cron
-                        elif [ "$mes" -eq 1 ]
-                        then
-                            echo "* * 15 * * sacsex" >> $cron
-                        else
-                            echo "* * 28 * * sacsex" >> $cron
-                        fi
-                        # Guardado de contenido de fichero en crontab
-                        crontab $cron
-                        if [ $? -eq 0 ];then
-                            echo " crontab reconfigurado correctamente"
-                            ok=0
-                        else
-                            crontab $oldCron
-                            echo " Error, no se ha podido reconfigurar crontab"
-                            error=1
-                        fi
+		    if validarHora
+		    then
+			h=`echo $hora | cut -d: -f1`
+			m=`echo $hora | cut -d: -f2`
+                    	if validarMes
+                    	then
+		             # Guardado de orden crontab en fichero
+		             if [ "$mes" -eq 0 ]
+		             then
+		                echo "$m $h 1 * * sacsex" >> $cron
+		             elif [ "$mes" -eq 1 ]
+		             then
+		                echo "$m $h 15 * * sacsex" >> $cron
+		             else
+		                echo "$m $h 28 * * sacsex" >> $cron
+		             fi
+		             # Guardado de contenido de fichero en crontab
+		             crontab $cron
+		             if [ $? -eq 0 ];then
+		                 echo " crontab reconfigurado correctamente"
+		                 ok=0
+		             else
+		                 crontab $oldCron
+		                 echo " Error, no se ha podido reconfigurar crontab"
+		                 error=1
+		             fi
+			fi
                     fi
                 ;;
                 *)
