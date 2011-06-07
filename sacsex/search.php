@@ -36,6 +36,7 @@
 			$purgaStile='display:none';
 	
 			$filepath = $_POST['filepath'];
+			$filepath=limpiar($filepath);
 			if ($filepath != ""){
 				$insQuery="INSERT INTO filepath (FILEPATH,USER_ID) VALUES ('$filepath',$id)";
 				$res=mysql_query($insQuery,$link);
@@ -87,12 +88,14 @@
 			
 			if (isset($_POST['fname']) && $_POST['fname']!=''){
 				$bnom=true;
+				$nom=limpiar($nom);
 				$nom=$_POST['fname'];
 			}else{
 				$bnom=false;
 			}
 			if (isset($_POST['numd']) && $_POST['numd']!=''){
 				$dias=$_POST['numd'];
+				$dias=limpiar($dias);
 				switch ($_POST['freq']) {
 					case 'dias':
 						$text='DAY';
@@ -123,7 +126,8 @@
 			
 			if (isset($_POST['freqPurga']) && isset($_POST['numPurga'])){
 				if ( esNumero($_POST['freqPurga']) && esNumero($_POST['numPurga']) ){
-					$updatePurga = "UPDATE purga SET VALOR=".$_POST['numPurga']." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
+					$numPurga=limpiar($_POST['numPurga']);
+					$updatePurga = "UPDATE purga SET VALOR=".$numPurga." , FREQ=".$_POST['freqPurga']." WHERE USER_ID=$id";
 					$resPurga = mysql_query($updatePurga,$link);
 					if (!$resPurga){
 						$valorPurgaError=$_POST['numPurga'];
@@ -165,7 +169,8 @@
 	$array=mysql_fetch_array($resultUser);
 	$usuario=$array['NAME'];
 	$sizeTotal=$array['MAX_LIMIT'];
-	/* Query para la suma total de tamaño de ficheros tar del usuario */
+	
+/* Query para la suma total de tamaño de ficheros tar del usuario */
 	$tamOcup="SELECT sum(size)as 'total' FROM backups GROUP BY USER_ID HAVING USER_ID=$id";
 	$resultTam=mysql_query($tamOcup,$link);
 	$sizeA=mysql_fetch_array($resultTam);

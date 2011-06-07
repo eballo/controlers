@@ -84,8 +84,8 @@
 
 	 /**
 	  * Limpia un string preparandolo para utilizarlo en una consulta SQL
-	  * @param $value
-	  * @return unknown_type
+	  * @param $value Cadena con codigo a insertar en sentencias mysql
+	  * @return $value string limpio de sentencias sql
 	  */
 	function limpiar($value){
 		$value=str_replace("'","",$value);
@@ -100,7 +100,7 @@
 		
 		$value = trim(htmlentities($value)); // Evita introducción código HTML
 		
-		if (get_magic_quotes_gpc()) {	// quita los caracteres 
+		if (get_magic_quotes_gpc()) {	// quita los caracteres escapados
 			$value = stripslashes($value);
 		}
 		return $value;
@@ -144,7 +144,7 @@
 	 * 		   null si no se encontro usuario
 	 */
 	function buscaUser($user , $link){
-
+		$user=limpiar($user);
 		$query="SELECT ID FROM user WHERE NAME='$user'";
 		$busca=mysql_query($query,$link);
 		$idA=mysql_fetch_array($busca);
@@ -163,6 +163,8 @@
 	 * 		   null si el usuario no es valido
 	 */
 	function verificaUser($user , $passwordLogin , $link){
+		$user=limpiar($user);
+		$passwordLogin=limpiar($passwordLogin);
 		$id=buscaUser($user,$link);		
 		$query="SELECT PASSWORD FROM user WHERE ID='$id'";
 		$busca=mysql_query($query,$link);
@@ -220,6 +222,10 @@
 		if ($dlimit>$limit){
 			$res="Error: La cuota Diaria supera al espacio total permitido";
 		}else{
+			$user=limpiar($user);
+			$pass=limpiar($pass);
+			$limit=limpiar($limit);
+			$dlimit=limpiar($dlimit);
 			$res= "";
 			$id=buscaUser($user,$link);
 			if ($id==''){
