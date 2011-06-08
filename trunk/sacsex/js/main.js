@@ -70,7 +70,7 @@
 	    		if (res==0){
 				    	saveOk(id);
 				    }else{
-				    	errorSave();
+				    	errorSave(res);
 				    }
 	    	  },
 	    	  error: errorSave
@@ -82,8 +82,13 @@
 		$("#data"+ id).find("#imgSave").fadeOut("slow");
 	}
 	
-	function errorSave(){
-		alert("No se han podido actualizar los datos del usuario.");
+	function errorSave(res){
+		if(res==1){
+			alert("Usuario no actualizado.\n\nLa cuota Diaria supera al espacio total permitido");			
+		}else{
+			alert("No se han podido actualizar los datos del usuario.");
+		}
+
 	}
 	
 	function descargarFichero( idfile ){
