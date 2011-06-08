@@ -1,8 +1,16 @@
-#! /bin/bash
-
-# reconfigure.sh
-
-
+#!/bin/bash
+#
+# Nombre: reconfigure.sh
+# Autores: Giorgio y Cristina
+# Descripción:
+#  Script de reconfiguración Sacs-ex
+#  Permite establecer una nueva contraseña de usuario
+#  Permite reconfigurar el crontab
+# Requisitos:
+#  Para una buena y correcta ejecución del programa
+#  Tener instalado la aplicación links
+#  Tener instalado la aplicación zenity
+#
 
 # Ruta de fichero para editar crontab
 cron="/tmp/cron_$USER"
@@ -145,13 +153,16 @@ else
     seguirRe=false
     while ! $seguirRe
     do
-        echo -e "Reconfiguracion \nIndica opcion a reconfigurar \n (0) Cambiar password \n (1) Reconfigurar crontab"
-        read opc
-
+        if [ "$zenityOk" ];then
+            opc=`zenity --list --title="Reconfiguración SACS-EX" --text="Indica opción a reconfigurar" --column="Opc" --column="Acción" 0 "Cambiar password" 1 "Reconfigurar crontab" 2>/dev/null`
+        else
+            echo -e "Reconfiguración SACS-EX\nIndica opcion a reconfigurar \n (0) Cambiar password \n (1) Reconfigurar crontab"
+            read opc
+        fi
         test "$opc" -gt 1 -o "$opc" -lt 0 2>/dev/null
         if [ $? -eq 0 ]
         then
-            echo -e "Introduce un valor numerico y dentro de los valores del menu\n"
+            echo -e "Introduce un valor numérico y dentro de los valores del menu\n"
             seguirRe=false
         else
             seguirRe=true
@@ -163,12 +174,20 @@ else
         home=`echo ~`
         if [ ! -d "$home/.sacsexBckps" ]
         then
-            echo -e "Error: no se encuentra la ruta $home/.sacsexBckps \nNo esta instalado el cliente de sacsex \nNo se ha podido cambiar el password"
+            if [ "$zenityOk" ];then
+                zenity --error --title="Error" --text="No se encuentra la ruta $home/.sacsexBckps \nNo está instalado el cliente de sacsex \nNo se ha podido cambiar el password" 2>/dev/null
+            else
+                echo -e "Error: no se encuentra la ruta $home/.sacsexBckps \nNo está instalado el cliente de sacsex \nNo se ha podido cambiar el password"
+            fi
         else
             SACSEXHOME="$home/.sacsexBckps"
             if [ ! -f $SACSEXHOME/sacsex.properties ]
             then
-                echo -e "Error: no se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password"
+                if [ "$zenityOk" ];then
+                    zenity --error --title="Error" --text="No se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password" 2>/dev/null
+                else
+                    echo -e "Error: no se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password"
+                fi
             else
                 propiertiesFile="$SACSEXHOME/sacsex.properties"
                 for elem in `cat $propiertiesFile`
@@ -182,8 +201,12 @@ else
                     fi
                 done
                 
-                echo "Introduce contraseña antigua: "
-                read -s passold
+                if [ "$zenityOk" ];then
+                    passold=`zenity --entry --title="SACS-EX" --hide-text --text="$user, introduce tu contraseña actual" 2>/dev/null`
+                else
+                    echo "Introduce tu contraseña actual: "
+                    read -s passold
+                fi
                 # Conexión con el servicio para convertir passold a md5 para comprobar
                 passold=`links -dump "http://$SVR_CONN/sacsex/services/service.md5convert.php?text=$passold" 2>/dev/null`
                 pwd5mdold=`echo $passold | cut -d'/' -f2`
@@ -191,29 +214,50 @@ else
                 # Conexión con el servicio para validar el password antiguo
                 busca=`links -dump "http://$SVR_CONN/sacsex/services/service.auth.php?user=$user&pass=$pwd5mdold&install=false" 2>/dev/null`
                 buscaOk=`echo $busca | cut -d':' -f2`
-                echo $buscaOk
                 
                 if [ "$buscaOk" == '1' ]
                 then
-                    echo "Error: contraseña antigua no es correcta"
+                    if [ "$zenityOk" ];then
+                        zenity --error --title="Error" --text="La contraseña actual no es correcta" 2>/dev/null
+                    else
+                        echo "Error: contraseña antigua no es correcta"
+                    fi
                 else
-                    echo "Introduce contraseña nueva: "
-                    read -s passnew
-                    echo "Vuelve a introducir la contraseña"
-                    read -s passnewRep
+                    if [ "$zenityOk" ];then
+                        passnew=`zenity --entry --title="SACS-EX" --hide-text --text="$user, introduce contraseña nueva: " 2>/dev/null`
+                        passnewRep=`zenity --entry --title="SACS-EX" --hide-text --text="$user, vuelve a introducir la contraseña" 2>/dev/null`
+                    else
+                        echo "Introduce contraseña nueva: "
+                        read -s passnew
+                        echo "Vuelve a introducir la contraseña"
+                        read -s passnewRep
+                    fi
+                    
                     if [ "$passnew" != "$passnewRep" ]
                     then
-                        echo "Error: la contraseña no es identica"
+                        if [ "$zenityOk" ];then
+                            zenity --error --title="Error" --text="La contraseña no es identica" 2>/dev/null
+                        else
+                            echo "Error: la contraseña no es identica"
+                        fi
                     else
                         home=`echo ~`
                         if [ ! -d "$home/.sacsexBckps" ]
                         then
-                            echo -e "Error: no se encuentra la ruta $home/.sacsexBckps \nNo ha sido instalado el cliente de sacsex"
+                            if [ "$zenityOk" ];then
+                                zenity --error --title="Error" --text="No se encuentra la ruta $home/.sacsexBckps \nNo ha sido instalado el cliente de sacsex" 2>/dev/null
+                            else
+                                echo -e "Error: no se encuentra la ruta $home/.sacsexBckps \nNo ha sido instalado el cliente de sacsex"
+                            fi
                         else
                             SACSEXHOME="$home/.sacsexBckps"
                             if [ ! -f $SACSEXHOME/sacsex.properties ]
                             then
-                                echo -e "Error: no se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password"
+                                if [ "$zenityOk" ];then
+                                    zenity --error --title="Error" --text="No se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password" 2>/dev/null
+                                else
+                                    echo -e "Error: no se encuentra el fichero sacsex.properties \nNo se ha podido cambiar el password"
+                                fi
                             else
                                 propiertiesFile="$SACSEXHOME/sacsex.properties"
                                 for elem in `cat $propiertiesFile`
@@ -247,9 +291,17 @@ else
                                     echo "SACS_USER=$user" >> $propiertiesFile
                                     echo "SACS_PASS=$pass" >> $propiertiesFile
                                     echo "SACS_USER_HOME=$home" >> $propiertiesFile
-                                    echo "Cambio de password correctamente"
+                                    if [ "$zenityOk" ];then
+                                        zenity --info --title="SACS-EX" --text="Cambio de password correctamente" 2>/dev/null
+                                    else
+                                        echo "Cambio de password correctamente"
+                                    fi
                                 else
-                                    echo "No se han realizado cambios en el password"
+                                    if [ "$zenityOk" ];then
+                                        zenity --error --title="Error" --text="No se han realizado cambios en el password" 2>/dev/null
+                                    else
+                                        echo "No se han realizado cambios en el password"
+                                    fi
                                 fi
                             fi
                         fi
@@ -263,8 +315,16 @@ else
         okRe=false
         while ! $okRe
         do
-            echo -e "Se borrara la configuracion de crontab ya establecida \nEstas seguro de reconfigurar crontab? \n (0) Si \n (1) No"
-            read conf
+            if [ "$zenityOk" ];then
+                conf=`zenity --list --title="Reconfiguración SACS-EX" --text="Se borrara la configuración de crontab ya establecida \nEstás seguro de reconfigurar crontab?" --column="Opc" --column="Acción" 0 "Si" 1 "No" 2>/dev/null`
+                if [ "$conf" != 0 ];then
+                    zenity --error --title="Error" --text="Opcion cancelada o erronea, vuelva a intentarlo \nNo se ha reconfigurado nada" 2>/dev/null
+                    exit 1
+                fi
+            else
+                echo -e "Se borrara la configuración de crontab ya establecida \nEstás seguro de reconfigurar crontab? \n (0) Si \n (1) No"
+                read conf
+            fi
             if [ "$conf" -eq 0 ]
             then
                 seguir=false
@@ -288,8 +348,8 @@ else
                     fi
                 done
 
-		cron="/tmp/cron_$USER"
-		oldCron="/tmp/cron_${USER}_old"
+		        cron="/tmp/cron_$USER"
+		        oldCron="/tmp/cron_${USER}_old"
                                 
                 # Copia de configuracion crontab establecido a un fichero por si ocurre algun error
                 crontab -l | grep -v sacsex > $cron # Recogemos La nueva configuracion (sin la linea de ejecucion de la aplicacion)
@@ -339,33 +399,33 @@ else
                     fi
                 ;;
                 2)
-		    if validarHora
-		    then
-			h=`echo $hora | cut -d: -f1`
-			m=`echo $hora | cut -d: -f2`
+		            if validarHora
+		            then
+			            h=`echo $hora | cut -d: -f1`
+			            m=`echo $hora | cut -d: -f2`
                     	if validarMes
                     	then
-		             # Guardado de orden crontab en fichero
-		             if [ "$mes" -eq 0 ]
-		             then
-		                echo "$m $h 1 * * sacsex" >> $cron
-		             elif [ "$mes" -eq 1 ]
-		             then
-		                echo "$m $h 15 * * sacsex" >> $cron
-		             else
-		                echo "$m $h 28 * * sacsex" >> $cron
-		             fi
-		             # Guardado de contenido de fichero en crontab
-		             crontab $cron
-		             if [ $? -eq 0 ];then
-		                 echo " crontab reconfigurado correctamente"
-		                 ok=0
-		             else
-		                 crontab $oldCron
-		                 echo " Error, no se ha podido reconfigurar crontab"
-		                 error=1
-		             fi
-			fi
+                            # Guardado de orden crontab en fichero
+                            if [ "$mes" -eq 0 ]
+                            then
+                                echo "$m $h 1 * * sacsex" >> $cron
+                            elif [ "$mes" -eq 1 ]
+                            then
+                                echo "$m $h 15 * * sacsex" >> $cron
+                            else
+                                echo "$m $h 28 * * sacsex" >> $cron
+                            fi
+                            # Guardado de contenido de fichero en crontab
+                            crontab $cron
+                            if [ $? -eq 0 ];then
+                                echo " crontab reconfigurado correctamente"
+                                ok=0
+                            else
+                                crontab $oldCron
+                                echo " Error, no se ha podido reconfigurar crontab"
+                                error=1
+		                    fi
+			            fi
                     fi
                 ;;
                 *)
@@ -384,11 +444,19 @@ else
             then
                 okRe=true
             else
-                echo -e "Opcion erronea, vuelva a intertarlo\n"
+                if [ "$zenityOk" ];then
+                    zenity --error --title="Error" --text="Opcion cancelada o erronea, vuelva a intentarlo \nNo se ha reconfigurado nada" 2>/dev/null
+                else
+                    echo -e "Opcion cancelada o erronea, vuelva a intentarlo \nNo se ha reconfigurado nada"
+                fi
             fi
         done
 
     else
-        echo "Error: no se permiten strings"
+        if [ "$zenityOk" ];then
+            zenity --error --title="Error" --text="Opcion cancelada o erronea, vuelva a intentarlo \nNo se ha reconfigurado nada" 2>/dev/null
+        else
+            echo -e "Opcion cancelada o erronea, vuelva a intentarlo \nNo se ha reconfigurado nada"
+        fi
     fi
 fi

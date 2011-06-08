@@ -6,6 +6,7 @@
 	 * $MYSQL_IP 		direccion IP para MySQL
 	 * $MYSQL_USER  	nombre de usuario para MySQL
 	 * $MYSQL_PASSWORD	password de usuario para MySQL
+	 * $MYSQL_BDNAME	nombre de base de datos para MySQL
 	 * 
 	 * $IP_SERVER	dirección IP del servidor
 	 * $USER_BKPS	nombre de usuario para backups
