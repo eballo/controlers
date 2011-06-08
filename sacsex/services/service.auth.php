@@ -19,6 +19,8 @@
 	$user=$_GET['user'];
 	$pass=$_GET['pass'];
 	$install=$_GET['install'];
+	$user=limpiar($user);
+ 	$pass=limpiar($pass);
 	$id=verificaUser($user, $pass,$link);
 	$resp=3;
 		

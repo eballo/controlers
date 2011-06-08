@@ -12,12 +12,13 @@
 			$update2=0;
 		}else{
 			if (isset($_POST['dayLimit'])){
-				$query="UPDATE user SET DAY_LIMIT=".$_POST['dayLimit']." WHERE ID=".$_POST['iduser'];
+				$dayLimit=limpiar($_POST['dayLimit']);
+				$query="UPDATE user SET DAY_LIMIT=".$dayLimit." WHERE ID=".$_POST['iduser'];
 				$update=mysql_query($query,$link);
-			}
-			
-			if (isset($_POST['limit'])){
-				$query="UPDATE user SET MAX_LIMIT=".$_POST['limit']." WHERE ID=".$_POST['iduser'];
+			}			
+			if (isset($_POST['limit'])){				
+				$limit=limpiar($_POST['limit']);
+				$query="UPDATE user SET MAX_LIMIT=".$limit." WHERE ID=".$_POST['iduser'];
 				$update2=mysql_query($query,$link);
 			}
 		}		

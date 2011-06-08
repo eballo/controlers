@@ -13,11 +13,11 @@
 
 	include_once '../includes/servicesHeaders.php';
 
-	$user=$_GET['user'];
-	$pass=$_GET['pass'];
-	$file=$_GET['file'];
-	$date=$_GET['date'];
-	$size=$_GET['size'];
+	$user=limpiar($_GET['user']);
+	$pass=limpiar($_GET['pass']);
+	$file=limpiar($_GET['file']);
+	$date=limpiar($_GET['date']);
+	$size=limpiar($_GET['size']);
 	$bd=$GLOBALS['MYSQL_BDNAME'];
 	$link=conectar($bd);
 	//busco el ID del usuario
