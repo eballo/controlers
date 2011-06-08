@@ -14,8 +14,8 @@
 	 * $BKPS_PATH	ruta de directorio final para la copia de backups
 	 */
 
-	$MYSQL_IP="localhost";
-	//$MYSQL_IP="192.168.1.25";
+	//$MYSQL_IP="localhost";
+	$MYSQL_IP="172.20.1.85";
 	$MYSQL_USER="root";
 	$MYSQL_PASSWORD="sadiel";
 	$MYSQL_BDNAME="bdsintesi";

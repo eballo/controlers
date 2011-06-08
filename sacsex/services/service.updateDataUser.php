@@ -8,8 +8,8 @@
 	
 	if ( $_SESSION['login'] && $_SESSION['type'] == "admin" ){
 		if ($_POST['dayLimit']>$_POST['limit']){
-			$update=2;
-			$update2=2;
+			$update=0;
+			$update2=0;
 		}else{
 			if (isset($_POST['dayLimit'])){
 				$dayLimit=limpiar($_POST['dayLimit']);
@@ -24,10 +24,8 @@
 		}		
 		if ( $update2 == 1 && $update == 1 ){
 			echo "0";
-		}elseif($update==2 && $update2==2){
-			echo "1";
 		}else{
-			echo "2";
+			echo "1";
 		}
 		
 	}
