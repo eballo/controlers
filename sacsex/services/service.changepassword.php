@@ -3,7 +3,7 @@
 	 * changepassword.php
 	 * 
 	 * Este servicio es utilizado por el script 'reconfigure.sh'
-	 * Servicio reconfigure.php que recibe como parametro usuario, password antiguo en md5 y password nuevo en md5
+	 * Servicio changepassword.php que recibe como parametro usuario, password antiguo en md5 y password nuevo en md5
 	 * Valida el usuario si es correcto y modifica el password de usuario en BD por el nuevo que se ha pasado 
 	 * Retorna '0:' si la notificación de la modificación del password ha sido correcto 
 	 * 		   '1:' descripción del error en caso contrario

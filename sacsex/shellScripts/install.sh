@@ -1,6 +1,6 @@
-# !/bin/bash
+#!/bin/bash
 #
-# Nombre: preinstall.sh
+# Nombre: install.sh
 # Autores: Giorgio y Cristina
 # Descripción:
 #  Script de instalación Sacs-ex
@@ -8,10 +8,10 @@
 #  Genera el sacsex.properties
 #  Configura el crontab
 # Requisitos:
-#  Para un buena y correcta ejecución del programa
+#  Para una buena y correcta ejecución del programa
 #  Tener instalado la aplicación links
 #  Tener instalado la aplicación zenity
-#  Tener el script backups-sacs2.sh en el mismo directorio que este script
+#  Tener el script sacsex que se ejecutará por el crontab
 #
 
 linksOk=`whereis links | grep bin`
@@ -372,7 +372,7 @@ else
 					fi
 				;;
 				esac
-				
+				# Si crontab se ha establecido correctamente, creamos el fichero properties
 				if [ $ok ]
 				then
 					touch $SACSEXHOME/sacsex.properties
