@@ -2,9 +2,9 @@
 	/**
 	 * dirlist.php
 	 * 
-	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Este servicio es utilizado por el script binario 'sacsex'
 	 * Servicio dirlist.php que recibe como parametro usuario y password en md5
-	 * Recoge todas las rutas de la base de datos y las valida
+	 * Recoge todas las rutas a realizar backups de la base de datos y las valida
 	 * Retorna las rutas validas separadas por un espacio
 	 */
 	

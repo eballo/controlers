@@ -2,7 +2,7 @@
 	/**
 	 * uploadOk.php
 	 * 
-	 * Este servicio es utilizado por el script 'backups-sacs2.sh'
+	 * Este servicio es utilizado por el script binario 'sacsex'
 	 * Servicio uploadOk.php que recibe como parametro usuario, password en md5, nombre del fichero tar y tamaño del tar
 	 * Comprueba que el fichero tar backup no exceda el tamaño de subida ni que sobrepase el limite de espacio en servidor.
 	 * Retorna los datos de conexión para scp si ha cumplido las condiciones
