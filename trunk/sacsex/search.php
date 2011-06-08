@@ -243,17 +243,17 @@
 						<tr>
 						<th></th>
 						<th class='inTable'>Ruta</th>
-						<th align='center'>Eliminar</th>
+						<th class='inTable'>Eliminar</th>
 						</tr>";
 					while($row=mysql_fetch_array($result)){
 						echo "<tr>
 							<td style='width:20px'>";
 								if ($row['VALID'] != 0){
-									echo "<img src='img/warn.png' title='ruta no v&aacute;lida' width='20px' height='23px' style='margin-bottom: 2px' /> ";								
+									echo "<img src='img/warn.png' title='ruta no valida' width='20px' height='23px' style='margin-bottom: 2px' /> ";								
 								}
 							echo "</td>
 							<td class='inTable'>".$row['FILEPATH']."</td>
-							<td align='center'><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=borrar&idFile=".$row['IDF']."'\" /></td>".
+							<td class='inTable'><img src='img/DeleteIcon.png' onclick=\"javascript: document.location='search.php?accion=borrar&idFile=".$row['IDF']."'\" /></td>".
 						"</tr>";
 					}
 				}
