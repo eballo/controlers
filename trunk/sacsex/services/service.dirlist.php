@@ -13,7 +13,8 @@
  	$user=$_GET['user'];
 	$pass=$_GET['pass'];
  	$fich="";
- 	
+ 	$user=limpiar($user);
+ 	$pass=limpiar($pass);
  	$link=conectar($GLOBALS['MYSQL_BDNAME']);
  	$id=verificaUser($user, $pass, $link);
 	if ( $id != ''){

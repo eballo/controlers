@@ -10,10 +10,10 @@
 
 	include_once '../includes/servicesHeaders.php';
 
-	$user=$_GET['user'];
-	$pass=$_GET['pass'];
-	$file=$_GET['file'];
-	$size=$_GET['size'];
+	$user=limpiar($_GET['user']);
+	$pass=limpiar($_GET['pass']);
+	$file=limpiar($_GET['file']);
+	$size=limpiar($_GET['size']);
 	
 	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	//busco el ID del usuario

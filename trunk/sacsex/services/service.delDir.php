@@ -2,9 +2,9 @@
 	include_once '../includes/servicesHeaders.php';
 	
 	//Recibe ruta directorio, nombre y password(md5) de usuario y elimina la ruta de la BD
-	$ruta=$_GET['dir'];
-	$user=$_GET['user'];
-	$pass=$_GET['pass'];
+	$ruta=limpiar($_GET['dir']);
+	$user=limpiar($_GET['user']);
+	$pass=limpiar($_GET['pass']);
 	
 	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);

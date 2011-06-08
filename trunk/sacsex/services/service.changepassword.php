@@ -11,9 +11,9 @@
 
 	include_once '../includes/servicesHeaders.php';
 	
-	$user=$_GET['user'];
-	$pass=$_GET['pass'];
-	$pwd5mdnew=$_GET['passnew'];
+	$user=limpiar($_GET['user']);
+	$pass=limpiar($_GET['pass']);
+	$pwd5mdnew=limpiar($_GET['passnew']);
 
 	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	$id=verificaUser($user, $pass, $link);
