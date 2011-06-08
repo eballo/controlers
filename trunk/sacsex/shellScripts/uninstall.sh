@@ -1,10 +1,16 @@
 #!/bin/bash
 #
-# Script de Desinstalación de Sacsex
-#
-# Debe eliminar la carpeta de sacsexBkps (donde esta la configuracion en propierties)
-# Notificar a la bd que ha sido desinstalado
-# quitar la entrada en el crontab del usuario
+# Nombre: uninstall.sh
+# Autores: Giorgio y Cristina
+# Descripción:
+#  Script de desinstalación sacsex
+#  Debe eliminar la carpeta de sacsexBkps (donde esta la configuracion en propierties)
+#  Notifica a la base de datos que ha sido desinstalado
+#  Quita la entrada en el crontab del usuario
+# Requisitos:
+#  Para una buena y correcta ejecución del programa
+#  Tener instalado la aplicación links
+#  Tener instalado la aplicación zenity
 #
 
 linksOk=`whereis links | grep bin`
@@ -23,10 +29,10 @@ else
 	
 	if [ "$zenityOk" ]
 	then
-		zenity --question --title="Desinstalacion SACSEX" --text="Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar?" 2>/dev/null
+		zenity --question --title="Desinstalacion SACSEX" --text="Se va a proceder a la desinstalación de la aplicación\n\n Está seguro de querer desinstalar?" 2>/dev/null
 		uninstall=$?
 	else
-		echo "Se va a proceder a la desinstalacion de la aplicacion\n\n Esta seguro de querer desinstalar? (0 para aceptar)"
+		echo "Se va a proceder a la desinstalación de la aplicación\n\n Está seguro de querer desinstalar? (0 para aceptar)"
 		read uninstall
 	fi
 	if [ "$uninstall" == "0" ]
@@ -46,14 +52,12 @@ else
 				elif [ `echo $elem | grep "SACS_PASS=" | wc -l` -eq 1 ]
 				then
 					pwd5md=`echo $elem | cut -d'=' -f2`
-				elif [ `echo $elem | grep "SACS_LOGIN=" | wc -l` -eq 1 ]
-				then
-					sshLogin=`echo $elem | cut -d'=' -f2`
 				fi
 			done
 			rm -R "$SACSEXHOME"
 			if [ $? -eq 0 ]
 			then
+                # Conexion a servicio para notificar la desinstalacion a la base de datos
 				res=`links -dump "http://$SVR_CONN/sacsex/services/service.uninstall.php?user=$user&pass=$pwd5md"`
 				newCron="/tmp/cron_$USER"
 				if [ `echo $res | cut -d":" -f1` -eq 0 ]
