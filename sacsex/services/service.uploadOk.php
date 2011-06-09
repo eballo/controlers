@@ -18,7 +18,43 @@
 	$link=conectar($GLOBALS['MYSQL_BDNAME']);
 	//busco el ID del usuario
 	$id=verificaUser($user, $pass, $link);
-	if ( $id!=''){
+	if ( $id!=''){	
+		//Se realiza la purga de archivos segun lña configuracion del usuario	
+		$purgarQ="SELECT VALOR,FREQ from purga WHERE USER_ID=$id";
+		$res=mysql_query($purgarQ,$link);
+		$purgarA=mysql_fetch_array($res);
+		$valor=$purgarA[0];
+		$freq=$purgarA[1];
+
+		if ($valor!=0){
+			// Proceso Purga
+			$dias=$valor;
+			switch ($freq) {
+				case 0:
+					$text='DAY';
+					break;
+				case 1:
+					$text='MONTH';
+					break;
+				case 2:
+					$text='YEAR';
+				break;
+			} 
+			$dateQ=" AND TIMESTAMPDIFF($text,TIMEDATE,curdate()) >=". $dias;
+			$query="SELECT * FROM backups WHERE USER_ID=$id".$dateQ.";";
+
+			$res=mysql_query($query,$link);
+			$path=$GLOBALS['BKPS_PATH']."/".$id;
+
+			while ($row=mysql_fetch_array($res)){
+				if(unlink($path."/".$row['FILENAME'])){
+					$delQ="DELETE from backups WHERE USER_ID=".$id." AND ID=".$row['ID'];
+					$delRes=mysql_query($delQ,$link);			
+				}
+			}
+			//
+		}
+		
 		//Genero la busqueda de la info del usuario (para obtener los limites)
 		$userDetQ="SELECT * FROM user WHERE ID=$id";
 		$busca=mysql_query($userDetQ,$link);
