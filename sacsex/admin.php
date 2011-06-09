@@ -138,7 +138,7 @@ $rows=mysql_num_rows($result);
 					while ($row=mysql_fetch_array($result)){
 						echo "<tr id='data".$row["ID"]."'>";
 							if ($row["INSTALAT"] == "1"){
-							echo "<td><img src='img/inst.png'title='Instalado' /> </td>";
+							echo "<td><img src='img/inst.png' title='Instalado' /> </td>";
 						}else{
 							echo "<td></td>";
 						}
