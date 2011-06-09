@@ -4,12 +4,22 @@
 
 	require_once 'Archive/Tar.php';
 					
+	/**
+	 * Función pata leer un fichero tar
+	 * @param String $nombre nombre de fichero tar
+	 * @return array con contenido de tar
+	 */
 	function readTar($nombre){
 		$obj = new Archive_Tar($nombre); // nombre del archivo
 		$files = $obj->listContent();       // array con informacion del fichero
 	return $files;
 	}
 	
+	/**
+	 * Función para hallar números
+	 * @param unknown_type $val
+	 * @return boolean
+	 */
 	function esNumero($val){
 		$a=preg_match_all("/[\D]/",$val,$lista); //Numero de veces que aparece un valor no numerico
 		$b=0;
@@ -20,13 +30,17 @@
 		return $a==0;
 	}
 	
-	
+	/**
+	 * Funcion para hallar un entero
+	 * @param unknown_type $val
+	 * @return boolean
+	 */
 	function esEntero($val){
 		return preg_match_all("/[\D]/",$val,$l)==0;
 	}
 	
 	/**
-	 * Funcion que sirve para controlar el valor recibido segun sea el tipo de dato
+	 * Funcion para controlar el valor recibido segun sea el tipo de dato
 	 * @param String $text Texto a validar
 	 * @param String $tipo Numerico o Cadena de texto
 	 * @return Cierto o Falso segun sea valido o no
@@ -75,6 +89,11 @@
 		return ($num/1024)/1024;
 	}
 	
+	/**
+	 * Función para convertir el formato de la fecha
+	 * @param unknown_type $fecha
+	 * @return string
+	 */
 	function fechaEsp($fecha){
 		list($date, $time) = explode(' ', $fecha); //Separamos fecha y hora
 		list($y, $M, $d) = explode('-', $date);

@@ -353,7 +353,7 @@ else
                                 
                 # Copia de configuracion crontab establecido a un fichero por si ocurre algun error
                 crontab -l | grep -v sacsex > $cron # Recogemos La nueva configuracion (sin la linea de ejecucion de la aplicacion)
-				crontab -l > $oldCron
+				crontab -l > $oldCron 2>/dev/null
                 case "$frec" in
                 0)
                     if validarHora
