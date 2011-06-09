@@ -5,7 +5,7 @@
 	require_once 'Archive/Tar.php';
 					
 	/**
-	 * Función pata leer un fichero tar
+	 * Función para leer un fichero tar
 	 * @param String $nombre nombre de fichero tar
 	 * @return array con contenido de tar
 	 */
@@ -91,7 +91,7 @@
 	
 	/**
 	 * Función para convertir el formato de la fecha
-	 * @param unknown_type $fecha
+	 * @param DATETIME $fecha
 	 * @return string
 	 */
 	function fechaEsp($fecha){
