@@ -138,7 +138,7 @@ $rows=mysql_num_rows($result);
 					while ($row=mysql_fetch_array($result)){
 						echo "<tr id='data".$row["ID"]."'>";
 							if ($row["INSTALAT"] == "1"){
-							echo "<td><img src='img/inst.png'/> </td>";
+							echo "<td><img src='img/inst.png'title='Instalado' /> </td>";
 						}else{
 							echo "<td></td>";
 						}
@@ -147,7 +147,7 @@ $rows=mysql_num_rows($result);
 						"<td><input class='inputEditable' style='text-align: right' name='dayLimit' type='text' value='".$row["DAY_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>
 						<td><input class='inputEditable' style='text-align: right' name='limit' type='text' value='".$row["MAX_LIMIT"]."' onkeypress=\"marcarChange('".$row["ID"]."')\"></td><td>KB</td>";
 						if (!esAdmin($row["ID"], $adminLink)){
-							echo "<td>
+							echo "<td align='center'>
 									<img id='imgSave' src='img/save_icon.png' style='display:none' onclick=\"save('".$row["ID"]."')\"/>
 									<img src='img/DeleteIcon.png' onclick=\"javascript: document.location='admin.php?action=delUser&id=".$row["ID"]."'\"/>
 								</td>";

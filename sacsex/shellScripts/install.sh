@@ -220,7 +220,7 @@ else
 		if [ "$zenityOk" ]
 		then
 		    loginName=`zenity --entry --title="SACS-EX Login" --text="Introduce tu login" 2>/dev/null`
-			password=`zenity --entry --title="SACS-EX Login" --hide-text --text="$loginName, introduce tu contrasena" 2>/dev/null`
+			password=`zenity --entry --title="SACS-EX Login" --hide-text --text="$loginName, introduce tu contraseña" 2>/dev/null`
 		else
 			echo "Introduce tu login"
 			read loginName
@@ -296,12 +296,11 @@ else
 						m=`echo $hora | cut -d: -f2`
 						
 						# Guardado de orden crontab en fichero
-						crontab -l > $newcron
+						crontab -l > $newcron 2>/dev/null
 						echo "$m $h * * * sacsex" >> $newcron
 						# Guardado de contenido de fichero en crontab
 						crontab $newcron
 						if [ $? -eq 0 ];then
-							echo " crontab configurado correctamente"
 							ok=0
 						else
 							echo " Error, no se ha podido configurar crontab"
@@ -316,13 +315,12 @@ else
 						then
 							h=`echo $hora | cut -d: -f1`
 							m=`echo $hora | cut -d: -f2`
-							crontab -l > $newcron
+							crontab -l > $newcron 2>/dev/null
 							# Guardado de orden crontab en fichero
 							echo "$m $h * * $dia sacsex" >> $newcron
 							# Guardado de contenido de fichero en crontab
 							crontab $newcron 2>/dev/null
 							if [ $? -eq 0 ];then
-								echo " crontab configurado correctamente"
 								ok=0
 							else
 								echo " Error, no se ha podido configurar crontab"
@@ -339,7 +337,7 @@ else
 						if validarMes
 						then
 							# Guardado de orden crontab en fichero
-							crontab -l > $newcron
+							crontab -l > $newcron 2>/dev/null
 							if [ "$mes" -eq 0 ]
 							then
 								echo "$m $h 1 * * sacsex" >> $newcron
@@ -353,7 +351,6 @@ else
 							# Guardado de contenido de fichero en crontab
 							crontab $newcron 2>/dev/null
 							if [ $? -eq 0 ];then
-								echo " crontab configurado correctamente"
 								ok=0
 							else
 								echo " Error, no se ha podido configurar crontab"
